@@ -310,13 +310,34 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        #audio-prompt {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 1.5rem;
+            background: var(--primary-color);
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            z-index: 1000;
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        #audio-prompt.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
     <div id="preloader">
         <div class="spinner"></div>
     </div>
-    <audio id="welcome-sound" src="welcome.mp3" preload="auto" autoplay></audio>
+    <audio id="welcome-sound" src="welcome.mp3" preload="auto" autoplay muted></audio>
+    <button id="audio-prompt" class="bubbly-btn" aria-label="Enable welcome sound">Enable Sound</button>
 
     <div class="parallax-background"></div>
 
@@ -581,12 +602,13 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            console.log("Portfolio website loaded at 06:47 AM PKT, September 23, 2025.");
+            console.log("Portfolio website loaded at 07:45 AM PKT, September 23, 2025.");
 
             // Cached Elements
             const elements = {
                 preloader: document.getElementById('preloader'),
                 welcomeSound: document.getElementById('welcome-sound'),
+                audioPrompt: document.getElementById('audio-prompt'),
                 mobileMenuButton: document.getElementById('mobile-menu-button'),
                 mobileMenu: document.getElementById('mobile-menu'),
                 mainHeader: document.getElementById('main-header'),
@@ -619,17 +641,39 @@
             function playWelcomeSound() {
                 if (!sessionStorage.getItem('welcomeSoundPlayed')) {
                     elements.welcomeSound.play().then(() => {
-                        console.log('Welcome sound played successfully.');
-                        sessionStorage.setItem('welcomeSoundPlayed', 'true');
+                        console.log('Welcome sound started playing (muted).');
+                        // Attempt to unmute after 1 second
+                        setTimeout(() => {
+                            elements.welcomeSound.muted = false;
+                            console.log('Welcome sound unmuted successfully.');
+                            sessionStorage.setItem('welcomeSoundPlayed', 'true');
+                            elements.audioPrompt.classList.remove('visible');
+                        }, 1000);
                     }).catch(error => {
-                        console.warn('Audio playback failed:', error);
+                        console.warn('Audio playback failed:', error.message);
                         sessionStorage.setItem('welcomeSoundPlayed', 'true'); // Prevent retries
+                        // Show prompt if playback fails (e.g., NotAllowedError)
+                        if (error.name === 'NotAllowedError') {
+                            elements.audioPrompt.classList.add('visible');
+                        }
                     });
                 }
             }
 
             // Attempt to play on load
             playWelcomeSound();
+
+            // Enable sound on user click if prompt is visible
+            elements.audioPrompt.addEventListener('click', () => {
+                elements.welcomeSound.muted = false;
+                elements.welcomeSound.play().then(() => {
+                    console.log('Welcome sound played via user interaction.');
+                    sessionStorage.setItem('welcomeSoundPlayed', 'true');
+                    elements.audioPrompt.classList.remove('visible');
+                }).catch(error => {
+                    console.warn('Audio playback failed after prompt:', error.message);
+                });
+            });
 
             // Preloader
             window.addEventListener('load', () => {
