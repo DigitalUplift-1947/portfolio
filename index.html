@@ -1,3 +1,801 @@
+
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Owais | Portfolio</title>
+    <!-- Font Awesome for social media and skills icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts for the 'Inter' typeface -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS framework -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* CSS Variables for consistent color theming */
+        :root {
+            --primary-color: #FF8C00; /* Dark Orange */
+            --secondary-color: #FACC15; /* Yellow */
+            --background-dark: #111827; /* Dark charcoal */
+            --card-dark: #1F2937; /* Slightly lighter charcoal for cards */
+            --subtle-gray: #374151;
+        }
+
+        /* Sets the base font, background color, and text color for the entire page */
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #E0E0E0;
+            background-color: var(--background-dark);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated background parallax effect container */
+        .parallax-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            /* A subtle radial gradient for a floating effect */
+            background: linear-gradient(-45deg, #0A192F, #171123, #0A192F, #112A3A, #0A192F);
+            background-size: 400% 400%;
+            animation: moveGradient 25s ease infinite; /* Adjusted animation speed */
+        }
+
+        /* Adds a fading underline effect to navigation links on hover */
+        .nav-link {
+            position: relative;
+            display: inline-block;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease-out;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Sets the initial state for sections that will animate into view */
+        .animated-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        /* The final state for animated sections when they are visible in the viewport */
+        .animated-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Styles for the bubbly button with hover and active effects */
+        .bubbly-btn {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, background-color 0.2s ease-out;
+        }
+        .bubbly-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        .bubbly-btn:active {
+            transform: translateY(0);
+            box-shadow: none;
+        }
+        /* Defines the ripple effect that appears on a button click */
+        .bubbly-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0);
+        }
+        .bubbly-btn:focus::after,
+        .bubbly-btn:active::after {
+            animation: ripple-effect 0.4s ease-out forwards;
+        }
+        @keyframes ripple-effect {
+            to {
+                transform: translate(-50%, -50%) scale(15);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes moveGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Styling for the mobile menu */
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        /* Styles for the modal message box */
+        .modal {
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+            pointer-events: none;
+        }
+        .modal.is-visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: scale(1);
+        }
+        
+        /* New CSS for the hiding/showing header */
+        #main-header {
+            transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        #main-header.scrolled {
+            background-color: rgb(17, 24, 39, 0.9);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        #main-header.hide {
+            transform: translateY(-100%);
+        }
+        
+        /* New CSS for the typing animation */
+        #changing-text {
+            min-height: 2.5rem; /* Prevents layout shift */
+            white-space: nowrap; /* Keeps all text on one line */
+            overflow: hidden; /* Hides the text overflow */
+            position: relative;
+        }
+        
+        /* The blinking cursor effect */
+        #changing-text::after {
+            content: '';
+            position: absolute;
+            display: inline-block;
+            width: 2px;
+            height: 100%;
+            background-color: var(--primary-color);
+            margin-left: 5px;
+            animation: blink-cursor 0.75s step-end infinite;
+        }
+
+        @keyframes blink-cursor {
+            from, to { opacity: 0; }
+            50% { opacity: 1; }
+        }
+        
+        /* New CSS for social media icon hover effects */
+        .linkedin-hover:hover {
+            color: #0A66C2; /* LinkedIn brand color */
+        }
+        .youtube-hover:hover {
+            color: #FF0000; /* YouTube brand color */
+        }
+        
+        /* --- New: Custom Keyframes Animation --- */
+        /* Defines the pulsing effect for the icons */
+        @keyframes pulse-brand-color {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.4);
+                filter: brightness(150%);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        /* --- New: Classes for Brand Colors and Animation --- */
+        .whatsapp-pulse {
+            animation: pulse-brand-color 1s ease-in-out;
+            color: #25D366 !important;
+        }
+        
+        .email-pulse {
+            animation: pulse-brand-color 1s ease-in-out;
+            color: #3498db !important;
+        }
+        
+        .linkedin-pulse {
+            animation: pulse-brand-color 1s ease-in-out;
+            color: #0A66C2 !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- =================================================================
+    COMPONENT: Animated Background
+    ================================================================== -->
+    <div id="parallax-bg" class="parallax-background"></div>
+
+    <!-- =================================================================
+    COMPONENT: Header and Navigation
+    ================================================================== -->
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 py-4 px-4 md:px-8">
+        <nav class="container mx-auto flex justify-between items-center py-2">
+            <h1 class="text-xl md:text-2xl font-black text-gray-50 uppercase tracking-wide">My work showcase</h1>
+            <!-- Desktop Navigation -->
+            <ul class="hidden md:flex space-x-8 text-sm md:text-base font-medium">
+                <li><a href="#home" class="nav-link text-gray-300 hover:text-white transition-colors duration-200">Home</a></li>
+                <li><a href="#about" class="nav-link text-gray-300 hover:text-white transition-colors duration-200">About</a></li>
+                <li><a href="#experience" class="nav-link text-gray-300 hover:text-white transition-colors duration-200">Experience</a></li>
+                <li><a href="#certifications" class="nav-link text-gray-300 hover:text-white transition-colors duration-200">Certifications</a></li>
+                <li><a href="#contact" class="nav-link text-gray-300 hover:text-white transition-colors duration-200">Contact</a></li>
+            </ul>
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden bg-gray-800/90 backdrop-blur-lg absolute top-full left-0 w-full transform -translate-y-[150%]">
+            <ul class="flex flex-col items-center space-y-4 py-6 text-lg">
+                <li><a href="#home" class="nav-link text-gray-300 hover:text-white">Home</a></li>
+                <li><a href="#about" class="nav-link text-gray-300 hover:text-white">About</a></li>
+                <li><a href="#experience" class="nav-link text-gray-300 hover:text-white">Experience</a></li>
+                <li><a href="#certifications" class="nav-link text-gray-300 hover:text-white">Certifications</a></li>
+                <li><a href="#contact" class="nav-link text-gray-300 hover:text-white">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="relative z-10">
+
+        <!-- =================================================================
+        SECTION: Home
+        ================================================================== -->
+        <section id="home" class="min-h-screen flex items-center pt-32 md:pt-40 px-4 md:px-8">
+            <div class="text-center w-full space-y-6 animated-section">
+                <h2 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-tight">
+                    Hello, I'm <span class="text-[var(--primary-color)]">Muhammad Owais</span>
+                </h2>
+                <!-- The new animated text container -->
+                <p id="changing-text" class="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto"></p>
+                
+                <!-- Social media icons with a pulsing effect -->
+                <div class="flex justify-center items-center space-x-6 mt-8">
+                    <!-- Added IDs to the <i> tags for easy selection in JavaScript -->
+                    <a href="https://wa.me/message/NHLJOW7GEFJ7L1" target="_blank" rel="noopener noreferrer" class="text-2xl text-white transition-colors duration-200 hover:text-[#25D366]" aria-label="WhatsApp">
+                        <i id="whatsapp-icon" class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="mailto:your-email@example.com" class="text-2xl text-white transition-colors duration-200 hover:text-[var(--primary-color)]" aria-label="Email">
+                        <i id="email-icon" class="fas fa-envelope"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/muhammad-owais-b45106328/" target="_blank" rel="noopener noreferrer" class="text-2xl text-white transition-colors duration-200 hover:text-[#0A66C2]" aria-label="LinkedIn">
+                        <i id="linkedin-icon" class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+
+                <a href="#certifications" class="inline-block mt-4 px-8 py-3 text-lg font-semibold text-gray-900 bg-white rounded-full shadow-lg bubbly-btn hover:bg-[var(--primary-color)] hover:text-white">
+                    Explore My Certifications
+                </a>
+            </div>
+        </section>
+
+
+        <!-- =================================================================
+        SECTION: About
+        ================================================================== -->
+        <section id="about" class="py-12 md:py-20 px-4 md:px-8 animated-section"> <!-- Adjusted section padding -->
+            <div class="container mx-auto max-w-5xl">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[var(--primary-color)]">About Me</h2>
+                <div class="flex flex-col md:flex-row items-center md:items-start space-y-8 md:space-y-0 md:space-x-12 bg-gray-800 p-8 rounded-2xl shadow-xl border border-gray-700">
+                    <!-- Profile Photo Container -->
+                    <div class="flex-shrink-0 w-48 h-48 rounded-full overflow-hidden bg-gray-700 border-4 border-gray-600">
+                        <img src="Profile.jpg" alt="Profile Photo for Muhammad Owais" class="w-full h-full object-cover">
+                    </div>
+                    <!-- Text Content and Skills -->
+                    <div class="md:flex-grow text-center md:text-left">
+                        <p class="text-gray-200 leading-relaxed mb-4">I combine diverse skills in AI tools, prompt engineering, and cybersecurity with practical experience in digital marketing and content creation. 
+                            and currently pursuing Bachelor of Business Information Systems (BBIS) University of Management and Technology – Ongoing(Expected 2027)</p>
+                        <p class="text-gray-200 leading-relaxed mb-6">While I don’t fit a single mold, my work is driven by a deep curiosity for emerging technologies and a commitment to continuous learning. I am adaptable, creative, and passionate about turning complex ideas into simple, effective solutions.</p>
+                        <div class="mt-8">
+                            <h3 class="text-2xl font-semibold mb-6 text-[var(--primary-color)]">My Skills</h3>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="px-4 py-1.5 bg-gray-700 text-gray-200 rounded-full text-sm font-medium flex items-center shadow-lg"><i class="fas fa-robot mr-2 text-[var(--primary-color)]"></i>AI Tools</span>
+                                <span class="px-4 py-1.5 bg-gray-700 text-gray-200 rounded-full text-sm font-medium flex items-center shadow-lg"><i class="fab fa-python mr-2 text-yellow-400"></i>Python</span>
+                                <span class="px-4 py-1.5 bg-gray-700 text-gray-200 rounded-full text-sm font-medium flex items-center shadow-lg"><i class="fas fa-shield-alt mr-2 text-red-400"></i>Cybersecurity</span>
+                                <span class="px-4 py-1.5 bg-gray-700 text-gray-200 rounded-full text-sm font-medium flex items-center shadow-lg"><i class="fas fa-bullhorn mr-2 text-blue-400"></i>Digital Marketing</span>
+                                <span class="px-4 py-1.5 bg-gray-700 text-gray-200 rounded-full text-sm font-medium flex items-center shadow-lg"><i class="fas fa-video mr-2 text-pink-400"></i>YouTube Creation</span>
+                                <span class="px-4 py-1.5 bg-gray-700 text-gray-200 rounded-full text-sm font-medium flex items-center shadow-lg"><i class="fas fa-comments mr-2 text-yellow-300"></i>Bilingual Communication</span>
+                                <span class="px-4 py-1.5 bg-gray-700 text-gray-200 rounded-full text-sm font-medium flex items-center shadow-lg"><i class="fab fa-github mr-2 text-white"></i>GitHub</span>
+                                <span class="px-4 py-1.5 bg-gray-700 text-gray-200 rounded-full text-sm font-medium flex items-center shadow-lg"><i class="fas fa-globe mr-2 text-green-300"></i>Netlify</span>
+                                <span class="px-4 py-1.5 bg-gray-700 text-gray-200 rounded-full text-sm font-medium flex items-center shadow-lg"><i class="fas fa-film mr-2 text-purple-400"></i>Premiere Pro</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================
+        SECTION: Professional Experience
+        ================================================================== -->
+        <section id="experience" class="py-12 md:py-20 px-4 md:px-8 animated-section"> <!-- Adjusted section padding -->
+            <div class="container mx-auto max-w-5xl">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[var(--primary-color)]">Professional Experience</h2>
+                <div class="space-y-8 md:space-y-12">
+                    <!-- Experience Card 1 -->
+                    <div class="bg-gray-800 p-6 md:p-8 rounded-2xl shadow-xl border border-gray-700 transition-transform duration-300 hover:scale-[1.01]">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                            <h3 class="text-2xl font-semibold text-white">AI & Content Strategist</h3>
+                            <p class="text-sm font-medium text-gray-200">working Since 2020</p>
+                        </div>
+                        <p class="text-gray-200 mb-2">Digital Uplift (Personal Project)</p>
+                        <ul class="list-disc list-inside space-y-2 text-gray-200">
+                            <li>Created and managed engaging tech content for my YouTube channel, building steady audience growth.</li>
+                            <li>Explored and applied prompt engineering techniques to design creative scripts and ideas.</li>
+                            <li>Managed all aspects of video production, from shooting to editing with Adobe Premiere Pro.</li>
+                        </ul>
+                    </div>
+                    <!-- Experience Card 2 -->
+                    <div class="bg-gray-800 p-6 md:p-8 rounded-2xl shadow-xl border border-gray-700 transition-transform duration-300 hover:scale-[1.01]">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                            <h3 class="text-2xl font-semibold text-white">Internships</h3>
+                            <p class="text-sm font-medium text-gray-200">2023-2026</p>
+                        </div>
+                        <p class="text-gray-200 mb-2">Experience across NGOs, organizations & companies.</p>
+                        <ul class="list-disc list-inside space-y-2 text-gray-200">
+                            <li>Shaukat Khanum Hospital (Marketing & HR Intern, 2023–2024): Assisted in campaign management, internal communications, and recruitment coordination.".</li>
+                            <li>TX Labz (HR Intern, 2022): Streamlined onboarding documentation and supported interview scheduling and resume screening.</li>
+                            <li>Med Coach Global (Current, 2025–Present): Handling social media </li>
+                            <li>NGO Experience: Collaborated with Alkhimat Foundation and ILM on various projects and initiatives.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================
+        SECTION: Certifications
+        ================================================================== -->
+        <section id="certifications" class="py-12 md:py-20 px-4 md:px-8 animated-section"> <!-- Adjusted section padding -->
+            <div class="container mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[var(--primary-color)]">Certifications</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Certification Card 1 - Google Prompt Engineering -->
+                    <div class="bg-gray-800 p-6 rounded-2xl shadow-xl transition-all duration-300 hover:scale-[1.03] border border-gray-700">
+                        <img src="google.svg" alt="Google Certificate Badge" class="rounded-lg mb-4 h-auto mx-auto object-cover border border-gray-600">
+                        <h3 class="text-2xl font-semibold text-white mb-2 text-center">Prompt Engineering and Prompting Essentials</h3>
+                        <p class="text-gray-200 mb-2 text-center">Issued by Google</p>
+                        <p class="text-sm text-[var(--primary-color)] text-center">2025</p>
+                        <div class="text-center mt-4">
+                            <a href="https://www.coursera.org/account/accomplishments/verify/EO0L72HVNHTL?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=pdf_header_button&utm_product=course" class="inline-block text-sm text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer">View Credential &rarr;</a>
+                        </div>
+                    </div>
+                    <!-- Certification Card 2 - Google AI Essentials -->
+                    <div class="bg-gray-800 p-6 rounded-2xl shadow-xl transition-all duration-300 hover:scale-[1.03] border border-gray-700">
+                        <img src="google.svg" alt="Google AI Certificate Badge" class="rounded-lg mb-4 h-auto mx-auto object-cover border border-gray-600">
+                        <h3 class="text-2xl font-semibold text-white mb-2 text-center">Google AI Essentials</h3>
+                        <p class="text-gray-200 mb-2 text-center">Issued by Google</p>
+                        <p class="text-sm text-[var(--primary-color)] text-center">2025</p>
+                        <div class="text-center mt-4">
+                            <a href="https://coursera.org/share/ec941470fa4f3bfdd16eae5b4789f247" class="inline-block text-sm text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer">View Credential &rarr;</a>
+                        </div>
+                    </div>
+                    <!-- Certification Card 3 - LinkedIn AI Essentials -->
+                    <div class="bg-gray-800 p-6 rounded-2xl shadow-xl transition-all duration-300 hover:scale-[1.03] border border-gray-700">
+                        <img src="likedin.svg" alt="LinkedIn Certificate Badge" class="rounded-lg mb-4 h-auto mx-auto object-cover border border-gray-600">
+                        <h3 class="text-2xl font-semibold text-white mb-2 text-center">LinkedIn AI Essentials</h3>
+                        <p class="text-gray-200 mb-2 text-center">Issued by LinkedIn</p>
+                        <p class="text-sm text-[var(--primary-color)] text-center">2024</p>
+                        <div class="text-center mt-4">
+                            <a href="https://www.linkedin.com/in/muhammad-owais-b45106328/details/certifications/1727674508303/single-media-viewer/?type=DOCUMENT&profileId=ACoAAFKY-uUBCVsLmS7CEWtVmvBWSOo8InjIfPM" class="inline-block text-sm text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer">View Credential &rarr;</a>
+                        </div>
+                    </div>
+                    <!-- Certification Card 4 - Python Programming -->
+                    <div class="bg-gray-800 p-6 rounded-2xl shadow-xl transition-all duration-300 hover:scale-[1.03] border border-gray-700">
+                        <img src="itu.svg" alt="ITU Python Certificate Badge" class="rounded-lg mb-4 h-auto mx-auto object-cover border border-gray-600">
+                        <h3 class="text-2xl font-semibold text-white mb-2 text-center">Python Programming Course</h3>
+                        <p class="text-gray-200 mb-2 text-center">Issued by ITU</p>
+                        <p class="text-sm text-[var(--primary-color)] text-center">2023</p>
+                        <div class="text-center mt-4">
+                            <a href="https://www.linkedin.com/in/muhammad-owais-b45106328/details/certifications/1727659107845/single-media-viewer/?type=IMAGE&profileId=ACoAAFKY-uUBCVsLmS7CEWtVmvBWSOo8InjIfPM" class="inline-block text-sm text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer">View Credential &rarr;</a>
+                        </div>
+                    </div>
+                    <!-- Certification Card 5 - Digital Marketing -->
+                    <div class="bg-gray-800 p-6 rounded-2xl shadow-xl transition-all duration-300 hover:scale-[1.03] border border-gray-700">
+                        <img src="google.svg" alt="Google Marketing Certificate Badge" class="rounded-lg mb-4 h-auto mx-auto object-cover border border-gray-600">
+                        <h3 class="text-2xl font-semibold text-white mb-2 text-center">Digital Marketing Course</h3>
+                        <p class="text-gray-200 mb-2 text-center">Issued by Google</p>
+                        <p class="text-sm text-[var(--primary-color)] text-center">2024</p>
+                        <div class="text-center mt-4">
+                            <a href="https://skillshop.exceedlms.com/student/award/fR9PskUZepTYWBUYdNzMdnPy" class="inline-block text-sm text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer">View Credential &rarr;</a>
+                        </div>
+                    </div>
+                    <!-- Certification Card 6 - Cybersecurity -->
+                    <div class="bg-gray-800 p-6 rounded-2xl shadow-xl transition-all duration-300 hover:scale-[1.03] border border-gray-700">
+                        <img src="ibm.svg" alt="IBM Cybersecurity Certificate Badge" class="rounded-lg mb-4 h-auto mx-auto object-cover border border-gray-600">
+                        <h3 class="text-2xl font-semibold text-white mb-2 text-center">Cybersecurity Course</h3>
+                        <p class="text-gray-200 mb-2 text-center">Issued by IBM</p>
+                        <p class="text-sm text-[var(--primary-color)] text-center">2024</p>
+                        <div class="text-center mt-4">
+                            <a href="https://www.credly.com/badges/fa7cbba6-4f2e-4192-9f6f-77983482e85d/public_url" class="inline-block text-sm text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer">View Credential &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================
+        SECTION: Contact
+        ================================================================== -->
+        <section id="contact" class="py-12 md:py-20 px-4 md:px-8 animated-section"> <!-- Adjusted section padding -->
+            <div class="container mx-auto max-w-2xl">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[var(--primary-color)]">Get in Touch</h2>
+                <!-- 
+                    The form now uses Web3Forms, a free and simple service.
+                    1. Go to Web3Forms (web3forms.com) and sign up for a free account.
+                    2. Create a new form to get your unique access key.
+                    3. Replace "YOUR_ACCESS_KEY_HERE" with your key.
+                -->
+                <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-6 bg-gray-800 p-8 rounded-2xl shadow-xl border border-gray-700">
+                    <!-- This hidden input is crucial. It tells Web3Forms where to send the email. -->
+                    <input type="hidden" name="access_key" value="492a8810-9deb-4946-8c01-ba7883b310d6">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-200">Name</label>
+                        <input type="text" id="name" name="name" class="mt-1 block w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-md shadow-sm focus:border-[var(--primary-color)] focus:ring-[var(--primary-color)] text-white" required>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-200">Email</label>
+                        <input type="email" id="email" name="email" class="mt-1 block w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-md shadow-sm focus:border-[var(--primary-color)] focus:ring-[var(--primary-color)] text-white" required>
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-200">Message</label>
+                        <textarea id="message" name="message" rows="4" class="mt-1 block w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-md shadow-sm focus:border-[var(--primary-color)] focus:ring-[var(--primary-color)] text-white" required></textarea>
+                    </div>
+                    <button type="submit" class="w-full px-4 py-3 bg-white/10 text-white font-bold rounded-lg bubbly-btn hover:bg-[var(--primary-color)] hover:text-white">Send Message</button> <!-- Updated button style -->
+                </form>
+                <!-- Social media and download links -->
+                <div class="mt-12 text-center">
+                    <p class="text-gray-200">Find me on social media:</p>
+                    <div class="flex justify-center space-x-6 mt-4 text-2xl">
+                        <!-- LinkedIn link now has a branded hover color -->
+                        <a href="https://www.linkedin.com/in/muhammad-owais-b45106328/" class="text-gray-200 transition-colors duration-200 linkedin-hover" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+                        <!-- YouTube link now has a branded hover color -->
+                        <a href="https://www.youtube.com/@DigitalUplift.1947" class="text-gray-200 transition-colors duration-200 youtube-hover" aria-label="YouTube" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <!-- WhatsApp and Download buttons -->
+                <div class="mt-12 text-center space-y-4">
+                    <p class="text-gray-200">Or contact me directly and download my resume:</p>
+                    <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="https://wa.me/message/NHLJOW7GEFJ7L1 " target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-6 py-3 bg-white/10 text-white font-bold rounded-lg bubbly-btn flex items-center justify-center hover:bg-[#25D366] hover:text-white"> <!-- Updated button style -->
+                            <i class="fab fa-whatsapp mr-2"></i> Chat on WhatsApp
+                        </a>
+                        <a href="Cv 2025.pdf" download class="w-full sm:w-auto px-6 py-3 bg-white/10 text-white font-bold rounded-lg bubbly-btn flex items-center justify-center hover:bg-[var(--primary-color)] hover:text-white" target="_blank" rel="noopener noreferrer"> <!-- Updated button style -->
+                            <i class="fas fa-download mr-2"></i> Download Resume
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- The modal is now controlled by the form submission logic. -->
+    <div id="message-modal" class="modal fixed inset-0 bg-gray-900/50 backdrop-blur-sm flex items-center justify-center opacity-0 z-50 transform scale-95">
+        <div class="bg-gray-800 p-8 rounded-lg shadow-xl text-center border border-gray-700 max-w-sm w-full transform transition-transform duration-300 scale-95">
+            <h3 class="text-xl font-bold text-white mb-4">Message Sent!</h3>
+            <p id="modal-message" class="text-gray-200"></p>
+            <button id="close-modal-btn" class="mt-6 px-4 py-2 bg-[var(--primary-color)] text-gray-900 rounded-lg font-semibold bubbly-btn">Close</button>
+        </div>
+    </div>
+
+
+    <!-- =================================================================
+    COMPONENT: Footer
+    ================================================================== -->
+    <footer class="text-center py-8 text-gray-500 text-sm">
+        <p>&copy; 2025 Muhammad Owais. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("Portfolio website loaded successfully.");
+            const sections = document.querySelectorAll('.animated-section');
+            const navLinks = document.querySelectorAll('header nav ul li a');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mainHeader = document.getElementById('main-header');
+            const contactForm = document.getElementById('contact-form');
+            const messageModal = document.getElementById('message-modal');
+            const modalMessage = document.getElementById('modal-message');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            
+            let lastScrollY = window.scrollY;
+
+            // --- Header Scroll Logic ---
+            window.addEventListener('scroll', () => {
+                const currentScrollY = window.scrollY;
+                if (currentScrollY > 50) {
+                    mainHeader.classList.add('scrolled');
+                } else {
+                    mainHeader.classList.remove('scrolled');
+                }
+                if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                    mainHeader.classList.add('hide');
+                } else {
+                    mainHeader.classList.remove('hide');
+                }
+                lastScrollY = currentScrollY;
+            });
+
+            // --- Mobile Menu Toggle ---
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('-translate-y-[150%]');
+            });
+
+            // Close mobile menu when a link is clicked
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('-translate-y-[150%]');
+                });
+            });
+
+            // --- Intersection Observer for animated sections ---
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        const id = entry.target.getAttribute('id');
+                        console.log(`Section '#${id}' is now visible.`);
+                        navLinks.forEach(link => {
+                            link.classList.toggle('text-white', link.getAttribute('href') === `#${id}`);
+                            link.classList.toggle('font-semibold', link.getAttribute('href') === `#${id}`);
+                            link.classList.toggle('text-gray-300', link.getAttribute('href') !== `#${id}`);
+                        });
+                    }
+                });
+            }, { threshold: 0.3 });
+            sections.forEach(section => observer.observe(section));
+
+            // --- Typing Animation Logic ---
+            const phrases = [
+                "Curiosity drives me to explore new technologies and tools.",
+                "Challenges are opportunities to adapt and find creative solutions.",
+                "Creativity shines through in turning ideas into engaging digital content.",
+                "Attention to detail ensures every project is polished and complete.",
+                "Discipline allows me to manage multiple tasks and learn consistently.",
+                "Collaboration is key, and I enjoy helping others grow while working together.",
+                "Taking initiative helps me move projects forward without waiting.",
+                "Analytical thinking guides me in researching, evaluating, and implementing solutions.",
+                "Innovation inspires me to simplify complex concepts for others.",
+                "Passion fuels my dedication to every project I take on."
+            ];
+            const changingTextElement = document.getElementById('changing-text');
+            let phraseIndex = 0;
+            let letterIndex = 0;
+            let isDeleting = false;
+
+            function typeWriter() {
+                const currentPhrase = phrases[phraseIndex];
+
+                if (isDeleting) {
+                    // Remove one letter
+                    changingTextElement.textContent = currentPhrase.substring(0, letterIndex - 1);
+                    letterIndex--;
+                } else {
+                    // Add one letter
+                    changingTextElement.textContent = currentPhrase.substring(0, letterIndex + 1);
+                    letterIndex++;
+                }
+
+                // Check for state change (finished typing or deleting)
+                if (!isDeleting && letterIndex === currentPhrase.length) {
+                    // Pause after typing
+                    isDeleting = true;
+                    setTimeout(typeWriter, 2000); // Pause before deleting
+                } else if (isDeleting && letterIndex === 0) {
+                    // Switch to the next phrase
+                    isDeleting = false;
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                    setTimeout(typeWriter, 500); // Pause before typing next phrase
+                } else {
+                    // Continue typing or deleting
+                    const typingSpeed = isDeleting ? 25 : 50;
+                    setTimeout(typeWriter, typingSpeed);
+                }
+            }
+            
+            // Start the typing animation
+            window.onload = typeWriter;
+
+
+            // --- Contact Form Submission Logic (Web3Forms) ---
+            contactForm.addEventListener('submit', async function(event) {
+                event.preventDefault();
+
+                // Show a loading indicator in the button
+                const submitButton = contactForm.querySelector('button[type="submit"]');
+                const originalButtonText = submitButton.innerHTML;
+                submitButton.innerHTML = 'Sending...';
+                submitButton.disabled = true;
+
+                try {
+                    const formData = new FormData(contactForm);
+                    const response = await fetch(contactForm.action, {
+                        method: contactForm.method,
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    const result = await response.json();
+
+                    if (response.ok) {
+                        modalMessage.textContent = result.message || 'Thank you for your message. I will get back to you soon!';
+                        contactForm.reset();
+                    } else {
+                        throw new Error(result.message || 'An error occurred. Please try again later.');
+                    }
+                } catch (error) {
+                    console.error('Submission Error:', error);
+                    modalMessage.textContent = 'Submission failed. Please check the console for details.';
+                } finally {
+                    submitButton.innerHTML = originalButtonText;
+                    submitButton.disabled = false;
+                    messageModal.classList.add('is-visible');
+                }
+            });
+
+            // --- Modal Close Button ---
+            closeModalBtn.addEventListener('click', () => {
+                messageModal.classList.remove('is-visible');
+            });
+            // Also close modal when clicking outside of it
+            messageModal.addEventListener('click', (event) => {
+                if (event.target === messageModal) {
+                    messageModal.classList.remove('is-visible');
+                }
+            });
+            
+            // --- Sequential Icon Pulsing Animation ---
+            const icons = [
+                { id: 'whatsapp-icon', class: 'whatsapp-pulse' },
+                { id: 'email-icon', class: 'email-pulse' },
+                { id: 'linkedin-icon', class: 'linkedin-pulse' }
+            ];
+
+            let iconIndex = 0;
+            const pulseDelay = 2000; // 2 seconds between each pulse starting
+
+            function pulseNextIcon() {
+                const currentIcon = document.getElementById(icons[iconIndex].id);
+                if (currentIcon) {
+                    // Add the brand color pulse class to start the animation
+                    currentIcon.classList.add(icons[iconIndex].class);
+
+                    // Set a timeout to remove the pulse class after the animation duration (1s)
+                    setTimeout(() => {
+                        currentIcon.classList.remove(icons[iconIndex].class);
+                    }, 1000); 
+                }
+
+                // Move to the next icon, or loop back to the beginning
+                iconIndex = (iconIndex + 1) % icons.length;
+            }
+
+            // Start the animation sequence
+            setInterval(pulseNextIcon, pulseDelay);
+        });
+    </script>
+</body>
+</html>
+
+
+Animate  the WhatsApp, email, and LinkedIn icons below my name. They should pulse one after another in that order. As each icon pulses, it should change to its brand color: green for WhatsApp, blue for email, and the standard LinkedIn blue for the LinkedIn icon. Make sure this animation is continuous and smooth. Do not change any other elements on the page. the animation should be be loop again and aganin
+
+Thought for 59s
+html
+699 hidden lines
+2 / 2
+4.8s
+its good but the animation is not smooth smooth
+To make the pulsing animation of the WhatsApp, Email, and LinkedIn icons smoother, we can refine the animation by adjusting the timing, easing function, and keyframes to ensure a more fluid and visually appealing effect. The changes will focus on the JavaScript logic for the pulsing sequence and the CSS keyframes to create a seamless loop. We'll keep the animation duration consistent, use a smoother easing function, and ensure the icons transition back to their original state gracefully. No other elements on the page will be modified.
+
+Below is the updated HTML with the refined animation logic:
+
+index.html
+html
+•
+Explanation of Changes
+CSS Keyframes (pulse-brand-color) Updates:
+Reduced the maximum scale from 1.4 to 1.3 for a subtler effect, making the animation less jarring.
+Adjusted filter: brightness from 150% to 140% to maintain color vibrancy without overexposure.
+Changed the animation timing function to cubic-bezier(0.4, 0, 0.2, 1) for a smoother, more natural easing curve.
+Set the animation duration to 0.8s for a balanced speed that feels fluid.
+JavaScript Animation Logic Updates:
+Modified the pulseNextIcon function to remove the pulse class from all icons before applying it to the current one, preventing overlap and ensuring a clean transition.
+Set pulseDuration to 800ms to match the CSS animation duration.
+Adjusted cycleDuration to 2400ms (800ms per icon × 3 icons), ensuring each icon pulses exactly once per cycle.
+Removed the static setInterval and instead used setTimeout within pulseNextIcon to chain the animations, allowing precise control over timing and avoiding potential drift.
+These changes ensure that the WhatsApp, Email, and LinkedIn icons pulse sequentially in a smooth, continuous loop with their respective brand colors (green for WhatsApp, blue for Email, and LinkedIn blue for LinkedIn). The rest of the page remains unchanged.
+
+5.1s
+Get in Touch
+add some constraints so that people can not just mess with the system
+To add constraints to the "Get in Touch" contact form to prevent misuse or abuse (e.g., spamming or invalid submissions), we can implement several client-side and server-side validation techniques without altering other elements of the page. Since the form uses Web3Forms for submission, we'll focus on client-side constraints that work within the existing setup, as Web3Forms already includes some server-side protections like rate limiting and spam filtering. The constraints will include input validation, a character limit for the message, a submission cooldown, and a simple CAPTCHA-like challenge (e.g., a checkbox to verify the user is not a bot). These additions will enhance security while maintaining the form's functionality and user experience.
+
+Below is the updated HTML with the contact form in the "Get in Touch" section modified to include these constraints. The rest of the page remains unchanged, and only the relevant <section id="contact"> and associated JavaScript are updated.
+
+html
+807 hidden lines
+Changes Made to the "Get in Touch" Section
+Input Validation:
+Name: Added maxlength="50" and a regex pattern (^[A-Za-z\s-]{2,50}$) to allow only letters, spaces, or hyphens, with a length of 2–50 characters.
+Email: Uses HTML5 type="email" and a regex pattern (^[^\s@]+@[^\s@]+\.[^\s@]+$) to ensure a valid email format.
+Message: Added maxlength="500" and a regex pattern (^[\w\s.,!?()-]{10,500}$) to allow alphanumeric characters, spaces, and common punctuation (.,!?-), with a length of 10–500 characters, preventing special characters like < or > to mitigate XSS risks.
+Error Messaging:
+Added error message elements (<p class="error-message">) below each input field to display validation feedback.
+Styled errors with a red color (#EF4444) and a class (input-error) to highlight invalid inputs with a red border.
+Errors are shown/hidden dynamically based on real-time input validation.
+CAPTCHA Checkbox:
+Added a simple "I'm not a bot" checkbox (<input type="checkbox" id="not-a-bot">) as a basic CAPTCHA to deter automated submissions.
+The form submission is blocked unless the checkbox is checked, with an error message displayed if unchecked.
+Submission Cooldown:
+Implemented a 30-second cooldown between form submissions using lastSubmissionTime and submissionCooldown variables in JavaScript.
+If a user tries to submit again within 30 seconds, a modal displays the message: "Please wait 30 seconds before submitting again."
+Form Validation Logic:
+Added a validateForm function that runs on input events (input and change) for all fields and the CAPTCHA checkbox.
+The submit button is disabled by default (disabled attribute) and only enabled when all validations pass.
+Validation checks are performed in real-time, providing immediate feedback to the user.
+JavaScript Updates:
+Integrated validation into the form submission handler to ensure all constraints are met before sending the request to Web3Forms.
+Reset the CAPTCHA checkbox and disable the submit button after a successful submission to prevent immediate resubmission.
+Maintained the existing Web3Forms submission logic, ensuring compatibility with the service's server-side protections (e.g., spam filtering).
+Additional Notes
+Web3Forms Protections: Web3Forms already includes server-side spam protection and rate limiting. The client-side constraints complement these by reducing invalid submissions before they reach the server.
+User Experience: The constraints are designed to be non-intrusive, with clear error messages and a simple CAPTCHA that doesn't require complex user interaction.
+Security: The regex patterns prevent common injection attacks (e.g., HTML/JS injection via < or >), and the cooldown reduces the risk of brute-force spamming.
+No External Dependencies: The CAPTCHA is a simple checkbox to avoid adding external libraries, keeping the page lightweight.
+The rest of the page, including the smooth icon pulsing animation, remains unchanged. These constraints should effectively prevent users from "messing with the system" while maintaining a smooth and professional user experience.
+
+9.3s
+Ok we are almost done i just 
+want the pulsing animation to be a bit slow
+To slow down the pulsing animation for the WhatsApp, Email, and LinkedIn icons, we can adjust the animation duration in the CSS keyframes and the JavaScript timing logic. Specifically, we'll increase the pulse-brand-color animation duration from 0.8 seconds to 1.2 seconds for a more relaxed and smoother effect. We'll also update the JavaScript pulseDuration and cycleDuration to match, ensuring each icon pulses sequentially with a total cycle time of 1.2s × 3 icons = 3.6 seconds. No other parts of the page, including the contact form constraints or other sections, will be modified.
+
+Below is the updated HTML with only the relevant CSS and JavaScript changes for the pulsing animation:
+
+index.html
+html
+•
+Explanation of Changes
+CSS Keyframes (pulse-brand-color):
+Updated the animation duration from 0.8s to 1.2s for the .whatsapp-pulse, .email-pulse, and .linkedin-pulse classes to slow down the pulsing effect.
+Kept the cubic-bezier(0.4, 0, 0.2, 1) easing function for a smooth, natural transition.
+The keyframes remain unchanged in terms of scale (1 to 1.3) and brightness (100% to 140%) to maintain the visual effect, only slowing the timing.
+JavaScript Animation Logic:
+Updated pulseDuration from 800 to 1200 (milliseconds) to match the new CSS animation duration.
+Updated cycleDuration from 2400 to 3600 (1200ms × 3 icons) to ensure each icon pulses once per cycle, maintaining the sequential animation.
+The pulseNextIcon function remains unchanged in logic, ensuring icons pulse one at a time with the new timing.
+These changes make the pulsing animation for the WhatsApp, Email, and LinkedIn icons noticeably slower and more deliberate, enhancing the visual smoothness while preserving the rest of the page's functionality, including the contact form constraints and other animations.
+
+12.3s
+there are to issue 
+1. The email icon is not working
+2. Get in Touch form needs fine tuning as i wrote somting even one letter all the messegs suddenly apper even thoe they should only apare at the time of pressing send button,If some thing is not right
+3.  Get in Touch form sections are having issues with color change 
+Thought for 1m 4s
+html
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -231,18 +1029,11 @@
 </head>
 <body>
 
-    <!-- =================================================================
-    COMPONENT: Animated Background
-    ================================================================== -->
     <div id="parallax-bg" class="parallax-background"></div>
 
-    <!-- =================================================================
-    COMPONENT: Header and Navigation
-    ================================================================== -->
     <header id="main-header" class="fixed top-0 left-0 right-0 z-50 py-4 px-4 md:px-8">
         <nav class="container mx-auto flex justify-between items-center py-2">
             <h1 class="text-xl md:text-2xl font-black text-gray-50 uppercase tracking-wide">My work showcase</h1>
-            <!-- Desktop Navigation -->
             <ul class="hidden md:flex space-x-8 text-sm md:text-base font-medium">
                 <li><a href="#home" class="nav-link text-gray-300 hover:text-white transition-colors duration-200">Home</a></li>
                 <li><a href="#about" class="nav-link text-gray-300 hover:text-white transition-colors duration-200">About</a></li>
@@ -250,14 +1041,12 @@
                 <li><a href="#certifications" class="nav-link text-gray-300 hover:text-white transition-colors duration-200">Certifications</a></li>
                 <li><a href="#contact" class="nav-link text-gray-300 hover:text-white transition-colors duration-200">Contact</a></li>
             </ul>
-            <!-- Mobile Menu Button -->
             <div class="md:hidden">
                 <button id="mobile-menu-button" class="text-white focus:outline-none">
                     <i class="fas fa-bars text-2xl"></i>
                 </button>
             </div>
         </nav>
-        <!-- Mobile Menu -->
         <div id="mobile-menu" class="md:hidden bg-gray-800/90 backdrop-blur-lg absolute top-full left-0 w-full transform -translate-y-[150%]">
             <ul class="flex flex-col items-center space-y-4 py-6 text-lg">
                 <li><a href="#home" class="nav-link text-gray-300 hover:text-white">Home</a></li>
@@ -271,9 +1060,6 @@
 
     <main class="relative z-10">
 
-        <!-- =================================================================
-        SECTION: Home
-        ================================================================== -->
         <section id="home" class="min-h-screen flex items-center pt-32 md:pt-40 px-4 md:px-8">
             <div class="text-center w-full space-y-6 animated-section">
                 <h2 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-tight">
@@ -281,12 +1067,11 @@
                 </h2>
                 <p id="changing-text" class="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto"></p>
                 
-                <!-- Social media icons with a pulsing effect -->
                 <div class="flex justify-center items-center space-x-6 mt-8">
                     <a href="https://wa.me/message/NHLJOW7GEFJ7L1" target="_blank" rel="noopener noreferrer" class="text-2xl text-white transition-colors duration-200 hover:text-[#25D366]" aria-label="WhatsApp">
                         <i id="whatsapp-icon" class="fab fa-whatsapp"></i>
                     </a>
-                    <a href="mailto:professional.OTS@Gmail.com" class="text-2xl text-white transition-colors duration-200 hover:text-[var(--primary-color)]" aria-label="Email">
+                    <a href="mailto:your-email@example.com" class="text-2xl text-white transition-colors duration-200 hover:text-[#3498db]" aria-label="Email">
                         <i id="email-icon" class="fas fa-envelope"></i>
                     </a>
                     <a href="https://www.linkedin.com/in/muhammad-owais-b45106328/" target="_blank" rel="noopener noreferrer" class="text-2xl text-white transition-colors duration-200 hover:text-[#0A66C2]" aria-label="LinkedIn">
@@ -300,9 +1085,6 @@
             </div>
         </section>
 
-        <!-- =================================================================
-        SECTION: About
-        ================================================================== -->
         <section id="about" class="py-12 md:py-20 px-4 md:px-8 animated-section">
             <div class="container mx-auto max-w-5xl">
                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[var(--primary-color)]">About Me</h2>
@@ -333,9 +1115,6 @@
             </div>
         </section>
 
-        <!-- =================================================================
-        SECTION: Professional Experience
-        ================================================================== -->
         <section id="experience" class="py-12 md:py-20 px-4 md:px-8 animated-section">
             <div class="container mx-auto max-w-5xl">
                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[var(--primary-color)]">Professional Experience</h2>
@@ -369,9 +1148,6 @@
             </div>
         </section>
 
-        <!-- =================================================================
-        SECTION: Certifications
-        ================================================================== -->
         <section id="certifications" class="py-12 md:py-20 px-4 md:px-8 animated-section">
             <div class="container mx-auto">
                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[var(--primary-color)]">Certifications</h2>
@@ -434,9 +1210,6 @@
             </div>
         </section>
 
-        <!-- =================================================================
-        SECTION: Contact
-        ================================================================== -->
         <section id="contact" class="py-12 md:py-20 px-4 md:px-8 animated-section">
             <div class="container mx-auto max-w-2xl">
                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[var(--primary-color)]">Get in Touch</h2>
@@ -462,7 +1235,7 @@
                         <label for="not-a-bot" class="ml-2 text-sm font-medium text-gray-200">I'm not a bot</label>
                         <p id="captcha-error" class="error-message ml-2">Please check this box to verify you're not a bot.</p>
                     </div>
-                    <button type="submit" id="submit-btn" class="w-full px-4 py-3 bg-white/10 text-white font-bold rounded-lg bubbly-btn hover:bg-[var(--primary-color)] hover:text-white" disabled>Send Message</button>
+                    <button type="submit" id="submit-btn" class="w-full px-4 py-3 bg-white/10 text-white font-bold rounded-lg bubbly-btn hover:bg-[var(--primary-color)] hover:text-white">Send Message</button>
                 </form>
                 <div class="mt-12 text-center">
                     <p class="text-gray-200">Find me on social media:</p>
@@ -484,8 +1257,7 @@
                 </div>
             </div>
         </section>
-    </main>
-    
+
     <div id="message-modal" class="modal fixed inset-0 bg-gray-900/50 backdrop-blur-sm flex items-center justify-center opacity-0 z-50 transform scale-95">
         <div class="bg-gray-800 p-8 rounded-lg shadow-xl text-center border border-gray-700 max-w-sm w-full transform transition-transform duration-300 scale-95">
             <h3 class="text-xl font-bold text-white mb-4">Message Sent!</h3>
@@ -524,7 +1296,6 @@
             let lastSubmissionTime = 0;
             const submissionCooldown = 30000;
 
-            // Header Scroll Logic
             window.addEventListener('scroll', () => {
                 const currentScrollY = window.scrollY;
                 if (currentScrollY > 50) {
@@ -540,7 +1311,6 @@
                 lastScrollY = currentScrollY;
             });
 
-            // Mobile Menu Toggle
             mobileMenuButton.addEventListener('click', () => {
                 mobileMenu.classList.toggle('-translate-y-[150%]');
             });
@@ -551,7 +1321,6 @@
                 });
             });
 
-            // Intersection Observer for animated sections
             const observer = new IntersectionObserver(entries => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -568,7 +1337,6 @@
             }, { threshold: 0.3 });
             sections.forEach(section => observer.observe(section));
 
-            // Typing Animation Logic
             const phrases = [
                 "Curiosity drives me to explore new technologies and tools.",
                 "Challenges are opportunities to adapt and find creative solutions.",
@@ -612,7 +1380,6 @@
             
             window.onload = typeWriter;
 
-            // --- Updated: Slower Sequential Icon Pulsing Animation ---
             const icons = [
                 { id: 'whatsapp-icon', class: 'whatsapp-pulse' },
                 { id: 'email-icon', class: 'email-pulse' },
@@ -620,8 +1387,8 @@
             ];
 
             let iconIndex = 0;
-            const pulseDuration = 1200; // Increased to match slower CSS animation
-            const cycleDuration = 3600; // 1200ms * 3 icons
+            const pulseDuration = 1200;
+            const cycleDuration = 3600;
 
             function pulseNextIcon() {
                 icons.forEach(icon => {
@@ -640,7 +1407,6 @@
 
             pulseNextIcon();
 
-            // Form Validation and Constraints
             function validateName(name) {
                 const nameRegex = /^[A-Za-z\s-]{2,50}$/;
                 return nameRegex.test(name);
@@ -670,44 +1436,39 @@
             function validateForm() {
                 let isValid = true;
 
+                clearError(nameInput, nameError);
+                clearError(emailInput, emailError);
+                clearError(messageInput, messageError);
+                captchaError.classList.remove('active');
+
                 if (!validateName(nameInput.value)) {
                     showError(nameInput, nameError, 'Name must be 2-50 characters and contain only letters, spaces, or hyphens.');
                     isValid = false;
-                } else {
-                    clearError(nameInput, nameError);
                 }
 
                 if (!validateEmail(emailInput.value)) {
                     showError(emailInput, emailError, 'Please enter a valid email address.');
                     isValid = false;
-                } else {
-                    clearError(emailInput, emailError);
                 }
 
                 if (!validateMessage(messageInput.value)) {
                     showError(messageInput, messageError, 'Message must be 10-500 characters and cannot contain special characters like < or >.');
                     isValid = false;
-                } else {
-                    clearError(messageInput, messageError);
                 }
 
                 if (!captchaCheckbox.checked) {
                     captchaError.classList.add('active');
                     isValid = false;
-                } else {
-                    captchaError.classList.remove('active');
                 }
 
-                submitBtn.disabled = !isValid;
                 return isValid;
             }
 
-            nameInput.addEventListener('input', validateForm);
-            emailInput.addEventListener('input', validateForm);
-            messageInput.addEventListener('input', validateForm);
-            captchaCheckbox.addEventListener('change', validateForm);
+            nameInput.addEventListener('input', () => clearError(nameInput, nameError));
+            emailInput.addEventListener('input', () => clearError(emailInput, emailError));
+            messageInput.addEventListener('input', () => clearError(messageInput, messageError));
+            captchaCheckbox.addEventListener('change', () => captchaError.classList.remove('active'));
 
-            // Contact Form Submission Logic with Cooldown
             contactForm.addEventListener('submit', async function(event) {
                 event.preventDefault();
 
@@ -742,7 +1503,6 @@
                         modalMessage.textContent = result.message || 'Thank you for your message. I will get back to you soon!';
                         contactForm.reset();
                         captchaCheckbox.checked = false;
-                        submitBtn.disabled = true;
                         lastSubmissionTime = currentTime;
                     } else {
                         throw new Error(result.message || 'An error occurred. Please try again later.');
@@ -752,7 +1512,7 @@
                     modalMessage.textContent = 'Submission failed. Please try again later.';
                 } finally {
                     submitBtn.innerHTML = originalButtonText;
-                    submitBtn.disabled = true;
+                    submitBtn.disabled = false;
                     messageModal.classList.add('is-visible');
                 }
             });
@@ -769,3 +1529,7 @@
     </script>
 </body>
 </html>
+Add to chat
+
+Upgrade to SuperGrok
+New conversation - Grok
