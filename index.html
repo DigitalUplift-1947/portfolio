@@ -75,7 +75,7 @@
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
         }
         .bubbly-btn:active {
-            transform: translateY(0);
+            transform: scale(0.95);
             box-shadow: none;
         }
         .bubbly-btn::after {
@@ -158,10 +158,10 @@
             50% { opacity: 1; }
         }
 
-        .linkedin-hover:hover {
+        .linkedin-hover:hover, .linkedin-contact:hover {
             color: #0A66C2;
         }
-        .youtube-hover:hover {
+        .youtube-hover:hover, .youtube-contact:hover {
             color: #FF0000;
         }
 
@@ -195,6 +195,11 @@
             color: #0A66C2 !important;
         }
 
+        .youtube-pulse {
+            animation: pulse-brand-color 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            color: #FF0000 !important;
+        }
+
         .error-message {
             color: #EF4444;
             font-size: 0.875rem;
@@ -209,22 +214,157 @@
             border-color: #EF4444 !important;
         }
 
-        /* Explicit focus styles for form inputs and textarea */
         input:focus, textarea:focus {
             outline: none;
             border-color: var(--primary-color) !important;
             box-shadow: 0 0 0 2px rgba(255, 140, 0, 0.5) !important;
         }
 
-        /* Ensure checkbox has consistent focus styling */
         input[type="checkbox"]:focus {
             outline: none;
             border-color: var(--primary-color) !important;
             box-shadow: 0 0 0 2px rgba(255, 140, 0, 0.5) !important;
         }
+
+        /* Timeline Styles */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 1rem;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--primary-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -0.5rem;
+            top: 0;
+            width: 1rem;
+            height: 1rem;
+            background: var(--primary-color);
+            border-radius: 50%;
+            border: 2px solid var(--card-dark);
+        }
+
+        .timeline-content {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+        }
+
+        .timeline-content.show {
+            max-height: 500px; /* Initial max-height, adjusted dynamically in JS */
+            opacity: 1;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            background: var(--primary-color);
+            color: #fff;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        /* Back-to-Top Button */
+        #back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary-color);
+            color: #fff;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 1000;
+        }
+
+        #back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--background-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            transition: opacity 0.5s ease;
+        }
+
+        #preloader.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .spinner {
+            width: 3rem;
+            height: 3rem;
+            border: 4px solid var(--primary-color);
+            border-top: 4px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Animated Tagline */
+        .tagline {
+            position: relative;
+            display: inline-block;
+        }
+        .tagline::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--secondary-color);
+            transition: width 0.5s ease-out;
+        }
+        .tagline:hover::after {
+            width: 100%;
+        }
     </style>
 </head>
 <body>
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
 
     <div id="parallax-bg" class="parallax-background"></div>
 
@@ -247,485 +387,4 @@
         <div id="mobile-menu" class="md:hidden bg-gray-800/90 backdrop-blur-lg absolute top-full left-0 w-full transform -translate-y-[150%]">
             <ul class="flex flex-col items-center space-y-4 py-6 text-lg">
                 <li><a href="#home" class="nav-link text-gray-300 hover:text-white">Home</a></li>
-                <li><a href="#about" class="nav-link text-gray-300 hover:text-white">About</a></li>
-                <li><a href="#experience" class="nav-link text-gray-300 hover:text-white">Experience</a></li>
-                <li><a href="#certifications" class="nav-link text-gray-300 hover:text-white">Certifications</a></li>
-                <li><a href="#contact" class="nav-link text-gray-300 hover:text-white">Contact</a></li>
-            </ul>
-        </div>
-    </header>
-
-    <main class="relative z-10">
-
-        <section id="home" class="min-h-screen flex items-center pt-32 md:pt-40 px-4 md:px-8">
-            <div class="text-center w-full space-y-6 animated-section">
-                <h2 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-tight">
-                    Hello, I'm <span class="text-[var(--primary-color)]">Muhammad Owais</span>
-                </h2>
-                <p id="changing-text" class="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto"></p>
-                <div class="flex justify-center items-center space-x-6 mt-8">
-                    <a href="https://wa.me/message/NHLJOW7GEFJ7L1" target="_blank" rel="noopener noreferrer" class="text-2xl text-white transition-colors duration-200 hover:text-[#25D366]" aria-label="WhatsApp">
-                        <i id="whatsapp-icon" class="fab fa-whatsapp"></i>
-                    </a>
-                    <a href="mailto:professional.OTS@Gmail.com" class="text-2xl text-white transition-colors duration-200 hover:text-[#3498db]" aria-label="Email">
-                        <i id="email-icon" class="fas fa-envelope"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/muhammad-owais-b45106328/" target="_blank" rel="noopener noreferrer" class="text-2xl text-white transition-colors duration-200 hover:text-[#0A66C2]" aria-label="LinkedIn">
-                        <i id="linkedin-icon" class="fab fa-linkedin"></i>
-                    </a>
-                </div>
-                <a href="#certifications" class="inline-block mt-4 px-8 py-3 text-lg font-semibold text-gray-900 bg-white rounded-full shadow-lg bubbly-btn hover:bg-[var(--primary-color)] hover:text-white">
-                    Explore My Certifications
-                </a>
-            </div>
-        </section>
-
-        <section id="about" class="py-12 md:py-20 px-4 md:px-8 animated-section">
-            <div class="container mx-auto max-w-5xl">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[var(--primary-color)]">About Me</h2>
-                <div class="flex flex-col md:flex-row items-center md:items-start space-y-8 md:space-y-0 md:space-x-12 bg-gray-800 p-8 rounded-2xl shadow-xl border border-gray-700">
-                    <div class="flex-shrink-0 w-48 h-48 rounded-full overflow-hidden bg-gray-700 border-4 border-gray-600">
-                        <img src="Profile.jpg" alt="Profile Photo for Muhammad Owais" class="w-full h-full object-cover">
-                    </div>
-                    <div class="md:flex-grow text-center md:text-left">
-                        <p class="text-gray-200 leading-relaxed mb-4">I combine diverse skills in AI tools, prompt engineering, and cybersecurity with practical experience in digital marketing and content creation. 
-                            and currently pursuing Bachelor of Business Information Systems (BBIS) University of Management and Technology – Ongoing(Expected 2027)</p>
-                        <p class="text-gray-200 leading-relaxed mb-6">While I don’t fit a single mold, my work is driven by a deep curiosity for emerging technologies and a commitment to continuous learning. I am adaptable, creative, and passionate about turning complex ideas into simple, effective solutions.</p>
-                        <div class="mt-8">
-                            <h3 class="text-2xl font-semibold mb-6 text-[var(--primary-color)]">My Skills</h3>
-                            <div class="flex flex-wrap gap-3">
-                                <span class="px-4 py-1.5 bg-gray-700 text-gray-200 rounded-full text-sm font-medium flex items-center shadow-lg"><i class="fas fa-robot mr-2 text-[var(--primary-color)]"></i>AI Tools</span>
-                                <span class="px-4 py-1.5 bg-gray-700 text-gray-200 rounded-full text-sm font-medium flex items-center shadow-lg"><i class="fab fa-python mr-2 text-yellow-400"></i>Python</span>
-                                <span class="px-4 py-1.5 bg-gray-700 text-gray-200 rounded-full text-sm font-medium flex items-center shadow-lg"><i class="fas fa-shield-alt mr-2 text-red-400"></i>Cybersecurity</span>
-                                <span class="px-4 py-1.5 bg-gray-700 text-gray-200 rounded-full text-sm font-medium flex items-center shadow-lg"><i class="fas fa-bullhorn mr-2 text-blue-400"></i>Digital Marketing</span>
-                                <span class="px-4 py-1.5 bg-gray-700 text-gray-200 rounded-full text-sm font-medium flex items-center shadow-lg"><i class="fas fa-video mr-2 text-pink-400"></i>YouTube Creation</span>
-                                <span class="px-4 py-1.5 bg-gray-700 text-gray-200 rounded-full text-sm font-medium flex items-center shadow-lg"><i class="fas fa-comments mr-2 text-yellow-300"></i>Bilingual Communication</span>
-                                <span class="px-4 py-1.5 bg-gray-700 text-gray-200 rounded-full text-sm font-medium flex items-center shadow-lg"><i class="fab fa-github mr-2 text-white"></i>GitHub</span>
-                                <span class="px-4 py-1.5 bg-gray-700 text-gray-200 rounded-full text-sm font-medium flex items-center shadow-lg"><i class="fas fa-globe mr-2 text-green-300"></i>Netlify</span>
-                                <span class="px-4 py-1.5 bg-gray-700 text-gray-200 rounded-full text-sm font-medium flex items-center shadow-lg"><i class="fas fa-film mr-2 text-purple-400"></i>Premiere Pro</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="experience" class="py-12 md:py-20 px-4 md:px-8 animated-section">
-            <div class="container mx-auto max-w-5xl">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[var(--primary-color)]">Professional Experience</h2>
-                <div class="space-y-8 md:space-y-12">
-                    <div class="bg-gray-800 p-6 md:p-8 rounded-2xl shadow-xl border border-gray-700 transition-transform duration-300 hover:scale-[1.01]">
-                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
-                            <h3 class="text-2xl font-semibold text-white">AI & Content Strategist</h3>
-                            <p class="text-sm font-medium text-gray-200">working Since 2020</p>
-                        </div>
-                        <p class="text-gray-200 mb-2">Digital Uplift (Personal Project)</p>
-                        <ul class="list-disc list-inside space-y-2 text-gray-200">
-                            <li>Created and managed engaging tech content for my YouTube channel, building steady audience growth.</li>
-                            <li>Explored and applied prompt engineering techniques to design creative scripts and ideas.</li>
-                            <li>Managed all aspects of video production, from shooting to editing with Adobe Premiere Pro.</li>
-                        </ul>
-                    </div>
-                    <div class="bg-gray-800 p-6 md:p-8 rounded-2xl shadow-xl border border-gray-700 transition-transform duration-300 hover:scale-[1.01]">
-                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
-                            <h3 class="text-2xl font-semibold text-white">Internships</h3>
-                            <p class="text-sm font-medium text-gray-200">2023-2026</p>
-                        </div>
-                        <p class="text-gray-200 mb-2">Experience across NGOs, organizations & companies.</p>
-                        <ul class="list-disc list-inside space-y-2 text-gray-200">
-                            <li>Shaukat Khanum Hospital (Marketing & HR Intern, 2023–2024): Assisted in campaign management, internal communications, and recruitment coordination.</li>
-                            <li>TX Labz (HR Intern, 2022): Streamlined onboarding documentation and supported interview scheduling and resume screening.</li>
-                            <li>Med Coach Global (Current, 2025–Present): Handling social media </li>
-                            <li>NGO Experience: Collaborated with Alkhimat Foundation and ILM on various projects and initiatives.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="certifications" class="py-12 md:py-20 px-4 md:px-8 animated-section">
-            <div class="container mx-auto">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[var(--primary-color)]">Certifications</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="bg-gray-800 p-6 rounded-2xl shadow-xl transition-all duration-300 hover:scale-[1.03] border border-gray-700">
-                        <img src="google.svg" alt="Google Certificate Badge" class="rounded-lg mb-4 h-auto mx-auto object-cover border border-gray-600">
-                        <h3 class="text-2xl font-semibold text-white mb-2 text-center">Prompt Engineering and Prompting Essentials</h3>
-                        <p class="text-gray-200 mb-2 text-center">Issued by Google</p>
-                        <p class="text-sm text-[var(--primary-color)] text-center">2025</p>
-                        <div class="text-center mt-4">
-                            <a href="https://www.coursera.org/account/accomplishments/verify/EO0L72HVNHTL?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=pdf_header_button&utm_product=course" class="inline-block text-sm text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer">View Credential &rarr;</a>
-                        </div>
-                    </div>
-                    <div class="bg-gray-800 p-6 rounded-2xl shadow-xl transition-all duration-300 hover:scale-[1.03] border border-gray-700">
-                        <img src="google.svg" alt="Google AI Certificate Badge" class="rounded-lg mb-4 h-auto mx-auto object-cover border border-gray-600">
-                        <h3 class="text-2xl font-semibold text-white mb-2 text-center">Google AI Essentials</h3>
-                        <p class="text-gray-200 mb-2 text-center">Issued by Google</p>
-                        <p class="text-sm text-[var(--primary-color)] text-center">2025</p>
-                        <div class="text-center mt-4">
-                            <a href="https://coursera.org/share/ec941470fa4f3bfdd16eae5b4789f247" class="inline-block text-sm text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer">View Credential &rarr;</a>
-                        </div>
-                    </div>
-                    <div class="bg-gray-800 p-6 rounded-2xl shadow-xl transition-all duration-300 hover:scale-[1.03] border border-gray-700">
-                        <img src="likedin.svg" alt="LinkedIn Certificate Badge" class="rounded-lg mb-4 h-auto mx-auto object-cover border border-gray-600">
-                        <h3 class="text-2xl font-semibold text-white mb-2 text-center">LinkedIn AI Essentials</h3>
-                        <p class="text-gray-200 mb-2 text-center">Issued by LinkedIn</p>
-                        <p class="text-sm text-[var(--primary-color)] text-center">2024</p>
-                        <div class="text-center mt-4">
-                            <a href="https://www.linkedin.com/in/muhammad-owais-b45106328/details/certifications/1727674508303/single-media-viewer/?type=DOCUMENT&profileId=ACoAAFKY-uUBCVsLmS7CEWtVmvBWSOo8InjIfPM" class="inline-block text-sm text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer">View Credential &rarr;</a>
-                        </div>
-                    </div>
-                    <div class="bg-gray-800 p-6 rounded-2xl shadow-xl transition-all duration-300 hover:scale-[1.03] border border-gray-700">
-                        <img src="itu.svg" alt="ITU Python Certificate Badge" class="rounded-lg mb-4 h-auto mx-auto object-cover border border-gray-600">
-                        <h3 class="text-2xl font-semibold text-white mb-2 text-center">Python Programming Course</h3>
-                        <p class="text-gray-200 mb-2 text-center">Issued by ITU</p>
-                        <p class="text-sm text-[var(--primary-color)] text-center">2023</p>
-                        <div class="text-center mt-4">
-                            <a href="https://www.linkedin.com/in/muhammad-owais-b45106328/details/certifications/1727659107845/single-media-viewer/?type=IMAGE&profileId=ACoAAFKY-uUBCVsLmS7CEWtVmvBWSOo8InjIfPM" class="inline-block text-sm text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer">View Credential &rarr;</a>
-                        </div>
-                    </div>
-                    <div class="bg-gray-800 p-6 rounded-2xl shadow-xl transition-all duration-300 hover:scale-[1.03] border border-gray-700">
-                        <img src="google.svg" alt="Google Marketing Certificate Badge" class="rounded-lg mb-4 h-auto mx-auto object-cover border border-gray-600">
-                        <h3 class="text-2xl font-semibold text-white mb-2 text-center">Digital Marketing Course</h3>
-                        <p class="text-gray-200 mb-2 text-center">Issued by Google</p>
-                        <p class="text-sm text-[var(--primary-color)] text-center">2024</p>
-                        <div class="text-center mt-4">
-                            <a href="https://skillshop.exceedlms.com/student/award/fR9PskUZepTYWBUYdNzMdnPy" class="inline-block text-sm text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer">View Credential &rarr;</a>
-                        </div>
-                    </div>
-                    <div class="bg-gray-800 p-6 rounded-2xl shadow-xl transition-all duration-300 hover:scale-[1.03] border border-gray-700">
-                        <img src="ibm.svg" alt="IBM Cybersecurity Certificate Badge" class="rounded-lg mb-4 h-auto mx-auto object-cover border border-gray-600">
-                        <h3 class="text-2xl font-semibold text-white mb-2 text-center">Cybersecurity Course</h3>
-                        <p class="text-gray-200 mb-2 text-center">Issued by IBM</p>
-                        <p class="text-sm text-[var(--primary-color)] text-center">2024</p>
-                        <div class="text-center mt-4">
-                            <a href="https://www.credly.com/badges/fa7cbba6-4f2e-4192-9f6f-77983482e85d/public_url" class="inline-block text-sm text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer">View Credential &rarr;</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="py-12 md:py-20 px-4 md:px-8 animated-section">
-            <div class="container mx-auto max-w-2xl">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[var(--primary-color)]">Get in Touch</h2>
-                <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-6 bg-gray-800 p-8 rounded-2xl shadow-xl border border-gray-700">
-                    <input type="hidden" name="access_key" value="492a8810-9deb-4946-8c01-ba7883b310d6">
-                    <div>
-                        <label for="name" class="block text-sm font-medium text-gray-200">Name</label>
-                        <input type="text" id="name" name="name" maxlength="50" class="mt-1 block w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-md shadow-sm text-white" required>
-                        <p id="name-error" class="error-message">Name must be 2-50 characters and contain only letters, spaces, or hyphens.</p>
-                    </div>
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-gray-200">Email</label>
-                        <input type="email" id="email" name="email" class="mt-1 block w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-md shadow-sm text-white" required>
-                        <p id="email-error" class="error-message">Please enter a valid email address.</p>
-                    </div>
-                    <div>
-                        <label for="message" class="block text-sm font-medium text-gray-200">Message</label>
-                        <textarea id="message" name="message" rows="4" maxlength="500" class="mt-1 block w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-md shadow-sm text-white" required></textarea>
-                        <p id="message-error" class="error-message">Message must be 10-500 characters and cannot contain special characters like &lt; or &gt;.</p>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="checkbox" id="not-a-bot" class="h-4 w-4 text-[var(--primary-color)] bg-gray-900 border-gray-700 rounded">
-                        <label for="not-a-bot" class="ml-2 text-sm font-medium text-gray-200">I'm not a bot</label>
-                        <p id="captcha-error" class="error-message ml-2">Please check this box to verify you're not a bot.</p>
-                    </div>
-                    <button type="submit" id="submit-btn" class="w-full px-4 py-3 bg-white/10 text-white font-bold rounded-lg bubbly-btn hover:bg-[var(--primary-color)] hover:text-white">Send Message</button>
-                </form>
-                <div class="mt-12 text-center">
-                    <p class="text-gray-200">Find me on social media:</p>
-                    <div class="flex justify-center space-x-6 mt-4 text-2xl">
-                        <a href="https://www.linkedin.com/in/muhammad-owais-b45106328/" class="text-gray-200 transition-colors duration-200 linkedin-hover" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://www.youtube.com/@DigitalUplift.1947" class="text-gray-200 transition-colors duration-200 youtube-hover" aria-label="YouTube" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div class="mt-12 text-center space-y-4">
-                    <p class="text-gray-200">Or contact me directly and download my resume:</p>
-                    <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
-                        <a href="https://wa.me/message/NHLJOW7GEFJ7L1" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-6 py-3 bg-white/10 text-white font-bold rounded-lg bubbly-btn flex items-center justify-center hover:bg-[#25D366] hover:text-white">
-                            <i class="fab fa-whatsapp mr-2"></i> Chat on WhatsApp
-                        </a>
-                        <a href="Cv 2025.pdf" download class="w-full sm:w-auto px-6 py-3 bg-white/10 text-white font-bold rounded-lg bubbly-btn flex items-center justify-center hover:bg-[var(--primary-color)] hover:text-white" target="_blank" rel="noopener noreferrer">
-                            <i class="fas fa-download mr-2"></i> Download Resume
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <div id="message-modal" class="modal fixed inset-0 bg-gray-900/50 backdrop-blur-sm flex items-center justify-center opacity-0 z-50 transform scale-95">
-        <div class="bg-gray-800 p-8 rounded-lg shadow-xl text-center border border-gray-700 max-w-sm w-full transform transition-transform duration-300 scale-95">
-            <h3 class="text-xl font-bold text-white mb-4">Message Sent!</h3>
-            <p id="modal-message" class="text-gray-200"></p>
-            <button id="close-modal-btn" class="mt-6 px-4 py-2 bg-[var(--primary-color)] text-gray-900 rounded-lg font-semibold bubbly-btn">Close</button>
-        </div>
-    </div>
-
-    <footer class="text-center py-8 text-gray-500 text-sm">
-        <p>&copy; 2025 Muhammad Owais. All Rights Reserved.</p>
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log("Portfolio website loaded successfully.");
-            const sections = document.querySelectorAll('.animated-section');
-            const navLinks = document.querySelectorAll('header nav ul li a');
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const mainHeader = document.getElementById('main-header');
-            const contactForm = document.getElementById('contact-form');
-            const messageModal = document.getElementById('message-modal');
-            const modalMessage = document.getElementById('modal-message');
-            const closeModalBtn = document.getElementById('close-modal-btn');
-            const submitBtn = document.getElementById('submit-btn');
-            const nameInput = document.getElementById('name');
-            const emailInput = document.getElementById('email');
-            const messageInput = document.getElementById('message');
-            const captchaCheckbox = document.getElementById('not-a-bot');
-            const nameError = document.getElementById('name-error');
-            const emailError = document.getElementById('email-error');
-            const messageError = document.getElementById('message-error');
-            const captchaError = document.getElementById('captcha-error');
-
-            let lastScrollY = window.scrollY;
-            let lastSubmissionTime = 0;
-            const submissionCooldown = 30000;
-
-            window.addEventListener('scroll', () => {
-                const currentScrollY = window.scrollY;
-                if (currentScrollY > 50) {
-                    mainHeader.classList.add('scrolled');
-                } else {
-                    mainHeader.classList.remove('scrolled');
-                }
-                if (currentScrollY > lastScrollY && currentScrollY > 100) {
-                    mainHeader.classList.add('hide');
-                } else {
-                    mainHeader.classList.remove('hide');
-                }
-                lastScrollY = currentScrollY;
-            });
-
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('-translate-y-[150%]');
-            });
-
-            document.querySelectorAll('#mobile-menu a').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('-translate-y-[150%]');
-                });
-            });
-
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        const id = entry.target.getAttribute('id');
-                        console.log(`Section '#${id}' is now visible.`);
-                        navLinks.forEach(link => {
-                            link.classList.toggle('text-white', link.getAttribute('href') === `#${id}`);
-                            link.classList.toggle('font-semibold', link.getAttribute('href') === `#${id}`);
-                            link.classList.toggle('text-gray-300', link.getAttribute('href') !== `#${id}`);
-                        });
-                    }
-                });
-            }, { threshold: 0.3 });
-            sections.forEach(section => observer.observe(section));
-
-            const phrases = [
-                "Curiosity drives me to explore new technologies and tools.",
-                "Challenges are opportunities to adapt and find creative solutions.",
-                "Creativity shines through in turning ideas into engaging digital content.",
-                "Attention to detail ensures every project is polished and complete.",
-                "Discipline allows me to manage multiple tasks and learn consistently.",
-                "Collaboration is key, and I enjoy helping others grow while working together.",
-                "Taking initiative helps me move projects forward without waiting.",
-                "Analytical thinking guides me in researching, evaluating, and implementing solutions.",
-                "Innovation inspires me to simplify complex concepts for others.",
-                "Passion fuels my dedication to every project I take on."
-            ];
-            const changingTextElement = document.getElementById('changing-text');
-            let phraseIndex = 0;
-            let letterIndex = 0;
-            let isDeleting = false;
-
-            function typeWriter() {
-                const currentPhrase = phrases[phraseIndex];
-
-                if (isDeleting) {
-                    changingTextElement.textContent = currentPhrase.substring(0, letterIndex - 1);
-                    letterIndex--;
-                } else {
-                    changingTextElement.textContent = currentPhrase.substring(0, letterIndex + 1);
-                    letterIndex++;
-                }
-
-                if (!isDeleting && letterIndex === currentPhrase.length) {
-                    isDeleting = true;
-                    setTimeout(typeWriter, 2000);
-                } else if (isDeleting && letterIndex === 0) {
-                    isDeleting = false;
-                    phraseIndex = (phraseIndex + 1) % phrases.length;
-                    setTimeout(typeWriter, 500);
-                } else {
-                    const typingSpeed = isDeleting ? 25 : 50;
-                    setTimeout(typeWriter, typingSpeed);
-                }
-            }
-
-            window.onload = typeWriter;
-
-            const icons = [
-                { id: 'whatsapp-icon', class: 'whatsapp-pulse' },
-                { id: 'email-icon', class: 'email-pulse' },
-                { id: 'linkedin-icon', class: 'linkedin-pulse' }
-            ];
-
-            let iconIndex = 0;
-            const pulseDuration = 1200;
-            const cycleDuration = 3600;
-
-            function pulseNextIcon() {
-                icons.forEach(icon => {
-                    const element = document.getElementById(icon.id);
-                    if (element) element.classList.remove(icon.class);
-                });
-
-                const currentIcon = document.getElementById(icons[iconIndex].id);
-                if (currentIcon) {
-                    currentIcon.classList.add(icons[iconIndex].class);
-                }
-
-                iconIndex = (iconIndex + 1) % icons.length;
-                setTimeout(pulseNextIcon, pulseDuration);
-            }
-
-            pulseNextIcon();
-
-            function validateName(name) {
-                const nameRegex = /^[A-Za-z\s-]{2,50}$/;
-                return nameRegex.test(name);
-            }
-
-            function validateEmail(email) {
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                return emailRegex.test(email);
-            }
-
-            function validateMessage(message) {
-                const messageRegex = /^[\w\s.,!?()-]{10,500}$/;
-                return messageRegex.test(message);
-            }
-
-            function showError(element, errorElement, message) {
-                element.classList.add('input-error');
-                errorElement.textContent = message;
-                errorElement.classList.add('active');
-            }
-
-            function clearError(element, errorElement) {
-                element.classList.remove('input-error');
-                errorElement.classList.remove('active');
-            }
-
-            function clearAllErrors() {
-                clearError(nameInput, nameError);
-                clearError(emailInput, emailError);
-                clearError(messageInput, messageError);
-                captchaError.classList.remove('active');
-            }
-
-            function validateForm() {
-                let isValid = true;
-
-                if (!validateName(nameInput.value)) {
-                    showError(nameInput, nameError, 'Name must be 2-50 characters and contain only letters, spaces, or hyphens.');
-                    isValid = false;
-                }
-
-                if (!validateEmail(emailInput.value)) {
-                    showError(emailInput, emailError, 'Please enter a valid email address.');
-                    isValid = false;
-                }
-
-                if (!validateMessage(messageInput.value)) {
-                    showError(messageInput, messageError, 'Message must be 10-500 characters and cannot contain special characters like < or >.');
-                    isValid = false;
-                }
-
-                if (!captchaCheckbox.checked) {
-                    captchaError.classList.add('active');
-                    isValid = false;
-                }
-
-                return isValid;
-            }
-
-            nameInput.addEventListener('input', () => clearError(nameInput, nameError));
-            emailInput.addEventListener('input', () => clearError(emailInput, emailError));
-            messageInput.addEventListener('input', () => clearError(messageInput, messageError));
-            captchaCheckbox.addEventListener('change', () => captchaError.classList.remove('active'));
-
-            contactForm.addEventListener('submit', async function(event) {
-                event.preventDefault();
-
-                clearAllErrors();
-
-                const currentTime = Date.now();
-                if (currentTime - lastSubmissionTime < submissionCooldown) {
-                    modalMessage.textContent = 'Please wait 30 seconds before submitting again.';
-                    messageModal.classList.add('is-visible');
-                    return;
-                }
-
-                if (!validateForm()) {
-                    return;
-                }
-
-                const originalButtonText = submitBtn.innerHTML;
-                submitBtn.innerHTML = 'Sending...';
-                submitBtn.disabled = true;
-
-                try {
-                    const formData = new FormData(contactForm);
-                    const response = await fetch(contactForm.action, {
-                        method: contactForm.method,
-                        body: formData,
-                        headers: {
-                            'Accept': 'application/json'
-                        }
-                    });
-
-                    const result = await response.json();
-
-                    if (response.ok) {
-                        modalMessage.textContent = result.message || 'Thank you for your message. I will get back to you soon!';
-                        contactForm.reset();
-                        captchaCheckbox.checked = false;
-                        lastSubmissionTime = currentTime;
-                    } else {
-                        throw new Error(result.message || 'An error occurred. Please try again later.');
-                    }
-                } catch (error) {
-                    console.error('Submission Error:', error);
-                    modalMessage.textContent = 'Submission failed. Please try again later.';
-                } finally {
-                    submitBtn.innerHTML = originalButtonText;
-                    submitBtn.disabled = false;
-                    messageModal.classList.add('is-visible');
-                }
-            });
-
-            closeModalBtn.addEventListener('click', () => {
-                messageModal.classList.remove('is-visible');
-            });
-            messageModal.addEventListener('click', (event) => {
-                if (event.target === messageModal) {
-                    messageModal.classList.remove('is-visible');
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+                <li><a href="#about" class="nav-link text-gray-300
