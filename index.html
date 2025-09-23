@@ -3,7 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of Muhammad Owais, an AI enthusiast, content creator, and digital marketer specializing in prompt engineering, cybersecurity, and YouTube content. Explore certifications, experience, and skills.">
+    <meta name="keywords" content="Muhammad Owais, AI tools, prompt engineering, cybersecurity, digital marketing, YouTube creator, portfolio, certifications, Python, Google AI Essentials">
+    <meta property="og:title" content="Muhammad Owais | Portfolio">
+    <meta property="og:description" content="Discover the professional journey of Muhammad Owais in AI, cybersecurity, and digital content creation.">
+    <meta property="og:image" content="Profile.jpg">
+    <meta property="og:url" content="https://your-portfolio-url.com">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Muhammad Owais | Portfolio">
+    <meta name="twitter:description" content="Explore Muhammad Owais's skills in AI, prompt engineering, and more.">
+    <meta name="twitter:image" content="Profile.jpg">
     <title>Muhammad Owais | Portfolio</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -68,15 +79,16 @@
         .bubbly-btn {
             position: relative;
             overflow: hidden;
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.4s ease-in-out;
         }
         .bubbly-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
         }
         .bubbly-btn:active {
-            transform: scale(0.95);
+            transform: scale(0.92);
             box-shadow: none;
+            transition: transform 0.2s ease-in-out;
         }
         .bubbly-btn::after {
             content: '';
@@ -85,18 +97,18 @@
             left: 50%;
             width: 5px;
             height: 5px;
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.6);
             border-radius: 50%;
             opacity: 0;
             transform: translate(-50%, -50%) scale(0);
-            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease-in-out;
         }
         .bubbly-btn:active::after {
-            animation: ripple-effect 0.4s ease-in-out forwards;
+            animation: ripple-effect 0.5s ease-in-out forwards;
         }
         @keyframes ripple-effect {
             to {
-                transform: translate(-50%, -50%) scale(15);
+                transform: translate(-50%, -50%) scale(20);
                 opacity: 0;
             }
         }
@@ -310,34 +322,13 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
-        #audio-prompt {
-            position: fixed;
-            bottom: 1.5rem;
-            left: 1.5rem;
-            background: var(--primary-color);
-            color: #fff;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            font-size: 0.875rem;
-            font-weight: 500;
-            z-index: 1000;
-            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        #audio-prompt.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
     </style>
 </head>
 <body>
     <div id="preloader">
         <div class="spinner"></div>
     </div>
-    <audio id="welcome-sound" src="welcome.mp3" preload="auto" autoplay muted></audio>
-    <button id="audio-prompt" class="bubbly-btn" aria-label="Enable welcome sound">Enable Sound</button>
+    <audio id="welcome-sound" src="welcome.mp3" preload="auto"></audio>
 
     <div class="parallax-background"></div>
 
@@ -419,7 +410,7 @@
                             </div>
                         </div>
                         <div class="mt-4 sm:mt-6 text-center md:text-left">
-                            <a href="https://www.youtube.com/@DigitalUplift.1947" target="_blank" rel="noopener noreferrer" class="inline-block px-4 py-2 sm:px-6 sm:py-3 bg-white/10 text-white font-bold rounded-lg bubbly-btn flex items-center justify-center hover:bg-[#FF0000]">
+                            <a id="youtube-btn" href="https://www.youtube.com/@DigitalUplift.1947" target="_blank" rel="noopener noreferrer" class="inline-block px-4 py-2 sm:px-6 sm:py-3 bg-white/10 text-white font-bold rounded-lg bubbly-btn flex items-center justify-center hover:bg-[#FF0000]">
                                 <i class="fab fa-youtube mr-2"></i>Visit My YouTube Channel
                             </a>
                         </div>
@@ -602,13 +593,13 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            console.log("Portfolio website loaded at 07:45 AM PKT, September 23, 2025.");
+            console.log("Portfolio website loaded at 06:47 AM PKT, September 23, 2025.");
 
             // Cached Elements
             const elements = {
                 preloader: document.getElementById('preloader'),
                 welcomeSound: document.getElementById('welcome-sound'),
-                audioPrompt: document.getElementById('audio-prompt'),
+                youtubeBtn: document.getElementById('youtube-btn'),
                 mobileMenuButton: document.getElementById('mobile-menu-button'),
                 mobileMenu: document.getElementById('mobile-menu'),
                 mainHeader: document.getElementById('main-header'),
@@ -637,43 +628,21 @@
             const submissionCooldown = 30000;
             let scrollTimeout;
 
-            // Play Welcome Sound Automatically with Fallback
+            // Play Welcome Sound on YouTube Button Click
             function playWelcomeSound() {
                 if (!sessionStorage.getItem('welcomeSoundPlayed')) {
                     elements.welcomeSound.play().then(() => {
-                        console.log('Welcome sound started playing (muted).');
-                        // Attempt to unmute after 1 second
-                        setTimeout(() => {
-                            elements.welcomeSound.muted = false;
-                            console.log('Welcome sound unmuted successfully.');
-                            sessionStorage.setItem('welcomeSoundPlayed', 'true');
-                            elements.audioPrompt.classList.remove('visible');
-                        }, 1000);
+                        console.log('Welcome sound played successfully.');
+                        sessionStorage.setItem('welcomeSoundPlayed', 'true');
                     }).catch(error => {
-                        console.warn('Audio playback failed:', error.message);
+                        console.warn('Audio playback failed:', error);
                         sessionStorage.setItem('welcomeSoundPlayed', 'true'); // Prevent retries
-                        // Show prompt if playback fails (e.g., NotAllowedError)
-                        if (error.name === 'NotAllowedError') {
-                            elements.audioPrompt.classList.add('visible');
-                        }
                     });
                 }
             }
 
-            // Attempt to play on load
-            playWelcomeSound();
-
-            // Enable sound on user click if prompt is visible
-            elements.audioPrompt.addEventListener('click', () => {
-                elements.welcomeSound.muted = false;
-                elements.welcomeSound.play().then(() => {
-                    console.log('Welcome sound played via user interaction.');
-                    sessionStorage.setItem('welcomeSoundPlayed', 'true');
-                    elements.audioPrompt.classList.remove('visible');
-                }).catch(error => {
-                    console.warn('Audio playback failed after prompt:', error.message);
-                });
-            });
+            // Attach to YouTube button
+            elements.youtubeBtn.addEventListener('click', playWelcomeSound);
 
             // Preloader
             window.addEventListener('load', () => {
