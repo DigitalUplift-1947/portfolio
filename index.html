@@ -316,7 +316,7 @@
     <div id="preloader">
         <div class="spinner"></div>
     </div>
-    <audio id="welcome-sound" src="welcome.mp3" preload="auto"></audio>
+    <audio id="welcome-sound" src="welcome.mp3" preload="auto" autoplay></audio>
 
     <div class="parallax-background"></div>
 
@@ -615,7 +615,7 @@
             const submissionCooldown = 30000;
             let scrollTimeout;
 
-            // Play Welcome Sound on First Interaction
+            // Play Welcome Sound Automatically with Fallback
             function playWelcomeSound() {
                 if (!sessionStorage.getItem('welcomeSoundPlayed')) {
                     elements.welcomeSound.play().then(() => {
@@ -628,7 +628,8 @@
                 }
             }
 
-            document.addEventListener('click', playWelcomeSound, { once: true });
+            // Attempt to play on load
+            playWelcomeSound();
 
             // Preloader
             window.addEventListener('load', () => {
