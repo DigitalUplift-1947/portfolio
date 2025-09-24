@@ -1,350 +1,116 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio of Muhammad Owai...uTube content. Explore certifications, experience, and skills.">
-    <meta name="keywords" content="Muhammad Owais, AI tools, pro...eator, portfolio, certifications, Python, Google AI Essentials">
-    <meta property="og:title" content="Muhammad Owais | Portfolio">
-    <meta property="og:description" content="Discover the profes...mmad Owais in AI, cybersecurity, and digital content creation.">
-    <meta property="og:image" content="Profile.jpg">
-    <meta property="og:url" content="https://your-portfolio-url.com">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Muhammad Owais | Portfolio">
-    <meta name="twitter:description" content="Explore Muhammad Owais's skills in AI, prompt engineering, and more.">
-    <meta name="twitter:image" content="Profile.jpg">
-    <title>Muhammad Owais | Portfolio</title>
-
-<!-- original styles (kept intact) -->
-<style>
-/* Existing page CSS truncated for brevity in the canvas preview - original file content preserved above. */
-</style>
-    <!-- Enhancements: CSS variables, loader, background canvas, toggles -->
-    <style id="enhancements">
-    :root{
-        --bg: #0b1020; /* dark default */
-        --card: #0f1724;
-        --text: #e6eef8;
-        --muted: #9aa7bf;
-        --primary-color: #6ee7b7;
-        --accent: #7dd3fc;
-        --glass: rgba(255,255,255,0.04);
-        --transition-fast: 240ms;
-        --transition-med: 400ms;
-    }
-    [data-theme='light']{
-        --bg: #f7fbff;
-        --card: #ffffff;
-        --text: #0f1724;
-        --muted: #4b5563;
-        --primary-color: #0ea5a4;
-        --accent: #f59e0b;
-        --glass: rgba(0,0,0,0.04);
-    }
-    /* Ensure existing layout not broken */
-    html,body{background:var(--bg) !important; color:var(--text) !important; transition: background var(--transition-med) ease, color var(--transition-med) ease;}
-    .parallax-background{position:fixed; inset:0; z-index:-1; pointer-events:none; background:transparent;}
-    canvas#bg-canvas{position:fixed; inset:0; width:100%; height:100%; display:block; z-index:-2; pointer-events:none;}
-    /* Loader overlay */
-    #preloader{position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:var(--bg); z-index:9999; transition:opacity .6s ease, visibility .6s ease; }
-    #preloader.hide{opacity:0; visibility:hidden; pointer-events:none;}
-    #loader-canvas{width:220px; height:220px; border-radius:50%; box-shadow: 0 10px 40px rgba(0,0,0,0.6); background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));}
-    .theme-toggle{display:inline-flex; align-items:center; gap:8px; padding:8px 10px; border-radius:999px; background:var(--glass); backdrop-filter: blur(6px); cursor:pointer; color:var(--text); border:1px solid rgba(255,255,255,0.04);}
-    .theme-toggle .icon{width:20px; height:20px; display:inline-block; }
-    /* Accessibility & reduced motion */
-    @media (prefers-reduced-motion: reduce){
-        *{transition: none !important; animation: none !important;}
-    }
-    /* Mobile fallback: hide canvas if low-end */
-    .no-webgl .parallax-background, .no-webgl canvas#bg-canvas{display:none;}
-    .mobile-fallback .parallax-background{background: linear-gradient(180deg, #0b1220 0%, #071023 100%); background-attachment: fixed;}
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Owais Portfolio</title>
+  <link rel="stylesheet" href="style.css"><!-- keep original css -->
+  <style>
+    html, body {margin:0;padding:0;height:100%;background:#0b1020;color:white;transition:background .6s ease,color .6s ease;font-family:sans-serif;}
+    #bg-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:-1;}
+    #preloader{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#0b1020;color:white;z-index:9999;transition:opacity .6s ease,visibility .6s ease;}
+    #preloader.hide{opacity:0;visibility:hidden;}
+    #loader-canvas{width:160px;height:160px;}
+    .theme-toggle{position:fixed;top:1rem;right:1rem;padding:.5rem 1rem;border:none;border-radius:6px;cursor:pointer;font-size:1.2rem;z-index:10;}
+    header,main,footer{position:relative;z-index:1;}
+    section{padding:4rem 2rem;min-height:100vh;}
+    h1,h2,h3{margin-bottom:1rem;}
+    .certifications{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;}
+    .cert-card{background:rgba(255,255,255,0.05);padding:1rem;border-radius:12px;transition:transform .3s ease;}
+    .cert-card:hover{transform:translateY(-6px);}
+  </style>
 </head>
 <body>
-    <div id="preloader">
-        <div class="spinner"></div>
-    </div>
-    <audio id="welcome-sound" src="welcome.mp3" preload="auto"></audio>
+  <!-- Preloader -->
+  <div id="preloader">
+    <canvas id="loader-canvas" width="160" height="160"></canvas>
+  </div>
+  <!-- Background -->
+  <canvas id="bg-canvas"></canvas>
+  <!-- Theme Toggle -->
+  <button id="toggle" class="theme-toggle">🌙</button>
 
-    <div class="parallax-background"></div>
+  <!-- Header -->
+  <header id="main-header">
+    <nav>
+      <h1>Owais Portfolio</h1>
+    </nav>
+  </header>
 
-    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 py-3 px-4 sm:px-6">
-        <nav class="container mx-auto flex justify-between items-center">
-            <h1 class="text-lg sm:text-xl md:text-2xl font-black text-gray-50 uppercase tracking-wide">My Work Showcase</h1>
-            <ul class="hidden md:flex space-x-6 text-sm font-medium">
-                <li><a href="#home" class="nav-link text-gray-300 hover:text-white">Home</a></li>
-                <li><a href="#about" class="nav-link text-gray-300 hover:text-white">About</a></li>
-                <li><a href="#experience" class="nav-link text-gray-300 hover:text-white">Experience</a></li>
-            </ul>
-            <!-- social icons and CTA preserved -->
-        </nav>
-    </header>
+  <!-- Main Sections -->
+  <main>
+    <section id="about">
+      <h2>About Me</h2>
+      <p>Hi, I’m Owais — a student, YouTuber, and tech enthusiast passionate about ethical hacking, cybersecurity, quantum computing, and AI.</p>
+    </section>
 
-    <main>
-        <!-- original page content preserved - certifications, sections, forms, etc. -->
-    </main>
+    <section id="experience">
+      <h2>Experience</h2>
+      <p>Worked on multiple projects in AI, security, and digital content creation. Exploring network security tools and global finance systems.</p>
+    </section>
 
-    <!-- GPU-accelerated low-poly parallax canvas -->
-    <canvas id="bg-canvas" aria-hidden="true"></canvas>
+    <section id="certifications">
+      <h2>Certifications</h2>
+      <div class="certifications">
+        <div class="cert-card">Google AI Essentials</div>
+        <div class="cert-card">Prompt Engineering (Google)</div>
+        <div class="cert-card">IBM Cybersecurity</div>
+        <div class="cert-card">ITU Python Programming</div>
+        <div class="cert-card">Google Digital Marketing</div>
+        <div class="cert-card">LinkedIn AI Essentials</div>
+        <div class="cert-card">HP & IAS Certifications</div>
+      </div>
+    </section>
 
-    <!-- Interactive loader canvas (enhancement) -->
-    <canvas id="loader-canvas" width="220" height="220" aria-hidden="true"></canvas>
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:you@example.com">you@example.com</a></p>
+    </section>
+  </main>
 
-    <!-- Enhancements JS: Three.js parallax, GSAP animations, theme toggle, loader behavior -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" integrity="" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/three@0.150.1/build/three.min.js"></script>
-    <script>
-    (function(){ 'use strict';
-        // Namespace
-        const NS = window.__DU__ = window.__DU__ || {};
+  <footer>
+    <p>© 2025 Owais. All rights reserved.</p>
+  </footer>
 
-        // Utilities
-        function prefersReducedMotion(){ return window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
-        function isMobile(){ return /Mobi|Android/i.test(navigator.userAgent); }
-        function hasWebGL(){
-            try{
-                const canvas = document.createElement('canvas');
-                return !!(window.WebGLRenderingContext && (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')));
-            }catch(e){ return false; }
-        }
-
-        // Theme management
-        const root = document.documentElement;
-        const stored = localStorage.getItem('du_theme');
-        const initialTheme = stored || 'dark';
-        if(initialTheme === 'light') root.setAttribute('data-theme','light'); else root.setAttribute('data-theme','dark');
-
-        // Inject theme toggle into header (keeps existing markup unchanged)
-        function createThemeToggle(){
-            const nav = document.querySelector('#main-header nav.container') || document.querySelector('#main-header nav');
-            if(!nav) return;
-            const btn = document.createElement('button');
-            btn.id = 'theme-toggle';
-            btn.className = 'theme-toggle';
-            btn.title = 'Toggle dark / light mode';
-            btn.setAttribute('aria-pressed', initialTheme === 'light' ? 'true' : 'false');
-            btn.innerHTML = '<span class="icon" aria-hidden="true">🌙</span><span class="label sr-only">Toggle theme</span>';
-            btn.addEventListener('click', toggleTheme);
-            // place at end of nav
-            nav.appendChild(btn);
-            // update icon based on current theme
-            updateToggleIcon(initialTheme === 'light' ? 'light' : 'dark');
-        }
-        function updateToggleIcon(theme){
-            const btn = document.getElementById('theme-toggle');
-            if(!btn) return;
-            btn.querySelector('.icon').textContent = theme === 'light' ? '☀️' : '🌙';
-            btn.setAttribute('aria-pressed', theme === 'light' ? 'true' : 'false');
-        }
-        function toggleTheme(){
-            const current = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-            const next = current === 'light' ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', next);
-            localStorage.setItem('du_theme', next);
-            updateToggleIcon(next);
-            // animate background transition via GSAP if available
-            if(window.gsap){ gsap.to(document.documentElement, {duration:0.6, css:{'--bg': getComputedStyle(document.documentElement).getPropertyValue('--bg')}, onComplete: ()=>{ /* noop */ }}); }
-            // Notify Three.js to switch appearance
-            if(NS.scene && NS.updateTheme) NS.updateTheme(next);
-        }
-
-        // Loader animation (simple interactive circle drawing)
-        function initLoader(){
-            const loader = document.getElementById('preloader');
-            const canvas = document.getElementById('loader-canvas');
-            if(!canvas || !loader) return;
-            const ctx = canvas.getContext('2d');
-            const DPR = Math.min(2, window.devicePixelRatio || 1);
-            const size = Math.min(220, Math.max(140, Math.floor(Math.min(window.innerWidth, window.innerHeight) * 0.2)));
-            canvas.width = size * DPR;
-            canvas.height = size * DPR;
-            canvas.style.width = size+'px';
-            canvas.style.height = size+'px';
-            ctx.scale(DPR, DPR);
-            let t = 0;
-            function draw(){
-                ctx.clearRect(0,0,canvas.width, canvas.height);
-                const w = size, h = size, cx = w/2, cy = h/2, r = Math.min(w,h)/2 - 12;
-                // background radial
-                const g = ctx.createRadialGradient(cx,cy, r*0.1, cx,cy, r*1.4);
-                g.addColorStop(0, 'rgba(255,255,255,0.04)');
-                g.addColorStop(1, 'rgba(0,0,0,0.12)');
-                ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx,cy,r+6,0,Math.PI*2); ctx.fill();
-
-                // orbiting dots (stars)
-                for(let i=0;i<8;i++){
-                    const ang = (t*0.02 + i*(Math.PI*2/8));
-                    const x = cx + Math.cos(ang) * (r*0.6);
-                    const y = cy + Math.sin(ang) * (r*0.6);
-                    ctx.beginPath();
-                    ctx.fillStyle = 'rgba(255,255,255,'+ (0.4 + 0.6*Math.abs(Math.sin(t*0.02 + i))) +')';
-                    ctx.arc(x,y, 3 + 1*Math.sin(t*0.02 + i), 0, Math.PI*2);
-                    ctx.fill();
-                }
-                // central crescent (moon-like) or sun depending on theme
-                const theme = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-                ctx.save();
-                ctx.translate(cx,cy);
-                ctx.rotate(Math.sin(t*0.01)*0.05);
-                ctx.beginPath();
-                ctx.fillStyle = theme==='light' ? 'rgba(255,220,140,0.98)' : 'rgba(230,240,255,0.98)';
-                ctx.arc(0,0, r*0.48, 0, Math.PI*2);
-                ctx.fill();
-                // crescent mask for moon
-                if(theme==='dark'){
-                    ctx.globalCompositeOperation = 'destination-out';
-                    ctx.beginPath();
-                    ctx.arc(r*0.12, -r*0.08, r*0.38, 0, Math.PI*2);
-                    ctx.fill();
-                }
-                ctx.restore();
-
-                t++;
-                if(!loader.classList.contains('hide')) requestAnimationFrame(draw);
-            }
-            draw();
-
-            // allow micro-interaction drag
-            let isDown=false, startX=0, startY=0;
-            canvas.addEventListener('pointerdown', e=>{ isDown=true; startX=e.clientX; startY=e.clientY; canvas.setPointerCapture(e.pointerId); });
-            canvas.addEventListener('pointerup', e=>{ isDown=false; canvas.releasePointerCapture(e.pointerId); });
-            canvas.addEventListener('pointermove', e=>{
-                if(!isDown) return;
-                const dx = (e.clientX - startX)*0.08, dy = (e.clientY - startY)*0.08;
-                canvas.style.transform = `translate(${dx}px, ${dy}px) rotate(${dx*0.02}deg)`;
-            });
-        }
-
-        // After full load: hide preloader, run welcome reveal (GSAP timeline)
-        function onLoaded(){
-            const loader = document.getElementById('preloader');
-            const welcomeSound = document.getElementById('welcome-sound');
-            if(window.gsap){
-                const tl = gsap.timeline();
-                tl.to('#preloader', {duration:0.6, autoAlpha:0, onComplete: ()=>{ loader.classList.add('hide'); }});
-                tl.from('#main-header', {y:-20, autoAlpha:0, duration:0.6}, '-=0.2');
-                tl.from('main, section, .container', {autoAlpha:0, y:20, duration:0.8, stagger:0.06}, '-=0.4');
-            } else {
-                if(loader) loader.classList.add('hide');
-            }
-            // play welcome sound only if user interaction earlier (most browsers block autoplay)
-            try{ if(welcomeSound && (window.__hasInteracted || document.hasFocus())) welcomeSound.play().catch(()=>{}); }catch(e){}
-        }
-
-        // Interact detection (to permit audio)
-        function setupInteractionDetector(){
-            const onFirst = ()=>{ window.__hasInteracted = true; window.removeEventListener('pointerdown', onFirst); };
-            window.addEventListener('pointerdown', onFirst, {once:true});
-        }
-
-        // Initialize Three.js parallax background (low-poly)
-        function initThree(){
-            if(!hasWebGL() || isMobile() || prefersReducedMotion()) {
-                document.documentElement.classList.add('no-webgl');
-                document.documentElement.classList.add('mobile-fallback');
-                return;
-            }
-            const canvas = document.getElementById('bg-canvas');
-            if(!canvas) return;
-            // Scene, camera, renderer
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 0.1, 1000);
-            camera.position.z = 40;
-            const renderer = new THREE.WebGLRenderer({canvas: canvas, alpha: true, antialias: true});
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(2, window.devicePixelRatio||1));
-            renderer.outputEncoding = THREE.sRGBEncoding;
-
-            // Particles (stars)
-            const starGeo = new THREE.BufferGeometry();
-            const starCount = 600;
-            const positions = new Float32Array(starCount * 3);
-            for(let i=0;i<starCount;i++){
-                const r = 120 + Math.random()*400;
-                const theta = Math.random()*Math.PI*2;
-                const phi = Math.acos((Math.random()*2)-1);
-                positions[i*3] = Math.cos(theta)*Math.sin(phi)*r;
-                positions[i*3+1] = Math.sin(theta)*Math.sin(phi)*r;
-                positions[i*3+2] = Math.cos(phi)*r - 100;
-            }
-            starGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-            const starMat = new THREE.PointsMaterial({size: 0.6, color: 0xFFFFFF, transparent: true, opacity: 0.9, depthWrite:false});
-            const stars = new THREE.Points(starGeo, starMat);
-            scene.add(stars);
-
-            // Low-poly focal sphere (moon / sun)
-            const sphereGeo = new THREE.IcosahedronGeometry(8, 4); // low-poly
-            const sphereMat = new THREE.MeshStandardMaterial({color:0xFFFFFF, emissive:0x4466ff, emissiveIntensity:0.5, roughness:0.7, metalness:0.1});
-            const sphere = new THREE.Mesh(sphereGeo, sphereMat);
-            sphere.position.set(30,10,-20);
-            scene.add(sphere);
-
-            // subtle ambient and directional light
-            const amb = new THREE.AmbientLight(0xffffff, 0.35);
-            const dir = new THREE.DirectionalLight(0xffffff, 0.6);
-            dir.position.set(-10,20,10);
-            scene.add(amb, dir);
-
-            // Parallax control
-            const state = {mx:0,my:0, scrollY:0};
-            window.addEventListener('mousemove', (e)=>{
-                const nx = (e.clientX / window.innerWidth) - 0.5;
-                const ny = (e.clientY / window.innerHeight) - 0.5;
-                state.mx = nx; state.my = ny;
-            }, {passive:true});
-
-            window.addEventListener('scroll', ()=>{ state.scrollY = window.scrollY; }, {passive:true});
-
-            // responsive resize
-            function onResize(){ camera.aspect = window.innerWidth/window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); }
-            window.addEventListener('resize', onResize);
-
-            // animate
-            let lastTime = performance.now();
-            function animate(now){
-                const dt = (now - lastTime) * 0.001; lastTime = now;
-                // subtle rotation
-                stars.rotation.y += 0.01 * dt * 60;
-                sphere.rotation.y += 0.02 * dt * 60;
-                // camera parallax based on mouse and scroll
-                camera.position.x += (state.mx * 6 - camera.position.x) * 0.05;
-                camera.position.y += (-state.my * 8 + (state.scrollY/200) - camera.position.y) * 0.05;
-                camera.lookAt(0,0,0);
-                renderer.render(scene, camera);
-                if(!document.hidden) requestAnimationFrame(animate);
-            }
-            requestAnimationFrame(animate);
-
-            // Theme update hook
-            NS.scene = scene;
-            NS.updateTheme = function(theme){
-                if(theme === 'light'){
-                    // make sphere sun-like
-                    gsap.to(sphere.material.color, {r:1, g:0.85, b:0.4, duration:0.6});
-                    gsap.to(sphere.material, {emissiveIntensity:1.4, duration:0.6});
-                    gsap.to(starMat, {opacity:0.05, duration:0.6});
-                    gsap.to(renderer.domElement, {opacity:1, duration:0.6});
-                } else {
-                    gsap.to(sphere.material.color, {r:0.9, g:0.95, b:1, duration:0.6});
-                    gsap.to(sphere.material, {emissiveIntensity:0.5, duration:0.6});
-                    gsap.to(starMat, {opacity:0.9, duration:0.6});
-                }
-            };
-            // apply initial theme
-            NS.updateTheme(document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
-        } // initThree end
-
-        // Kick off
-        document.addEventListener('DOMContentLoaded', ()=>{
-            createThemeToggle();
-            initLoader();
-            setupInteractionDetector();
-            if(typeof requestAnimationFrame === 'undefined') requestAnimationFrame = function(cb){ setTimeout(cb,16); };
-        });
-        window.addEventListener('load', ()=>{ onLoaded(); initThree(); });
-    })();
-    </script>
-    <!-- end enhancements -->
+  <!-- Scripts -->
+  <script src="https://unpkg.com/three@0.150.1/build/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script>
+    const canvas=document.getElementById('bg-canvas');
+    const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+    renderer.setSize(window.innerWidth,window.innerHeight);
+    renderer.setPixelRatio(Math.min(2,window.devicePixelRatio||1));
+    const scene=new THREE.Scene();
+    const camera=new THREE.PerspectiveCamera(50,window.innerWidth/window.innerHeight,0.1,1000);
+    camera.position.z=50;
+    const starGeo=new THREE.BufferGeometry();
+    const starCount=700;
+    const pos=new Float32Array(starCount*3);
+    for(let i=0;i<starCount;i++){pos[i*3]=(Math.random()-0.5)*1000;pos[i*3+1]=(Math.random()-0.5)*1000;pos[i*3+2]=(Math.random()-0.5)*1000;}
+    starGeo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+    const starMat=new THREE.PointsMaterial({size:0.9,color:0xffffff});
+    const stars=new THREE.Points(starGeo,starMat);scene.add(stars);
+    const sphereGeo=new THREE.IcosahedronGeometry(10,4);
+    const sphereMat=new THREE.MeshStandardMaterial({color:0xffffff,emissive:0x4466ff,emissiveIntensity:0.6});
+    const sphere=new THREE.Mesh(sphereGeo,sphereMat);sphere.position.set(0,0,-40);scene.add(sphere);
+    const loader=new THREE.TextureLoader();
+    const cloudTexture=loader.load('https://threejs.org/examples/textures/sprites/cloud.png');
+    const clouds=[];
+    for(let i=0;i<6;i++){const mat=new THREE.SpriteMaterial({map:cloudTexture,transparent:true,opacity:0.5});const sprite=new THREE.Sprite(mat);sprite.scale.set(120,80,1);sprite.position.set((Math.random()-0.5)*250,(Math.random()-0.5)*150,-60-Math.random()*60);sprite.visible=false;scene.add(sprite);clouds.push(sprite);}
+    scene.add(new THREE.AmbientLight(0xffffff,0.4));
+    const dir=new THREE.DirectionalLight(0xffffff,0.8);dir.position.set(-10,20,10);scene.add(dir);
+    const state={mx:0,my:0,scroll:0};
+    window.addEventListener('mousemove',e=>{state.mx=(e.clientX/window.innerWidth-0.5)*2;state.my=(e.clientY/window.innerHeight-0.5)*2;});
+    window.addEventListener('scroll',()=>{state.scroll=window.scrollY;});
+    function animate(){stars.rotation.y+=0.00015*60;sphere.rotation.y+=0.0005*60;clouds.forEach(c=>c.rotation.z+=0.00005*60);camera.position.x+=(state.mx*6-camera.position.x)*0.04;camera.position.y+=(-state.my*4+state.scroll/300-camera.position.y)*0.04;camera.lookAt(0,0,0);renderer.render(scene,camera);requestAnimationFrame(animate);}animate();
+    let theme='dark';
+    const toggle=document.getElementById('toggle');
+    toggle.onclick=()=>{theme=theme==='dark'?'light':'dark';if(theme==='light'){gsap.to(sphere.material.color,{r:1,g:0.85,b:0.4,duration:0.6});gsap.to(sphere.material,{emissiveIntensity:1.2,duration:0.6});document.body.style.background='#eaf6ff';document.body.style.color='#0f1724';toggle.textContent='☀️';gsap.to(starMat,{opacity:0.1,duration:0.6});clouds.forEach(c=>c.visible=true);}else{gsap.to(sphere.material.color,{r:0.9,g:0.95,b:1,duration:0.6});gsap.to(sphere.material,{emissiveIntensity:0.5,duration:0.6});document.body.style.background='#0b1020';document.body.style.color='white';toggle.textContent='🌙';gsap.to(starMat,{opacity:1,duration:0.6});clouds.forEach(c=>c.visible=false);}};
+    const loaderCanvas=document.getElementById('loader-canvas');
+    const ctx=loaderCanvas.getContext('2d');let t=0;
+    function drawLoader(){ctx.clearRect(0,0,loaderCanvas.width,loaderCanvas.height);const cx=loaderCanvas.width/2,cy=loaderCanvas.height/2;ctx.fillStyle=theme==='light'?'#facc15':'#e0e7ff';ctx.beginPath();ctx.arc(cx,cy,40,0,Math.PI*2);ctx.fill();for(let i=0;i<8;i++){const ang=t*0.05+i*(Math.PI/4);ctx.beginPath();ctx.arc(cx+Math.cos(ang)*60,cy+Math.sin(ang)*60,5,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,0.8)';ctx.fill();}t++;if(!document.getElementById('preloader').classList.contains('hide'))requestAnimationFrame(drawLoader);}drawLoader();
+    window.addEventListener('load',()=>{gsap.to('#preloader',{duration:0.6,autoAlpha:0,onComplete:()=>{document.getElementById('preloader').classList.add('hide');}});});
+    window.addEventListener('resize',()=>{camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight);});
+  </script>
 </body>
 </html>
