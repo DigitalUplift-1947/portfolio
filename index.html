@@ -15,7 +15,7 @@
     <meta name="twitter:description" content="Explore Muhammad Owais's skills in AI, prompt engineering, and more.">
     <meta name="twitter:image" content="https://via.placeholder.com/150">
     <title>Muhammad Owais | Portfolio</title>
-    <link rel="icon" href="favicon.png.jpg" type="image/x-icon" alt="Muhammad Owais Portfolio Favicon">
+    <link rel="icon" href="favicon.png" type="image/x-icon" alt="Muhammad Owais Portfolio Favicon">
     <!-- End of Meta Tags and Title -->
 
     <!-- Start of External Styles and Scripts -->
@@ -200,8 +200,8 @@
             transition: color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Enhanced smoother nav link color transition */
             color: var(--gray-dark);
             cursor: pointer;
-            font-weight: 500;
-            font-size: 0.875rem; /* Adjusted size for header fit */
+            font-weight: 700;
+            font-size: 1.125rem; /* Bigger font size */
         }
         .nav-link::after {
             content: '';
@@ -225,12 +225,12 @@
 
         .animated-section {
             opacity: 0;
-            transform: translateX(-30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transform: translateY(30px); /* Slightly increased for more dramatic entrance */
+            transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Enhanced with longer duration and smoother easing */
         }
         .animated-section.is-visible {
             opacity: 1;
-            transform: translateX(0);
+            transform: translateY(0);
         }
 
         .bubbly-btn {
@@ -795,6 +795,30 @@
             width: auto;
             margin-right: 0.5rem;
         }
+
+        /* New logo styling */
+        .logo-section {
+            text-align: center;
+            padding: 1rem 0;
+        }
+        .logo-section img {
+            max-width: 100%;
+            height: auto;
+            max-height: 200px; /* Adjust as needed for responsiveness */
+            animation: subtleAnimation 1.5s ease-in-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes subtleAnimation {
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @media (max-width: 640px) {
+            .logo-section img {
+                max-height: 150px;
+            }
+        }
     </style>
     <!-- End of Inline Styles -->
 </head>
@@ -823,17 +847,16 @@
     <!-- End of Parallax Background -->
 
     <!-- Start of Header Section -->
-    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 py-3 px-4 sm:px-6">
-        <nav class="container mx-auto flex justify-between items-center">
-            <img src="Adobe Express - file.png" alt="Portfolio Logo" class="header-title-img" style="width: 200px; height: auto;">
-                <div class="flex items-center space-x-2 sm:space-x-4 relative">
-                <ul class="hidden md:flex space-x-4 sm:space-x-6 text-base font-medium"> <!-- Adjusted space-x -->
-                    <li><a href="#home" class="nav-link" data-i18n="nav-home">Home</a></li>
-                    <li><a href="#about" class="nav-link" data-i18n="nav-about">About</a></li>
-                    <li><a href="#experience" class="nav-link" data-i18n="nav-experience">Experience</a></li>
-                    <li><a href="#certifications" class="nav-link" data-i18n="nav-certifications">Certifications</a></li>
-                    <li><a href="#contact" class="nav-link" data-i18n="nav-contact">Contact</a></li>
-                </ul>
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 py-4 px-4 sm:px-6">
+        <nav class="flex justify-between items-center w-full">
+            <ul class="hidden md:flex space-x-6 lg:space-x-8 text-lg font-bold"> <!-- Navigation on left -->
+                <li><a href="#home" class="nav-link" data-i18n="nav-home">Home</a></li>
+                <li><a href="#about" class="nav-link" data-i18n="nav-about">About</a></li>
+                <li><a href="#experience" class="nav-link" data-i18n="nav-experience">Experience</a></li>
+                <li><a href="#certifications" class="nav-link" data-i18n="nav-certifications">Certifications</a></li>
+                <li><a href="#contact" class="nav-link" data-i18n="nav-contact">Contact</a></li>
+            </ul>
+            <div class="flex items-center space-x-2 sm:space-x-4 relative"> <!-- Buttons on right -->
                 <button id="lang-toggle" class="lang-toggle" aria-label="Language Selector" title="Select Language">
                     <i class="fas fa-globe"></i>
                 </button>
@@ -859,7 +882,7 @@
             </div>
         </nav>
         <div id="mobile-menu" class="md:hidden absolute top-full left-0 w-full transform -translate-y-[150%]">
-            <ul class="flex flex-col items-center space-y-4 py-6 text-base font-medium">
+            <ul class="flex flex-col items-center space-y-4 py-6 text-lg font-bold"> <!-- Bigger and bolder for mobile too -->
                 <li><a href="#home" class="nav-link" data-i18n="nav-home">Home</a></li>
                 <li><a href="#about" class="nav-link" data-i18n="nav-about">About</a></li>
                 <li><a href="#experience" class="nav-link" data-i18n="nav-experience">Experience</a></li>
@@ -869,6 +892,14 @@
         </div>
     </header>
     <!-- End of Header Section -->
+
+    <!-- New Logo Section -->
+    <div class="logo-section" style="display: flex; justify-content: center; align-items: center; height: 200px;">
+    <img src="Adobe Express - file.png" alt="Muhammad Owais Logo">
+    </div>
+
+
+    <!-- End of New Logo Section -->
 
     <!-- Start of Main Content -->
     <main class="relative z-10">
@@ -899,7 +930,7 @@
         <!-- End of Home Section -->
 
         <!-- Start of About Section -->
-        <section id="about" class="py-24 sm:py-28 md:py-32 px-6 sm:px-8 animated-section about-section">
+        <section id="about" class="py-16 sm:py-20 md:py-24 px-6 sm:px-8 animated-section about-section">
             <div class="container mx-auto max-w-5xl">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 md:mb-14 text-[var(--primary-color)]" data-i18n="about-title">About Me</h2>
                 <div class="flex flex-col md:flex-row items-center md:items-start space-y-8 md:space-y-0 md:space-x-10 bg-gray-800 p-8 sm:p-10 rounded-2xl shadow-xl border border-gray-700">
@@ -936,7 +967,7 @@
         <!-- End of About Section -->
 
         <!-- Start of Experience Section -->
-        <section id="experience" class="py-24 sm:py-28 md:py-32 px-6 sm:px-8 animated-section">
+        <section id="experience" class="py-16 sm:py-20 md:py-24 px-6 sm:px-8 animated-section">
             <div class="container mx-auto max-w-5xl">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 md:mb-14 text-[var(--primary-color)]" data-i18n="experience-title">Professional Experience</h2>
                 <div class="timeline">
@@ -983,13 +1014,12 @@
         <!-- End of Experience Section -->
 
         <!-- Start of Certifications Section -->
-        <section id="certifications" class="py-24 sm:py-28 md:py-32 px-6 sm:px-8 animated-section certifications-section">
+        <section id="certifications" class="py-16 sm:py-20 md:py-24 px-6 sm:px-8 animated-section certifications-section">
             <div class="container mx-auto max-w-6xl">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 md:mb-14 text-[var(--primary-color)]" data-i18n="cert-title">Certifications</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
                     <div class="bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
-                        <img src="google.svg" alt="Google Certificate Badge" class="rounded-lg mb-4 w-64 h-auto mx-auto object-cover border border-gray-600" loading="lazy">
-
+                        <img src="google.svg" alt="Google Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
                         <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2 text-center" data-i18n="cert-prompt-eng">Prompt Engineering and Prompting Essentials</h3>
                         <p class="text-gray-200 text-base sm:text-lg mb-2 text-center" data-i18n="issued-by-google">Issued by Google</p>
                         <p class="text-sm sm:text-base text-gray-200 text-center">2025</p>
@@ -1048,7 +1078,7 @@
         <!-- End of Certifications Section -->
 
         <!-- Start of Contact Section -->
-        <section id="contact" class="py-24 sm:py-28 md:py-32 px-6 sm:px-8 animated-section">
+        <section id="contact" class="py-16 sm:py-20 md:py-24 px-6 sm:px-8 animated-section">
             <div class="container mx-auto max-w-3xl">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 md:mb-14 text-[var(--primary-color)]" data-i18n="contact-title">Get in Touch</h2>
                 <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-8 bg-gray-800 p-8 sm:p-10 rounded-2xl shadow-xl border border-gray-700 contact-form">
@@ -1124,7 +1154,6 @@
 
     <!-- Start of JavaScript File Loading Functions -->
     <script type="text/javascript">
-        // File loading function for handling XLSX files
         var gk_isXlsx = false;
         var gk_xlsxFileLookup = {};
         var gk_fileData = {};
@@ -1219,7 +1248,6 @@
             // Start of Translations Object - Full for all languages
             const translations = {
                 en: {
-                    'header-title': 'Work Showcase',
                     'nav-home': 'Home',
                     'nav-about': 'About',
                     'nav-experience': 'Experience',
@@ -1302,7 +1330,6 @@
                     'lang-pt': 'Português'
                 },
                 es: {
-                    'header-title': 'Galería de Trabajo',
                     'nav-home': 'Inicio',
                     'nav-about': 'Acerca de',
                     'nav-experience': 'Experiencia',
@@ -1336,7 +1363,7 @@
                     'exp-internships': 'Pasantías',
                     'badge-multiple': 'Múltiples Roles',
                     'exp-various-dates': 'Varias Organizaciones | 2022 – 2026',
-                    'exp-intern1': 'Hospital Shaukat Khanum (Pasantía en Marketing y RRHH, 2023–2024): Aumenté la participación en eventos un 15% y agilicé el reclutamiento.',
+                    'exp-intern1': 'Shaukat Khanum Hospital (Pasantía en Marketing y RRHH, 2023–2024): Aumenté la participación en eventos un 15% y agilicé el reclutamiento.',
                     'exp-intern2': 'TX Labz (Pasantía en RRHH, 2022): Optimicé el onboarding, reduciendo el tiempo de procesamiento un 20%.',
                     'exp-intern3': 'Med Coach Global (Pasantía en Redes Sociales, 2025–Presente): Aumenté el engagement en redes sociales un 30%.',
                     'exp-intern4': 'Experiencia en ONG (Alkhimat Foundation y ILM): Coordiné proyectos comunitarios y divulgación.',
@@ -1385,7 +1412,6 @@
                     'lang-pt': 'Português'
                 },
                 fr: {
-                    'header-title': 'Vitrine de Travail',
                     'nav-home': 'Accueil',
                     'nav-about': 'À propos',
                     'nav-experience': 'Expérience',
@@ -1468,7 +1494,6 @@
                     'lang-pt': 'Português'
                 },
                 de: {
-                    'header-title': 'Arbeitsvorstellung',
                     'nav-home': 'Startseite',
                     'nav-about': 'Über mich',
                     'nav-experience': 'Erfahrung',
@@ -1551,7 +1576,6 @@
                     'lang-pt': 'Português'
                 },
                 zh: {
-                    'header-title': '作品展示',
                     'nav-home': '首页',
                     'nav-about': '关于',
                     'nav-experience': '经验',
@@ -1634,12 +1658,11 @@
                     'lang-pt': 'Português'
                 },
                 ja: {
-                    'header-title': '作品集',
                     'nav-home': 'ホーム',
                     'nav-about': '私について',
                     'nav-experience': '経験',
                     'nav-certifications': '認定資格',
-                    'nav-contact': '連絡先',
+                    'nav-contact': 'お問い合わせ',
                     'home-hello': 'こんにちは',
                     'explore-certifications': '私の認定資格を探る',
                     'join-me': 'より明るい未来のためのデジタルスキルの習得に私と一緒に参加しましょう！',
@@ -1717,7 +1740,6 @@
                     'lang-pt': 'Português'
                 },
                 ko: {
-                    'header-title': '작업 쇼케이스',
                     'nav-home': '홈',
                     'nav-about': '소개',
                     'nav-experience': '경험',
@@ -1800,7 +1822,6 @@
                     'lang-pt': 'Português'
                 },
                 ar: {
-                    'header-title': 'عرض العمل',
                     'nav-home': 'الرئيسية',
                     'nav-about': 'حول',
                     'nav-experience': 'الخبرة',
@@ -1883,7 +1904,6 @@
                     'lang-pt': 'Português'
                 },
                 hi: {
-                    'header-title': 'कार्य प्रदर्शनी',
                     'nav-home': 'घर',
                     'nav-about': 'के बारे में',
                     'nav-experience': 'अनुभव',
@@ -1966,7 +1986,6 @@
                     'lang-pt': 'Português'
                 },
                 pt: {
-                    'header-title': 'Exibição de Trabalho',
                     'nav-home': 'Início',
                     'nav-about': 'Sobre',
                     'nav-experience': 'Experiência',
