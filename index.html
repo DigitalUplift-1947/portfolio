@@ -823,52 +823,64 @@
     <!-- End of Parallax Background -->
 
     <!-- Start of Header Section -->
-    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 py-4 px-4 sm:px-6">
-        <nav class="container mx-auto flex justify-between items-center">
-            <img src="Adobe Express - file.png" alt="Portfolio Logo" class="header-title-img" style="width: 200px; height: 200px;">
-            <div class="flex items-center space-x-2 sm:space-x-4 relative">
-                <ul class="hidden md:flex space-x-4 sm:space-x-6 text-base font-medium"> <!-- Adjusted space-x -->
-                    <li><a href="#home" class="nav-link" data-i18n="nav-home">Home</a></li>
-                    <li><a href="#about" class="nav-link" data-i18n="nav-about">About</a></li>
-                    <li><a href="#experience" class="nav-link" data-i18n="nav-experience">Experience</a></li>
-                    <li><a href="#certifications" class="nav-link" data-i18n="nav-certifications">Certifications</a></li>
-                    <li><a href="#contact" class="nav-link" data-i18n="nav-contact">Contact</a></li>
-                </ul>
-                <button id="lang-toggle" class="lang-toggle" aria-label="Language Selector" title="Select Language">
-                    <i class="fas fa-globe"></i>
-                </button>
-                <div id="lang-dropdown" class="lang-dropdown">
-                    <a href="#" class="lang-option" data-lang="en" data-i18n="lang-en">English</a>
-                    <a href="#" class="lang-option" data-lang="es" data-i18n="lang-es">Español</a>
-                    <a href="#" class="lang-option" data-lang="fr" data-i18n="lang-fr">Français</a>
-                    <a href="#" class="lang-option" data-lang="de" data-i18n="lang-de">Deutsch</a>
-                    <a href="#" class="lang-option" data-lang="zh" data-i18n="lang-zh">中文</a>
-                    <a href="#" class="lang-option" data-lang="ja" data-i18n="lang-ja">日本語</a>
-                    <a href="#" class="lang-option" data-lang="ko" data-i18n="lang-ko">한국어</a>
-                    <a href="#" class="lang-option" data-lang="ar" data-i18n="lang-ar">العربية</a>
-                    <a href="#" class="lang-option" data-lang="hi" data-i18n="lang-hi">हिंदी</a>
-                    <a href="#" class="lang-option" data-lang="pt" data-i18n="lang-pt">Português</a>
-                </div>
-                <button id="theme-toggle" class="theme-toggle" aria-label="Switch to light theme">
-                    <i class="fas fa-moon"></i>
-                    <i class="fas fa-sun"></i>
-                </button>
-                <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none" aria-expanded="false" aria-controls="mobile-menu">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
-            </div>
-        </nav>
-        <div id="mobile-menu" class="md:hidden absolute top-full left-0 w-full transform -translate-y-[150%]">
-            <ul class="flex flex-col items-center space-y-4 py-6 text-base font-medium">
+<header id="main-header" class="fixed top-0 left-0 right-0 z-50 py-2 px-4 sm:px-6 bg-white shadow-md">
+    <nav class="container mx-auto flex justify-between items-center">
+        <!-- Logo -->
+        <img src="Adobe Express - file.png" alt="Portfolio Logo" class="header-title-img w-28 sm:w-32 h-auto">
+
+        <!-- Navigation & Buttons -->
+        <div class="flex items-center space-x-2 sm:space-x-4 relative">
+            <!-- Desktop Menu -->
+            <ul class="hidden md:flex space-x-4 sm:space-x-6 text-base font-medium">
                 <li><a href="#home" class="nav-link" data-i18n="nav-home">Home</a></li>
                 <li><a href="#about" class="nav-link" data-i18n="nav-about">About</a></li>
                 <li><a href="#experience" class="nav-link" data-i18n="nav-experience">Experience</a></li>
                 <li><a href="#certifications" class="nav-link" data-i18n="nav-certifications">Certifications</a></li>
                 <li><a href="#contact" class="nav-link" data-i18n="nav-contact">Contact</a></li>
             </ul>
+
+            <!-- Language Toggle -->
+            <button id="lang-toggle" class="lang-toggle" aria-label="Language Selector" title="Select Language">
+                <i class="fas fa-globe"></i>
+            </button>
+            <div id="lang-dropdown" class="lang-dropdown">
+                <a href="#" class="lang-option" data-lang="en" data-i18n="lang-en">English</a>
+                <a href="#" class="lang-option" data-lang="es" data-i18n="lang-es">Español</a>
+                <a href="#" class="lang-option" data-lang="fr" data-i18n="lang-fr">Français</a>
+                <a href="#" class="lang-option" data-lang="de" data-i18n="lang-de">Deutsch</a>
+                <a href="#" class="lang-option" data-lang="zh" data-i18n="lang-zh">中文</a>
+                <a href="#" class="lang-option" data-lang="ja" data-i18n="lang-ja">日本語</a>
+                <a href="#" class="lang-option" data-lang="ko" data-i18n="lang-ko">한국어</a>
+                <a href="#" class="lang-option" data-lang="ar" data-i18n="lang-ar">العربية</a>
+                <a href="#" class="lang-option" data-lang="hi" data-i18n="lang-hi">हिंदी</a>
+                <a href="#" class="lang-option" data-lang="pt" data-i18n="lang-pt">Português</a>
+            </div>
+
+            <!-- Theme Toggle -->
+            <button id="theme-toggle" class="theme-toggle" aria-label="Switch to light theme">
+                <i class="fas fa-moon"></i>
+                <i class="fas fa-sun"></i>
+            </button>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none" aria-expanded="false" aria-controls="mobile-menu">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
         </div>
-    </header>
-    <!-- End of Header Section -->
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden absolute top-full left-0 w-full transform -translate-y-[150%]">
+        <ul class="flex flex-col items-center space-y-4 py-6 text-base font-medium">
+            <li><a href="#home" class="nav-link" data-i18n="nav-home">Home</a></li>
+            <li><a href="#about" class="nav-link" data-i18n="nav-about">About</a></li>
+            <li><a href="#experience" class="nav-link" data-i18n="nav-experience">Experience</a></li>
+            <li><a href="#certifications" class="nav-link" data-i18n="nav-certifications">Certifications</a></li>
+            <li><a href="#contact" class="nav-link" data-i18n="nav-contact">Contact</a></li>
+        </ul>
+    </div>
+</header>
+<!-- End of Header Section -->
 
     <!-- Start of Main Content -->
     <main class="relative z-10">
