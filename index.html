@@ -561,10 +561,147 @@
         html.light-theme .contact-form label[for="not-a-bot"] {
             color: var(--gray-light);
         }
+
+        /* Loading Screen Styles */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--background-dark);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+        }
+        #loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.1);
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .loading-text {
+            color: #FFFFFF;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Welcome Overlay Styles */
+        #welcome-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 25, 47, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+        }
+        #welcome-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .welcome-emoji {
+            font-size: 10rem;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+        .welcome-text {
+            font-size: 2rem;
+            color: #FFFFFF;
+            margin: 2rem 0;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        #welcome-btn {
+            padding: 1rem 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        #welcome-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Main Content Transition */
+        main.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+        }
+        main {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        header.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+        }
+        header {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
     </style>
     <!-- End of Inline Styles -->
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader"></div>
+        <p class="loading-text">Loading Portfolio...</p>
+    </div>
+
+    <!-- Welcome Overlay -->
+    <div id="welcome-overlay">
+        <div class="welcome-emoji">👋</div>
+        <p class="welcome-text">Let's have a look at my portfolio!</p>
+        <button id="welcome-btn" class="bubbly-btn">Enter</button>
+    </div>
+
+    <!-- Welcome Sound Placeholder -->
+    <audio id="welcome-sound" preload="auto">
+        <source src="welcome.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
     <!-- Start of Parallax Background -->
     <div class="parallax-background"></div>
     <!-- End of Parallax Background -->
@@ -572,7 +709,7 @@
     <!-- Start of Header Section -->
     <header id="main-header" class="fixed top-0 left-0 right-0 z-50 py-4 px-4 sm:px-6">
         <nav class="container mx-auto flex justify-between items-center">
-            <h1 class="text-xl sm:text-2xl md:text-3xl font-bold uppercase tracking-wide">My Work Showcase</h1>
+            <h1 class="text-xl sm:text-2xl md:text-3xl font-bold uppercase tracking-wide">Work Showcase</h1>
             <div class="flex items-center space-x-4">
                 <ul class="hidden md:flex space-x-6 text-base font-medium">
                     <li><a href="#home" class="nav-link">Home</a></li>
@@ -927,7 +1064,13 @@
                 toggleButtons: document.querySelectorAll('.toggle-details'),
                 changingText: document.getElementById('changing-text'),
                 themeToggle: document.getElementById('theme-toggle'),
-                parallaxBackground: document.querySelector('.parallax-background')
+                parallaxBackground: document.querySelector('.parallax-background'),
+                loadingScreen: document.getElementById('loading-screen'),
+                welcomeOverlay: document.getElementById('welcome-overlay'),
+                welcomeBtn: document.getElementById('welcome-btn'),
+                welcomeSound: document.getElementById('welcome-sound'),
+                mainContent: document.querySelector('main'),
+                headerElement: document.querySelector('header')
             };
             // End of Cached Elements
 
@@ -937,6 +1080,27 @@
             const submissionCooldown = 30000;
             let scrollTimeout;
             // End of Variables for Scroll and Submission
+
+            // Start of Loading Screen and Welcome Sequence
+            setTimeout(() => {
+                elements.loadingScreen.classList.add('hidden');
+                setTimeout(() => {
+                    elements.welcomeOverlay.classList.add('visible');
+                }, 500);
+            }, 2000);
+
+            elements.welcomeBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Welcome button clicked');
+                elements.welcomeSound.play().catch(() => console.log('Welcome sound play failed'));
+                elements.welcomeOverlay.classList.remove('visible');
+                setTimeout(() => {
+                    elements.mainContent.classList.add('fade-in');
+                    elements.headerElement.classList.add('fade-in');
+                }, 500);
+            });
+            // End of Loading Screen and Welcome Sequence
 
             // Start of Parallax Background Functions (Stars and Clouds)
             function createStars() {
