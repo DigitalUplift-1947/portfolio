@@ -225,12 +225,12 @@
 
         .animated-section {
             opacity: 0;
-            transform: translateY(30px); /* Slightly increased for more dramatic entrance */
-            transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Enhanced with longer duration and smoother easing */
+            transform: translateX(-30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
         .animated-section.is-visible {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateX(0);
         }
 
         .bubbly-btn {
@@ -823,55 +823,83 @@
     <!-- End of Parallax Background -->
 
     <!-- Start of Header Section -->
-<header id="main-header" class="fixed top-0 left-0 right-0 z-50 py-2 px-4 sm:px-6">
-    <nav class="container mx-auto flex justify-between items-center">
-        <img src="Adobe Express - file.png" alt="Portfolio Logo" class="header-title-img" style="width: 200px; height: 200px;">
-        <div class="flex items-center space-x-2 sm:space-x-4 relative">
-            <ul class="hidden md:flex space-x-4 sm:space-x-6 text-base font-medium"> <!-- Adjusted space-x -->
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 py-3 px-4 sm:px-6">
+        <nav class="container mx-auto flex justify-between items-center">
+            <img src="Adobe Express - file.png" alt="Portfolio Logo" class="header-title-img" style="width: 200px; height: auto;">
+                <div class="flex items-center space-x-2 sm:space-x-4 relative">
+                <ul class="hidden md:flex space-x-4 sm:space-x-6 text-base font-medium"> <!-- Adjusted space-x -->
+                    <li><a href="#home" class="nav-link" data-i18n="nav-home">Home</a></li>
+                    <li><a href="#about" class="nav-link" data-i18n="nav-about">About</a></li>
+                    <li><a href="#experience" class="nav-link" data-i18n="nav-experience">Experience</a></li>
+                    <li><a href="#certifications" class="nav-link" data-i18n="nav-certifications">Certifications</a></li>
+                    <li><a href="#contact" class="nav-link" data-i18n="nav-contact">Contact</a></li>
+                </ul>
+                <button id="lang-toggle" class="lang-toggle" aria-label="Language Selector" title="Select Language">
+                    <i class="fas fa-globe"></i>
+                </button>
+                <div id="lang-dropdown" class="lang-dropdown">
+                    <a href="#" class="lang-option" data-lang="en" data-i18n="lang-en">English</a>
+                    <a href="#" class="lang-option" data-lang="es" data-i18n="lang-es">Español</a>
+                    <a href="#" class="lang-option" data-lang="fr" data-i18n="lang-fr">Français</a>
+                    <a href="#" class="lang-option" data-lang="de" data-i18n="lang-de">Deutsch</a>
+                    <a href="#" class="lang-option" data-lang="zh" data-i18n="lang-zh">中文</a>
+                    <a href="#" class="lang-option" data-lang="ja" data-i18n="lang-ja">日本語</a>
+                    <a href="#" class="lang-option" data-lang="ko" data-i18n="lang-ko">한국어</a>
+                    <a href="#" class="lang-option" data-lang="ar" data-i18n="lang-ar">العربية</a>
+                    <a href="#" class="lang-option" data-lang="hi" data-i18n="lang-hi">हिंदी</a>
+                    <a href="#" class="lang-option" data-lang="pt" data-i18n="lang-pt">Português</a>
+                </div>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Switch to light theme">
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun"></i>
+                </button>
+                <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none" aria-expanded="false" aria-controls="mobile-menu">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="md:hidden absolute top-full left-0 w-full transform -translate-y-[150%]">
+            <ul class="flex flex-col items-center space-y-4 py-6 text-base font-medium">
                 <li><a href="#home" class="nav-link" data-i18n="nav-home">Home</a></li>
                 <li><a href="#about" class="nav-link" data-i18n="nav-about">About</a></li>
                 <li><a href="#experience" class="nav-link" data-i18n="nav-experience">Experience</a></li>
                 <li><a href="#certifications" class="nav-link" data-i18n="nav-certifications">Certifications</a></li>
                 <li><a href="#contact" class="nav-link" data-i18n="nav-contact">Contact</a></li>
             </ul>
-            <button id="lang-toggle" class="lang-toggle" aria-label="Language Selector" title="Select Language">
-                <i class="fas fa-globe"></i>
-            </button>
-            <div id="lang-dropdown" class="lang-dropdown">
-                <a href="#" class="lang-option" data-lang="en" data-i18n="lang-en">English</a>
-                <a href="#" class="lang-option" data-lang="es" data-i18n="lang-es">Español</a>
-                <a href="#" class="lang-option" data-lang="fr" data-i18n="lang-fr">Français</a>
-                <a href="#" class="lang-option" data-lang="de" data-i18n="lang-de">Deutsch</a>
-                <a href="#" class="lang-option" data-lang="zh" data-i18n="lang-zh">中文</a>
-                <a href="#" class="lang-option" data-lang="ja" data-i18n="lang-ja">日本語</a>
-                <a href="#" class="lang-option" data-lang="ko" data-i18n="lang-ko">한국어</a>
-                <a href="#" class="lang-option" data-lang="ar" data-i18n="lang-ar">العربية</a>
-                <a href="#" class="lang-option" data-lang="hi" data-i18n="lang-hi">हिंदी</a>
-                <a href="#" class="lang-option" data-lang="pt" data-i18n="lang-pt">Português</a>
-            </div>
-            <button id="theme-toggle" class="theme-toggle" aria-label="Switch to light theme">
-                <i class="fas fa-moon"></i>
-                <i class="fas fa-sun"></i>
-            </button>
-            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none" aria-expanded="false" aria-controls="mobile-menu">
-                <i class="fas fa-bars text-xl"></i>
-            </button>
         </div>
-    </nav>
-    <div id="mobile-menu" class="md:hidden absolute top-full left-0 w-full transform -translate-y-[150%]">
-        <ul class="flex flex-col items-center space-y-4 py-6 text-base font-medium">
-            <li><a href="#home" class="nav-link" data-i18n="nav-home">Home</a></li>
-            <li><a href="#about" class="nav-link" data-i18n="nav-about">About</a></li>
-            <li><a href="#experience" class="nav-link" data-i18n="nav-experience">Experience</a></li>
-            <li><a href="#certifications" class="nav-link" data-i18n="nav-certifications">Certifications</a></li>
-            <li><a href="#contact" class="nav-link" data-i18n="nav-contact">Contact</a></li>
-        </ul>
-    </div>
-</header>
-<!-- End of Header Section -->
+    </header>
+    <!-- End of Header Section -->
+
+    <!-- Start of Main Content -->
+    <main class="relative z-10">
+        <!-- Start of Home Section -->
+        <section id="home" class="min-h-screen flex items-center pt-28 sm:pt-32 px-6 sm:px-8">
+            <div class="text-center w-full space-y-8 animated-section">
+                <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight">
+                    <span data-i18n="home-hello">Hello</span>, I'm <span class="text-[var(--primary-color)]">Muhammad Owais</span>
+                </h2>
+                <p id="changing-text" class="text-lg sm:text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto"></p>
+                <div class="flex justify-center space-x-8">
+                    <a href="https://wa.me/message/NHLJOW7GEFJ7L1" target="_blank" rel="noopener noreferrer" class="text-2xl sm:text-3xl text-white hover:text-[#25D366] social-icon" aria-label="WhatsApp">
+                        <i id="whatsapp-icon" class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="mailto:professional.ots@gmail.com" class="text-2xl sm:text-3xl text-white hover:text-[#3498db] social-icon" aria-label="Email">
+                        <i id="email-icon" class="fas fa-envelope"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/muhammad-owais-b45106328/" target="_blank" rel="noopener noreferrer" class="text-2xl sm:text-3xl text-white hover:text-[#0A66C2] social-icon" aria-label="LinkedIn">
+                        <i id="linkedin-icon" class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+                <div class="mt-6 space-y-6">
+                    <a href="#certifications" class="inline-block px-8 py-3 sm:px-10 sm:py-4 text-lg sm:text-xl font-semibold text-gray-900 bg-white rounded-full shadow-lg bubbly-btn hover:bg-[var(--primary-color)] hover:text-white" data-i18n="explore-certifications">Explore My Certifications</a>
+                    <p class="text-lg sm:text-xl text-gray-200" data-i18n="join-me">Join me in mastering digital skills for a brighter future!</p>
+                </div>
+            </div>
+        </section>
+        <!-- End of Home Section -->
 
         <!-- Start of About Section -->
-        <section id="about" class="py-16 sm:py-20 md:py-24 px-6 sm:px-8 animated-section about-section">
+        <section id="about" class="py-24 sm:py-28 md:py-32 px-6 sm:px-8 animated-section about-section">
             <div class="container mx-auto max-w-5xl">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 md:mb-14 text-[var(--primary-color)]" data-i18n="about-title">About Me</h2>
                 <div class="flex flex-col md:flex-row items-center md:items-start space-y-8 md:space-y-0 md:space-x-10 bg-gray-800 p-8 sm:p-10 rounded-2xl shadow-xl border border-gray-700">
@@ -908,7 +936,7 @@
         <!-- End of About Section -->
 
         <!-- Start of Experience Section -->
-        <section id="experience" class="py-16 sm:py-20 md:py-24 px-6 sm:px-8 animated-section">
+        <section id="experience" class="py-24 sm:py-28 md:py-32 px-6 sm:px-8 animated-section">
             <div class="container mx-auto max-w-5xl">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 md:mb-14 text-[var(--primary-color)]" data-i18n="experience-title">Professional Experience</h2>
                 <div class="timeline">
@@ -955,12 +983,13 @@
         <!-- End of Experience Section -->
 
         <!-- Start of Certifications Section -->
-        <section id="certifications" class="py-16 sm:py-20 md:py-24 px-6 sm:px-8 animated-section certifications-section">
+        <section id="certifications" class="py-24 sm:py-28 md:py-32 px-6 sm:px-8 animated-section certifications-section">
             <div class="container mx-auto max-w-6xl">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 md:mb-14 text-[var(--primary-color)]" data-i18n="cert-title">Certifications</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
                     <div class="bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
-                        <img src="google.svg" alt="Google Certificate Badge" class="rounded-lg mb-4 w-48 h-auto mx-auto object-cover border border-gray-600" loading="lazy">
+                        <img src="google.svg" alt="Google Certificate Badge" class="rounded-lg mb-4 w-64 h-auto mx-auto object-cover border border-gray-600" loading="lazy">
+
                         <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2 text-center" data-i18n="cert-prompt-eng">Prompt Engineering and Prompting Essentials</h3>
                         <p class="text-gray-200 text-base sm:text-lg mb-2 text-center" data-i18n="issued-by-google">Issued by Google</p>
                         <p class="text-sm sm:text-base text-gray-200 text-center">2025</p>
@@ -969,7 +998,7 @@
                         </div>
                     </div>
                     <div class="bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
-                        <img src="google.svg" alt="Google AI Certificate Badge" class="rounded-lg mb-4 w-48 h-auto mx-auto object-cover border border-gray-600" loading="lazy">
+                        <img src="google.svg" alt="Google AI Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
                         <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2 text-center" data-i18n="cert-google-ai">Google AI Essentials</h3>
                         <p class="text-gray-200 text-base sm:text-lg mb-2 text-center" data-i18n="issued-by-google">Issued by Google</p>
                         <p class="text-sm sm:text-base text-gray-200 text-center">2025</p>
@@ -978,7 +1007,7 @@
                         </div>
                     </div>
                     <div class="bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
-                        <img src="likedin.svg" alt="LinkedIn Certificate Badge" class="rounded-lg mb-4 w-48 h-auto mx-auto object-cover border border-gray-600" loading="lazy">
+                        <img src="likedin.svg" alt="LinkedIn Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
                         <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2 text-center" data-i18n="cert-linkedin-ai">LinkedIn AI Essentials</h3>
                         <p class="text-gray-200 text-base sm:text-lg mb-2 text-center" data-i18n="issued-by-linkedin">Issued by LinkedIn</p>
                         <p class="text-sm sm:text-base text-gray-200 text-center">2024</p>
@@ -987,7 +1016,7 @@
                         </div>
                     </div>
                     <div class="bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
-                        <img src="itu.svg" alt="ITU Python Certificate Badge" class="rounded-lg mb-4 w-48 h-auto mx-auto object-cover border border-gray-600" loading="lazy">
+                        <img src="itu.svg" alt="ITU Python Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
                         <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2 text-center" data-i18n="cert-python">Python Programming Course</h3>
                         <p class="text-gray-200 text-base sm:text-lg mb-2 text-center" data-i18n="issued-by-itu">Issued by ITU</p>
                         <p class="text-sm sm:text-base text-gray-200 text-center">2023</p>
@@ -996,7 +1025,7 @@
                         </div>
                     </div>
                     <div class="bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
-                        <img src="google.svg" alt="Google Marketing Certificate Badge" class="rounded-lg mb-4 w-48 h-auto mx-auto object-cover border border-gray-600" loading="lazy">
+                        <img src="google.svg" alt="Google Marketing Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
                         <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2 text-center" data-i18n="cert-marketing">Digital Marketing Course</h3>
                         <p class="text-gray-200 text-base sm:text-lg mb-2 text-center" data-i18n="issued-by-google">Issued by Google</p>
                         <p class="text-sm sm:text-base text-gray-200 text-center">2024</p>
@@ -1005,7 +1034,7 @@
                         </div>
                     </div>
                     <div class="bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
-                        <img src="ibm.svg" alt="IBM Cybersecurity Certificate Badge" class="rounded-lg mb-4 w-48 h-auto mx-auto object-cover border border-gray-600" loading="lazy">
+                        <img src="ibm.svg" alt="IBM Cybersecurity Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
                         <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2 text-center" data-i18n="cert-cyber">Cybersecurity Course</h3>
                         <p class="text-gray-200 text-base sm:text-lg mb-2 text-center" data-i18n="issued-by-ibm">Issued by IBM</p>
                         <p class="text-sm sm:text-base text-gray-200 text-center">2024</p>
@@ -1019,7 +1048,7 @@
         <!-- End of Certifications Section -->
 
         <!-- Start of Contact Section -->
-        <section id="contact" class="py-16 sm:py-20 md:py-24 px-6 sm:px-8 animated-section">
+        <section id="contact" class="py-24 sm:py-28 md:py-32 px-6 sm:px-8 animated-section">
             <div class="container mx-auto max-w-3xl">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 md:mb-14 text-[var(--primary-color)]" data-i18n="contact-title">Get in Touch</h2>
                 <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-8 bg-gray-800 p-8 sm:p-10 rounded-2xl shadow-xl border border-gray-700 contact-form">
