@@ -1,4 +1,43 @@
-<!DOCTYPE html>
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -7,34 +46,105 @@
     <meta name="keywords" content="Muhammad Owais, AI tools, prompt engineering, cybersecurity, digital marketing, YouTube creator, portfolio, certifications, Python, Google AI Essentials">
     <meta property="og:title" content="Muhammad Owais | Portfolio">
     <meta property="og:description" content="Discover the professional journey of Muhammad Owais in AI, cybersecurity, and digital content creation.">
-    <meta property="og:image" content="Profile.jpg">
+    <meta property="og:image" content="https://via.placeholder.com/150">
     <meta property="og:url" content="https://your-portfolio-url.com">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Muhammad Owais | Portfolio">
     <meta name="twitter:description" content="Explore Muhammad Owais's skills in AI, prompt engineering, and more.">
-    <meta name="twitter:image" content="Profile.jpg">
+    <meta name="twitter:image" content="https://via.placeholder.com/150">
     <title>Muhammad Owais | Portfolio</title>
-    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <link rel="icon" href="https://via.placeholder.com/32" type="image/x-icon" alt="Muhammad Owais Portfolio Favicon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
     <style>
         :root {
             --primary-color: #FF8C00;
-            --background-dark: #111827;
+            --background-dark: #0A192F;
             --card-dark: #1F2937;
+            --text-dark: #F3F4F6;
+            --background-light: #E6F0FA;
+            --card-light: #FFFFFF;
+            --text-light: #111827;
+            --header-bg-dark: rgba(17, 24, 39, 0.95);
+            --header-bg-light: rgba(255, 255, 255, 0.95);
+            --gray-dark: #9CA3AF;
+            --gray-light: #374151;
+            --card-border-dark: #374151;
+            --card-border-light: #D1D5DB;
         }
 
         html {
-            scroll-padding-top: 80px;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        html.light-theme {
+            --background-dark: var(--background-light);
+            --card-dark: var(--card-light);
+            --text-dark: var(--text-light);
+            --header-bg-dark: var(--header-bg-light);
+            --gray-dark: var(--gray-light);
+            --card-border-dark: var(--card-border-light);
+        }
+
+        html.light-theme .text-gray-200,
+        html.light-theme .text-gray-300,
+        html.light-theme .text-gray-500 {
+            color: var(--gray-light) !important;
+        }
+
+        html.light-theme .bubbly-btn:not(:hover) {
+            color: var(--text-light) !important;
+            background-color: #D1D5DB;
+            border: 2px solid var(--gray-light);
+        }
+
+        html.light-theme .bubbly-btn:hover {
+            color: #FFFFFF !important;
+            background-color: var(--primary-color) !important;
+            border-color: var(--primary-color);
+        }
+
+        html.light-theme .toggle-details:not(:hover) {
+            background: #E5E7EB;
+            color: var(--text-light);
+        }
+
+        html.light-theme .toggle-details:hover {
+            background: var(--primary-color);
+            color: #FFFFFF;
+        }
+
+        html.light-theme .theme-toggle:not(:hover) {
+            background: #E5E7EB;
+            color: var(--text-light);
+        }
+
+        html.light-theme .theme-toggle:hover {
+            background: var(--primary-color);
+            color: #FFFFFF;
+        }
+
+        html.light-theme #back-to-top:not(:hover) {
+            background: #D1D5DB;
+            color: var(--text-light);
+        }
+
+        html.light-theme #back-to-top:hover {
+            background: var(--primary-color);
+            color: #FFFFFF;
         }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            color: #E0E0E0;
+            color: var(--text-dark);
             background-color: var(--background-dark);
             overflow-x: hidden;
             position: relative;
+            transition: background-color 0.5s ease, color 0.5s ease;
+            font-size: 1rem;
+            line-height: 1.5;
         }
 
         .parallax-background {
@@ -44,13 +154,72 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: linear-gradient(-45deg, #0A192F, #171123, #0A192F, #112A3A, #0A192F);
-            background-size: 200% 200%;
-            animation: moveGradient 15s ease-in-out infinite;
+            background: radial-gradient(circle at 50% 0%, #1E3A8A 0%, #0A192F 70%);
+            transition: background 0.5s ease;
+        }
+
+        .parallax-background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Ccircle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.8)"/%3E%3Ccircle cx="30" cy="40" r="0.7" fill="rgba(255,255,255,0.6)"/%3E%3C/svg%3E') repeat;
+            background-size: 80px 80px;
+            opacity: 0.4;
+            animation: twinkle 4s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.7; }
+        }
+
+        .parallax-background .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.4);
+            animation: fall 3s linear infinite;
+            will-change: transform;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100vh); opacity: 0.8; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        html.light-theme .parallax-background {
+            background: radial-gradient(circle at 80% 20%, #FFD700 0%, #87CEEB 50%, #E6F0FA 100%);
+        }
+
+        html.light-theme .parallax-background::before {
+            display: none;
+        }
+
+        .parallax-background .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            box-shadow: 0 0 12px 6px rgba(255, 255, 255, 0.3);
+            animation: drift 20s linear infinite;
+            will-change: transform;
+            pointer-events: none;
+        }
+
+        @keyframes drift {
+            0% { transform: translateX(-100vw); }
+            100% { transform: translateX(100vw); }
         }
 
         .nav-link {
             position: relative;
+            transition: color 0.5s ease;
+            color: var(--gray-dark);
+            cursor: pointer;
+            font-weight: 500;
         }
         .nav-link::after {
             content: '';
@@ -64,6 +233,12 @@
         }
         .nav-link:hover::after {
             width: 100%;
+        }
+        html.light-theme .nav-link {
+            color: var(--gray-light);
+        }
+        html.light-theme .nav-link:hover {
+            color: var(--text-light);
         }
 
         .animated-section {
@@ -79,7 +254,12 @@
         .bubbly-btn {
             position: relative;
             overflow: hidden;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.4s ease-in-out;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.4s ease-in-out, color 0.5s ease, border-color 0.4s ease;
+            cursor: pointer;
+            z-index: 10;
+            pointer-events: auto;
+            font-weight: 600;
+            font-size: 1.1rem;
         }
         .bubbly-btn:hover {
             transform: translateY(-5px) scale(1.05);
@@ -113,18 +293,18 @@
             }
         }
 
-        @keyframes moveGradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
         #mobile-menu {
-            transition: transform 0.3s ease-in-out;
+            transition: transform 0.3s ease-in-out, background-color 0.5s ease;
+            background-color: var(--header-bg-dark);
+            z-index: 50;
+            pointer-events: auto;
+        }
+        html.light-theme #mobile-menu {
+            background-color: var(--header-bg-light);
         }
 
         .modal {
-            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out, background-color 0.5s ease;
             pointer-events: none;
         }
         .modal.is-visible {
@@ -132,12 +312,17 @@
             pointer-events: auto;
             transform: scale(1);
         }
+        html.light-theme .modal {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
 
         #main-header {
-            transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out, background-color 0.5s ease;
+            z-index: 50;
+            pointer-events: auto;
         }
         #main-header.scrolled {
-            background-color: rgba(17, 24, 39, 0.9);
+            background-color: var(--header-bg-dark);
             backdrop-filter: blur(8px);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
@@ -146,10 +331,13 @@
         }
 
         #changing-text {
-            min-height: 2.5rem;
+            min-height: 2.75rem;
             white-space: nowrap;
             overflow: hidden;
             position: relative;
+            transition: color 0.5s ease;
+            font-size: 1.1rem;
+            line-height: 1.5;
         }
         #changing-text::after {
             content: '';
@@ -163,6 +351,9 @@
         @keyframes blink-cursor {
             from, to { opacity: 0; }
             50% { opacity: 1; }
+        }
+        html.light-theme #changing-text {
+            color: var(--gray-light);
         }
 
         .linkedin-hover:hover, .linkedin-contact:hover { color: #0A66C2; }
@@ -181,9 +372,10 @@
 
         .error-message {
             color: #EF4444;
-            font-size: 0.875rem;
-            margin-top: 0.25rem;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
             display: none;
+            transition: color 0.5s ease;
         }
         .error-message.active { display: block; role: alert; }
 
@@ -202,7 +394,7 @@
 
         .timeline {
             position: relative;
-            padding-left: 1.5rem;
+            padding-left: 2rem;
         }
         .timeline::before {
             content: '';
@@ -216,8 +408,10 @@
 
         .timeline-item {
             position: relative;
-            margin-bottom: 1.5rem;
-            padding-left: 1.5rem;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+            transition: background-color 0.5s ease, border-color 0.5s ease;
+            z-index: 5;
         }
         .timeline-item::before {
             content: '';
@@ -235,36 +429,43 @@
             max-height: 0;
             opacity: 0;
             overflow: hidden;
-            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out, color 0.5s ease;
         }
         .timeline-content.show {
-            max-height: 500px;
+            max-height: calc(100vh + 500px);
             opacity: 1;
+        }
+        html.light-theme .timeline-content {
+            color: var(--gray-light);
         }
 
         .badge {
-            padding: 0.25rem 0.5rem;
+            padding: 0.35rem 0.75rem;
             background: var(--primary-color);
             color: #fff;
             border-radius: 0.25rem;
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             font-weight: 600;
-            margin-left: 0.5rem;
+            margin-left: 0.75rem;
         }
 
         .toggle-details {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 2rem;
-            height: 2rem;
+            width: 2.25rem;
+            height: 2.25rem;
             background: rgba(255, 255, 255, 0.1);
             color: white;
             border-radius: 50%;
-            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out, color 0.3s ease;
+            cursor: pointer;
+            z-index: 15;
+            pointer-events: auto;
         }
         .toggle-details:hover {
             background: var(--primary-color);
+            color: #FFFFFF;
         }
         .toggle-details.active {
             transform: rotate(180deg);
@@ -272,20 +473,23 @@
 
         #back-to-top {
             position: fixed;
-            bottom: 1.5rem;
-            right: 1.5rem;
+            bottom: 2rem;
+            right: 2rem;
             background: var(--primary-color);
             color: #fff;
-            width: 2.5rem;
-            height: 2.5rem;
+            width: 3rem;
+            height: 3rem;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, background-color 0.5s ease, color 0.5s ease;
             z-index: 1000;
+            cursor: pointer;
+            pointer-events: auto;
+            font-size: 1.25rem;
         }
         #back-to-top.visible {
             opacity: 1;
@@ -303,7 +507,7 @@
             align-items: center;
             justify-content: center;
             z-index: 2000;
-            transition: opacity 0.7s ease-in-out;
+            transition: opacity 0.7s ease-in-out, background-color 0.5s ease;
         }
         #preloader.hide {
             opacity: 0;
@@ -311,8 +515,8 @@
         }
 
         .spinner {
-            width: 2.5rem;
-            height: 2.5rem;
+            width: 3rem;
+            height: 3rem;
             border: 4px solid var(--primary-color);
             border-top: 4px solid transparent;
             border-radius: 50%;
@@ -322,137 +526,221 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.75rem;
+            height: 2.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-dark);
+            border-radius: 50%;
+            transition: background-color 0.3s ease-in-out, color 0.5s ease;
+            cursor: pointer;
+            z-index: 100;
+            pointer-events: auto;
+        }
+        .theme-toggle:hover {
+            background: var(--primary-color);
+            color: #FFFFFF;
+        }
+        .theme-toggle i {
+            font-size: 1.5rem;
+        }
+        html.light-theme .theme-toggle .fa-moon { display: none; }
+        html.light-theme .theme-toggle .fa-sun { display: inline; }
+        .theme-toggle .fa-sun { display: none; }
+
+        html.light-theme #main-header h1 {
+            color: var(--text-light);
+        }
+        html.light-theme .timeline-item {
+            background-color: var(--card-light);
+            border-color: var(--card-border-light);
+        }
+        html.light-theme .about-section .flex {
+            background-color: var(--card-light);
+            border-color: var(--card-border-light);
+        }
+        html.light-theme .certifications-section .grid > div {
+            background-color: var(--card-light);
+            border-color: var(--card-border-light);
+        }
+        html.light-theme .contact-form {
+            background-color: var(--card-light);
+            border-color: var(--card-border-light);
+        }
+        html.light-theme .modal > div {
+            background-color: var(--card-light);
+            border-color: var(--card-border-light);
+        }
+        html.light-theme .form-input {
+            background-color: #F3F4F6;
+            border-color: var(--card-border-light);
+            color: var(--text-light);
+        }
+        html.light-theme .skill-badge {
+            background-color: #E5E7EB;
+            color: var(--text-light);
+        }
+        html.light-theme #home h2 {
+            color: var(--text-light);
+        }
+        html.light-theme #home a:not(:hover) {
+            color: var(--text-light);
+        }
+        html.light-theme .timeline-item h3 {
+            color: var(--text-light);
+        }
+        html.light-theme .certifications-section h3 {
+            color: var(--text-light);
+        }
+        html.light-theme .contact-form label {
+            color: var(--text-light);
+        }
+        html.light-theme footer {
+            color: var(--gray-light);
+        }
+        html.light-theme .contact-form label[for="not-a-bot"] {
+            color: var(--gray-light);
+        }
     </style>
 </head>
 <body>
     <div id="preloader">
         <div class="spinner"></div>
     </div>
-    <audio id="welcome-sound" src="welcome.mp3" preload="auto"></audio>
 
     <div class="parallax-background"></div>
 
-    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 py-3 px-4 sm:px-6">
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 py-4 px-4 sm:px-6">
         <nav class="container mx-auto flex justify-between items-center">
-            <h1 class="text-lg sm:text-xl md:text-2xl font-black text-gray-50 uppercase tracking-wide">My Work Showcase</h1>
-            <ul class="hidden md:flex space-x-6 text-sm font-medium">
-                <li><a href="#home" class="nav-link text-gray-300 hover:text-white">Home</a></li>
-                <li><a href="#about" class="nav-link text-gray-300 hover:text-white">About</a></li>
-                <li><a href="#experience" class="nav-link text-gray-300 hover:text-white">Experience</a></li>
-                <li><a href="#certifications" class="nav-link text-gray-300 hover:text-white">Certifications</a></li>
-                <li><a href="#contact" class="nav-link text-gray-300 hover:text-white">Contact</a></li>
-            </ul>
-            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none" aria-expanded="false" aria-controls="mobile-menu">
-                <i class="fas fa-bars text-xl"></i>
-            </button>
+            <h1 class="text-xl sm:text-2xl md:text-3xl font-bold uppercase tracking-wide">My Work Showcase</h1>
+            <div class="flex items-center space-x-4">
+                <ul class="hidden md:flex space-x-6 text-base font-medium">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#experience" class="nav-link">Experience</a></li>
+                    <li><a href="#certifications" class="nav-link">Certifications</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Switch to light theme">
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun"></i>
+                </button>
+                <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none" aria-expanded="false" aria-controls="mobile-menu">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
         </nav>
-        <div id="mobile-menu" class="md:hidden bg-gray-800/90 backdrop-blur-lg absolute top-full left-0 w-full transform -translate-y-[150%]">
-            <ul class="flex flex-col items-center space-y-4 py-6 text-base">
-                <li><a href="#home" class="nav-link text-gray-300 hover:text-white">Home</a></li>
-                <li><a href="#about" class="nav-link text-gray-300 hover:text-white">About</a></li>
-                <li><a href="#experience" class="nav-link text-gray-300 hover:text-white">Experience</a></li>
-                <li><a href="#certifications" class="nav-link text-gray-300 hover:text-white">Certifications</a></li>
-                <li><a href="#contact" class="nav-link text-gray-300 hover:text-white">Contact</a></li>
+        <div id="mobile-menu" class="md:hidden absolute top-full left-0 w-full transform -translate-y-[150%]">
+            <ul class="flex flex-col items-center space-y-4 py-6 text-base font-medium">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#certifications" class="nav-link">Certifications</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
         </div>
     </header>
 
     <main class="relative z-10">
-        <section id="home" class="min-h-screen flex items-center pt-24 sm:pt-32 px-4 sm:px-6">
-            <div class="text-center w-full space-y-6 animated-section">
-                <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight">
+        <section id="home" class="min-h-screen flex items-center pt-28 sm:pt-32 px-6 sm:px-8">
+            <div class="text-center w-full space-y-8 animated-section">
+                <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight">
                     Hello, I'm <span class="text-[var(--primary-color)]">Muhammad Owais</span>
                 </h2>
-                <p id="changing-text" class="text-base sm:text-lg md:text-xl text-gray-200 max-w-3xl mx-auto"></p>
-                <div class="flex justify-center space-x-6">
-                    <a href="https://wa.me/message/NHLJOW7GEFJ7L1" target="_blank" rel="noopener noreferrer" class="text-xl sm:text-2xl text-white hover:text-[#25D366]" aria-label="WhatsApp">
+                <p id="changing-text" class="text-lg sm:text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto"></p>
+                <div class="flex justify-center space-x-8">
+                    <a href="https://wa.me/message/NHLJOW7GEFJ7L1" target="_blank" rel="noopener noreferrer" class="text-2xl sm:text-3xl text-white hover:text-[#25D366]" aria-label="WhatsApp">
                         <i id="whatsapp-icon" class="fab fa-whatsapp"></i>
                     </a>
-                    <a href="mailto:professional.ots@gmail.com" class="text-xl sm:text-2xl text-white hover:text-[#3498db]" aria-label="Email">
+                    <a href="mailto:professional.ots@gmail.com" class="text-2xl sm:text-3xl text-white hover:text-[#3498db]" aria-label="Email">
                         <i id="email-icon" class="fas fa-envelope"></i>
                     </a>
-                    <a href="https://www.linkedin.com/in/muhammad-owais-b45106328/" target="_blank" rel="noopener noreferrer" class="text-xl sm:text-2xl text-white hover:text-[#0A66C2]" aria-label="LinkedIn">
+                    <a href="https://www.linkedin.com/in/muhammad-owais-b45106328/" target="_blank" rel="noopener noreferrer" class="text-2xl sm:text-3xl text-white hover:text-[#0A66C2]" aria-label="LinkedIn">
                         <i id="linkedin-icon" class="fab fa-linkedin"></i>
                     </a>
                 </div>
-                <div class="mt-4 space-y-4">
-                    <a href="#certifications" class="inline-block px-6 py-2 sm:px-8 sm:py-3 text-base sm:text-lg font-semibold text-gray-900 bg-white rounded-full shadow-lg bubbly-btn hover:bg-[var(--primary-color)] hover:text-white">
+                <div class="mt-6 space-y-6">
+                    <a href="#certifications" class="inline-block px-8 py-3 sm:px-10 sm:py-4 text-lg sm:text-xl font-semibold text-gray-900 bg-white rounded-full shadow-lg bubbly-btn hover:bg-[var(--primary-color)] hover:text-white">
                         Explore My Certifications
                     </a>
-                    <p class="text-base sm:text-lg text-gray-200">Join me in mastering digital skills for a brighter future!</p>
+                    <p class="text-lg sm:text-xl text-gray-200">Join me in mastering digital skills for a brighter future!</p>
                 </div>
             </div>
         </section>
 
-        <section id="about" class="py-12 sm:py-16 md:py-20 px-4 sm:px-6 animated-section">
+        <section id="about" class="py-16 sm:py-20 md:py-24 px-6 sm:px-8 animated-section about-section">
             <div class="container mx-auto max-w-5xl">
-                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-[var(--primary-color)]">About Me</h2>
-                <div class="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8 bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-700">
-                    <div class="flex-shrink-0 w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden bg-gray-700 border-4 border-gray-600">
-                        <img src="Profile.jpg" alt="Profile Photo for Muhammad Owais" class="w-full h-full object-cover">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 md:mb-14 text-[var(--primary-color)]">About Me</h2>
+                <div class="flex flex-col md:flex-row items-center md:items-start space-y-8 md:space-y-0 md:space-x-10 bg-gray-800 p-8 sm:p-10 rounded-2xl shadow-xl border border-gray-700">
+                    <div class="flex-shrink-0 w-48 h-48 sm:w-56 sm:h-56 rounded-full overflow-hidden bg-gray-700 border-4 border-gray-600">
+                        <img src="https://via.placeholder.com/150" alt="Profile Photo for Muhammad Owais" class="w-full h-full object-cover">
                     </div>
                     <div class="md:flex-grow text-center md:text-left">
-                        <p class="text-sm sm:text-base leading-relaxed mb-4">I combine skills in AI tools, prompt engineering, and cybersecurity with experience in digital marketing and content creation. Currently pursuing <span class="text-[var(--primary-color)]">Bachelor of Business Information Systems (BBIS)</span>, University of Management and Technology – Ongoing (Expected 2027).</p>
-                        <p class="text-sm sm:text-base leading-relaxed mb-4">Through my YouTube channel <a href="https://www.youtube.com/@DigitalUplift.1947" target="_blank" rel="noopener noreferrer" class="text-[var(--primary-color)] hover:underline">@DigitalUplift.1947</a>, I empower over <span class="text-[var(--primary-color)]">177 million Pakistanis</span> lacking digital skills with weekly videos offering practical tips.</p>
-                        <p class="text-sm sm:text-base leading-relaxed mb-6">Driven by curiosity and a commitment to learning, I’m adaptable, creative, and passionate about simplifying complex ideas.</p>
-                        <div class="mt-6">
-                            <h3 class="text-xl sm:text-2xl font-semibold mb-4 text-[var(--primary-color)]">Skills & Expertise</h3>
-                            <div class="flex flex-wrap gap-2 sm:gap-3">
-                                <span class="px-3 py-1 sm:px-4 sm:py-1.5 bg-gray-700 text-gray-200 rounded-full text-xs sm:text-sm font-medium flex items-center shadow"><i class="fas fa-robot mr-2 text-gray-400"></i>AI Tools</span>
-                                <span class="px-3 py-1 sm:px-4 sm:py-1.5 bg-gray-700 text-gray-200 rounded-full text-xs sm:text-sm font-medium flex items-center shadow"><i class="fab fa-python mr-2 text-yellow-400"></i>Python</span>
-                                <span class="px-3 py-1 sm:px-4 sm:py-1.5 bg-gray-700 text-gray-200 rounded-full text-xs sm:text-sm font-medium flex items-center shadow"><i class="fas fa-shield-alt mr-2 text-red-400"></i>Cybersecurity</span>
-                                <span class="px-3 py-1 sm:px-4 sm:py-1.5 bg-gray-700 text-gray-200 rounded-full text-xs sm:text-sm font-medium flex items-center shadow"><i class="fas fa-bullhorn mr-2 text-blue-400"></i>Digital Marketing</span>
-                                <span class="px-3 py-1 sm:px-4 sm:py-1.5 bg-gray-700 text-gray-200 rounded-full text-xs sm:text-sm font-medium flex items-center shadow"><i class="fas fa-video mr-2 text-pink-400"></i>YouTube Creation</span>
-                                <span class="px-3 py-1 sm:px-4 sm:py-1.5 bg-gray-700 text-gray-200 rounded-full text-xs sm:text-sm font-medium flex items-center shadow"><i class="fas fa-comments mr-2 text-yellow-300"></i>Bilingual Communication</span>
-                                <span class="px-3 py-1 sm:px-4 sm:py-1.5 bg-gray-700 text-gray-200 rounded-full text-xs sm:text-sm font-medium flex items-center shadow"><i class="fab fa-github mr-2 text-white"></i>GitHub</span>
-                                <span class="px-3 py-1 sm:px-4 sm:py-1.5 bg-gray-700 text-gray-200 rounded-full text-xs sm:text-sm font-medium flex items-center shadow"><i class="fas fa-globe mr-2 text-green-300"></i>Netlify</span>
-                                <span class="px-3 py-1 sm:px-4 sm:py-1.5 bg-gray-700 text-gray-200 rounded-full text-xs sm:text-sm font-medium flex items-center shadow"><i class="fas fa-film mr-2 text-purple-400"></i>Premiere Pro</span>
+                        <p class="text-base sm:text-lg leading-relaxed mb-6 text-gray-200">I combine skills in AI tools, prompt engineering, and cybersecurity with experience in digital marketing and content creation. Currently pursuing <span class="text-[var(--primary-color)]">Bachelor of Business Information Systems (BBIS)</span>, University of Management and Technology – Ongoing (Expected 2027).</p>
+                        <p class="text-base sm:text-lg leading-relaxed mb-6 text-gray-200">Through my YouTube channel <a href="https://www.youtube.com/@DigitalUplift.1947" target="_blank" rel="noopener noreferrer" class="text-[var(--primary-color)] hover:underline">@DigitalUplift.1947</a>, I empower over <span class="text-[var(--primary-color)]">177 million Pakistanis</span> lacking digital skills with weekly videos offering practical tips.</p>
+                        <p class="text-base sm:text-lg leading-relaxed mb-8 text-gray-200">Driven by curiosity and a commitment to learning, I’m adaptable, creative, and passionate about simplifying complex ideas.</p>
+                        <div class="mt-8">
+                            <h3 class="text-2xl sm:text-3xl font-semibold mb-6 text-[var(--primary-color)]">Skills & Expertise</h3>
+                            <div class="flex flex-wrap gap-3 sm:gap-4">
+                                <span class="px-4 py-1.5 sm:px-5 sm:py-2 bg-gray-700 text-gray-200 rounded-full text-sm sm:text-base font-medium flex items-center shadow skill-badge"><i class="fas fa-robot mr-2 text-gray-400"></i>AI Tools</span>
+                                <span class="px-4 py-1.5 sm:px-5 sm:py-2 bg-gray-700 text-gray-200 rounded-full text-sm sm:text-base font-medium flex items-center shadow skill-badge"><i class="fab fa-python mr-2 text-yellow-400"></i>Python</span>
+                                <span class="px-4 py-1.5 sm:px-5 sm:py-2 bg-gray-700 text-gray-200 rounded-full text-sm sm:text-base font-medium flex items-center shadow skill-badge"><i class="fas fa-shield-alt mr-2 text-red-400"></i>Cybersecurity</span>
+                                <span class="px-4 py-1.5 sm:px-5 sm:py-2 bg-gray-700 text-gray-200 rounded-full text-sm sm:text-base font-medium flex items-center shadow skill-badge"><i class="fas fa-bullhorn mr-2 text-blue-400"></i>Digital Marketing</span>
+                                <span class="px-4 py-1.5 sm:px-5 sm:py-2 bg-gray-700 text-gray-200 rounded-full text-sm sm:text-base font-medium flex items-center shadow skill-badge"><i class="fas fa-video mr-2 text-pink-400"></i>YouTube Creation</span>
+                                <span class="px-4 py-1.5 sm:px-5 sm:py-2 bg-gray-700 text-gray-200 rounded-full text-sm sm:text-base font-medium flex items-center shadow skill-badge"><i class="fas fa-comments mr-2 text-yellow-300"></i>Bilingual Communication</span>
+                                <span class="px-4 py-1.5 sm:px-5 sm:py-2 bg-gray-700 text-gray-200 rounded-full text-sm sm:text-base font-medium flex items-center shadow skill-badge"><i class="fab fa-github mr-2 text-white"></i>GitHub</span>
+                                <span class="px-4 py-1.5 sm:px-5 sm:py-2 bg-gray-700 text-gray-200 rounded-full text-sm sm:text-base font-medium flex items-center shadow skill-badge"><i class="fas fa-globe mr-2 text-green-300"></i>Netlify</span>
+                                <span class="px-4 py-1.5 sm:px-5 sm:py-2 bg-gray-700 text-gray-200 rounded-full text-sm sm:text-base font-medium flex items-center shadow skill-badge"><i class="fas fa-film mr-2 text-purple-400"></i>Premiere Pro</span>
                             </div>
                         </div>
-                        <div class="mt-4 sm:mt-6 text-center md:text-left">
-                            <a id="youtube-btn" href="https://www.youtube.com/@DigitalUplift.1947" target="_blank" rel="noopener noreferrer" class="inline-block px-4 py-2 sm:px-6 sm:py-3 bg-white/10 text-white font-bold rounded-lg bubbly-btn flex items-center justify-center hover:bg-[#FF0000]">
+                        <div class="mt-6 sm:mt-8 text-center md:text-left">
+                            <button id="youtube-btn" onclick="window.open('https://www.youtube.com/@DigitalUplift.1947', '_blank');" class="inline-block px-6 py-3 sm:px-8 sm:py-4 bg-white/10 text-white font-bold rounded-lg bubbly-btn flex items-center justify-center hover:bg-[#FF0000]">
                                 <i class="fab fa-youtube mr-2"></i>Visit My YouTube Channel
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="experience" class="py-12 sm:py-16 md:py-20 px-4 sm:px-6 animated-section">
+        <section id="experience" class="py-16 sm:py-20 md:py-24 px-6 sm:px-8 animated-section">
             <div class="container mx-auto max-w-5xl">
-                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-[var(--primary-color)]">Professional Experience</h2>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 md:mb-14 text-[var(--primary-color)]">Professional Experience</h2>
                 <div class="timeline">
-                    <div class="timeline-item bg-gray-800 p-4 sm:p-6 rounded-2xl shadow-xl border border-gray-700 hover:scale-[1.01] transition-transform duration-300" aria-labelledby="experience-1" role="listitem">
+                    <div class="timeline-item bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.01] transition-transform duration-300" aria-labelledby="experience-1" role="listitem">
                         <div class="flex items-center mb-4">
-                            <i class="fas fa-briefcase mr-2 sm:mr-3 text-[var(--primary-color)] text-lg sm:text-xl"></i>
-                            <h3 id="experience-1" class="text-xl sm:text-2xl font-bold text-white">AI & Content Strategist</h3>
+                            <i class="fas fa-briefcase mr-3 text-[var(--primary-color)] text-xl sm:text-2xl"></i>
+                            <h3 id="experience-1" class="text-2xl sm:text-3xl font-bold text-white">AI & Content Strategist</h3>
                             <span class="badge">Personal Project</span>
                         </div>
-                        <p class="text-xs sm:text-sm font-medium text-gray-200 mb-4">Digital Uplift | 2020 – Present</p>
+                        <p class="text-sm sm:text-base font-medium text-gray-200 mb-4">Digital Uplift | 2020 – Present</p>
                         <button class="toggle-details" aria-expanded="false" aria-controls="details-1" aria-label="Toggle AI & Content Strategist details">
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div id="details-1" class="timeline-content mt-4">
-                            <ul class="list-disc list-inside space-y-2 text-gray-200 text-sm sm:text-base">
+                            <ul class="list-disc list-inside space-y-3 text-gray-200 text-base sm:text-lg">
                                 <li>Produced tech-focused YouTube content, growing audience by 25% annually.</li>
                                 <li>Developed creative scripts using prompt engineering, enhancing engagement.</li>
                                 <li>Handled end-to-end video production with Adobe Premiere Pro.</li>
                             </ul>
                         </div>
                     </div>
-                    <div class="timeline-item bg-gray-800 p-4 sm:p-6 rounded-2xl shadow-xl border border-gray-700 hover:scale-[1.01] transition-transform duration-300" aria-labelledby="experience-2" role="listitem">
+                    <div class="timeline-item bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.01] transition-transform duration-300" aria-labelledby="experience-2" role="listitem">
                         <div class="flex items-center mb-4">
-                            <i class="fas fa-user-tie mr-2 sm:mr-3 text-[var(--primary-color)] text-lg sm:text-xl"></i>
-                            <h3 id="experience-2" class="text-xl sm:text-2xl font-bold text-white">Internships</h3>
+                            <i class="fas fa-user-tie mr-3 text-[var(--primary-color)] text-xl sm:text-2xl"></i>
+                            <h3 id="experience-2" class="text-2xl sm:text-3xl font-bold text-white">Internships</h3>
                             <span class="badge">Multiple Roles</span>
                         </div>
-                        <p class="text-xs sm:text-sm font-medium text-gray-200 mb-4">Various Organizations | 2022 – 2026</p>
+                        <p class="text-sm sm:text-base font-medium text-gray-200 mb-4">Various Organizations | 2022 – 2026</p>
                         <button class="toggle-details" aria-expanded="false" aria-controls="details-2" aria-label="Toggle Internships details">
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div id="details-2" class="timeline-content mt-4">
-                            <ul class="list-disc list-inside space-y-2 text-gray-200 text-sm sm:text-base">
+                            <ul class="list-disc list-inside space-y-3 text-gray-200 text-base sm:text-lg">
                                 <li><strong>Shaukat Khanum Hospital (Marketing & HR Intern, 2023–2024)</strong>: Boosted event participation by 15% and streamlined recruitment.</li>
                                 <li><strong>TX Labz (HR Intern, 2022)</strong>: Optimized onboarding, reducing processing time by 20%.</li>
                                 <li><strong>Med Coach Global (Social Media Intern, 2025–Present)</strong>: Increased social media engagement by 30%.</li>
@@ -464,109 +752,110 @@
             </div>
         </section>
 
-        <section id="certifications" class="py-12 sm:py-16 md:py-20 px-4 sm:px-6 animated-section">
+        <section id="certifications" class="py-16 sm:py-20 md:py-24 px-6 sm:px-8 animated-section certifications-section">
             <div class="container mx-auto max-w-6xl">
-                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-[var(--primary-color)]">Certifications</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                    <div class="bg-gray-800 p-4 sm:p-6 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
-                        <img src="google.svg" alt="Google Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
-                        <h3 class="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-2 text-center">Prompt Engineering and Prompting Essentials</h3>
-                        <p class="text-gray-200 text-sm sm:text-base mb-2 text-center">Issued by Google</p>
-                        <p class="text-xs sm:text-sm text-gray-200 text-center">2025</p>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 md:mb-14 text-[var(--primary-color)]">Certifications</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
+                    <div class="bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
+                        <img src="https://via.placeholder.com/150" alt="Google Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
+                        <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2 text-center">Prompt Engineering and Prompting Essentials</h3>
+                        <p class="text-gray-200 text-base sm:text-lg mb-2 text-center">Issued by Google</p>
+                        <p class="text-sm sm:text-base text-gray-200 text-center">2025</p>
                         <div class="text-center mt-4">
-                            <a href="https://www.coursera.org/account/accomplishments/verify/EO0L72HVNHTL" class="inline-block text-xs sm:text-sm text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer">View Credential &rarr;</a>
+                            <a href="https://www.coursera.org/account/accomplishments/verify/EO0L72HVNHTL" class="inline-block text-sm sm:text-base text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer">View Credential &rarr;</a>
                         </div>
                     </div>
-                    <div class="bg-gray-800 p-4 sm:p-6 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
-                        <img src="google.svg" alt="Google AI Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
-                        <h3 class="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-2 text-center">Google AI Essentials</h3>
-                        <p class="text-gray-200 text-sm sm:text-base mb-2 text-center">Issued by Google</p>
-                        <p class="text-xs sm:text-sm text-gray-200 text-center">2025</p>
+                    <div class="bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
+                        <img src="https://via.placeholder.com/150" alt="Google AI Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
+                        <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2 text-center">Google AI Essentials</h3>
+                        <p class="text-gray-200 text-base sm:text-lg mb-2 text-center">Issued by Google</p>
+                        <p class="text-sm sm:text-base text-gray-200 text-center">2025</p>
                         <div class="text-center mt-4">
-                            <a href="https://coursera.org/share/ec941470fa4f3bfdd16eae5b4789f247" class="inline-block text-xs sm:text-sm text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer">View Credential &rarr;</a>
+                            <a href="https://coursera.org/share/ec941470fa4f3bfdd16eae5b4789f247" class="inline-block text-sm sm:text-base text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer">View Credential &rarr;</a>
                         </div>
                     </div>
-                    <div class="bg-gray-800 p-4 sm:p-6 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
-                        <img src="likedin.svg" alt="LinkedIn Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
-                        <h3 class="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-2 text-center">LinkedIn AI Essentials</h3>
-                        <p class="text-gray-200 text-sm sm:text-base mb-2 text-center">Issued by LinkedIn</p>
-                        <p class="text-xs sm:text-sm text-gray-200 text-center">2024</p>
+                    <div class="bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
+                        <img src="https://via.placeholder.com/150" alt="LinkedIn Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
+                        <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2 text-center">LinkedIn AI Essentials</h3>
+                        <p class="text-gray-200 text-base sm:text-lg mb-2 text-center">Issued by LinkedIn</p>
+                        <p class="text-sm sm:text-base text-gray-200 text-center">2024</p>
                         <div class="text-center mt-4">
-                            <a href="https://www.linkedin.com/in/muhammad-owais-b45106328/details/certifications/1727674508303/single-media-viewer/" class="inline-block text-xs sm:text-sm text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer">View Credential &rarr;</a>
+                            <a href="https://www.linkedin.com/in/muhammad-owais-b45106328/details/certifications/1727674508303/single-media-viewer/" class="inline-block text-sm sm:text-base text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer">View Credential &rarr;</a>
                         </div>
                     </div>
-                    <div class="bg-gray-800 p-4 sm:p-6 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
-                        <img src="itu.svg" alt="ITU Python Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
-                        <h3 class="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-2 text-center">Python Programming Course</h3>
-                        <p class="text-gray-200 text-sm sm:text-base mb-2 text-center">Issued by ITU</p>
-                        <p class="text-xs sm:text-sm text-gray-200 text-center">2023</p>
+                    <div class="bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
+                        <img src="https://via.placeholder.com/150" alt="ITU Python Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
+                        <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2 text-center">Python Programming Course</h3>
+                        <p class="text-gray-200 text-base sm:text-lg mb-2 text-center">Issued by ITU</p>
+                        <p class="text-sm sm:text-base text-gray-200 text-center">2023</p>
                         <div class="text-center mt-4">
-                            <a href="https://www.linkedin.com/in/muhammad-owais-b45106328/details/certifications/1727659107845/single-media-viewer/" class="inline-block text-xs sm:text-sm text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer">View Credential &rarr;</a>
+                            <a href="https://www.linkedin.com/in/muhammad-owais-b45106328/details/certifications/1727659107845/single-media-viewer/" class="inline-block text-sm sm:text-base text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer">View Credential &rarr;</a>
                         </div>
                     </div>
-                    <div class="bg-gray-800 p-4 sm:p-6 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
-                        <img src="google.svg" alt="Google Marketing Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
-                        <h3 class="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-2 text-center">Digital Marketing Course</h3>
-                        <p class="text-gray-200 text-sm sm:text-base mb-2 text-center">Issued by Google</p>
-                        <p class="text-xs sm:text-sm text-gray-200 text-center">2024</p>
+                    <div class="bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
+                        <img src="https://via.placeholder.com/150" alt="Google Marketing Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
+                        <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2 text-center">Digital Marketing Course</h3>
+                        <p class="text-gray-200 text-base sm:text-lg mb-2 text-center">Issued by Google</p>
+                        <p class="text-sm sm:text-base text-gray-200 text-center">2024</p>
                         <div class="text-center mt-4">
-                            <a href="https://skillshop.exceedlms.com/student/award/fR9PskUZepTYWBUYdNzMdnPy" class="inline-block text-xs sm:text-sm text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer">View Credential &rarr;</a>
+                            <a href="https://skillshop.exceedlms.com/student/award/fR9PskUZepTYWBUYdNzMdnPy" class="inline-block text-sm sm:text-base text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer">View Credential &rarr;</a>
                         </div>
                     </div>
-                    <div class="bg-gray-800 p-4 sm:p-6 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
-                        <img src="ibm.svg" alt="IBM Cybersecurity Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
-                        <h3 class="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-2 text-center">Cybersecurity Course</h3>
-                        <p class="text-gray-200 text-sm sm:text-base mb-2 text-center">Issued by IBM</p>
-                        <p class="text-xs sm:text-sm text-gray-200 text-center">2024</p>
+                    <div class="bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
+                        <img src="https://via.placeholder.com/150" alt="IBM Cybersecurity Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
+                        <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2 text-center">Cybersecurity Course</h3>
+                        <p class="text-gray-200 text-base sm:text-lg mb-2 text-center">Issued by IBM</p>
+                        <p class="text-sm sm:text-base text-gray-200 text-center">2024</p>
                         <div class="text-center mt-4">
-                            <a href="https://www.credly.com/badges/fa7cbba6-4f2e-4192-9f6f-77983482e85d/public_url" class="inline-block text-xs sm:text-sm text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer">View Credential &rarr;</a>
+                            <a href="https://www.credly.com/badges/fa7cbba6-4f2e-4192-9f6f-77983482e85d/public_url" class="inline-block text-sm sm:text-base text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer">View Credential &rarr;</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="contact" class="py-12 sm:py-16 md:py-20 px-4 sm:px-6 animated-section">
-            <div class="container mx-auto max-w-2xl">
-                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-[var(--primary-color)]">Get in Touch</h2>
-                <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-6 bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-700">
+        <section id="contact" class="py-16 sm:py-20 md:py-24 px-6 sm:px-8 animated-section">
+            <div class="container mx-auto max-w-3xl">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 md:mb-14 text-[var(--primary-color)]">Get in Touch</h2>
+                <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-8 bg-gray-800 p-8 sm:p-10 rounded-2xl shadow-xl border border-gray-700 contact-form">
                     <input type="hidden" name="access_key" value="492a8810-9deb-4946-8c01-ba7883b310d6">
+                    <input type="text" name="honeypot" style="display: none;">
                     <div>
-                        <label for="name" class="block text-sm font-medium text-gray-200">Name</label>
-                        <input type="text" id="name" name="name" maxlength="50" class="mt-1 block w-full px-3 sm:px-4 py-2 bg-gray-900 border border-gray-700 rounded-md text-white" required>
+                        <label for="name" class="block text-base font-medium text-gray-200">Name</label>
+                        <input type="text" id="name" name="name" maxlength="50" class="mt-1 block w-full px-4 sm:px-5 py-3 bg-gray-900 border border-gray-700 rounded-md text-white form-input" required>
                         <p id="name-error" class="error-message">Name must be 2-50 characters and contain only letters, spaces, or hyphens.</p>
                     </div>
                     <div>
-                        <label for="email" class="block text-sm font-medium text-gray-200">Email</label>
-                        <input type="email" id="email" name="email" class="mt-1 block w-full px-3 sm:px-4 py-2 bg-gray-900 border border-gray-700 rounded-md text-white" required>
+                        <label for="email" class="block text-base font-medium text-gray-200">Email</label>
+                        <input type="email" id="email" name="email" class="mt-1 block w-full px-4 sm:px-5 py-3 bg-gray-900 border border-gray-700 rounded-md text-white form-input" required>
                         <p id="email-error" class="error-message">Please enter a valid email address.</p>
                     </div>
                     <div>
-                        <label for="message" class="block text-sm font-medium text-gray-200">Message</label>
-                        <textarea id="message" name="message" rows="4" maxlength="500" class="mt-1 block w-full px-3 sm:px-4 py-2 bg-gray-900 border border-gray-700 rounded-md text-white" required></textarea>
+                        <label for="message" class="block text-base font-medium text-gray-200">Message</label>
+                        <textarea id="message" name="message" rows="5" maxlength="500" class="mt-1 block w-full px-4 sm:px-5 py-3 bg-gray-900 border border-gray-700 rounded-md text-white form-input" required></textarea>
                         <p id="message-error" class="error-message">Message must be 10-500 characters and cannot contain special characters.</p>
                     </div>
                     <div class="flex items-center">
-                        <input type="checkbox" id="not-a-bot" class="h-4 w-4 text-[var(--primary-color)] bg-gray-900 border-gray-700 rounded">
-                        <label for="not-a-bot" class="ml-2 text-sm font-medium text-gray-200">I'm not a bot</label>
+                        <input type="checkbox" id="not-a-bot" class="h-5 w-5 text-[var(--primary-color)] bg-gray-900 border-gray-700 rounded">
+                        <label for="not-a-bot" class="ml-2 text-base font-medium text-gray-200">I'm not a bot</label>
                         <p id="captcha-error" class="error-message ml-2">Please check this box to verify.</p>
                     </div>
-                    <button type="submit" id="submit-btn" class="w-full px-4 py-2 sm:px-6 sm:py-3 bg-white/10 text-white font-bold rounded-lg bubbly-btn hover:bg-[var(--primary-color)]">Send Message</button>
+                    <button type="submit" id="submit-btn" class="w-full px-6 py-3 sm:px-8 sm:py-4 bg-white/10 text-white font-bold rounded-lg bubbly-btn hover:bg-[var(--primary-color)]">Send Message</button>
                 </form>
-                <div class="mt-8 sm:mt-12 text-center">
-                    <p class="text-gray-200 text-sm sm:text-base">Find me on social media:</p>
-                    <div class="flex justify-center space-x-6 mt-4 text-xl sm:text-2xl">
+                <div class="mt-10 sm:mt-12 text-center">
+                    <p class="text-base sm:text-lg text-gray-200">Find me on social media:</p>
+                    <div class="flex justify-center space-x-8 mt-4 text-2xl sm:text-3xl">
                         <a href="https://www.linkedin.com/in/muhammad-owais-b45106328/" class="text-gray-200 linkedin-contact" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i id="linkedin-contact-icon" class="fab fa-linkedin"></i></a>
                         <a href="https://www.youtube.com/@DigitalUplift.1947" class="text-gray-200 youtube-contact" aria-label="YouTube" target="_blank" rel="noopener noreferrer"><i id="youtube-contact-icon" class="fab fa-youtube"></i></a>
                     </div>
                 </div>
-                <div class="mt-8 sm:mt-12 text-center space-y-4">
-                    <p class="text-gray-200 text-sm sm:text-base">Or contact me directly:</p>
-                    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-                        <a href="https://wa.me/message/NHLJOW7GEFJ7L1" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-4 py-2 sm:px-6 sm:py-3 bg-white/10 text-white font-bold rounded-lg bubbly-btn flex items-center justify-center hover:bg-[#25D366]">
+                <div class="mt-10 sm:mt-12 text-center space-y-6">
+                    <p class="text-base sm:text-lg text-gray-200">Or contact me directly:</p>
+                    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                        <a href="https://wa.me/message/NHLJOW7GEFJ7L1" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 bg-white/10 text-white font-bold rounded-lg bubbly-btn flex items-center justify-center hover:bg-[#25D366]">
                             <i class="fab fa-whatsapp mr-2"></i>Chat on WhatsApp
                         </a>
-                        <a href="Cv 2025.pdf" download class="w-full sm:w-auto px-4 py-2 sm:px-6 sm:py-3 bg-white/10 text-white font-bold rounded-lg bubbly-btn flex items-center justify-center hover:bg-[var(--primary-color)]">
+                        <a href="Cv_2025.pdf" download class="w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 bg-white/10 text-white font-bold rounded-lg bubbly-btn flex items-center justify-center hover:bg-[var(--primary-color)]">
                             <i class="fas fa-download mr-2"></i>Download Resume
                         </a>
                     </div>
@@ -575,30 +864,65 @@
         </section>
     </main>
 
-    <div id="message-modal" class="modal fixed inset-0 bg-gray-900/50 backdrop-blur-sm flex items-center justify-center opacity-0 z-50 transform scale-95">
-        <div class="bg-gray-800 p-6 sm:p-8 rounded-lg shadow-xl text-center border border-gray-700 max-w-sm w-full">
-            <h3 class="text-lg sm:text-xl font-bold text-white mb-4">Message Sent!</h3>
-            <p id="modal-message" class="text-gray-200 text-sm sm:text-base"></p>
-            <button id="close-modal-btn" class="mt-4 sm:mt-6 px-4 py-2 bg-[var(--primary-color)] text-gray-900 rounded-lg font-semibold bubbly-btn">Close</button>
+    <div id="message-modal" class="modal fixed inset-0 bg-gray-900/50 backdrop-blur-sm flex items-center justify-center opacity-0 z-50 transform scale-95" aria-modal="true">
+        <div class="bg-gray-800 p-8 sm:p-10 rounded-lg shadow-xl text-center border border-gray-700 max-w-md w-full">
+            <h3 class="text-xl sm:text-2xl font-bold text-white mb-4">Message Sent!</h3>
+            <p id="modal-message" class="text-base sm:text-lg text-gray-200" aria-live="polite"></p>
+            <button id="close-modal-btn" class="mt-6 sm:mt-8 px-6 py-3 bg-[var(--primary-color)] text-gray-900 rounded-lg font-semibold bubbly-btn">Close</button>
         </div>
     </div>
 
-    <button id="back-to-top" aria-label="Back to Top" class="bubbly-btn">
+    <button id="back-to-top" aria-label="Scroll to top of page" title="Back to Top" class="bubbly-btn">
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <footer class="text-center py-6 sm:py-8 text-gray-500 text-sm">
+    <footer class="text-center py-8 sm:py-10 text-gray-500 text-base">
         <p>&copy; 2025 <span class="text-[var(--primary-color)]">Muhammad Owais</span>. All Rights Reserved.</p>
     </footer>
 
-    <script>
+    <script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+            return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+            if (!filename || typeof filename !== 'string') {
+                console.error('Invalid filename');
+                return '';
+            }
+            if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+                try {
+                    var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                    var firstSheetName = workbook.SheetNames[0];
+                    var worksheet = workbook.Sheets[firstSheetName];
+                    var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                    var filteredData = jsonData.filter(row => row.some(filledCell));
+                    var headerRowIndex = filteredData.findIndex((row, index) =>
+                        row.filter(filledCell).length >= (filteredData[index + 1]?.filter(filledCell).length || 0)
+                    );
+                    if (headerRowIndex === -1 || headerRowIndex > 25) {
+                        headerRowIndex = 0;
+                    }
+                    var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex));
+                    csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                    return csv;
+                } catch (e) {
+                    console.error('Error processing XLSX:', e);
+                    return '';
+                }
+            }
+            return gk_fileData[filename] || '';
+        }
+    </script>
+    <script defer>
         document.addEventListener('DOMContentLoaded', () => {
-            console.log("Portfolio website loaded at 06:47 AM PKT, September 23, 2025.");
+            console.log("Portfolio website loaded at 06:22 AM PKT, September 25, 2025");
 
             // Cached Elements
             const elements = {
                 preloader: document.getElementById('preloader'),
-                welcomeSound: document.getElementById('welcome-sound'),
                 youtubeBtn: document.getElementById('youtube-btn'),
                 mobileMenuButton: document.getElementById('mobile-menu-button'),
                 mobileMenu: document.getElementById('mobile-menu'),
@@ -620,7 +944,9 @@
                 sections: document.querySelectorAll('.animated-section'),
                 navLinks: document.querySelectorAll('header nav ul li a'),
                 toggleButtons: document.querySelectorAll('.toggle-details'),
-                changingText: document.getElementById('changing-text')
+                changingText: document.getElementById('changing-text'),
+                themeToggle: document.getElementById('theme-toggle'),
+                parallaxBackground: document.querySelector('.parallax-background')
             };
 
             let lastScrollY = window.scrollY;
@@ -628,31 +954,109 @@
             const submissionCooldown = 30000;
             let scrollTimeout;
 
-            // Play Welcome Sound on YouTube Button Click
-            function playWelcomeSound() {
-                if (!sessionStorage.getItem('welcomeSoundPlayed')) {
-                    elements.welcomeSound.play().then(() => {
-                        console.log('Welcome sound played successfully.');
-                        sessionStorage.setItem('welcomeSoundPlayed', 'true');
-                    }).catch(error => {
-                        console.warn('Audio playback failed:', error);
-                        sessionStorage.setItem('welcomeSoundPlayed', 'true'); // Prevent retries
-                    });
+            // Falling Stars for Dark Theme
+            function createStars() {
+                console.log('Creating stars for dark theme');
+                removeClouds();
+                for (let i = 0; i < 20; i++) {
+                    const star = document.createElement('div');
+                    star.classList.add('star');
+                    star.style.width = `${Math.random() * 2 + 1}px`;
+                    star.style.height = `${Math.random() * 4 + 2}px`;
+                    star.style.left = `${Math.random() * 100}vw`;
+                    star.style.animationDelay = `${Math.random() * 2}s`;
+                    elements.parallaxBackground.appendChild(star);
                 }
             }
 
-            // Attach to YouTube button
-            elements.youtubeBtn.addEventListener('click', playWelcomeSound);
+            // Clouds for Light Theme
+            function createClouds() {
+                console.log('Creating clouds for light theme');
+                removeStars();
+                for (let i = 0; i < 4; i++) {
+                    const cloud = document.createElement('div');
+                    cloud.classList.add('cloud');
+                    const size = Math.random() * 50 + 30;
+                    cloud.style.width = `${size}px`;
+                    cloud.style.height = `${size / 2}px`;
+                    cloud.style.left = `${Math.random() * 100}vw`;
+                    cloud.style.top = `${Math.random() * 40}vh`;
+                    cloud.style.animationDelay = `${Math.random() * 5}s`;
+                    elements.parallaxBackground.appendChild(cloud);
+                }
+            }
+
+            function removeStars() {
+                const stars = document.querySelectorAll('.parallax-background .star');
+                stars.forEach(star => star.remove());
+                console.log('Removed stars');
+            }
+
+            function removeClouds() {
+                const clouds = document.querySelectorAll('.parallax-background .cloud');
+                clouds.forEach(cloud => cloud.remove());
+                console.log('Removed clouds');
+            }
+
+            // Theme Toggle Functionality
+            const toggleTheme = () => {
+                console.log('Theme toggle clicked');
+                const isLightTheme = document.documentElement.classList.toggle('light-theme');
+                elements.themeToggle.setAttribute('aria-label', isLightTheme ? 'Switch to dark theme' : 'Switch to light theme');
+                localStorage.setItem('theme', isLightTheme ? 'light' : 'dark');
+                console.log('Theme set to:', isLightTheme ? 'light' : 'dark');
+                if (isLightTheme) {
+                    createClouds();
+                } else {
+                    createStars();
+                }
+            };
+
+            // Initialize Theme
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (savedTheme === 'light' || (!savedTheme && !prefersDark)) {
+                document.documentElement.classList.add('light-theme');
+                elements.themeToggle.setAttribute('aria-label', 'Switch to dark theme');
+                console.log('Initialized with light theme');
+                createClouds();
+            } else {
+                document.documentElement.classList.remove('light-theme');
+                elements.themeToggle.setAttribute('aria-label', 'Switch to light theme');
+                console.log('Initialized with dark theme');
+                createStars();
+            }
+
+            // Theme Toggle Event Listeners
+            elements.themeToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Theme toggle click event triggered');
+                toggleTheme();
+            });
+            elements.themeToggle.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Theme toggle keydown event triggered');
+                    toggleTheme();
+                }
+            });
 
             // Preloader
             window.addEventListener('load', () => {
-                setTimeout(() => elements.preloader.classList.add('hide'), 700);
+                setTimeout(() => {
+                    elements.preloader.classList.add('hide');
+                    console.log('Preloader hidden');
+                }, 700);
             });
 
             // Smooth Scroll
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', (e) => {
                     e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Nav link clicked:', anchor.getAttribute('href'));
                     const targetId = anchor.getAttribute('href');
                     document.querySelector(targetId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 });
@@ -667,22 +1071,32 @@
                     elements.backToTopBtn.classList.toggle('visible', currentScrollY > 50);
                     elements.mainHeader.classList.toggle('hide', currentScrollY > lastScrollY && currentScrollY > 100);
                     lastScrollY = currentScrollY;
+                    console.log('Scroll position:', currentScrollY);
                 }, 100);
             });
 
-            elements.backToTopBtn.addEventListener('click', () => {
+            elements.backToTopBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Back to top button clicked');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
             // Mobile Menu
-            elements.mobileMenuButton.addEventListener('click', () => {
+            elements.mobileMenuButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Mobile menu button clicked');
                 const isExpanded = elements.mobileMenuButton.getAttribute('aria-expanded') === 'true';
                 elements.mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
                 elements.mobileMenu.classList.toggle('-translate-y-[150%]');
+                console.log('Mobile menu expanded:', !isExpanded);
             });
 
             elements.mobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
+                link.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    console.log('Mobile menu link clicked:', link.getAttribute('href'));
                     elements.mobileMenu.classList.add('-translate-y-[150%]');
                     elements.mobileMenuButton.setAttribute('aria-expanded', 'false');
                 });
@@ -694,12 +1108,13 @@
                     if (entry.isIntersecting) {
                         entry.target.classList.add('is-visible');
                         const id = entry.target.getAttribute('id');
-                        console.log(`Section '#${id}' is now visible.`);
+                        console.log(`Section '#${id}' is now visible`);
                         elements.navLinks.forEach(link => {
                             const isActive = link.getAttribute('href') === `#${id}`;
                             link.classList.toggle('text-white', isActive);
                             link.classList.toggle('font-semibold', isActive);
-                            link.classList.toggle('text-gray-300', !isActive);
+                            link.classList.toggle('text-gray-300', !isActive && !document.documentElement.classList.contains('light-theme'));
+                            link.classList.toggle('text-gray-light', !isActive && document.documentElement.classList.contains('light-theme'));
                         });
                     }
                 });
@@ -734,7 +1149,7 @@
                     phraseIndex = (phraseIndex + 1) % phrases.length;
                     setTimeout(typeWriter, 500);
                 } else {
-                    setTimeout(typeWriter, isDeleting ? 25 : 50);
+                    requestAnimationFrame(typeWriter);
                 }
             }
             typeWriter();
@@ -780,6 +1195,10 @@
                     elements.captchaError.classList.add('active');
                     isValid = false;
                 }
+                if (elements.contactForm.querySelector('[name="honeypot"]').value) {
+                    console.log('Bot detected via honeypot');
+                    isValid = false;
+                }
                 return isValid;
             };
 
@@ -795,6 +1214,8 @@
 
             elements.contactForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
+                e.stopPropagation();
+                console.log('Form submit clicked');
                 [elements.nameError, elements.emailError, elements.messageError, elements.captchaError].forEach(error => error.classList.remove('active'));
                 [elements.nameInput, elements.emailInput, elements.messageInput].forEach(input => input.classList.remove('input-error'));
 
@@ -802,14 +1223,19 @@
                 if (currentTime - lastSubmissionTime < submissionCooldown) {
                     elements.modalMessage.textContent = 'Please wait 30 seconds before submitting again.';
                     elements.messageModal.classList.add('is-visible');
+                    console.log('Form submission blocked due to cooldown');
                     return;
                 }
 
-                if (!validateForm()) return;
+                if (!validateForm()) {
+                    console.log('Form validation failed');
+                    return;
+                }
 
                 const originalText = elements.submitBtn.innerHTML;
-                elements.submitBtn.innerHTML = 'Sending...';
+                elements.submitBtn.innerHTML = 'Sending... <span class="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin ml-2"></span>';
                 elements.submitBtn.disabled = true;
+                console.log('Submitting form...');
 
                 try {
                     const response = await fetch(elements.contactForm.action, {
@@ -823,6 +1249,7 @@
                         elements.contactForm.reset();
                         elements.captchaCheckbox.checked = false;
                         lastSubmissionTime = currentTime;
+                        console.log('Form submitted successfully');
                     } else {
                         throw new Error(result.message || 'Server error occurred.');
                     }
@@ -833,49 +1260,43 @@
                     elements.submitBtn.innerHTML = originalText;
                     elements.submitBtn.disabled = false;
                     elements.messageModal.classList.add('is-visible');
+                    console.log('Form submission complete');
                 }
             });
 
-            elements.closeModalBtn.addEventListener('click', () => {
+            elements.closeModalBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Close modal button clicked');
                 elements.messageModal.classList.remove('is-visible');
             });
 
             elements.messageModal.addEventListener('click', (e) => {
                 if (e.target === elements.messageModal) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Modal backdrop clicked');
                     elements.messageModal.classList.remove('is-visible');
                 }
             });
 
-            // Experience Toggle
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && elements.messageModal.classList.contains('is-visible')) {
+                    console.log('Escape key pressed, closing modal');
+                    elements.messageModal.classList.remove('is-visible');
+                }
+            });
+
             elements.toggleButtons.forEach(button => {
-                button.addEventListener('click', () => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Toggle details clicked');
                     const isExpanded = button.getAttribute('aria-expanded') === 'true';
-                    const details = button.nextElementSibling;
-
-                    elements.toggleButtons.forEach(otherButton => {
-                        if (otherButton !== button) {
-                            const otherDetails = otherButton.nextElementSibling;
-                            otherButton.setAttribute('aria-expanded', 'false');
-                            otherButton.querySelector('i').classList.replace('fa-chevron-up', 'fa-chevron-down');
-                            otherButton.classList.remove('active');
-                            otherDetails.style.maxHeight = '0';
-                            setTimeout(() => otherDetails.classList.remove('show'), 500);
-                        }
-                    });
-
                     button.setAttribute('aria-expanded', !isExpanded);
-                    const icon = button.querySelector('i');
-                    icon.classList.toggle('fa-chevron-down', isExpanded);
-                    icon.classList.toggle('fa-chevron-up', !isExpanded);
-                    button.classList.toggle('active', !isExpanded);
-
-                    if (!isExpanded) {
-                        details.classList.add('show');
-                        details.style.maxHeight = details.scrollHeight + 'px';
-                    } else {
-                        details.style.maxHeight = '0';
-                        setTimeout(() => details.classList.remove('show'), 500);
-                    }
+                    button.classList.toggle('active');
+                    const content = document.getElementById(button.getAttribute('aria-controls'));
+                    content.classList.toggle('show');
                 });
             });
         });
