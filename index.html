@@ -893,18 +893,26 @@
     </header>
     <!-- End of Header Section -->
 
-    <!-- New Logo Section -->
-    <div style="text-align: center; margin-top: 40px;">
-  <img src="Black and White Circle Icon Business Logo.svg" alt="logo" class="logo">
+    <!-- New Logo Section --><div class="logo-container">
+  <img src="logo.svg" alt="logo" class="logo">
 </div>
 
 <style>
+  /* Center everything */
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+  }
+
+  /* Logo animation */
   .logo {
     width: 250px;
     height: auto;
     opacity: 0;
     transform: translateY(40px) scale(0.9); /* start lower & smaller */
-    animation: coolIntro 1.6s ease-out forwards; /* play once */
+    animation: coolIntro 1.6s ease-out forwards;
   }
 
   @keyframes coolIntro {
@@ -914,14 +922,15 @@
     }
     60% {
       opacity: 1;
-      transform: translateY(-8px) scale(1.02); /* overshoot effect */
+      transform: translateY(-8px) scale(1.02); /* overshoot */
     }
     100% {
       opacity: 1;
-      transform: translateY(0) scale(1); /* settle naturally */
+      transform: translateY(0) scale(1); /* final position */
     }
   }
 </style>
+
 
     <!-- End of New Logo Section -->
 
