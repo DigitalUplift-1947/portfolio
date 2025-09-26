@@ -19,7 +19,7 @@
     <!-- End of Meta Tags and Title -->
 
     <!-- Start of External Styles and Scripts -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7kqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
@@ -1155,18 +1155,33 @@
                     </div>
                 </div>
                 <div class="mt-10 sm:mt-12 text-center space-y-6">
-                    <p class="text-base sm:text-lg text-gray-200" data-i18n="direct-text">Or contact me directly:</p>
-                    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-                        <a href="https://wa.me/message/NHLJOW7GEFJ7L1" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 bg-white/10 text-white font-bold rounded-lg bubbly-btn flex items-center justify-center hover:bg-[#25D366]" data-i18n="chat-whatsapp">
-                            <i class="fab fa-whatsapp mr-2"></i>Chat on WhatsApp
-                        </a>
-                        <a href="Cv_2025.pdf" download class="w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 bg-white/10 text-white font-bold rounded-lg bubbly-btn flex items-center justify-center hover:bg-[var(--primary-color)]" data-i18n="download-resume">
-                            <i class="fas fa-download mr-2"></i>Download Resume
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <p class="text-base sm:text-lg text-gray-200" data-i18n="direct-text">
+    Or contact me directly:
+  </p>
+
+  <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/message/NHLJOW7GEFJ7L1"
+       target="_blank" rel="noopener noreferrer"
+       class="w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 bg-white/10 text-white font-bold rounded-lg bubbly-btn flex items-center justify-center hover:bg-[#25D366]"
+       data-i18n="chat-whatsapp">
+       <i class="fab fa-whatsapp mr-2"></i>Chat on WhatsApp
+    </a>
+
+    <!-- Download Resume Button -->
+    <a href="Cv_2025.pdf"
+       download="Owais-Resume.pdf"
+       target="_blank" rel="noopener noreferrer"
+       class="w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 bg-white/10 text-white font-bold rounded-lg bubbly-btn flex items-center justify-center hover:bg-[var(--primary-color)]"
+       data-i18n="download-resume">
+       <i class="fas fa-download mr-2"></i>Download Resume
+    </a>
+  </div>
+</div>
+</div>
+</section>
+<!-- End of Contact Section -->
+
         <!-- End of Contact Section -->
     </main>
     <!-- End of Main Content -->
@@ -1515,7 +1530,7 @@
                     'social-text': 'Trouvez-moi sur les réseaux sociaux :',
                     'direct-text': 'Ou contactez-moi directement :',
                     'chat-whatsapp': '<i class="fab fa-whatsapp mr-2"></i>Chatter sur WhatsApp',
-                    'download-resume': '<i class="fas fa-download mr-2"></i>Télécharger le CV',
+                    'download-resume': '<i class="fas fa-download mr-2"></i>Télécharger le ',
                     'modal-sent': 'Message Envoyé !',
                     'modal-thanks': 'Merci pour votre message !',
                     'close-btn': 'Fermer',
