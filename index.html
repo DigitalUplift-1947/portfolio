@@ -893,17 +893,18 @@
     </header>
     <!-- End of Header Section -->
 
-    <!-- New Logo Section --><div class="logo-container">
-  <img src="logo.svg" alt="logo" class="logo">
+    <!-- New Logo Section --><
+  <div class="logo-container">
+  <img src="logo.svg" alt="Business Logo" class="logo">
 </div>
 
 <style>
-  /* Center everything */
+  /* Center logo + push it down */
   .logo-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 60px;
+    margin-top: 100px; /* default gap for desktop */
   }
 
   /* Logo animation */
@@ -911,7 +912,7 @@
     width: 250px;
     height: auto;
     opacity: 0;
-    transform: translateY(40px) scale(0.9); /* start lower & smaller */
+    transform: translateY(40px) scale(0.9);
     animation: coolIntro 1.6s ease-out forwards;
   }
 
@@ -926,11 +927,25 @@
     }
     100% {
       opacity: 1;
-      transform: translateY(0) scale(1); /* final position */
+      transform: translateY(0) scale(1);
     }
   }
-</style>
 
+  /* 📱 For smaller screens */
+  @media (max-width: 768px) {
+    .logo-container {
+      margin-top: 70px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .logo-container {
+      margin-top: 50px;
+    }
+    .logo {
+      width: 180px; /* smaller logo on phones */
+    }
+  }
 
     <!-- End of New Logo Section -->
 
