@@ -894,13 +894,38 @@
     <!-- End of Header Section -->
 
     <!-- New Logo Section -->
-    <div style="text-align: center; margin-top: 20px;">
-        <img src="logo.gif" alt="logo" style="width: 250px; height: auto;">
-    </div>
+    <div style="text-align: center; margin-top: 40px;">
+  <img src="Black and White Circle Icon Business Logo.svg" alt="logo" class="logo">
+</div>
 
+<style>
+  .logo {
+    width: 250px;
+    height: auto;
+    opacity: 0;
+    transform: translateY(40px) scale(0.9); /* start lower & smaller */
+    animation: coolIntro 1.6s ease-out forwards; /* play once */
+  }
+
+  @keyframes coolIntro {
+    0% {
+      opacity: 0;
+      transform: translateY(40px) scale(0.9);
+    }
+    60% {
+      opacity: 1;
+      transform: translateY(-8px) scale(1.02); /* overshoot effect */
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1); /* settle naturally */
+    }
+  }
+</style>
 
     <!-- End of New Logo Section -->
 
+    
     <!-- Start of Main Content -->
     <main class="relative z-10">
         <!-- Start of Home Section -->
