@@ -893,8 +893,8 @@
     </header>
     <!-- End of Header Section -->
 
-    <!-- New Logo Section --><
-  <div class="logo-container">
+    <!-- New Logo Section -->
+<div class="logo-container">
   <img src="logo.svg" alt="Business Logo" class="logo">
 </div>
 
@@ -904,7 +904,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 100px; /* default gap for desktop */
+    margin-top: 120px; /* adjust if still touching header */
   }
 
   /* Logo animation */
@@ -923,7 +923,7 @@
     }
     60% {
       opacity: 1;
-      transform: translateY(-8px) scale(1.02); /* overshoot */
+      transform: translateY(-8px) scale(1.02);
     }
     100% {
       opacity: 1;
@@ -931,23 +931,15 @@
     }
   }
 
-  /* 📱 For smaller screens */
+  /* Responsive tweaks */
   @media (max-width: 768px) {
-    .logo-container {
-      margin-top: 70px;
-    }
+    .logo-container { margin-top: 80px; }
   }
-
   @media (max-width: 480px) {
-    .logo-container {
-      margin-top: 50px;
-    }
-    .logo {
-      width: 180px; /* smaller logo on phones */
-    }
+    .logo-container { margin-top: 60px; }
+    .logo { width: 180px; }
   }
-
-    <!-- End of New Logo Section -->
+</style>
 
     
     <!-- Start of Main Content -->
