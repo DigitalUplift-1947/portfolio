@@ -30,21 +30,22 @@
         :root {
             --primary-color: #FF8C00;
             --background-dark: #0A192F;
-            --card-dark: #1F2937;
+            --card-dark: rgba(31, 41, 55, 0.5); /* Reduced opacity for stronger glass effect */
             --text-dark: #F3F4F6;
             --background-light: #E6F0FA;
-            --card-light: #FFFFFF;
-            --text-light: #111827;
-            --header-bg-dark: rgba(17, 24, 39, 0.95);
-            --header-bg-light: rgba(255, 255, 255, 0.95);
+            --card-light: rgba(255, 255, 255, 0.5); /* Reduced opacity for stronger glass effect */
+            --text-light: #000000; /* Changed to black for better contrast in light mode */
+            --header-bg-dark: rgba(17, 24, 39, 0.5); /* Reduced opacity */
+            --header-bg-light: rgba(255, 255, 255, 0.5); /* Reduced opacity */
             --gray-dark: #9CA3AF;
             --gray-light: #374151;
-            --card-border-dark: #374151;
-            --card-border-light: #D1D5DB;
+            --card-border-dark: rgba(255, 255, 255, 0.1);
+            --card-border-light: rgba(0, 0, 0, 0.1);
+            --blur-amount: 20px; /* Increased blur for better glassmorphism */
+            --shadow-soft: 0 4px 30px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow for better visibility */
         }
 
         html {
-            /* Enhanced smoother theme transition with cubic-bezier for more natural feel */
             transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
@@ -61,13 +62,14 @@
         html.light-theme .text-gray-300,
         html.light-theme .text-gray-500 {
             color: var(--gray-light) !important;
-            transition: color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Enhanced smooth text color transition */
+            transition: color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         html.light-theme .bubbly-btn:not(:hover) {
             color: var(--text-light) !important;
-            background-color: #D1D5DB;
-            border: 2px solid var(--gray-light);
+            background-color: rgba(209, 213, 219, 0.5); /* Reduced opacity for buttons in light mode */
+            border: 1px solid var(--card-border-light);
+            backdrop-filter: blur(var(--blur-amount));
             transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
@@ -79,8 +81,9 @@
         }
 
         html.light-theme .toggle-details:not(:hover) {
-            background: #E5E7EB;
+            background: rgba(229, 231, 235, 0.5); /* Reduced opacity */
             color: var(--text-light);
+            backdrop-filter: blur(var(--blur-amount));
             transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
@@ -91,8 +94,9 @@
         }
 
         html.light-theme .theme-toggle:not(:hover) {
-            background: #E5E7EB;
+            background: rgba(229, 231, 235, 0.5); /* Reduced opacity */
             color: var(--text-light);
+            backdrop-filter: blur(var(--blur-amount));
             transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
@@ -103,8 +107,9 @@
         }
 
         html.light-theme #back-to-top:not(:hover) {
-            background: #D1D5DB;
+            background: rgba(209, 213, 219, 0.5); /* Reduced opacity */
             color: var(--text-light);
+            backdrop-filter: blur(var(--blur-amount));
             transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
@@ -120,9 +125,10 @@
             background-color: var(--background-dark);
             overflow-x: hidden;
             position: relative;
-            transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Enhanced smoother body transition */
-            font-size: 1rem;
-            line-height: 1.5;
+            transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            font-size: 1.15rem; /* Slightly increased base font size for better visibility */
+            line-height: 1.7; /* Increased line height for readability */
+            font-weight: 400; /* Adjusted weight for better contrast */
         }
 
         .parallax-background {
@@ -133,7 +139,7 @@
             height: 100%;
             z-index: -1;
             background: radial-gradient(circle at 50% 0%, #1E3A8A 0%, #0A192F 70%);
-            transition: background 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Enhanced smoother parallax background transition */
+            transition: background 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .parallax-background::before {
@@ -146,12 +152,12 @@
             background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Ccircle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.8)"/%3E%3Ccircle cx="30" cy="40" r="0.7" fill="rgba(255,255,255,0.6)"/%3E%3C/svg%3E') repeat;
             background-size: 80px 80px;
             opacity: 0.4;
-            animation: twinkle 18s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; /* Slowed down twinkle further with smoother easing */
+            animation: twinkle 18s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
         }
 
         @keyframes twinkle {
             0%, 100% { opacity: 0.4; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.1); } /* Added subtle scale for enhancement */
+            50% { opacity: 0.8; transform: scale(1.1); }
         }
 
         html.light-theme .parallax-background {
@@ -167,7 +173,7 @@
             background: white;
             border-radius: 50%;
             box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.4);
-            animation: fall 15s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; /* Slowed down fall further with smoother easing */
+            animation: fall 15s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
             will-change: transform;
             pointer-events: none;
         }
@@ -176,7 +182,7 @@
             0% { transform: translateY(-100vh) rotate(0deg); opacity: 0; }
             10% { opacity: 1; }
             90% { opacity: 1; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; } /* Added rotation for enhancement */
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
         }
 
         html.light-theme .parallax-background .cloud {
@@ -184,7 +190,7 @@
             background: rgba(255, 255, 255, 0.4);
             border-radius: 50%;
             box-shadow: 0 0 12px 6px rgba(255, 255, 255, 0.3);
-            animation: drift 80s cubic-bezier(0.25, 0.1, 0.25, 1) infinite; /* Slowed down drift further */
+            animation: drift 80s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
             will-change: transform;
             pointer-events: none;
         }
@@ -192,16 +198,16 @@
         @keyframes drift {
             0% { transform: translateX(-100vw) scale(0.8); }
             50% { transform: translateX(0) scale(1); }
-            100% { transform: translateX(100vw) scale(0.8); } /* Added scale for more dynamic movement */
+            100% { transform: translateX(100vw) scale(0.8); }
         }
 
         .nav-link {
             position: relative;
-            transition: color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Enhanced smoother nav link color transition */
+            transition: color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             color: var(--gray-dark);
             cursor: pointer;
             font-weight: 700;
-            font-size: 1.125rem; /* Bigger font size */
+            font-size: 1.125rem;
         }
         .nav-link::after {
             content: '';
@@ -211,7 +217,7 @@
             bottom: -4px;
             left: 0;
             background-color: var(--primary-color);
-            transition: width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Enhanced underline animation */
+            transition: width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         .nav-link:hover::after {
             width: 100%;
@@ -225,8 +231,8 @@
 
         .animated-section {
             opacity: 0;
-            transform: translateY(30px); /* Slightly increased for more dramatic entrance */
-            transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Enhanced with longer duration and smoother easing */
+            transform: translateY(30px);
+            transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Slightly slower for smoother scrolling */
         }
         .animated-section.is-visible {
             opacity: 1;
@@ -236,16 +242,20 @@
         .bubbly-btn {
             position: relative;
             overflow: hidden;
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Enhanced transitions */
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             cursor: pointer;
             z-index: 10;
             pointer-events: auto;
             font-weight: 600;
             font-size: 1.1rem;
+            background: rgba(255, 255, 255, 0.05); /* More transparent for stronger glass */
+            backdrop-filter: blur(var(--blur-amount));
+            border: 1px solid var(--card-border-dark);
+            box-shadow: var(--shadow-soft);
         }
         .bubbly-btn:hover {
-            transform: translateY(-8px) scale(1.05); /* Slightly more lift */
-            box-shadow: 0 16px 28px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 16px 28px rgba(0, 0, 0, 0.3);
         }
         .bubbly-btn:active {
             transform: scale(0.95);
@@ -266,7 +276,7 @@
             transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease-in-out;
         }
         .bubbly-btn:active::after {
-            animation: ripple-effect 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; /* Enhanced ripple with easing */
+            animation: ripple-effect 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
         }
         @keyframes ripple-effect {
             to {
@@ -276,8 +286,11 @@
         }
 
         #mobile-menu {
-            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Enhanced smoother mobile menu transition */
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             background-color: var(--header-bg-dark);
+            backdrop-filter: blur(var(--blur-amount));
+            border: 1px solid var(--card-border-dark);
+            box-shadow: var(--shadow-soft);
             z-index: 50;
             pointer-events: auto;
         }
@@ -286,8 +299,10 @@
         }
 
         .modal {
-            transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Enhanced smoother modal transition */
+            transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             pointer-events: none;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
         }
         .modal.is-visible {
             opacity: 1;
@@ -297,42 +312,51 @@
         html.light-theme .modal {
             background-color: rgba(0, 0, 0, 0.5);
         }
+        .modal > div {
+            background: var(--card-dark);
+            backdrop-filter: blur(var(--blur-amount));
+            border: 1px solid var(--card-border-dark);
+            box-shadow: var(--shadow-soft);
+        }
 
         #main-header {
-            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Enhanced smoother header transition */
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Slower for smoother scrolling */
             z-index: 50;
             pointer-events: auto;
+            background-color: var(--header-bg-dark);
+            backdrop-filter: blur(var(--blur-amount));
+            border-bottom: 1px solid var(--card-border-dark);
         }
         #main-header.scrolled {
             background-color: var(--header-bg-dark);
-            backdrop-filter: blur(10px); /* Slightly stronger blur */
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+            backdrop-filter: blur(15px);
+            box-shadow: var(--shadow-soft);
         }
         #main-header.hide {
             transform: translateY(-100%);
         }
 
         #main-header h1 {
-            font-size: 1.25rem; /* Adjusted size for header fit on smaller screens */
+            font-size: 1.25rem;
         }
 
         #changing-text {
-            min-height: 4rem; /* Increased height for longer sentences */
-            white-space: normal; /* Allow wrapping for longer texts */
+            min-height: 4rem;
+            white-space: normal;
             overflow: hidden;
             position: relative;
-            transition: color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Enhanced smoother changing text transition */
-            font-size: 1.5rem; /* Increased text size for animation */
+            transition: color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            font-size: 1.5rem;
             line-height: 1.5;
         }
         #changing-text::after {
             content: '';
             position: absolute;
-            width: 0.5px; /* Further reduced cursor size */
+            width: 0.5px;
             height: 100%;
             background-color: var(--primary-color);
             margin-left: 4px;
-            animation: blink-cursor 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; /* Enhanced blink with easing and smoother speed */
+            animation: blink-cursor 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
         }
         @keyframes blink-cursor {
             from, to { opacity: 0; }
@@ -347,7 +371,7 @@
 
         @keyframes pulse-brand-color {
             0% { transform: scale(1); filter: brightness(100%); }
-            50% { transform: scale(1.05); filter: brightness(120%); } /* Subtler scale and brightness for enhancement */
+            50% { transform: scale(1.05); filter: brightness(120%); }
             100% { transform: scale(1); filter: brightness(100%); }
         }
 
@@ -361,7 +385,7 @@
             font-size: 0.9rem;
             margin-top: 0.5rem;
             display: none;
-            transition: color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease; /* Enhanced error message transition with opacity */
+            transition: color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease;
             opacity: 0;
         }
         .error-message.active { display: block; opacity: 1; role: alert; }
@@ -371,7 +395,7 @@
         input:focus, textarea:focus {
             outline: none;
             border-color: var(--primary-color) !important;
-            box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.3) !important; /* Enhanced focus ring */
+            box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.3) !important;
         }
 
         input[type="checkbox"]:focus {
@@ -397,11 +421,16 @@
             position: relative;
             margin-bottom: 2rem;
             padding-left: 2rem;
-            transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.4s ease; /* Enhanced timeline item transition */
+            transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.4s ease;
             z-index: 5;
+            background: var(--card-dark);
+            backdrop-filter: blur(var(--blur-amount));
+            border: 1px solid var(--card-border-dark);
+            box-shadow: var(--shadow-soft);
+            border-radius: 1rem;
         }
         .timeline-item:hover {
-            transform: translateX(5px); /* Added subtle hover shift for enhancement */
+            transform: translateX(5px);
         }
         .timeline-item::before {
             content: '';
@@ -413,7 +442,7 @@
             background: var(--primary-color);
             border-radius: 50%;
             border: 2px solid var(--card-dark);
-            transition: transform 0.4s ease; /* Animate dot on hover */
+            transition: transform 0.4s ease;
         }
         .timeline-item:hover::before {
             transform: scale(1.2);
@@ -423,7 +452,7 @@
             max-height: 0;
             opacity: 0;
             overflow: hidden;
-            transition: max-height 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Enhanced smoother timeline content transition */
+            transition: max-height 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         .timeline-content.show {
             max-height: calc(100vh + 500px);
@@ -435,13 +464,14 @@
 
         .badge {
             padding: 0.35rem 0.75rem;
-            background: var(--primary-color);
+            background: rgba(255, 140, 0, 0.2);
             color: #fff;
             border-radius: 0.25rem;
             font-size: 0.85rem;
             font-weight: 600;
             margin-left: 0.75rem;
-            transition: transform 0.4s ease; /* Added animation for badges */
+            transition: transform 0.4s ease;
+            backdrop-filter: blur(5px);
         }
         .badge:hover {
             transform: scale(1.05);
@@ -456,15 +486,18 @@
             background: rgba(255, 255, 255, 0.1);
             color: white;
             border-radius: 50%;
-            transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Enhanced smoother toggle button transition */
+            transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             cursor: pointer;
             z-index: 15;
             pointer-events: auto;
+            backdrop-filter: blur(var(--blur-amount));
+            border: 1px solid var(--card-border-dark);
+            box-shadow: var(--shadow-soft);
         }
         .toggle-details:hover {
             background: var(--primary-color);
             color: #FFFFFF;
-            transform: rotate(90deg) scale(1.1); /* Enhanced hover with rotation and scale */
+            transform: rotate(90deg) scale(1.1);
         }
         .toggle-details.active {
             transform: rotate(180deg);
@@ -474,7 +507,7 @@
             position: fixed;
             bottom: 2rem;
             right: 2rem;
-            background: var(--primary-color);
+            background: rgba(255, 140, 0, 0.2);
             color: #fff;
             width: 3rem;
             height: 3rem;
@@ -484,11 +517,14 @@
             justify-content: center;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), visibility 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.4s ease; /* Enhanced back-to-top transition */
+            transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), visibility 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.4s ease;
             z-index: 1000;
             cursor: pointer;
             pointer-events: auto;
             font-size: 1.25rem;
+            backdrop-filter: blur(var(--blur-amount));
+            border: 1px solid var(--card-border-dark);
+            box-shadow: var(--shadow-soft);
         }
         #back-to-top.visible {
             opacity: 1;
@@ -503,24 +539,27 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 2.25rem; /* Adjusted size for header fit */
-            height: 2.25rem; /* Adjusted size for header fit */
+            width: 2.25rem;
+            height: 2.25rem;
             background: rgba(255, 255, 255, 0.1);
             color: var(--text-dark);
             border-radius: 50%;
-            transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.4s ease; /* Enhanced theme toggle transition */
+            transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.4s ease;
             cursor: pointer;
             z-index: 100;
             pointer-events: auto;
-            margin-left: 0.5rem; /* Space between toggles */
+            margin-left: 0.5rem;
+            backdrop-filter: blur(var(--blur-amount));
+            border: 1px solid var(--card-border-dark);
+            box-shadow: var(--shadow-soft);
         }
         .theme-toggle:hover, .lang-toggle:hover {
             background: var(--primary-color);
             color: #FFFFFF;
-            transform: scale(1.1); /* Added scale on hover */
+            transform: scale(1.1);
         }
         .theme-toggle i, .lang-toggle i {
-            font-size: 1.25rem; /* Adjusted icon size */
+            font-size: 1.25rem;
         }
         html.light-theme .theme-toggle .fa-moon { display: none; }
         html.light-theme .theme-toggle .fa-sun { display: inline; }
@@ -528,7 +567,7 @@
 
         html.light-theme #main-header h1 {
             color: var(--text-light);
-            transition: color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Enhanced smoother header title transition */
+            transition: color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         html.light-theme .timeline-item {
             background-color: var(--card-light);
@@ -551,39 +590,41 @@
             border-color: var(--card-border-light);
         }
         html.light-theme .form-input {
-            background-color: #F3F4F6;
+            background-color: rgba(243, 244, 246, 0.6); /* Adjusted for better visibility */
             border-color: var(--card-border-light);
             color: var(--text-light);
-            transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Enhanced smoother form input transition */
+            backdrop-filter: blur(var(--blur-amount));
+            transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         html.light-theme .skill-badge {
-            background-color: #E5E7EB;
+            background-color: rgba(229, 231, 235, 0.6); /* Adjusted for better visibility */
             color: var(--text-light);
-            transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Enhanced smoother skill badge transition */
+            backdrop-filter: blur(var(--blur-amount));
+            transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         html.light-theme #home h2 {
             color: var(--text-light);
-            transition: color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Enhanced smoother home section title transition */
+            transition: color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         html.light-theme #home a:not(:hover) {
             color: var(--text-light);
-            transition: color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Enhanced smoother home section link transition */
+            transition: color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         html.light-theme .timeline-item h3 {
             color: var(--text-light);
-            transition: color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Enhanced smoother timeline item title transition */
+            transition: color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         html.light-theme .certifications-section h3 {
             color: var(--text-light);
-            transition: color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Enhanced smoother certifications title transition */
+            transition: color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         html.light-theme .contact-form label {
             color: var(--text-light);
-            transition: color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Enhanced smoother form label transition */
+            transition: color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         html.light-theme footer {
             color: var(--gray-light);
-            transition: color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Enhanced smoother footer transition */
+            transition: color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         html.light-theme .contact-form label[for="not-a-bot"] {
             color: var(--gray-light);
@@ -614,7 +655,7 @@
             border: 5px solid rgba(255, 255, 255, 0.1);
             border-top: 5px solid var(--primary-color);
             border-radius: 50%;
-            animation: spin 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; /* Enhanced spin with easing */
+            animation: spin 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
@@ -624,7 +665,7 @@
             color: #FFFFFF;
             font-size: 1.2rem;
             margin-top: 1rem;
-            animation: pulse 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; /* Enhanced pulse */
+            animation: pulse 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
         }
         @keyframes pulse {
             0%, 100% { opacity: 1; transform: scale(1); }
@@ -654,7 +695,7 @@
         }
         .welcome-emoji {
             font-size: 10rem;
-            animation: bounce 3s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite; /* Enhanced bounce with bouncy easing */
+            animation: bounce 3s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
         }
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
@@ -666,7 +707,7 @@
             color: #FFFFFF;
             margin: 2rem 0;
             text-align: center;
-            animation: fadeIn 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; /* Enhanced fadeIn */
+            animation: fadeIn 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
             opacity: 0;
         }
         @keyframes fadeIn {
@@ -709,7 +750,6 @@
             transform: translateY(-20px);
         }
 
-        /* Language Selector Styles */
         .lang-dropdown {
             position: absolute;
             top: 100%;
@@ -723,6 +763,8 @@
             visibility: hidden;
             transform: translateY(-10px);
             transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), visibility 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            backdrop-filter: blur(var(--blur-amount));
+            box-shadow: var(--shadow-soft);
         }
         .lang-dropdown.visible {
             opacity: 1;
@@ -744,7 +786,7 @@
         .lang-option:hover {
             background-color: var(--primary-color);
             color: white;
-            transform: translateX(5px); /* Added slide on hover for enhancement */
+            transform: translateX(5px);
         }
         html.light-theme .lang-option {
             color: var(--text-light);
@@ -753,6 +795,11 @@
         /* Enhanced certification card hover */
         .certifications-section .grid > div {
             transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            background: var(--card-dark);
+            backdrop-filter: blur(var(--blur-amount));
+            border: 1px solid var(--card-border-dark);
+            box-shadow: var(--shadow-soft);
+            border-radius: 1rem;
         }
         .certifications-section .grid > div:hover {
             transform: translateY(-10px);
@@ -762,6 +809,11 @@
         /* Enhanced skill badges */
         .skill-badge {
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+            background: rgba(31, 41, 55, 0.3); /* More transparent */
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--card-border-dark);
+            box-shadow: var(--shadow-soft);
+            border-radius: 9999px;
         }
         .skill-badge:hover {
             transform: translateY(-2px) scale(1.05);
@@ -771,6 +823,10 @@
         /* Social Icons Animation in Home Section */
         .social-icon {
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.4s ease;
+            padding: 0.5rem;
+            background: transparent !important; /* Ensure no glass effect on icons */
+            backdrop-filter: none !important;
+            border: none !important;
         }
         .social-icon:hover {
             transform: scale(1.2) rotate(10deg);
@@ -783,7 +839,11 @@
 
         /* Overall enhancements: Added subtle glow effects and improved shadows for cards */
         .about-section .flex, .certifications-section .grid > div, .timeline-item, .contact-form {
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background: var(--card-dark);
+            backdrop-filter: blur(var(--blur-amount));
+            border: 1px solid var(--card-border-dark);
+            box-shadow: var(--shadow-soft);
+            border-radius: 1rem;
         }
         .about-section .flex:hover, .certifications-section .grid > div:hover, .timeline-item:hover, .contact-form:hover {
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
@@ -804,7 +864,7 @@
         .logo-section img {
             max-width: 100%;
             height: auto;
-            max-height: 200px; /* Adjust as needed for responsiveness */
+            max-height: 200px;
             animation: subtleAnimation 1.5s ease-in-out forwards;
             opacity: 0;
         }
@@ -818,6 +878,31 @@
             .logo-section img {
                 max-height: 150px;
             }
+        }
+
+        /* Apply glassmorphism to form inputs */
+        .form-input {
+            background: rgba(31, 41, 55, 0.3); /* More transparent for inputs */
+            backdrop-filter: blur(var(--blur-amount));
+            border: 1px solid var(--card-border-dark);
+            transition: border-color 0.3s ease;
+        }
+
+        /* Contact form specific */
+        .contact-form {
+            border-radius: 1rem;
+        }
+
+        /* Increase font sizes for better visibility */
+        h2 {
+            font-size: 3.5rem !important; /* Larger headings */
+        }
+        h3 {
+            font-size: 2.5rem !important;
+        }
+        p, li {
+            font-size: 1.1rem !important; /* Larger body text */
+            font-weight: 500; /* Slightly bolder for clarity */
         }
     </style>
     <!-- End of Inline Styles -->
@@ -967,7 +1052,7 @@
         <section id="about" class="py-16 sm:py-20 md:py-24 px-6 sm:px-8 animated-section about-section">
             <div class="container mx-auto max-w-5xl">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 md:mb-14 text-[var(--primary-color)]" data-i18n="about-title">About Me</h2>
-                <div class="flex flex-col md:flex-row items-center md:items-start space-y-8 md:space-y-0 md:space-x-10 bg-gray-800 p-8 sm:p-10 rounded-2xl shadow-xl border border-gray-700">
+                <div class="flex flex-col md:flex-row items-center md:items-start space-y-8 md:space-y-0 md:space-x-10 p-8 sm:p-10 rounded-2xl shadow-xl border border-gray-700">
                     <div class="flex-shrink-0 w-48 h-48 sm:w-56 sm:h-56 rounded-full overflow-hidden bg-gray-700 border-4 border-gray-600">
                         <img src="Profile.jpg" alt="Profile Photo for Muhammad Owais" class="w-full h-full object-cover">
                     </div>
@@ -1005,7 +1090,7 @@
             <div class="container mx-auto max-w-5xl">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 md:mb-14 text-[var(--primary-color)]" data-i18n="experience-title">Professional Experience</h2>
                 <div class="timeline">
-                    <div class="timeline-item bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.01] transition-transform duration-300" aria-labelledby="experience-1" role="listitem">
+                    <div class="timeline-item p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.01] transition-transform duration-300" aria-labelledby="experience-1" role="listitem">
                         <div class="flex items-center mb-4">
                             <i class="fas fa-briefcase mr-3 text-[var(--primary-color)] text-xl sm:text-2xl"></i>
                             <h3 id="experience-1" class="text-2xl sm:text-3xl font-bold text-white" data-i18n="exp-ai-strategist">AI & Content Strategist</h3>
@@ -1023,7 +1108,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="timeline-item bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.01] transition-transform duration-300" aria-labelledby="experience-2" role="listitem">
+                    <div class="timeline-item p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.01] transition-transform duration-300" aria-labelledby="experience-2" role="listitem">
                         <div class="flex items-center mb-4">
                             <i class="fas fa-user-tie mr-3 text-[var(--primary-color)] text-xl sm:text-2xl"></i>
                             <h3 id="experience-2" class="text-2xl sm:text-3xl font-bold text-white" data-i18n="exp-internships">Internships</h3>
@@ -1052,7 +1137,7 @@
             <div class="container mx-auto max-w-6xl">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 md:mb-14 text-[var(--primary-color)]" data-i18n="cert-title">Certifications</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
-                    <div class="bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
+                    <div class="p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
                         <img src="google.svg" alt="Google Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
                         <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2 text-center" data-i18n="cert-prompt-eng">Prompt Engineering and Prompting Essentials</h3>
                         <p class="text-gray-200 text-base sm:text-lg mb-2 text-center" data-i18n="issued-by-google">Issued by Google</p>
@@ -1061,7 +1146,7 @@
                             <a href="https://www.coursera.org/account/accomplishments/verify/EO0L72HVNHTL" class="inline-block text-sm sm:text-base text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer" data-i18n="view-credential">View Credential &rarr;</a>
                         </div>
                     </div>
-                    <div class="bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
+                    <div class="p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
                         <img src="google.svg" alt="Google AI Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
                         <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2 text-center" data-i18n="cert-google-ai">Google AI Essentials</h3>
                         <p class="text-gray-200 text-base sm:text-lg mb-2 text-center" data-i18n="issued-by-google">Issued by Google</p>
@@ -1070,7 +1155,7 @@
                             <a href="https://coursera.org/share/ec941470fa4f3bfdd16eae5b4789f247" class="inline-block text-sm sm:text-base text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer" data-i18n="view-credential">View Credential &rarr;</a>
                         </div>
                     </div>
-                    <div class="bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
+                    <div class="p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
                         <img src="likedin.svg" alt="LinkedIn Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
                         <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2 text-center" data-i18n="cert-linkedin-ai">LinkedIn AI Essentials</h3>
                         <p class="text-gray-200 text-base sm:text-lg mb-2 text-center" data-i18n="issued-by-linkedin">Issued by LinkedIn</p>
@@ -1079,7 +1164,7 @@
                             <a href="https://www.linkedin.com/in/muhammad-owais-b45106328/details/certifications/1727674508303/single-media-viewer/" class="inline-block text-sm sm:text-base text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer" data-i18n="view-credential">View Credential &rarr;</a>
                         </div>
                     </div>
-                    <div class="bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
+                    <div class="p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
                         <img src="itu.svg" alt="ITU Python Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
                         <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2 text-center" data-i18n="cert-python">Python Programming Course</h3>
                         <p class="text-gray-200 text-base sm:text-lg mb-2 text-center" data-i18n="issued-by-itu">Issued by ITU</p>
@@ -1088,7 +1173,7 @@
                             <a href="https://www.linkedin.com/in/muhammad-owais-b45106328/details/certifications/1727659107845/single-media-viewer/" class="inline-block text-sm sm:text-base text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer" data-i18n="view-credential">View Credential &rarr;</a>
                         </div>
                     </div>
-                    <div class="bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
+                    <div class="p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
                         <img src="google.svg" alt="Google Marketing Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
                         <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2 text-center" data-i18n="cert-marketing">Digital Marketing Course</h3>
                         <p class="text-gray-200 text-base sm:text-lg mb-2 text-center" data-i18n="issued-by-google">Issued by Google</p>
@@ -1097,13 +1182,22 @@
                             <a href="https://skillshop.exceedlms.com/student/award/fR9PskUZepTYWBUYdNzMdnPy" class="inline-block text-sm sm:text-base text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer" data-i18n="view-credential">View Credential &rarr;</a>
                         </div>
                     </div>
-                    <div class="bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
+                    <div class="p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
                         <img src="ibm.svg" alt="IBM Cybersecurity Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
                         <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2 text-center" data-i18n="cert-cyber">Cybersecurity Course</h3>
                         <p class="text-gray-200 text-base sm:text-lg mb-2 text-center" data-i18n="issued-by-ibm">Issued by IBM</p>
                         <p class="text-sm sm:text-base text-gray-200 text-center">2024</p>
                         <div class="text-center mt-4">
                             <a href="https://www.credly.com/badges/fa7cbba6-4f2e-4192-9f6f-77983482e85d/public_url" class="inline-block text-sm sm:text-base text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer" data-i18n="view-credential">View Credential &rarr;</a>
+                        </div>
+                    </div>
+                    <div class="p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
+                        <img src="oracle.svg" alt="Oracle Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
+                        <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2 text-center">Oracle Cloud Infrastructure Foundations</h3>
+                        <p class="text-gray-200 text-base sm:text-lg mb-2 text-center">Issued by Oracle</p>
+                        <p class="text-sm sm:text-base text-gray-200 text-center">2025</p>
+                        <div class="text-center mt-4">
+                            <a href="https://www.youracclaim.com/badges/placeholder" class="inline-block text-sm sm:text-base text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer" data-i18n="view-credential">View Credential &rarr;</a>
                         </div>
                     </div>
                 </div>
@@ -1115,7 +1209,7 @@
         <section id="contact" class="py-16 sm:py-20 md:py-24 px-6 sm:px-8 animated-section">
             <div class="container mx-auto max-w-3xl">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 md:mb-14 text-[var(--primary-color)]" data-i18n="contact-title">Get in Touch</h2>
-                <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-8 bg-gray-800 p-8 sm:p-10 rounded-2xl shadow-xl border border-gray-700 contact-form">
+                <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-8 p-8 sm:p-10 rounded-2xl shadow-xl border border-gray-700 contact-form">
                     <input type="hidden" name="access_key" value="492a8810-9deb-4946-8c01-ba7883b310d6">
                     <input type="text" name="honeypot" style="display: none;">
                     <div>
@@ -1726,8 +1820,8 @@
                     'badge-multiple': '複数の役割',
                     'exp-various-dates': 'さまざまな組織 | 2022 – 2026',
                     'exp-intern1': 'Shaukat Khanum病院（マーケティング & HRインターン、2023–2024）：イベント参加を15%増加、採用を合理化。',
-                    'exp-intern2': 'TX Labz（HRインターン、2022）：オンボーディングを最適化、処理時間を20%短縮。',
-                    'exp-intern3': 'Med Coach Global（ソーシャルメディアインターン、2025–現在）：ソーシャルメディア関与を30%増加。',
+                    'exp-intern2': 'TX Labz（HRインターン, 2022）：オンボーディングを最適化、処理時間を20%短縮。',
+                    'exp-intern3': 'Med Coach Global（ソーシャルメディアインターン, 2025–現在）：ソーシャルメディア関与を30%増加。',
                     'exp-intern4': 'NGO経験（Alkhimat Foundation & ILM）：コミュニティプロジェクトとアウトリーチを調整。',
                     'cert-title': '認定資格',
                     'cert-prompt-eng': 'プロンプトエンジニアリングとプロンプティングエッセンシャル',
