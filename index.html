@@ -1168,6 +1168,14 @@
 
         }
 
+        html.light-theme .projects-section .grid > div {
+
+            background-color: var(--card-light);
+
+            border-color: var(--card-border-light);
+
+        }
+
         html.light-theme .contact-form {
 
             background-color: var(--card-light);
@@ -1622,7 +1630,7 @@
 
         .skill-badge {
 
-            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease, background-color 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease, background-color 0.3s ease, color 0.3s ease;
 
             background: rgba(31, 41, 55, 0.3); /* More transparent */
 
@@ -1645,6 +1653,8 @@
             transform: translateY(-2px) scale(1.05);
 
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+            color: #FFFFFF; /* White text on hover for readability */
 
         }
 
@@ -1836,6 +1846,66 @@
 
         }
 
+
+
+        /* Footer styling */
+
+        footer {
+
+            background: var(--header-bg-dark);
+
+            backdrop-filter: blur(var(--blur-amount));
+
+            border-top: 1px solid var(--card-border-dark);
+
+            padding: 2rem 0;
+
+        }
+
+        html.light-theme footer {
+
+            background: var(--header-bg-light);
+
+            border-top: 1px solid var(--card-border-light);
+
+        }
+
+        footer p {
+
+            margin-bottom: 1rem;
+
+        }
+
+        footer .social-links {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 1.5rem;
+
+        }
+
+        footer .social-links a {
+
+            color: var(--text-dark);
+
+            transition: color 0.3s ease;
+
+        }
+
+        html.light-theme footer .social-links a {
+
+            color: var(--text-light);
+
+        }
+
+        footer .social-links a:hover {
+
+            color: var(--primary-color);
+
+        }
+
     </style>
 
     <!-- End of Inline Styles -->
@@ -1906,6 +1976,8 @@
 
                 <li><a href="#certifications" class="nav-link" data-i18n="nav-certifications">Certifications</a></li>
 
+                <li><a href="#projects" class="nav-link" data-i18n="nav-projects">Projects</a></li>
+
                 <li><a href="#contact" class="nav-link" data-i18n="nav-contact">Contact</a></li>
 
             </ul>
@@ -1971,6 +2043,8 @@
                 <li><a href="#experience" class="nav-link" data-i18n="nav-experience">Experience</a></li>
 
                 <li><a href="#certifications" class="nav-link" data-i18n="nav-certifications">Certifications</a></li>
+
+                <li><a href="#projects" class="nav-link" data-i18n="nav-projects">Projects</a></li>
 
                 <li><a href="#contact" class="nav-link" data-i18n="nav-contact">Contact</a></li>
 
@@ -2438,6 +2512,62 @@
 
 
 
+        <!-- Start of Projects Section -->
+
+        <section id="projects" class="py-16 sm:py-20 md:py-24 px-6 sm:px-8 animated-section">
+
+            <div class="container mx-auto max-w-6xl">
+
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 md:mb-14 text-[var(--primary-color)]" data-i18n="projects-title">Projects</h2>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
+
+                    <!-- Project 1 -->
+
+                    <div class="p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
+
+                        <img src="project1.jpg" alt="Project 1 Image" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
+
+                        <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2 text-center">AI Chatbot</h3>
+
+                        <p class="text-gray-200 text-base sm:text-lg mb-4 text-center">An intelligent chatbot built with AI technologies.</p>
+
+                        <div class="text-center">
+
+                            <a href="https://github.com/yourusername/ai-chatbot" class="inline-block px-6 py-3 bg-white/10 text-white font-bold rounded-lg bubbly-btn hover:bg-[var(--primary-color)]" target="_blank" rel="noopener noreferrer" data-i18n="visit-project">Visit Project</a>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Project 2 -->
+
+                    <div class="p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
+
+                        <img src="project2.jpg" alt="Project 2 Image" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
+
+                        <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2 text-center">Portfolio Website</h3>
+
+                        <p class="text-gray-200 text-base sm:text-lg mb-4 text-center">A responsive personal portfolio website.</p>
+
+                        <div class="text-center">
+
+                            <a href="https://your-portfolio-url.com" class="inline-block px-6 py-3 bg-white/10 text-white font-bold rounded-lg bubbly-btn hover:bg-[var(--primary-color)]" target="_blank" rel="noopener noreferrer" data-i18n="visit-project">Visit Project</a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- End of Projects Section -->
+
+
+
         <!-- Start of Contact Section -->
 
         <section id="contact" class="py-16 sm:py-20 md:py-24 px-6 sm:px-8 animated-section">
@@ -2446,11 +2576,7 @@
 
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 md:mb-14 text-[var(--primary-color)]" data-i18n="contact-title">Get in Touch</h2>
 
-                <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-8 p-8 sm:p-10 rounded-2xl shadow-xl border border-gray-700 contact-form">
-
-                    <input type="hidden" name="access_key" value="492a8810-9deb-4946-8c01-ba7883b310d6">
-
-                    <input type="text" name="honeypot" style="display: none;">
+                <form id="contact-form" class="space-y-8 p-8 sm:p-10 rounded-2xl shadow-xl border border-gray-700 contact-form">
 
                     <div>
 
@@ -2578,9 +2704,37 @@
 
     <!-- Start of Footer Section -->
 
-    <footer class="text-center py-8 sm:py-10 text-gray-500 text-base">
+    <footer class="text-center text-gray-500 text-base">
 
         <p data-i18n="footer-copyright">&copy; 2025 <span class="text-[var(--primary-color)]">Muhammad Owais</span>. All Rights Reserved.</p>
+
+        <div class="social-links">
+
+            <a href="https://wa.me/message/NHLJOW7GEFJ7L1" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+
+                <i class="fab fa-whatsapp text-2xl"></i>
+
+            </a>
+
+            <a href="mailto:professional.ots@gmail.com" aria-label="Email">
+
+                <i class="fas fa-envelope text-2xl"></i>
+
+            </a>
+
+            <a href="https://www.linkedin.com/in/muhammad-owais-b45106328/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+
+                <i class="fab fa-linkedin text-2xl"></i>
+
+            </a>
+
+            <a href="https://www.youtube.com/@DigitalUplift.1947" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+
+                <i class="fab fa-youtube text-2xl"></i>
+
+            </a>
+
+        </div>
 
     </footer>
 
@@ -2788,6 +2942,8 @@
 
                     'nav-certifications': 'Certifications',
 
+                    'nav-projects': 'Projects',
+
                     'nav-contact': 'Contact',
 
                     'home-hello': 'Hello',
@@ -2876,6 +3032,10 @@
 
                     'cert-cyber': 'Cybersecurity Course',
 
+                    'projects-title': 'Projects',
+
+                    'visit-project': 'Visit Project',
+
                     'view-credential': 'View Credential →',
 
                     'contact-title': 'Get in Touch',
@@ -2951,6 +3111,8 @@
                     'nav-experience': 'Experiencia',
 
                     'nav-certifications': 'Certificaciones',
+
+                    'nav-projects': 'Proyectos',
 
                     'nav-contact': 'Contacto',
 
@@ -3040,6 +3202,10 @@
 
                     'cert-cyber': 'Curso de Ciberseguridad',
 
+                    'projects-title': 'Proyectos',
+
+                    'visit-project': 'Visitar Proyecto',
+
                     'view-credential': 'Ver Credencial →',
 
                     'contact-title': 'Ponte en Contacto',
@@ -3115,6 +3281,8 @@
                     'nav-experience': 'Expérience',
 
                     'nav-certifications': 'Certifications',
+
+                    'nav-projects': 'Projets',
 
                     'nav-contact': 'Contact',
 
@@ -3204,6 +3372,10 @@
 
                     'cert-cyber': 'Cours de Cybersécurité',
 
+                    'projects-title': 'Projets',
+
+                    'visit-project': 'Visiter le Projet',
+
                     'view-credential': 'Voir la Certification →',
 
                     'contact-title': 'Prenez Contact',
@@ -3279,6 +3451,8 @@
                     'nav-experience': 'Erfahrung',
 
                     'nav-certifications': 'Zertifikate',
+
+                    'nav-projects': 'Projekte',
 
                     'nav-contact': 'Kontakt',
 
@@ -3368,6 +3542,10 @@
 
                     'cert-cyber': 'Cybersecurity Course',
 
+                    'projects-title': 'Projekte',
+
+                    'visit-project': 'Projekt besuchen',
+
                     'view-credential': 'Credential ansehen →',
 
                     'contact-title': 'Kontaktieren Sie mich',
@@ -3443,6 +3621,8 @@
                     'nav-experience': '经验',
 
                     'nav-certifications': '证书',
+
+                    'nav-projects': '项目',
 
                     'nav-contact': '联系',
 
@@ -3532,6 +3712,10 @@
 
                     'cert-cyber': '网络安全课程',
 
+                    'projects-title': '项目',
+
+                    'visit-project': '访问项目',
+
                     'view-credential': '查看凭证 →',
 
                     'contact-title': '联系我',
@@ -3608,6 +3792,8 @@
 
                     'nav-certifications': '認定資格',
 
+                    'nav-projects': 'プロジェクト',
+
                     'nav-contact': 'お問い合わせ',
 
                     'home-hello': 'こんにちは',
@@ -3618,7 +3804,7 @@
 
                     'about-title': '私について',
 
-                    'about-para1': 'AIツール、プロンプトエンジニアリング、サイバーセキュリティのスキルをデジタルマーケティングとコンテンツ作成の経験と組み合わせています。現在、管理技術大学で<span class="text-[var(--primary-color)]">ビジネス情報システム学士（BBIS）</span>を修了中（2027年予定）。',
+                    'about-para1': 'AIツール、プロンプトエンジニアリング、サイバーセキュリティのスキルをデジタルマーケティングとコンテンツ作成の経験と組み合わせています。現在、管理技術大学で<span class="text-[var(--primary-color)]">ビジネス情報システム学士（BBIS)</span>を修了中（2027年予定）。',
 
                     'about-para2': '私のYouTubeチャンネル<a href="https://www.youtube.com/@DigitalUplift.1947" target="_blank" rel="noopener noreferrer" class="text-[var(--primary-color)] hover:underline">@DigitalUplift.1947</a>を通じて、デジタルスキルに欠ける<span class="text-[var(--primary-color)]">1億7700万人のパキスタン人</span>を、週刊ビデオで実践的なヒントを提供してエンパワーしています。',
 
@@ -3696,6 +3882,10 @@
 
                     'cert-cyber': 'サイバーセキュリティコース',
 
+                    'projects-title': 'プロジェクト',
+
+                    'visit-project': 'プロジェクトを訪問',
+
                     'view-credential': '資格証明書を見る →',
 
                     'contact-title': 'お問い合わせ',
@@ -3771,6 +3961,8 @@
                     'nav-experience': '경험',
 
                     'nav-certifications': '자격증',
+
+                    'nav-projects': '프로젝트',
 
                     'nav-contact': '연락처',
 
@@ -3860,6 +4052,10 @@
 
                     'cert-cyber': '사이버 보안 코스',
 
+                    'projects-title': '프로젝트',
+
+                    'visit-project': '프로젝트 방문',
+
                     'view-credential': '자격 증명 보기 →',
 
                     'contact-title': '연락처',
@@ -3935,6 +4131,8 @@
                     'nav-experience': 'الخبرة',
 
                     'nav-certifications': 'الشهادات',
+
+                    'nav-projects': 'المشاريع',
 
                     'nav-contact': 'الاتصال',
 
@@ -4024,6 +4222,10 @@
 
                     'cert-cyber': 'دورة أمن المعلومات',
 
+                    'projects-title': 'المشاريع',
+
+                    'visit-project': 'زيارة المشروع',
+
                     'view-credential': 'عرض الاعتماد →',
 
                     'contact-title': 'تواصل معي',
@@ -4099,6 +4301,8 @@
                     'nav-experience': 'अनुभव',
 
                     'nav-certifications': 'प्रमाणपत्र',
+
+                    'nav-projects': 'परियोजनाएं',
 
                     'nav-contact': 'संपर्क',
 
@@ -4188,6 +4392,10 @@
 
                     'cert-cyber': 'साइबरसिक्योरिटी कोर्स',
 
+                    'projects-title': 'परियोजनाएं',
+
+                    'visit-project': 'परियोजना देखें',
+
                     'view-credential': 'क्रेडेंशियल देखें →',
 
                     'contact-title': 'संपर्क करें',
@@ -4263,6 +4471,8 @@
                     'nav-experience': 'Experiência',
 
                     'nav-certifications': 'Certificações',
+
+                    'nav-projects': 'Projetos',
 
                     'nav-contact': 'Contato',
 
@@ -4351,6 +4561,10 @@
                     'cert-marketing': 'Curso de Marketing Digital',
 
                     'cert-cyber': 'Curso de Cibersegurança',
+
+                    'projects-title': 'Projetos',
+
+                    'visit-project': 'Visitar Projeto',
 
                     'view-credential': 'Ver Credencial →',
 
@@ -5002,7 +5216,7 @@
 
 
 
-            // Start of Form Validation and Submission
+            // Start of Form Validation and Submission with Cloudflare Worker
 
             function validateForm() {
 
@@ -5102,7 +5316,7 @@
 
                 if (now - lastSubmissionTime < submissionCooldown) {
 
-                    alert('Por favor, aguarde antes de enviar outra mensagem.');
+                    alert('Please wait before sending another message.');
 
                     return;
 
@@ -5124,29 +5338,41 @@
 
                 const originalText = elements.submitBtn.innerHTML;
 
-                elements.submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Enviando...';
+                elements.submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Sending...';
 
 
 
                 try {
 
-                    const formData = new FormData(elements.contactForm);
+                    const formData = {
 
-                    const response = await fetch('https://api.web3forms.com/submit', {
+                        name: elements.nameInput.value.trim(),
+
+                        email: elements.emailInput.value.trim(),
+
+                        message: elements.messageInput.value.trim()
+
+                    };
+
+                    const response = await fetch('https://your-worker-name.yourusername.workers.dev', { // Replace with your Worker URL
 
                         method: 'POST',
 
-                        body: formData,
+                        headers: {
+
+                            'Content-Type': 'application/json'
+
+                        },
+
+                        body: JSON.stringify(formData)
 
                     });
 
-                    const json = await response.json();
 
 
+                    if (response.ok) {
 
-                    if (json.success) {
-
-                        elements.modalMessage.innerHTML = 'Obrigado pela mensagem! Entrarei em contato em breve.';
+                        elements.modalMessage.innerHTML = 'Thank you for your message! I will get back to you soon.';
 
                         elements.messageModal.classList.add('is-visible');
 
@@ -5156,13 +5382,13 @@
 
                     } else {
 
-                        throw new Error(json.message || 'Falha no envio');
+                        throw new Error('Submission failed');
 
                     }
 
                 } catch (error) {
 
-                    alert('Houve um erro ao enviar sua mensagem. Tente novamente.');
+                    alert('There was an error sending your message. Please try again.');
 
                 } finally {
 
