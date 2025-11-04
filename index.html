@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <!-- Start of Meta Tags and Title -->
@@ -28,19 +28,19 @@
         :root {
             --primary-color: #FF8C00;
             --background-dark: #0A192F;
-            --card-dark: rgba(31, 41, 55, 0.5); /* Reduced opacity for stronger glass effect */
+            --card-dark: #1F2937; /* Solid background for consistency, removed opacity */
             --text-dark: #F3F4F6;
             --background-light: #E6F0FA;
-            --card-light: rgba(255, 255, 255, 0.5); /* Reduced opacity for stronger glass effect */
-            --text-light: #000000; /* Changed to black for better contrast in light mode */
-            --header-bg-dark: rgba(17, 24, 39, 0.5); /* Reduced opacity */
-            --header-bg-light: rgba(255, 255, 255, 0.5); /* Reduced opacity */
+            --card-light: #F9FAFB; /* Solid light background */
+            --text-light: #000000;
+            --header-bg-dark: #111827;
+            --header-bg-light: #FFFFFF;
             --gray-dark: #9CA3AF;
             --gray-light: #374151;
-            --card-border-dark: rgba(255, 255, 255, 0.1);
-            --card-border-light: rgba(0, 0, 0, 0.1);
-            --blur-amount: 20px; /* Increased blur for better glassmorphism */
-            --shadow-soft: 0 4px 30px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow for better visibility */
+            --card-border-dark: #374151;
+            --card-border-light: #D1D5DB;
+            --blur-amount: 20px;
+            --shadow-soft: 0 4px 30px rgba(0, 0, 0, 0.15);
         }
         html {
             transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -61,9 +61,8 @@
         }
         html.light-theme .bubbly-btn:not(:hover) {
             color: var(--text-light) !important;
-            background-color: rgba(209, 213, 219, 0.5); /* Reduced opacity for buttons in light mode */
+            background-color: var(--card-light);
             border: 1px solid var(--card-border-light);
-            backdrop-filter: blur(var(--blur-amount));
             transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         html.light-theme .bubbly-btn:hover {
@@ -73,9 +72,8 @@
             transition: background-color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         html.light-theme .toggle-details:not(:hover) {
-            background: rgba(229, 231, 235, 0.5); /* Reduced opacity */
+            background: var(--card-light);
             color: var(--text-light);
-            backdrop-filter: blur(var(--blur-amount));
             transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         html.light-theme .toggle-details:hover {
@@ -84,9 +82,8 @@
             transition: background-color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         html.light-theme .theme-toggle:not(:hover) {
-            background: rgba(229, 231, 235, 0.5); /* Reduced opacity */
+            background: var(--card-light);
             color: var(--text-light);
-            backdrop-filter: blur(var(--blur-amount));
             transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         html.light-theme .theme-toggle:hover {
@@ -95,9 +92,8 @@
             transition: background-color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         html.light-theme #back-to-top:not(:hover) {
-            background: rgba(209, 213, 219, 0.5); /* Reduced opacity */
+            background: var(--card-light);
             color: var(--text-light);
-            backdrop-filter: blur(var(--blur-amount));
             transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         html.light-theme #back-to-top:hover {
@@ -112,9 +108,9 @@
             overflow-x: hidden;
             position: relative;
             transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            font-size: 1.15rem; /* Slightly increased base font size for better visibility */
-            line-height: 1.7; /* Increased line height for readability */
-            font-weight: 400; /* Adjusted weight for better contrast */
+            font-size: 1.15rem;
+            line-height: 1.7;
+            font-weight: 400;
         }
         .parallax-background {
             position: fixed;
@@ -207,7 +203,7 @@
         .animated-section {
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Slightly slower for smoother scrolling */
+            transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         .animated-section.is-visible {
             opacity: 1;
@@ -222,12 +218,11 @@
             pointer-events: auto;
             font-weight: 600;
             font-size: 1.1rem;
-            background: rgba(255, 255, 255, 0.05); /* More transparent for stronger glass */
-            backdrop-filter: blur(var(--blur-amount));
+            background: var(--card-dark);
             border: 1px solid var(--card-border-dark);
             box-shadow: var(--shadow-soft);
-            margin: 0 0.5rem; /* Consistent margins for buttons */
-            padding: 0.75rem 1.5rem; /* Consistent padding for better spacing */
+            margin: 0 0.5rem;
+            padding: 0.75rem 1.5rem;
         }
         .bubbly-btn:hover {
             transform: translateY(-8px) scale(1.05);
@@ -263,7 +258,6 @@
         #mobile-menu {
             transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             background-color: var(--header-bg-dark);
-            backdrop-filter: blur(var(--blur-amount));
             border: 1px solid var(--card-border-dark);
             box-shadow: var(--shadow-soft);
             z-index: 50;
@@ -288,21 +282,18 @@
         }
         .modal > div {
             background: var(--card-dark);
-            backdrop-filter: blur(var(--blur-amount));
             border: 1px solid var(--card-border-dark);
             box-shadow: var(--shadow-soft);
         }
         #main-header {
-            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Slower for smoother scrolling */
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             z-index: 50;
             pointer-events: auto;
             background-color: var(--header-bg-dark);
-            backdrop-filter: blur(var(--blur-amount));
             border-bottom: 1px solid var(--card-border-dark);
         }
         #main-header.scrolled {
             background-color: var(--header-bg-dark);
-            backdrop-filter: blur(15px);
             box-shadow: var(--shadow-soft);
         }
         #main-header.hide {
@@ -386,7 +377,6 @@
             transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.4s ease;
             z-index: 5;
             background: var(--card-dark);
-            backdrop-filter: blur(var(--blur-amount));
             border: 1px solid var(--card-border-dark);
             box-shadow: var(--shadow-soft);
             border-radius: 1rem;
@@ -413,7 +403,7 @@
             max-height: 0;
             opacity: 0;
             overflow: hidden;
-            transition: max-height 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Increased duration for smoother expansion */
+            transition: max-height 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         .timeline-content.show {
             max-height: calc(100vh + 500px);
@@ -442,21 +432,20 @@
             justify-content: center;
             width: 2.25rem;
             height: 2.25rem;
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--card-dark);
             color: white;
             border-radius: 50%;
             transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             cursor: pointer;
             z-index: 15;
             pointer-events: auto;
-            backdrop-filter: blur(var(--blur-amount));
             border: 1px solid var(--card-border-dark);
             box-shadow: var(--shadow-soft);
         }
         .toggle-details:hover {
             background: var(--primary-color);
             color: #FFFFFF;
-            transform: scale(1.1); /* Removed rotate on hover for consistent direction */
+            transform: scale(1.1);
         }
         .toggle-details.active {
             transform: rotate(180deg);
@@ -465,7 +454,7 @@
             position: fixed;
             bottom: 2rem;
             right: 2rem;
-            background: rgba(255, 140, 0, 0.2);
+            background: var(--card-dark);
             color: #fff;
             width: 3rem;
             height: 3rem;
@@ -480,7 +469,6 @@
             cursor: pointer;
             pointer-events: auto;
             font-size: 1.25rem;
-            backdrop-filter: blur(var(--blur-amount));
             border: 1px solid var(--card-border-dark);
             box-shadow: var(--shadow-soft);
         }
@@ -498,7 +486,7 @@
             justify-content: center;
             width: 2.25rem;
             height: 2.25rem;
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--card-dark);
             color: var(--text-dark);
             border-radius: 50%;
             transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.4s ease;
@@ -506,7 +494,6 @@
             z-index: 100;
             pointer-events: auto;
             margin-left: 0.5rem;
-            backdrop-filter: blur(var(--blur-amount));
             border: 1px solid var(--card-border-dark);
             box-shadow: var(--shadow-soft);
         }
@@ -538,7 +525,7 @@
             border-color: var(--card-border-light);
         }
         html.light-theme .projects-section .grid > div {
-            background-color: #f9fafb !important;
+            background-color: var(--card-light) !important;
             border-color: var(--card-border-light);
         }
         html.light-theme .contact-form {
@@ -550,16 +537,14 @@
             border-color: var(--card-border-light);
         }
         html.light-theme .form-input {
-            background-color: rgba(243, 244, 246, 0.6); /* Adjusted for better visibility */
+            background-color: #F3F4F6;
             border-color: var(--card-border-light);
             color: var(--text-light);
-            backdrop-filter: blur(var(--blur-amount));
             transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         html.light-theme .skill-badge {
-            background-color: rgba(229, 231, 235, 0.6); /* Adjusted for better visibility */
+            background-color: #E5E7EB;
             color: var(--text-light);
-            backdrop-filter: blur(var(--blur-amount));
             transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         html.light-theme #home h2 {
@@ -718,7 +703,6 @@
             visibility: hidden;
             transform: translateY(-10px);
             transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), visibility 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            backdrop-filter: blur(var(--blur-amount));
             box-shadow: var(--shadow-soft);
         }
         .lang-dropdown.visible {
@@ -750,7 +734,6 @@
         .certifications-section .grid > div {
             transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             background: var(--card-dark);
-            backdrop-filter: blur(var(--blur-amount));
             border: 1px solid var(--card-border-dark);
             box-shadow: var(--shadow-soft);
             border-radius: 1rem;
@@ -762,18 +745,17 @@
         /* Enhanced skill badges with category-specific hover colors */
         .skill-badge {
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease, background-color 0.3s ease, color 0.3s ease;
-            background: rgba(31, 41, 55, 0.3); /* More transparent */
-            backdrop-filter: blur(5px);
+            background: var(--card-dark);
             border: 1px solid var(--card-border-dark);
             box-shadow: var(--shadow-soft);
             border-radius: 9999px;
-            margin: 0.5rem; /* Consistent margins for skills */
-            padding: 0.5rem 1rem; /* Consistent padding for better text spacing */
+            margin: 0.5rem;
+            padding: 0.5rem 1rem;
         }
         .skill-badge:hover {
             transform: translateY(-2px) scale(1.05);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            color: #FFFFFF; /* White text on hover for readability */
+            color: #FFFFFF;
         }
         /* Category-specific hover colors */
         .skill-ai:hover { background-color: #FF8C00; } /* AI - Orange */
@@ -786,10 +768,9 @@
         .social-icon {
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.4s ease;
             padding: 0.5rem;
-            background: transparent !important; /* Ensure no glass effect on icons */
-            backdrop-filter: none !important;
+            background: transparent !important;
             border: none !important;
-            margin: 0 0.5rem; /* Consistent spacing for icons */
+            margin: 0 0.5rem;
         }
         .social-icon:hover {
             transform: scale(1.2) rotate(10deg);
@@ -801,7 +782,6 @@
         /* Overall enhancements: Added subtle glow effects and improved shadows for cards */
         .about-section .flex, .certifications-section .grid > div, .timeline-item, .contact-form {
             background: var(--card-dark);
-            backdrop-filter: blur(var(--blur-amount));
             border: 1px solid var(--card-border-dark);
             box-shadow: var(--shadow-soft);
             border-radius: 1rem;
@@ -836,10 +816,9 @@
                 max-height: 150px;
             }
         }
-        /* Apply glassmorphism to form inputs */
+        /* Apply solid backgrounds to form inputs */
         .form-input {
-            background: rgba(31, 41, 55, 0.3); /* More transparent for inputs */
-            backdrop-filter: blur(var(--blur-amount));
+            background: var(--card-dark);
             border: 1px solid var(--card-border-dark);
             transition: border-color 0.3s ease;
         }
@@ -849,20 +828,19 @@
         }
         /* Increase font sizes for better visibility */
         h2 {
-            font-size: 3.5rem !important; /* Larger headings */
+            font-size: 3.5rem !important;
         }
         h3 {
             font-size: 2.5rem !important;
         }
         p, li {
-            font-size: 1.1rem !important; /* Larger body text */
-            font-weight: 500; /* Slightly bolder for clarity */
-            margin-bottom: 1rem; /* Consistent spacing for text elements */
+            font-size: 1.1rem !important;
+            font-weight: 500;
+            margin-bottom: 1rem;
         }
         /* Footer styling */
         footer {
             background: var(--header-bg-dark);
-            backdrop-filter: blur(var(--blur-amount));
             border-top: 1px solid var(--card-border-dark);
             padding: 2rem 0;
         }
@@ -873,13 +851,14 @@
         footer p {
             margin-bottom: 1rem;
         }
-        /* Enhanced Skills Section - Redesigned for modern look */
+        /* Enhanced Skills Section - Full-width, professional layout with Grid, consistent spacing */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem; /* Increased gap for better spacing */
-            justify-items: stretch; /* Full width for consistency */
-            margin-top: 2rem; /* Added top margin for expansion */
+            gap: 1.5rem; /* Consistent gap */
+            justify-items: stretch;
+            margin-top: 2rem;
+            width: 100%; /* Full width */
         }
         .skill-item {
             display: flex;
@@ -887,7 +866,7 @@
             align-items: flex-start;
             width: 100%;
             background: var(--card-dark);
-            padding: 1.5rem; /* Added padding for card-like structure */
+            padding: 1.5rem;
             border-radius: 1rem;
             border: 1px solid var(--card-border-dark);
             box-shadow: var(--shadow-soft);
@@ -898,31 +877,31 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
         .skill-badge {
-            font-size: 1.25rem; /* Larger font */
-            padding: 0.75rem 1.25rem; /* Adjusted padding for consistency */
-            margin-bottom: 1rem; /* Space before progress */
+            font-size: 1.25rem;
+            padding: 0.75rem 1.25rem;
+            margin-bottom: 1rem;
             font-weight: 600;
             display: flex;
             align-items: center;
-            width: 100%; /* Full width */
+            width: 100%;
             justify-content: flex-start;
         }
         .skill-badge i {
-            margin-right: 0.75rem; /* Consistent icon spacing */
-            width: 1.25rem; /* Fixed width for alignment */
+            margin-right: 0.75rem;
+            width: 1.25rem;
             text-align: center;
         }
         .progress-bar {
             width: 100%;
-            height: 10px; /* Slightly thicker for visibility */
+            height: 10px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 5px;
             overflow: hidden;
-            margin-top: auto; /* Push to bottom */
+            margin-top: auto;
         }
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--primary-color), #FFA500); /* Gradient for modern look */
+            background: linear-gradient(90deg, var(--primary-color), #FFA500);
             transition: width 0.5s ease;
             border-radius: 5px;
         }
@@ -930,59 +909,81 @@
             background: var(--card-light);
             border-color: var(--card-border-light);
         }
-        /* Profile 3D Effect - Fixed */
-        .profile-container {
-            overflow: visible !important;
-            position: relative; /* Ensure positioning context */
+        html.light-theme .progress-bar {
+            background: rgba(0, 0, 0, 0.1);
         }
-        .profile-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            height: 100%;
+        /* Profile 3D Effect - Subtle depth without overflow */
+        .profile-container {
+            overflow: hidden; /* Ensure no overflow */
+            position: relative;
+            width: 192px; /* Fixed size for consistency across devices */
+            height: 192px;
             border-radius: 50%;
-            background: var(--card-dark);
-            z-index: 1;
-            border: 4px solid #4b5563; /* Gray border for frame */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
         }
         .profile-container img {
-            position: relative;
-            z-index: 10;
-            transform: translateY(-8%) scale(1.05); /* Subtle pop-out, slight scale to fill */
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Add depth */
-            border-radius: 50%; /* Ensure circular clip on image */
-            clip-path: circle(50% at 50% 35%); /* Clip to allow head pop without distortion */
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            transform: scale(1.05); /* Slight scale for pop-out feel */
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15)); /* Elegant depth */
         }
-        html.light-theme .profile-container::before {
-            background: var(--card-light);
-            border-color: #d1d5db;
+        html.light-theme .profile-container {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
-        /* Projects Background Fix - Solid dark */
+        /* Projects Background Fix - Solid, consistent with certifications */
         .projects-section .grid > div {
-            background: #1f2937 !important; /* Solid dark gray */
-            backdrop-filter: none !important;
-            border: 1px solid #374151;
+            background: var(--card-dark) !important;
+            border: 1px solid var(--card-border-dark);
             box-shadow: var(--shadow-soft);
+            border-radius: 1rem;
+            margin: 0; /* Consistent margins */
+            padding: 1.5rem; /* Consistent padding */
         }
         html.light-theme .projects-section .grid > div {
-            background: #f9fafb !important; /* Solid light gray */
-            border-color: #d1d5db;
+            background: var(--card-light) !important;
+            border-color: var(--card-border-light);
         }
         /* Ensure high contrast text in projects */
         .projects-section h3 {
-            color: #ffffff !important; /* White for dark bg */
+            color: #FFFFFF !important;
         }
         .projects-section p {
-            color: #d1d5db !important; /* Light gray for readability */
+            color: #D1D5DB !important;
         }
         html.light-theme .projects-section h3 {
-            color: #111827 !important; /* Dark for light bg */
+            color: #111827 !important;
         }
         html.light-theme .projects-section p {
             color: #374151 !important;
+        }
+        /* Responsiveness for all sections */
+        @media (max-width: 768px) {
+            .skills-grid {
+                grid-template-columns: 1fr; /* Stack on mobile */
+            }
+            .profile-container {
+                width: 160px;
+                height: 160px;
+            }
+            .projects-section .grid {
+                grid-template-columns: 1fr;
+            }
+            .certifications-section .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr); /* Tablet layout */
+            }
+            .projects-section .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .certifications-section .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
     <!-- End of Inline Styles -->
@@ -1055,7 +1056,8 @@
         </div>
     </header>
     <!-- End of Header Section -->
-    <!-- New Logo Section --><div class="logo-container">
+    <!-- New Logo Section -->
+<div class="logo-container">
   <img src="logo.svg" alt="logo" class="logo">
 </div>
 <style>
@@ -1090,7 +1092,7 @@
   }
 </style>
     <!-- End of New Logo Section -->
-  
+ 
     <!-- Start of Main Content -->
     <main class="relative z-10">
         <!-- Start of Home Section -->
@@ -1123,8 +1125,8 @@
             <div class="container mx-auto max-w-5xl">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 md:mb-14 text-[var(--primary-color)]" data-i18n="about-title">About Me</h2>
                 <div class="flex flex-col md:flex-row items-center md:items-start space-y-8 md:space-y-0 md:space-x-10 p-8 sm:p-10 rounded-2xl shadow-xl border border-gray-700">
-                    <div class="flex-shrink-0 w-48 h-48 sm:w-56 sm:h-56 rounded-full overflow-hidden bg-gray-700 border-4 border-gray-600 profile-container">
-                        <img src="Profile.jpg" alt="Profile Photo for Muhammad Owais" class="w-full h-full object-cover">
+                    <div class="flex-shrink-0 profile-container">
+                        <img src="Profile.jpg" alt="Profile Photo for Muhammad Owais">
                     </div>
                     <div class="md:flex-grow text-center md:text-left">
                         <p class="text-base sm:text-lg leading-relaxed mb-6 text-gray-200" data-i18n="about-para1">I combine skills in AI tools, prompt engineering, and cybersecurity with experience in digital marketing and content creation. Currently pursuing <span class="text-[var(--primary-color)]">Bachelor of Business Information Systems (BBIS)</span>, University of Management and Technology – Ongoing (Expected 2027).</p>
@@ -1133,52 +1135,52 @@
                         <div class="mt-8">
                             <h3 class="text-2xl sm:text-3xl font-semibold mb-6 text-[var(--primary-color)]" data-i18n="skills-title">Skills & Expertise</h3>
                             <div class="skills-grid">
-                                <div class="skill-item">
-                                    <span class="skill-badge skill-ai"><i class="fas fa-robot mr-2"></i><span data-i18n="skill-ai">AI Tools</span></span>
+                                <div class="skill-item skill-ai">
+                                    <span class="skill-badge"><i class="fas fa-robot mr-2"></i><span data-i18n="skill-ai">AI Tools</span></span>
                                     <div class="progress-bar"><div class="progress-fill" style="width: 90%;"></div></div>
                                 </div>
-                                <div class="skill-item">
-                                    <span class="skill-badge skill-dev"><i class="fas fa-code mr-2"></i><span data-i18n="skill-python">Python</span></span>
+                                <div class="skill-item skill-dev">
+                                    <span class="skill-badge"><i class="fas fa-code mr-2"></i><span data-i18n="skill-python">Python</span></span>
                                     <div class="progress-bar"><div class="progress-fill" style="width: 85%;"></div></div>
                                 </div>
-                                <div class="skill-item">
-                                    <span class="skill-badge skill-security"><i class="fas fa-shield-alt mr-2"></i><span data-i18n="skill-cyber">Cybersecurity</span></span>
+                                <div class="skill-item skill-security">
+                                    <span class="skill-badge"><i class="fas fa-shield-alt mr-2"></i><span data-i18n="skill-cyber">Cybersecurity</span></span>
                                     <div class="progress-bar"><div class="progress-fill" style="width: 80%;"></div></div>
                                 </div>
-                                <div class="skill-item">
-                                    <span class="skill-badge skill-marketing"><i class="fas fa-chart-line mr-2"></i><span data-i18n="skill-marketing">Digital Marketing</span></span>
+                                <div class="skill-item skill-marketing">
+                                    <span class="skill-badge"><i class="fas fa-chart-line mr-2"></i><span data-i18n="skill-marketing">Digital Marketing</span></span>
                                     <div class="progress-bar"><div class="progress-fill" style="width: 75%;"></div></div>
                                 </div>
-                                <div class="skill-item">
-                                    <span class="skill-badge skill-content"><i class="fab fa-youtube mr-2"></i><span data-i18n="skill-youtube">YouTube Creation</span></span>
+                                <div class="skill-item skill-content">
+                                    <span class="skill-badge"><i class="fab fa-youtube mr-2"></i><span data-i18n="skill-youtube">YouTube Creation</span></span>
                                     <div class="progress-bar"><div class="progress-fill" style="width: 90%;"></div></div>
                                 </div>
-                                <div class="skill-item">
-                                    <span class="skill-badge skill-comm"><i class="fas fa-language mr-2"></i><span data-i18n="skill-bilingual">Bilingual Communication</span></span>
+                                <div class="skill-item skill-comm">
+                                    <span class="skill-badge"><i class="fas fa-language mr-2"></i><span data-i18n="skill-bilingual">Bilingual Communication</span></span>
                                     <div class="progress-bar"><div class="progress-fill" style="width: 95%;"></div></div>
                                 </div>
-                                <div class="skill-item">
-                                    <span class="skill-badge skill-dev"><i class="fab fa-github mr-2"></i><span data-i18n="skill-github">GitHub</span></span>
+                                <div class="skill-item skill-dev">
+                                    <span class="skill-badge"><i class="fab fa-github mr-2"></i><span data-i18n="skill-github">GitHub</span></span>
                                     <div class="progress-bar"><div class="progress-fill" style="width: 80%;"></div></div>
                                 </div>
-                                <div class="skill-item">
-                                    <span class="skill-badge skill-dev"><i class="fas fa-cloud mr-2"></i><span data-i18n="skill-netlify">Netlify</span></span>
+                                <div class="skill-item skill-dev">
+                                    <span class="skill-badge"><i class="fas fa-cloud mr-2"></i><span data-i18n="skill-netlify">Netlify</span></span>
                                     <div class="progress-bar"><div class="progress-fill" style="width: 70%;"></div></div>
                                 </div>
-                                <div class="skill-item">
-                                    <span class="skill-badge skill-content"><i class="fas fa-video mr-2"></i><span data-i18n="skill-premiere">Premiere Pro</span></span>
+                                <div class="skill-item skill-content">
+                                    <span class="skill-badge"><i class="fas fa-video mr-2"></i><span data-i18n="skill-premiere">Premiere Pro</span></span>
                                     <div class="progress-bar"><div class="progress-fill" style="width: 85%;"></div></div>
                                 </div>
-                                <div class="skill-item">
-                                    <span class="skill-badge skill-dev"><i class="fas fa-cloud mr-2"></i><span data-i18n="skill-cloudflare">Cloudflare</span></span>
+                                <div class="skill-item skill-dev">
+                                    <span class="skill-badge"><i class="fas fa-cloud mr-2"></i><span data-i18n="skill-cloudflare">Cloudflare</span></span>
                                     <div class="progress-bar"><div class="progress-fill" style="width: 75%;"></div></div>
                                 </div>
-                                <div class="skill-item">
-                                    <span class="skill-badge skill-dev"><i class="fas fa-server mr-2"></i><span data-i18n="skill-backend">Backend</span></span>
+                                <div class="skill-item skill-dev">
+                                    <span class="skill-badge"><i class="fas fa-server mr-2"></i><span data-i18n="skill-backend">Backend Development</span></span>
                                     <div class="progress-bar"><div class="progress-fill" style="width: 70%;"></div></div>
                                 </div>
-                                <div class="skill-item">
-                                    <span class="skill-badge skill-dev"><i class="fas fa-hammer mr-2"></i><span data-i18n="skill-workers">Workers</span></span>
+                                <div class="skill-item skill-dev">
+                                    <span class="skill-badge"><i class="fas fa-hammer mr-2"></i><span data-i18n="skill-workers">Workers</span></span>
                                     <div class="progress-bar"><div class="progress-fill" style="width: 65%;"></div></div>
                                 </div>
                             </div>
@@ -1312,15 +1314,15 @@
         </section>
         <!-- End of Certifications Section -->
         <!-- Start of Projects Section -->
-        <section id="projects" class="py-16 sm:py-20 md:py-24 px-6 sm:px-8 animated-section">
+        <section id="projects" class="py-16 sm:py-20 md:py-24 px-6 sm:px-8 animated-section projects-section">
             <div class="container mx-auto max-w-6xl">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 md:mb-14 text-[var(--primary-color)]" data-i18n="projects-title">Projects</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
                     <!-- Project 1 -->
                     <div class="p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
                         <img src="project1.jpg" alt="Project 1 Image" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
-                        <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2 text-center">AI Chatbot</h3>
-                        <p class="text-gray-200 text-base sm:text-lg mb-4 text-center">An intelligent chatbot built with AI technologies.</p>
+                        <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold mb-2 text-center">AI Chatbot</h3>
+                        <p class="text-base sm:text-lg mb-4 text-center">An intelligent chatbot built with AI technologies.</p>
                         <div class="text-center">
                             <a href="https://github.com/yourusername/ai-chatbot" class="inline-block px-6 py-3 bg-white/10 text-white font-bold rounded-lg bubbly-btn hover:bg-[var(--primary-color)]" target="_blank" rel="noopener noreferrer" data-i18n="visit-project">Visit Project</a>
                         </div>
@@ -1328,8 +1330,8 @@
                     <!-- Project 2 -->
                     <div class="p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
                         <img src="project2.jpg" alt="Project 2 Image" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
-                        <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2 text-center">Portfolio Website</h3>
-                        <p class="text-gray-200 text-base sm:text-lg mb-4 text-center">A responsive personal portfolio website.</p>
+                        <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold mb-2 text-center">Portfolio Website</h3>
+                        <p class="text-base sm:text-lg mb-4 text-center">A responsive personal portfolio website.</p>
                         <div class="text-center">
                             <a href="https://your-portfolio-url.com" class="inline-block px-6 py-3 bg-white/10 text-white font-bold rounded-lg bubbly-btn hover:bg-[var(--primary-color)]" target="_blank" rel="noopener noreferrer" data-i18n="visit-project">Visit Project</a>
                         </div>
@@ -1523,7 +1525,7 @@
                     'skill-netlify': 'Netlify',
                     'skill-premiere': 'Premiere Pro',
                     'skill-cloudflare': 'Cloudflare',
-                    'skill-backend': 'Backend',
+                    'skill-backend': 'Backend Development',
                     'skill-workers': 'Workers',
                     'visit-youtube': '<i class="fab fa-youtube mr-2"></i>Visit My YouTube Channel',
                     'experience-title': 'Professional Experience',
@@ -1611,7 +1613,7 @@
                     'skill-netlify': 'Netlify',
                     'skill-premiere': 'Premiere Pro',
                     'skill-cloudflare': 'Cloudflare',
-                    'skill-backend': 'Backend',
+                    'skill-backend': 'Backend Development',
                     'skill-workers': 'Workers',
                     'visit-youtube': '<i class="fab fa-youtube mr-2"></i>Visita Mi Canal de YouTube',
                     'experience-title': 'Experiencia Profesional',
@@ -1699,7 +1701,7 @@
                     'skill-netlify': 'Netlify',
                     'skill-premiere': 'Premiere Pro',
                     'skill-cloudflare': 'Cloudflare',
-                    'skill-backend': 'Backend',
+                    'skill-backend': 'Backend Development',
                     'skill-workers': 'Workers',
                     'visit-youtube': '<i class="fab fa-youtube mr-2"></i>Visiter Ma Chaîne YouTube',
                     'experience-title': 'Expérience Professionnelle',
@@ -1787,7 +1789,7 @@
                     'skill-netlify': 'Netlify',
                     'skill-premiere': 'Premiere Pro',
                     'skill-cloudflare': 'Cloudflare',
-                    'skill-backend': 'Backend',
+                    'skill-backend': 'Backend Development',
                     'skill-workers': 'Workers',
                     'visit-youtube': '<i class="fab fa-youtube mr-2"></i>Meinen YouTube-Kanal besuchen',
                     'experience-title': 'Berufliche Erfahrung',
@@ -1875,7 +1877,7 @@
                     'skill-netlify': 'Netlify',
                     'skill-premiere': 'Premiere Pro',
                     'skill-cloudflare': 'Cloudflare',
-                    'skill-backend': 'Backend',
+                    'skill-backend': 'Backend Development',
                     'skill-workers': 'Workers',
                     'visit-youtube': '<i class="fab fa-youtube mr-2"></i>访问我的YouTube频道',
                     'experience-title': '专业经验',
@@ -1963,7 +1965,7 @@
                     'skill-netlify': 'Netlify',
                     'skill-premiere': 'Premiere Pro',
                     'skill-cloudflare': 'Cloudflare',
-                    'skill-backend': 'Backend',
+                    'skill-backend': 'Backend Development',
                     'skill-workers': 'Workers',
                     'visit-youtube': '<i class="fab fa-youtube mr-2"></i>私のYouTubeチャンネルを訪れる',
                     'experience-title': 'プロフェッショナル経験',
@@ -2051,7 +2053,7 @@
                     'skill-netlify': 'Netlify',
                     'skill-premiere': 'Premiere Pro',
                     'skill-cloudflare': 'Cloudflare',
-                    'skill-backend': 'Backend',
+                    'skill-backend': 'Backend Development',
                     'skill-workers': 'Workers',
                     'visit-youtube': '<i class="fab fa-youtube mr-2"></i>내 YouTube 채널 방문',
                     'experience-title': '전문 경험',
@@ -2139,7 +2141,7 @@
                     'skill-netlify': 'نتفلای',
                     'skill-premiere': 'بريمير برو',
                     'skill-cloudflare': 'Cloudflare',
-                    'skill-backend': 'Backend',
+                    'skill-backend': 'Backend Development',
                     'skill-workers': 'Workers',
                     'visit-youtube': '<i class="fab fa-youtube mr-2"></i>زيارة قناتي على يوتيوب',
                     'experience-title': 'الخبرة المهنية',
@@ -2227,7 +2229,7 @@
                     'skill-netlify': 'नेटलीफाई',
                     'skill-premiere': 'प्रिमियर प्रो',
                     'skill-cloudflare': 'Cloudflare',
-                    'skill-backend': 'Backend',
+                    'skill-backend': 'Backend Development',
                     'skill-workers': 'Workers',
                     'visit-youtube': '<i class="fab fa-youtube mr-2"></i>मेरा यूट्यूब चैनल देखें',
                     'experience-title': 'व्यावसायिक अनुभव',
@@ -2315,7 +2317,7 @@
                     'skill-netlify': 'Netlify',
                     'skill-premiere': 'Premiere Pro',
                     'skill-cloudflare': 'Cloudflare',
-                    'skill-backend': 'Backend',
+                    'skill-backend': 'Backend Development',
                     'skill-workers': 'Workers',
                     'visit-youtube': '<i class="fab fa-youtube mr-2"></i>Visite Meu Canal no YouTube',
                     'experience-title': 'Experiência Profissional',
@@ -2767,4 +2769,3 @@
     <!-- End of Main JavaScript Logic -->
 </body>
 </html>
-    
