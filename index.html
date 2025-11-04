@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en" class="scroll-smooth">
 <head>
     <!-- Start of Meta Tags and Title -->
@@ -538,7 +538,7 @@
             border-color: var(--card-border-light);
         }
         html.light-theme .projects-section .grid > div {
-            background-color: var(--card-light);
+            background-color: #f9fafb !important;
             border-color: var(--card-border-light);
         }
         html.light-theme .contact-form {
@@ -873,52 +873,116 @@
         footer p {
             margin-bottom: 1rem;
         }
-        /* Enhanced Skills Section */
+        /* Enhanced Skills Section - Redesigned for modern look */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            justify-items: start;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem; /* Increased gap for better spacing */
+            justify-items: stretch; /* Full width for consistency */
+            margin-top: 2rem; /* Added top margin for expansion */
         }
         .skill-item {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             width: 100%;
+            background: var(--card-dark);
+            padding: 1.5rem; /* Added padding for card-like structure */
+            border-radius: 1rem;
+            border: 1px solid var(--card-border-dark);
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
         .skill-badge {
             font-size: 1.25rem; /* Larger font */
-            padding: 1rem 1.5rem; /* Larger padding */
-            margin-bottom: 0.75rem;
+            padding: 0.75rem 1.25rem; /* Adjusted padding for consistency */
+            margin-bottom: 1rem; /* Space before progress */
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            width: 100%; /* Full width */
+            justify-content: flex-start;
+        }
+        .skill-badge i {
+            margin-right: 0.75rem; /* Consistent icon spacing */
+            width: 1.25rem; /* Fixed width for alignment */
+            text-align: center;
         }
         .progress-bar {
             width: 100%;
-            height: 8px;
+            height: 10px; /* Slightly thicker for visibility */
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
+            border-radius: 5px;
             overflow: hidden;
+            margin-top: auto; /* Push to bottom */
         }
         .progress-fill {
             height: 100%;
-            background: var(--primary-color);
+            background: linear-gradient(90deg, var(--primary-color), #FFA500); /* Gradient for modern look */
             transition: width 0.5s ease;
+            border-radius: 5px;
         }
-        /* Profile 3D Effect */
+        html.light-theme .skill-item {
+            background: var(--card-light);
+            border-color: var(--card-border-light);
+        }
+        /* Profile 3D Effect - Fixed */
         .profile-container {
             overflow: visible !important;
+            position: relative; /* Ensure positioning context */
+        }
+        .profile-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--card-dark);
+            z-index: 1;
+            border: 4px solid #4b5563; /* Gray border for frame */
         }
         .profile-container img {
             position: relative;
             z-index: 10;
-            transform: translateY(-15%); /* Subtle pop-out effect */
+            transform: translateY(-8%) scale(1.05); /* Subtle pop-out, slight scale to fill */
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Add depth */
+            border-radius: 50%; /* Ensure circular clip on image */
+            clip-path: circle(50% at 50% 35%); /* Clip to allow head pop without distortion */
         }
-        /* Projects Background Fix */
+        html.light-theme .profile-container::before {
+            background: var(--card-light);
+            border-color: #d1d5db;
+        }
+        /* Projects Background Fix - Solid dark */
         .projects-section .grid > div {
-            background: var(--card-dark);
-            backdrop-filter: blur(var(--blur-amount));
-            border: 1px solid var(--card-border-dark);
+            background: #1f2937 !important; /* Solid dark gray */
+            backdrop-filter: none !important;
+            border: 1px solid #374151;
             box-shadow: var(--shadow-soft);
+        }
+        html.light-theme .projects-section .grid > div {
+            background: #f9fafb !important; /* Solid light gray */
+            border-color: #d1d5db;
+        }
+        /* Ensure high contrast text in projects */
+        .projects-section h3 {
+            color: #ffffff !important; /* White for dark bg */
+        }
+        .projects-section p {
+            color: #d1d5db !important; /* Light gray for readability */
+        }
+        html.light-theme .projects-section h3 {
+            color: #111827 !important; /* Dark for light bg */
+        }
+        html.light-theme .projects-section p {
+            color: #374151 !important;
         }
     </style>
     <!-- End of Inline Styles -->
@@ -1026,7 +1090,7 @@
   }
 </style>
     <!-- End of New Logo Section -->
-   
+  
     <!-- Start of Main Content -->
     <main class="relative z-10">
         <!-- Start of Home Section -->
@@ -1104,6 +1168,18 @@
                                 <div class="skill-item">
                                     <span class="skill-badge skill-content"><i class="fas fa-video mr-2"></i><span data-i18n="skill-premiere">Premiere Pro</span></span>
                                     <div class="progress-bar"><div class="progress-fill" style="width: 85%;"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                    <span class="skill-badge skill-dev"><i class="fas fa-cloud mr-2"></i><span data-i18n="skill-cloudflare">Cloudflare</span></span>
+                                    <div class="progress-bar"><div class="progress-fill" style="width: 75%;"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                    <span class="skill-badge skill-dev"><i class="fas fa-server mr-2"></i><span data-i18n="skill-backend">Backend</span></span>
+                                    <div class="progress-bar"><div class="progress-fill" style="width: 70%;"></div></div>
+                                </div>
+                                <div class="skill-item">
+                                    <span class="skill-badge skill-dev"><i class="fas fa-hammer mr-2"></i><span data-i18n="skill-workers">Workers</span></span>
+                                    <div class="progress-bar"><div class="progress-fill" style="width: 65%;"></div></div>
                                 </div>
                             </div>
                         </div>
@@ -1420,7 +1496,7 @@
             let scrollTimeout;
             let typingInterval; // For typing animation control
             // End of Variables for Scroll and Submission
-            // Start of Translations Object - Full for all languages
+            // Start of Translations Object - Full for all languages, with new keys
             const translations = {
                 en: {
                     'nav-home': 'Home',
@@ -1446,6 +1522,9 @@
                     'skill-github': 'GitHub',
                     'skill-netlify': 'Netlify',
                     'skill-premiere': 'Premiere Pro',
+                    'skill-cloudflare': 'Cloudflare',
+                    'skill-backend': 'Backend',
+                    'skill-workers': 'Workers',
                     'visit-youtube': '<i class="fab fa-youtube mr-2"></i>Visit My YouTube Channel',
                     'experience-title': 'Professional Experience',
                     'exp-ai-strategist': 'AI & Content Strategist',
@@ -1531,6 +1610,9 @@
                     'skill-github': 'GitHub',
                     'skill-netlify': 'Netlify',
                     'skill-premiere': 'Premiere Pro',
+                    'skill-cloudflare': 'Cloudflare',
+                    'skill-backend': 'Backend',
+                    'skill-workers': 'Workers',
                     'visit-youtube': '<i class="fab fa-youtube mr-2"></i>Visita Mi Canal de YouTube',
                     'experience-title': 'Experiencia Profesional',
                     'exp-ai-strategist': 'Estratega de IA y Contenido',
@@ -1616,6 +1698,9 @@
                     'skill-github': 'GitHub',
                     'skill-netlify': 'Netlify',
                     'skill-premiere': 'Premiere Pro',
+                    'skill-cloudflare': 'Cloudflare',
+                    'skill-backend': 'Backend',
+                    'skill-workers': 'Workers',
                     'visit-youtube': '<i class="fab fa-youtube mr-2"></i>Visiter Ma Chaîne YouTube',
                     'experience-title': 'Expérience Professionnelle',
                     'exp-ai-strategist': 'Stratège IA et Contenu',
@@ -1701,6 +1786,9 @@
                     'skill-github': 'GitHub',
                     'skill-netlify': 'Netlify',
                     'skill-premiere': 'Premiere Pro',
+                    'skill-cloudflare': 'Cloudflare',
+                    'skill-backend': 'Backend',
+                    'skill-workers': 'Workers',
                     'visit-youtube': '<i class="fab fa-youtube mr-2"></i>Meinen YouTube-Kanal besuchen',
                     'experience-title': 'Berufliche Erfahrung',
                     'exp-ai-strategist': 'KI- & Content-Stratege',
@@ -1786,6 +1874,9 @@
                     'skill-github': 'GitHub',
                     'skill-netlify': 'Netlify',
                     'skill-premiere': 'Premiere Pro',
+                    'skill-cloudflare': 'Cloudflare',
+                    'skill-backend': 'Backend',
+                    'skill-workers': 'Workers',
                     'visit-youtube': '<i class="fab fa-youtube mr-2"></i>访问我的YouTube频道',
                     'experience-title': '专业经验',
                     'exp-ai-strategist': 'AI与内容策略师',
@@ -1871,6 +1962,9 @@
                     'skill-github': 'GitHub',
                     'skill-netlify': 'Netlify',
                     'skill-premiere': 'Premiere Pro',
+                    'skill-cloudflare': 'Cloudflare',
+                    'skill-backend': 'Backend',
+                    'skill-workers': 'Workers',
                     'visit-youtube': '<i class="fab fa-youtube mr-2"></i>私のYouTubeチャンネルを訪れる',
                     'experience-title': 'プロフェッショナル経験',
                     'exp-ai-strategist': 'AI & コンテンツストラテジスト',
@@ -1956,6 +2050,9 @@
                     'skill-github': 'GitHub',
                     'skill-netlify': 'Netlify',
                     'skill-premiere': 'Premiere Pro',
+                    'skill-cloudflare': 'Cloudflare',
+                    'skill-backend': 'Backend',
+                    'skill-workers': 'Workers',
                     'visit-youtube': '<i class="fab fa-youtube mr-2"></i>내 YouTube 채널 방문',
                     'experience-title': '전문 경험',
                     'exp-ai-strategist': 'AI & 콘텐츠 전략가',
@@ -2041,6 +2138,9 @@
                     'skill-github': 'غيت هاب',
                     'skill-netlify': 'نتفلای',
                     'skill-premiere': 'بريمير برو',
+                    'skill-cloudflare': 'Cloudflare',
+                    'skill-backend': 'Backend',
+                    'skill-workers': 'Workers',
                     'visit-youtube': '<i class="fab fa-youtube mr-2"></i>زيارة قناتي على يوتيوب',
                     'experience-title': 'الخبرة المهنية',
                     'exp-ai-strategist': 'استراتيجي الذكاء الاصطناعي والمحتوى',
@@ -2126,6 +2226,9 @@
                     'skill-github': 'गिटहब',
                     'skill-netlify': 'नेटलीफाई',
                     'skill-premiere': 'प्रिमियर प्रो',
+                    'skill-cloudflare': 'Cloudflare',
+                    'skill-backend': 'Backend',
+                    'skill-workers': 'Workers',
                     'visit-youtube': '<i class="fab fa-youtube mr-2"></i>मेरा यूट्यूब चैनल देखें',
                     'experience-title': 'व्यावसायिक अनुभव',
                     'exp-ai-strategist': 'AI और कंटेंट स्ट्रैटेजिस्ट',
@@ -2211,6 +2314,9 @@
                     'skill-github': 'GitHub',
                     'skill-netlify': 'Netlify',
                     'skill-premiere': 'Premiere Pro',
+                    'skill-cloudflare': 'Cloudflare',
+                    'skill-backend': 'Backend',
+                    'skill-workers': 'Workers',
                     'visit-youtube': '<i class="fab fa-youtube mr-2"></i>Visite Meu Canal no YouTube',
                     'experience-title': 'Experiência Profissional',
                     'exp-ai-strategist': 'Estrategista de IA e Conteúdo',
@@ -2661,3 +2767,4 @@
     <!-- End of Main JavaScript Logic -->
 </body>
 </html>
+    
