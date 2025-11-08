@@ -821,10 +821,10 @@ footer p {
 }
 /* Enhanced Skills Section - Full-width, professional layout with Grid, consistent spacing */
 .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem; /* Consistent gap */
-    justify-items: stretch;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
     margin-top: 2rem;
     width: 100%; /* Full width */
 }
@@ -832,12 +832,12 @@ footer p {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 100%;
-    background: var(--card-dark);
-    padding: 2rem;
-    border-radius: 1rem;
-    border: 1px solid var(--card-border-dark);
-    box-shadow: var(--shadow-soft);
+    width: auto;
+    background: transparent;
+    padding: 0;
+    border-radius: 9999px;
+    border: none;
+    box-shadow: none;
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     cursor: pointer;
 }
@@ -853,8 +853,9 @@ footer p {
     font-weight: 600;
     display: flex;
     align-items: center;
-    width: 100%;
-    justify-content: flex-start;
+    width: auto;
+    justify-content: center;
+    background-color: #1F2937; /* Same color for all */
 }
 .skill-badge i {
     margin-right: 0.75rem;
@@ -881,11 +882,14 @@ footer p {
     color: var(--text-dark);
 }
 html.light-theme .skill-item {
-    background: var(--card-light);
+    background: transparent;
     border-color: var(--card-border-light);
 }
 html.light-theme .expanded-content p {
     color: var(--text-light);
+}
+html.light-theme .skill-badge {
+    background-color: #F9FAFB; /* Same color for light theme */
 }
 /* Profile 3D Effect - Subtle depth without overflow */
 .profile-container {
@@ -936,7 +940,7 @@ html.light-theme .projects-section p {
 /* Responsiveness for all sections */
 @media (max-width: 768px) {
     .skills-grid {
-        grid-template-columns: 1fr; /* Stack on mobile */
+        gap: 1rem; /* Stack on mobile */
     }
     .profile-container {
         width: 160px;
@@ -951,7 +955,7 @@ html.light-theme .projects-section p {
 }
 @media (min-width: 769px) and (max-width: 1024px) {
     .skills-grid {
-        grid-template-columns: repeat(2, 1fr); /* Tablet layout */
+        gap: 1rem; /* Tablet layout */
     }
     .projects-section .grid {
         grid-template-columns: repeat(2, 1fr);
