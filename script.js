@@ -763,7 +763,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'join-me': 'मुझसे जुड़ें और एक उज्जवल भविष्य के लिए डिजिटल कौशल में महारत हासिल करें!',
             'about-title': 'मेरे बारे में',
             'about-para1': 'मैं AI टूल्स, प्रॉम्प्ट इंजीनियरिंग और साइबरसिक्योरिटी कौशल को डिजिटल मार्केटिंग और कंटेंट क्रिएशन अनुभव के साथ जोड़ता हूं। वर्तमान में प्रबंधन और प्रौद्योगिकी विश्वविद्यालय से <span class="text-[var(--primary-color)]">बिजनेस इंफॉर्मेशन सिस्टम्स बैचलर (BBIS)</span> का पीछा कर रहा हूं – चल रहा (अपेक्षित 2027)।',
-            'about-para2': 'मेरे YouTube चैनल <a href="https://www.youtube.com/@DigitalUplift.1947" target="_blank" rel="noopener noreferrer" class="text-[var(--primary-color)] hover:underline">@DigitalUplift.1947</a> के माध्यम से, मैं डिजिटल कौशल की कमी वाले <span class="text-[var(--primary-color)]">177 मिलियन पाकिस्तानियों</span> को साप्ताहिक वीडियो के माध्यम से व्यावहारिक टिप्स प्रदान प्रदान करके सशक्त बनाता हूं।',
+            'about-para2': 'मेरे YouTube चैनल <a href="https://www.youtube.com/@DigitalUplift.1947" target="_blank" rel="noopener noreferrer" class="text-[var(--primary-color)] hover:underline">@DigitalUplift.1947</a> के माध्यम से, मैं डिजिटल कौशल की कमी वाले <span class="text-[var(--primary-color)]">177 मिलियन पाकिस्तानियों</span> को साप्ताहिक वीडियो के माध्यम से व्यावहारिक टिप्स प्रदान करके सशक्त बनाता हूं।',
             'about-para3': 'जिज्ञासा और सीखने के प्रति प्रतिबद्धता से प्रेरित, मैं अनुकूलनीय, रचनात्मक हूं और जटिल विचारों को सरल बनाने के लिए उत्साही हूं।',
             'skills-title': 'कौशल और विशेषज्ञता',
             'skill-ai': 'AI टूल्स',
