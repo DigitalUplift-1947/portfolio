@@ -1100,8 +1100,9 @@ document.addEventListener('DOMContentLoaded', () => {
             elements.headerElement.classList.add('fade-in');
             // Start typing animation
             typeWriter();
-            // Trigger icon pulses
-            setTimeout(triggerIconPulses, 1000);
+            // Trigger icon pulses and repeat every 5 seconds
+            triggerIconPulses();
+            setInterval(triggerIconPulses, 5000);
         }, 300);
     });
     // EASY EDIT: Loading screen hide. Adjust timeout for longer/shorter load simulation.
@@ -1140,8 +1141,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // EASY EDIT: Toggle details for timeline. Adjust aria attributes if adding more.
     elements.toggleButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            const content = document.getElementById(btn.getAttribute('aria-controls'));
+            const contentId = btn.getAttribute('aria-controls');
+            const content = document.getElementById(contentId);
             const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+            // Close all other sections first
+            elements.toggleButtons.forEach(otherBtn => {
+                if (otherBtn !== btn) {
+                    const otherContentId = otherBtn.getAttribute('aria-controls');
+                    const otherContent = document.getElementById(otherContentId);
+                    if (otherBtn.getAttribute('aria-expanded') === 'true') {
+                        otherBtn.setAttribute('aria-expanded', 'false');
+                        const otherIcon = otherBtn.querySelector('i');
+                        if (otherIcon) otherIcon.style.transform = 'rotate(0deg)';
+                        otherContent.classList.remove('show');
+                        otherBtn.classList.remove('active');
+                    }
+                }
+            });
+            // Toggle the clicked one
             btn.setAttribute('aria-expanded', !isExpanded);
             const icon = btn.querySelector('i');
             if (icon) icon.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
