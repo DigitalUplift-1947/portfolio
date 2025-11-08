@@ -39,6 +39,13 @@ document.addEventListener('DOMContentLoaded', () => {
         headerElement: document.querySelector('header'),
         socialIcons: document.querySelectorAll('.social-icon')
     };
+    // Load Lucide icons script
+    const lucideScript = document.createElement('script');
+    lucideScript.src = 'https://unpkg.com/lucide@latest/dist/umd/lucide.min.js';
+    document.head.appendChild(lucideScript);
+    lucideScript.onload = () => {
+        lucide.createIcons();
+    };
     // EASY EDIT: Variables for scroll and form submission. Adjust cooldown if needed.
     let lastScrollY = window.scrollY;
     let lastSubmissionTime = 0;
