@@ -15,19 +15,6 @@
     --card-border-light: #D1D5DB;
     --blur-amount: 20px;
     --shadow-soft: 0 4px 30px rgba(0, 0, 0, 0.15);
-    /* Add these variables to :root for category-specific colors. These are visually appealing accents that work well in both dark and light modes. */
-    --color-ai: #3498DB; /* Blue for AI */
-    --color-python: #27AE60; /* Green for Python */
-    --color-cyber: #E74C3C; /* Red for Cybersecurity */
-    --color-marketing: #9B59B6; /* Purple for Digital Marketing */
-    --color-youtube: #FF0000; /* Red for YouTube */
-    --color-bilingual: #F39C12; /* Orange for Bilingual */
-    --color-github: #333333; /* Dark gray for GitHub */
-    --color-netlify: #1ABC9C; /* Teal for Netlify */
-    --color-premiere: #8E44AD; /* Purple for Premiere Pro */
-    --color-cloudflare: #F39C12; /* Orange for Cloudflare */
-    --color-backend: #2980B9; /* Blue for Backend */
-    --color-workers: #7F8C8D; /* Gray for Workers */
 }
 html {
     transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -39,19 +26,6 @@ html.light-theme {
     --header-bg-dark: var(--header-bg-light);
     --gray-dark: var(--gray-light);
     --card-border-dark: var(--card-border-light);
-    /* Light theme adjustments for better contrast (slightly desaturated for readability). */
-    --color-ai: #2980B9;
-    --color-python: #229954;
-    --color-cyber: #C0392B;
-    --color-marketing: #8E44AD;
-    --color-youtube: #E74C3C;
-    --color-bilingual: #D68910;
-    --color-github: #2C3E50;
-    --color-netlify: #16A085;
-    --color-premiere: #7D3C98;
-    --color-cloudflare: #D68910;
-    --color-backend: #2471A3;
-    --color-workers: #6C7A89;
 }
 html.light-theme .text-gray-200,
 html.light-theme .text-gray-300,
@@ -861,7 +835,7 @@ footer p {
     width: auto;
     background: var(--card-dark);
     padding: 0.75rem 1.25rem;
-    border-radius: 9999px;
+    border-radius: 1rem; /* Rectangular with rounded edges */
     border: 1px solid var(--card-border-dark);
     box-shadow: var(--shadow-soft);
     transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
@@ -871,56 +845,20 @@ footer p {
     cursor: pointer;
     overflow: hidden; /* Prevent any overflow during expansion or hover */
 }
-/* Unified polished hover animation: subtle lift, scale, shadow increase, and background tint with category color. */
+/* Unified polished hover animation: subtle lift, scale, shadow increase, and background tint with primary color. */
 .skill-item:hover {
     transform: translateY(-5px) scale(1.02);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     border-color: transparent; /* Remove border on hover for a cleaner look */
+    background: rgba(var(--primary-color), 0.15); /* Uniform tint using primary color */
 }
-/* Category-specific hover backgrounds (subtle tint for appeal without overwhelming). */
-.skill-item.skill-ai:hover { background: rgba(var(--color-ai), 0.15); }
-.skill-item.skill-python:hover { background: rgba(var(--color-python), 0.15); }
-.skill-item.skill-cyber:hover { background: rgba(var(--color-cyber), 0.15); }
-.skill-item.skill-marketing:hover { background: rgba(var(--color-marketing), 0.15); }
-.skill-item.skill-youtube:hover { background: rgba(var(--color-youtube), 0.15); }
-.skill-item.skill-bilingual:hover { background: rgba(var(--color-bilingual), 0.15); }
-.skill-item.skill-github:hover { background: rgba(var(--color-github), 0.15); }
-.skill-item.skill-netlify:hover { background: rgba(var(--color-netlify), 0.15); }
-.skill-item.skill-premiere:hover { background: rgba(var(--color-premiere), 0.15); }
-.skill-item.skill-cloudflare:hover { background: rgba(var(--color-cloudflare), 0.15); }
-.skill-item.skill-backend:hover { background: rgba(var(--color-backend), 0.15); }
-.skill-item.skill-workers:hover { background: rgba(var(--color-workers), 0.15); }
-/* On hover, change text and icon color to match category for visual interest. */
+/* On hover, change text and icon color to white for consistency. */
 .skill-item:hover .skill-badge,
 .skill-item:hover .skill-badge i {
-    color: var(--primary-color); /* Fallback to primary, but override per category if desired */
+    color: #FFFFFF;
     transition: color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-.skill-item.skill-ai:hover .skill-badge,
-.skill-item.skill-ai:hover .skill-badge i { color: var(--color-ai); }
-.skill-item.skill-python:hover .skill-badge,
-.skill-item.skill-python:hover .skill-badge i { color: var(--color-python); }
-.skill-item.skill-cyber:hover .skill-badge,
-.skill-item.skill-cyber:hover .skill-badge i { color: var(--color-cyber); }
-.skill-item.skill-marketing:hover .skill-badge,
-.skill-item.skill-marketing:hover .skill-badge i { color: var(--color-marketing); }
-.skill-item.skill-youtube:hover .skill-badge,
-.skill-item.skill-youtube:hover .skill-badge i { color: var(--color-youtube); }
-.skill-item.skill-bilingual:hover .skill-badge,
-.skill-item.skill-bilingual:hover .skill-badge i { color: var(--color-bilingual); }
-.skill-item.skill-github:hover .skill-badge,
-.skill-item.skill-github:hover .skill-badge i { color: var(--color-github); }
-.skill-item.skill-netlify:hover .skill-badge,
-.skill-item.skill-netlify:hover .skill-badge i { color: var(--color-netlify); }
-.skill-item.skill-premiere:hover .skill-badge,
-.skill-item.skill-premiere:hover .skill-badge i { color: var(--color-premiere); }
-.skill-item.skill-cloudflare:hover .skill-badge,
-.skill-item.skill-cloudflare:hover .skill-badge i { color: var(--color-cloudflare); }
-.skill-item.skill-backend:hover .skill-badge,
-.skill-item.skill-backend:hover .skill-badge i { color: var(--color-backend); }
-.skill-item.skill-workers:hover .skill-badge,
-.skill-item.skill-workers:hover .skill-badge i { color: var(--color-workers); }
-/* Updated .skill-badge to prevent text overflow/wrapping: use ellipsis for long text, ensure it fits within pill. */
+/* Updated .skill-badge to prevent text overflow/wrapping: use ellipsis for long text, ensure it fits within rectangle. */
 .skill-badge {
     font-size: 1.25rem;
     font-weight: 600;
@@ -931,7 +869,7 @@ footer p {
     white-space: nowrap; /* Prevent wrapping */
     overflow: hidden; /* Hide overflow */
     text-overflow: ellipsis; /* Add ellipsis if text is too long */
-    max-width: 300px; /* Optional: Set a max-width to prevent overly long pills; adjust as needed */
+    max-width: 300px; /* Optional: Set a max-width to prevent overly long items; adjust as needed */
     transition: color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .skill-badge i {
@@ -965,6 +903,7 @@ html.light-theme .skill-item {
 }
 html.light-theme .skill-item:hover {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Softer shadow in light mode */
+    background: rgba(var(--primary-color), 0.15); /* Uniform tint in light mode */
 }
 html.light-theme .expanded-content p {
     color: var(--text-light);
