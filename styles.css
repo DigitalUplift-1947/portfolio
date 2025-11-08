@@ -838,8 +838,8 @@ footer p {
     border-radius: 1rem; /* Rectangular with rounded edges */
     border: 1px solid var(--card-border-dark);
     box-shadow: var(--shadow-soft);
-    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
                 border-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
                 background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     cursor: pointer;
@@ -912,10 +912,15 @@ html.light-theme .expanded-content p {
 .profile-container {
     overflow: hidden; /* Ensure no overflow */
     position: relative;
-    width: 192px; /* Fixed size for consistency across devices */
-    height: 192px;
+    width: 256px; /* Increased size for prominence */
+    height: 256px;
     border-radius: 50%;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.profile-container:hover {
+    transform: scale(1.05); /* Hover scale */
+    box-shadow: 0 8px 20px rgba(255, 140, 0, 0.3); /* Orange-themed glow on hover */
 }
 .profile-container img {
     width: 100%;
@@ -927,6 +932,9 @@ html.light-theme .expanded-content p {
 }
 html.light-theme .profile-container {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+html.light-theme .profile-container:hover {
+    box-shadow: 0 8px 20px rgba(255, 140, 0, 0.2); /* Adjusted for light mode */
 }
 /* Projects Background Fix - Solid, consistent with certifications */
 .projects-section .grid > div {
@@ -960,8 +968,8 @@ html.light-theme .projects-section p {
         gap: 1rem; /* Stack on mobile */
     }
     .profile-container {
-        width: 160px;
-        height: 160px;
+        width: 200px;
+        height: 200px;
     }
     .projects-section .grid {
         grid-template-columns: 1fr;
