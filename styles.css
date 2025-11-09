@@ -483,6 +483,30 @@ html.light-theme .badge {
 .theme-toggle i, .lang-toggle i {
     font-size: 1.25rem;
 }
+.theme-toggle {
+    position: relative;
+    width: 50px;
+    height: 24px;
+    background-color: #ccc;
+    border-radius: 50px;
+    transition: background-color 0.3s ease;
+}
+.theme-toggle.light {
+    background-color: #555;
+}
+.toggle-knob {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+.theme-toggle.light .toggle-knob {
+    transform: translateX(26px);
+}
 html.light-theme .theme-toggle [data-lucide="moon"] { display: none; }
 html.light-theme .theme-toggle [data-lucide="sun"] { display: inline; }
 .theme-toggle [data-lucide="sun"] { display: none; }
@@ -524,6 +548,10 @@ html.light-theme .skill-badge {
     background-color: #E5E7EB;
     color: var(--text-light);
     transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+html.light-theme .skill-item:hover .skill-badge {
+    background: var(--primary-color);
+    color: #000000;
 }
 html.light-theme #home h2 {
     color: var(--text-light);
@@ -740,8 +768,8 @@ html.light-theme .lang-option {
     box-shadow: var(--shadow-soft);
     border-radius: 9999px;
     margin: 0.5rem;
-    padding: 0.75rem 1.5rem;
-    font-size: 1.4rem;
+    padding: 1rem 2rem;
+    font-size: 1.6rem;
 }
 .skill-badge:hover {
     transform: translateY(-2px) scale(1.05);
@@ -876,7 +904,7 @@ footer p {
 }
 /* Updated .skill-badge to prevent text overflow/wrapping: use ellipsis for long text, ensure it fits within rectangle. */
 .skill-badge {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: 600;
     display: flex;
     align-items: center;
@@ -979,6 +1007,42 @@ html.light-theme .projects-section p {
     color: #374151 !important;
 }
 /* Responsiveness for all sections */
+@media (max-width: 360px) {
+    .skills-grid {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .profile-container {
+        width: 150px;
+        height: 150px;
+    }
+    .projects-section .grid, .certifications-section .grid {
+        grid-template-columns: 1fr;
+    }
+    .theme-toggle {
+        width: 40px;
+        height: 20px;
+    }
+    .toggle-knob {
+        width: 16px;
+        height: 16px;
+    }
+    .theme-toggle.light .toggle-knob {
+        transform: translateX(20px);
+    }
+}
+@media (max-width: 480px) {
+    .skills-grid {
+        gap: 0.75rem;
+    }
+    .profile-container {
+        width: 180px;
+        height: 180px;
+    }
+    .projects-section .grid, .certifications-section .grid {
+        grid-template-columns: 1fr;
+    }
+}
 @media (max-width: 768px) {
     .skills-grid {
         gap: 1rem; /* Stack on mobile */
@@ -1003,6 +1067,16 @@ html.light-theme .projects-section p {
     }
     .certifications-section .grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (min-width: 1025px) and (max-width: 1440px) {
+    .skills-grid {
+        gap: 1.5rem;
+    }
+}
+@media (min-width: 1441px) {
+    .skills-grid {
+        gap: 2rem;
     }
 }
 /* About Section Specific Styles - Wider layout and larger fonts */
@@ -1093,110 +1167,4 @@ i[data-lucide] {
     stroke-linecap: round;
     stroke-linejoin: round;
     transition: stroke 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-/* Theme Toggle Switch Styles */
-.toggle-container {
-    position: relative;
-    width: 3.75rem; /* Increased for better usability on mobile */
-    height: 2rem;
-    border-radius: 9999px;
-    background: var(--card-dark);
-    transition: background-color 0.3s ease;
-    cursor: pointer;
-}
-.theme-switch {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-.switch-label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 9999px;
-    background: var(--card-dark);
-    transition: background-color 0.3s ease;
-    cursor: pointer;
-}
-.switch-label .knob {
-    position: absolute;
-    top: 0.25rem;
-    left: 0.25rem;
-    width: 1.5rem;
-    height: 1.5rem;
-    border-radius: 50%;
-    background: white;
-    transition: transform 0.3s ease;
-}
-.theme-switch:checked + .switch-label {
-    background: var(--primary-color);
-}
-.theme-switch:checked + .switch-label .knob {
-    transform: translateX(1.75rem); /* Slide to right */
-}
-html.light-theme .toggle-container {
-    background: var(--card-light);
-}
-html.light-theme .switch-label {
-    background: var(--card-light);
-}
-/* Responsiveness */
-@media (max-width: 1440px) {
-    .container {
-        max-width: 1280px;
-    }
-}
-@media (max-width: 1024px) {
-    .container {
-        max-width: 960px;
-    }
-    .skills-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-@media (max-width: 768px) {
-    .container {
-        max-width: 720px;
-    }
-    .skills-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .toggle-container {
-        width: 3.5rem;
-        height: 1.75rem;
-    }
-    .switch-label .knob {
-        width: 1.25rem;
-        height: 1.25rem;
-    }
-    .theme-switch:checked + .switch-label .knob {
-        transform: translateX(1.75rem);
-    }
-    #main-header .container {
-        flex-wrap: wrap;
-    }
-}
-@media (max-width: 480px) {
-    .container {
-        max-width: 100%;
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-    .skills-grid {
-        grid-template-columns: 1fr;
-    }
-    h2 {
-        font-size: 2.5rem !important;
-    }
-    h3 {
-        font-size: 2rem !important;
-    }
-}
-@media (max-width: 360px) {
-    .bubbly-btn {
-        padding: 0.5rem 1rem;
-        font-size: 1rem;
-    }
 }
