@@ -1,11 +1,11 @@
-/* styles.css */
+/* style.css */
 :root {
     --primary-color: #FF8C00;
     --background-dark: #0A192F;
-    --card-dark: #1F2937; /* Solid background for consistency, removed opacity */
+    --card-dark: #1F2937;
     --text-dark: #F3F4F6;
     --background-light: #E6F0FA;
-    --card-light: #F9FAFB; /* Solid light background */
+    --card-light: #F9FAFB;
     --text-light: #000000;
     --header-bg-dark: #111827;
     --header-bg-light: #FFFFFF;
@@ -475,37 +475,18 @@ html.light-theme .badge {
     border: 1px solid var(--card-border-dark);
     box-shadow: var(--shadow-soft);
 }
+.theme-toggle {
+    width: auto;
+    padding: 0 0.5rem;
+    border-radius: 9999px;
+}
 .theme-toggle:hover, .lang-toggle:hover {
     background: var(--primary-color);
     color: #FFFFFF;
     transform: scale(1.1);
 }
-.theme-toggle i, .lang-toggle i {
+.theme-toggle i {
     font-size: 1.25rem;
-}
-.theme-toggle {
-    position: relative;
-    width: 50px;
-    height: 24px;
-    background-color: #ccc;
-    border-radius: 50px;
-    transition: background-color 0.3s ease;
-}
-.theme-toggle.light {
-    background-color: #555;
-}
-.toggle-knob {
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 20px;
-    height: 20px;
-    background-color: white;
-    border-radius: 50%;
-    transition: transform 0.3s ease;
-}
-.theme-toggle.light .toggle-knob {
-    transform: translateX(26px);
 }
 html.light-theme .theme-toggle [data-lucide="moon"] { display: none; }
 html.light-theme .theme-toggle [data-lucide="sun"] { display: inline; }
@@ -548,10 +529,6 @@ html.light-theme .skill-badge {
     background-color: #E5E7EB;
     color: var(--text-light);
     transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-html.light-theme .skill-item:hover .skill-badge {
-    background: var(--primary-color);
-    color: #000000;
 }
 html.light-theme #home h2 {
     color: var(--text-light);
@@ -769,12 +746,15 @@ html.light-theme .lang-option {
     border-radius: 9999px;
     margin: 0.5rem;
     padding: 1rem 2rem;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
 }
 .skill-badge:hover {
     transform: translateY(-2px) scale(1.05);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     color: #FFFFFF;
+}
+html.light-theme .skill-badge:hover {
+    color: #000000 !important;
 }
 /* Social Icons Animation in Home Section */
 .social-icon {
@@ -867,10 +847,10 @@ footer p {
 .skills-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem; /* Consistent gap */
+    gap: 1rem;
     justify-content: center;
     margin-top: 2rem;
-    width: 100%; /* Full width */
+    width: 100%;
 }
 .skill-item {
     display: flex;
@@ -879,7 +859,7 @@ footer p {
     width: auto;
     background: var(--card-dark);
     padding: 0.75rem 1.25rem;
-    border-radius: 1rem; /* Rectangular with rounded edges */
+    border-radius: 1rem;
     border: 1px solid var(--card-border-dark);
     box-shadow: var(--shadow-soft);
     transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
@@ -887,41 +867,38 @@ footer p {
                 border-color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
                 background-color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     cursor: pointer;
-    overflow: hidden; /* Prevent any overflow during expansion or hover */
+    overflow: hidden;
 }
-/* Unified polished hover animation: subtle lift, scale, shadow increase, and background tint with primary color. */
 .skill-item:hover {
     transform: translateY(-5px) scale(1.02);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    border-color: transparent; /* Remove border on hover for a cleaner look */
-    background: var(--primary-color); /* Uniform tint using primary color */
+    border-color: transparent;
+    background: var(--primary-color);
 }
-/* On hover, change text and icon color to white for consistency. */
 .skill-item:hover .skill-badge,
 .skill-item:hover .skill-badge i {
     color: #FFFFFF;
     transition: color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-/* Updated .skill-badge to prevent text overflow/wrapping: use ellipsis for long text, ensure it fits within rectangle. */
 .skill-badge {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: 600;
     display: flex;
     align-items: center;
     width: 100%;
     justify-content: flex-start;
-    white-space: nowrap; /* Prevent wrapping */
-    overflow: hidden; /* Hide overflow */
-    text-overflow: ellipsis; /* Add ellipsis if text is too long */
-    max-width: 300px; /* Optional: Set a max-width to prevent overly long items; adjust as needed */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 300px;
     transition: color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    padding: 1rem 2rem;
 }
 .skill-badge i {
     margin-right: 0.75rem;
     width: 1.25rem;
     text-align: center;
 }
-/* Expanded content for accordion */
 .expanded-content {
     max-height: 0;
     opacity: 0;
@@ -930,10 +907,10 @@ footer p {
     margin-top: 1rem;
     padding-top: 1rem;
     border-top: 1px solid var(--card-border-dark);
-    width: 100%; /* Ensure full width for content */
+    width: 100%;
 }
 .skill-item.expanded .expanded-content {
-    max-height: 200px; /* Adjust based on content */
+    max-height: 200px;
     opacity: 1;
 }
 .expanded-content p {
@@ -946,39 +923,42 @@ html.light-theme .skill-item {
     border-color: var(--card-border-light);
 }
 html.light-theme .skill-item:hover {
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Softer shadow in light mode */
-    background: var(--primary-color); /* Uniform tint in light mode */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    background: var(--primary-color);
+}
+html.light-theme .skill-item:hover .skill-badge {
+    color: #000000 !important;
 }
 html.light-theme .expanded-content p {
     color: var(--text-light);
 }
 /* Profile 3D Effect - Subtle depth without overflow */
 .profile-container {
-    overflow: hidden; /* Ensure no overflow */
+    overflow: hidden;
     position: relative;
-    width: 256px; /* Increased size for prominence */
+    width: 256px;
     height: 256px;
     border-radius: 50%;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 .profile-container:hover {
-    transform: scale(1.05); /* Hover scale */
-    box-shadow: 0 8px 20px rgba(255, 140, 0, 0.3); /* Orange-themed glow on hover */
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(255, 140, 0, 0.3);
 }
 .profile-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
-    transform: scale(1.05); /* Slight scale for pop-out feel */
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15)); /* Elegant depth */
+    transform: scale(1.05);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
 }
 html.light-theme .profile-container {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 html.light-theme .profile-container:hover {
-    box-shadow: 0 8px 20px rgba(255, 140, 0, 0.2); /* Adjusted for light mode */
+    box-shadow: 0 8px 20px rgba(255, 140, 0, 0.2);
 }
 /* Projects Background Fix - Solid, consistent with certifications */
 .projects-section .grid > div {
@@ -986,8 +966,8 @@ html.light-theme .profile-container:hover {
     border: 1px solid var(--card-border-dark);
     box-shadow: var(--shadow-soft);
     border-radius: 1rem;
-    margin: 0; /* Consistent margins */
-    padding: 1.5rem; /* Consistent padding */
+    margin: 0;
+    padding: 1.5rem;
 }
 html.light-theme .projects-section .grid > div {
     background: var(--card-light) !important;
@@ -1008,49 +988,42 @@ html.light-theme .projects-section p {
 }
 /* Responsiveness for all sections */
 @media (max-width: 360px) {
+    h2 {
+        font-size: 2.5rem !important;
+    }
+    h3 {
+        font-size: 1.8rem !important;
+    }
+    p, li {
+        font-size: 0.9rem !important;
+    }
     .skills-grid {
-        flex-direction: column;
         gap: 0.5rem;
-    }
-    .profile-container {
-        width: 150px;
-        height: 150px;
-    }
-    .projects-section .grid, .certifications-section .grid {
-        grid-template-columns: 1fr;
-    }
-    .theme-toggle {
-        width: 40px;
-        height: 20px;
-    }
-    .toggle-knob {
-        width: 16px;
-        height: 16px;
-    }
-    .theme-toggle.light .toggle-knob {
-        transform: translateX(20px);
-    }
-}
-@media (max-width: 480px) {
-    .skills-grid {
-        gap: 0.75rem;
     }
     .profile-container {
         width: 180px;
         height: 180px;
     }
-    .projects-section .grid, .certifications-section .grid {
-        grid-template-columns: 1fr;
+    .theme-toggle {
+        margin-left: 0.25rem;
     }
 }
-@media (max-width: 768px) {
+@media (max-width: 480px) {
+    h2 {
+        font-size: 2.8rem !important;
+    }
     .skills-grid {
-        gap: 1rem; /* Stack on mobile */
+        gap: 0.75rem;
     }
     .profile-container {
         width: 200px;
         height: 200px;
     }
+}
+@media (max-width: 768px) {
+    .skills-grid {
+        gap: 1rem;
+    }
     .projects-section .grid {
         grid-template-columns: 1fr;
     }
@@ -1058,9 +1031,9 @@ html.light-theme .projects-section p {
         grid-template-columns: 1fr;
     }
 }
-@media (min-width: 769px) and (max-width: 1024px) {
+@media (max-width: 1024px) {
     .skills-grid {
-        gap: 1rem; /* Tablet layout */
+        gap: 1rem;
     }
     .projects-section .grid {
         grid-template-columns: repeat(2, 1fr);
@@ -1069,14 +1042,9 @@ html.light-theme .projects-section p {
         grid-template-columns: repeat(2, 1fr);
     }
 }
-@media (min-width: 1025px) and (max-width: 1440px) {
-    .skills-grid {
-        gap: 1.5rem;
-    }
-}
-@media (min-width: 1441px) {
-    .skills-grid {
-        gap: 2rem;
+@media (max-width: 1440px) {
+    .container {
+        max-width: 1280px;
     }
 }
 /* About Section Specific Styles - Wider layout and larger fonts */
@@ -1084,20 +1052,20 @@ html.light-theme .projects-section p {
     max-width: 100%;
 }
 #about .container {
-    max-width: none; /* Changed to none for full width */
+    max-width: none;
 }
 #about h2 {
-    font-size: 4rem !important; /* Larger title */
+    font-size: 4rem !important;
 }
 #about h3 {
-    font-size: 3rem !important; /* Larger subsection title */
+    font-size: 3rem !important;
 }
 #about p {
-    font-size: 1.25rem !important; /* Increased readability */
+    font-size: 1.25rem !important;
     line-height: 1.8;
 }
 #about .flex {
-    padding: 1rem; /* Reduced padding for less dead space */
+    padding: 1rem;
 }
 @media (max-width: 768px) {
     #about .flex {
@@ -1116,7 +1084,7 @@ html.light-theme .projects-section p {
   width: 250px;
   height: auto;
   opacity: 0;
-  transform: translateY(40px) scale(0.9); /* start lower & smaller */
+  transform: translateY(40px) scale(0.9);
   animation: coolIntro 1.6s ease-out forwards;
 }
 @keyframes coolIntro {
@@ -1126,11 +1094,11 @@ html.light-theme .projects-section p {
   }
   60% {
     opacity: 1;
-    transform: translateY(-8px) scale(1.02); /* overshoot */
+    transform: translateY(-8px) scale(1.02);
   }
   100% {
     opacity: 1;
-    transform: translateY(0) scale(1); /* final position */
+    transform: translateY(0) scale(1);
   }
 }
 /* RTL support for languages like Arabic (if enabled in JS). */
@@ -1167,4 +1135,56 @@ i[data-lucide] {
     stroke-linecap: round;
     stroke-linejoin: round;
     transition: stroke 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+/* Toggle Switch Styles */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.toggle-switch label {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border-radius: 20px;
+}
+.toggle-switch label:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border-radius: 50%;
+}
+.toggle-switch input:checked + label {
+    background-color: var(--primary-color);
+}
+.toggle-switch input:checked + label:before {
+    transform: translateX(20px);
+}
+html.light-theme .toggle-switch label {
+    background-color: var(--primary-color);
+}
+html.light-theme .toggle-switch input:not(:checked) + label:before {
+    transform: translateX(20px);
+}
+html.light-theme .toggle-switch input:checked + label {
+    background-color: #ccc;
+}
+html.light-theme .toggle-switch input:checked + label:before {
+    transform: translateX(0);
 }
