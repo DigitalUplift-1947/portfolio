@@ -85,6 +85,14 @@ body {
     font-size: 1.15rem;
     line-height: 1.7;
     font-weight: 400;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+}
+p, li, h1, h2, h3, h4, h5, h6, span, div {
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
 }
 .parallax-background {
     position: fixed;
@@ -354,6 +362,9 @@ input[type="checkbox"]:focus {
     border: 1px solid var(--card-border-dark);
     box-shadow: var(--shadow-soft);
     border-radius: 1rem;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
 }
 .timeline-item:hover {
     transform: translateX(5px);
@@ -378,6 +389,9 @@ input[type="checkbox"]:focus {
     opacity: 0;
     overflow: hidden;
     transition: max-height 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
 }
 .timeline-content.show {
     max-height: calc(100vh + 500px);
@@ -728,6 +742,9 @@ html.light-theme .lang-option {
     border: 1px solid var(--card-border-dark);
     box-shadow: var(--shadow-soft);
     border-radius: 1rem;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
 }
 .certifications-section .grid > div:hover {
     transform: translateY(-10px);
@@ -742,6 +759,9 @@ html.light-theme .lang-option {
     margin: 0.5rem;
     padding: 1rem 2rem;
     font-size: 1.5rem;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
 }
 .skill-badge:hover {
     transform: translateY(-2px) scale(1.05);
@@ -769,6 +789,9 @@ html.light-theme .skill-badge:hover {
     border: 1px solid var(--card-border-dark);
     box-shadow: var(--shadow-soft);
     border-radius: 1rem;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
 }
 .about-section .flex:hover, .certifications-section .grid > div:hover, .timeline-item:hover, .contact-form:hover {
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
@@ -836,9 +859,8 @@ footer p {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
-    margin: 2.5rem auto 0;
-    max-width: calc(4 * 280px + 3 * 2rem);
-    padding: 0;
+    margin-top: 2.5rem;
+    padding: 0 1rem;
 }
 .skill-item {
     background: var(--card-dark);
@@ -847,9 +869,12 @@ footer p {
     padding: 1.5rem;
     box-shadow: var(--shadow-soft);
     transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    overflow: hidden;
+    overflow: visible;
     position: relative;
     cursor: pointer;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
 }
 .skill-item::before {
     content: '';
@@ -894,6 +919,9 @@ footer p {
     font-size: 1rem;
     line-height: 1.7;
     color: var(--gray-dark);
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
 }
 html.light-theme .expanded-content {
     color: var(--gray-light);
@@ -927,10 +955,15 @@ html.light-theme .expanded-content {
     box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
     border: none;
 }
-.projects-section .visit-project-btn:hover {
+.projects-section .visit-project-btn:hover,
+.projects-section .visit-project-btn:focus {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(255, 140, 0, 0.4);
     background: linear-gradient(135deg, #FF6B35, var(--primary-color));
+}
+.projects-section .visit-project-btn:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 2px 6px rgba(255, 140, 0, 0.2);
 }
 html.light-theme .projects-section .visit-project-btn {
     background: linear-gradient(135deg, white, #FFE4D6);
@@ -938,10 +971,15 @@ html.light-theme .projects-section .visit-project-btn {
     border: 2px solid var(--primary-color);
     box-shadow: 0 4px 12px rgba(255, 140, 0, 0.2);
 }
-html.light-theme .projects-section .visit-project-btn:hover {
+html.light-theme .projects-section .visit-project-btn:hover,
+html.light-theme .projects-section .visit-project-btn:focus {
     background: linear-gradient(135deg, var(--primary-color), #FF6B35);
     color: white;
     box-shadow: 0 8px 20px rgba(255, 140, 0, 0.3);
+}
+html.light-theme .projects-section .visit-project-btn:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 2px 6px rgba(255, 140, 0, 0.2);
 }
 /* ========================================
    REST OF ORIGINAL STYLES (unchanged)
@@ -980,6 +1018,9 @@ html.light-theme .profile-container:hover {
     border-radius: 1rem;
     margin: 0;
     padding: 1.5rem;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
 }
 html.light-theme .projects-section .grid > div {
     background: var(--card-light) !important;
@@ -1066,10 +1107,15 @@ html.light-theme .toggle-switch input:checked + label:before { transform: transl
     box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
     border: none;
 }
-.view-credential-btn:hover {
+.view-credential-btn:hover,
+.view-credential-btn:focus {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(255, 140, 0, 0.4);
     background: linear-gradient(135deg, #FF6B35, var(--primary-color));
+}
+.view-credential-btn:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 2px 6px rgba(255, 140, 0, 0.2);
 }
 html.light-theme .view-credential-btn {
     background: linear-gradient(135deg, white, #FFE4D6);
@@ -1077,8 +1123,13 @@ html.light-theme .view-credential-btn {
     border: 2px solid var(--primary-color);
     box-shadow: 0 4px 12px rgba(255, 140, 0, 0.2);
 }
-html.light-theme .view-credential-btn:hover {
+html.light-theme .view-credential-btn:hover,
+html.light-theme .view-credential-btn:focus {
     background: linear-gradient(135deg, var(--primary-color), #FF6B35);
     color: white;
     box-shadow: 0 8px 20px rgba(255, 140, 0, 0.3);
+}
+html.light-theme .view-credential-btn:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 2px 6px rgba(255, 140, 0, 0.2);
 }
