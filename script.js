@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         navLinks: document.querySelectorAll('header nav ul li a'),
         toggleButtons: document.querySelectorAll('.toggle-details'),
         changingText: document.getElementById('changing-text'),
-        themeToggle: document.getElementById('theme-toggle'),
+        themeToggleCheckbox: document.getElementById('toggle-checkbox'),
         langToggle: document.getElementById('lang-toggle'),
         langDropdown: document.getElementById('lang-dropdown'),
         langOptions: document.querySelectorAll('.lang-option'),
@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
         headerElement: document.querySelector('header'),
         socialIcons: document.querySelectorAll('.social-icon')
     };
-    // Load Lucide icons script
     const lucideScript = document.createElement('script');
     lucideScript.src = 'https://unpkg.com/lucide@latest/dist/umd/lucide.min.js';
     document.head.appendChild(lucideScript);
@@ -48,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let lastSubmissionTime = 0;
     const submissionCooldown = 30000;
     let scrollTimeout;
-    let typingInterval; // For typing animation control
+    let typingInterval;
     const translations = {
         en: {
             'nav-home': 'Home',
@@ -589,7 +588,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'explore-certifications': '내 자격증 탐색',
             'join-me': '더 밝은 미래를 위한 디지털 스킬 마스터링에 나와 함께하세요!',
             'about-title': '소개',
-            'about-para1': 'AI 도구, 프롬프트 엔지니어링, 사이버 보안 스킬을 디지털 마케팅과 콘텐츠 제작 경험과 결합합니다. 현재 관리 및 기술 대학에서 <span class="text-[var(--primary-color)]">비즈니스 정보 시스템 학사(BBIS)</span>를 추구 중 (2027년 예상).',
+            'about-para1': 'AI 도구, 프롬프트 엔지니어링, 사이버 보안 스킬을 디지털 마케팅과 콘텐츠 제작 경험과 결합합니다. 현재 관리 및 기술 대학에서<span class="text-[var(--primary-color)]">비즈니스 정보 시스템 학사(BBIS)</span>를 추구 중 (2027년 예상).',
             'about-para2': '내 YouTube 채널 <a href="https://www.youtube.com/@DigitalUplift.1947" target="_blank" rel="noopener noreferrer" class="text-[var(--primary-color)] hover:underline">@DigitalUplift.1947</a>을 통해 디지털 스킬이 부족한 <span class="text-[var(--primary-color)]">1억 7,700만 파키스탄인</span>을 주간 비디오로 실용적인 팁을 제공하여 강화합니다.',
             'about-para3': '호기심과 학습 헌신에 의해 주도되며, 적응력 있고 창의적이며 복잡한 아이디어를 단순화하는 데 열정적입니다.',
             'skills-title': '스킬 & 전문 지식',
@@ -792,7 +791,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'exp-internships': 'इंटर्नशिप',
             'badge-multiple': 'मल्टीपल भूमिकाएं',
             'exp-various-dates': 'विभिन्न संगठन | 2022 – 2026',
-            'exp-intern1': 'शौकत खानम अस्पताल (मार्केटिंग और HR इंटर्न, 2023–2024): इवेंट भागीदारी 15% बढ़ाई, भर्ती को सुव्यवस्थित किया।',
+            'exp-intern1': 'शशौकत खानम अस्पताल (मार्केटिंग और HR इंटर्न, 2023–2024): इवेंट भागीदारी 15% बढ़ाई, भर्ती को सुव्यवस्थित किया।',
             'exp-intern2': 'TX लैब्ज (HR इंटर्न, 2022): ऑनबोर्डिंग को अनुकूलित किया, प्रोसेसिंग टाइम 20% कम किया।',
             'exp-intern3': 'मेड कोच ग्लोबल (सोशल मीडिया इंटर्न, 2025–वर्तमान): सोशल मीडिया संलग्नता 30% बढ़ाई।',
             'exp-intern4': 'एनजीओ अनुभव (अलखिमत फाउंडेशन और ILM): समुदाय परियोजनाओं और आउटरीच का समन्वय किया।',
@@ -938,7 +937,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 el.innerHTML = translations[lang][key];
             }
         });
-        // Re-apply to any newly inserted elements (e.g., if HTML contains data-i18n, but in this case embedded)
         setTimeout(() => {
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
@@ -948,13 +946,11 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }, 0);
         document.documentElement.lang = lang;
-        // Restart typing animation if active
         if (typingInterval) {
             clearTimeout(typingInterval);
             typeWriter();
         }
     }
-    // Initialize language to English
     updateText('en');
     elements.langToggle.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -971,16 +967,11 @@ document.addEventListener('DOMContentLoaded', () => {
             elements.langDropdown.classList.remove('visible');
         });
     });
-    // Theme toggle with switch
-    elements.themeToggle.addEventListener('click', () => {
-        document.documentElement.classList.toggle('light-theme');
-        elements.themeToggle.classList.toggle('light');
+    elements.themeToggleCheckbox.addEventListener('change', () => {
+        document.documentElement.classList.toggle('light-theme', elements.themeToggleCheckbox.checked);
         const isLight = document.documentElement.classList.contains('light-theme');
-        elements.themeToggle.setAttribute('aria-label', isLight ? 'Switch to dark theme' : 'Switch to light theme');
-        // Update parallax for theme
         if (isLight) {
             elements.parallaxBackground.classList.add('light-theme');
-            // Recreate clouds if switching to light
             const existingClouds = elements.parallaxBackground.querySelectorAll('.cloud');
             existingClouds.forEach(cloud => cloud.remove());
             const cloudCount = 10;
@@ -989,13 +980,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 cloud.classList.add('cloud');
                 cloud.style.left = Math.random() * 100 + '%';
                 cloud.style.width = cloud.style.height = (Math.random() * 60 + 40) + 'px';
-                cloud.style.animationDelay = Math.random() * 50 + 's'; // Slower random delay
-                cloud.style.animationDuration = (Math.random() * 30 + 50) + 's'; // Longer duration further
+                cloud.style.animationDelay = Math.random() * 50 + 's';
+                cloud.style.animationDuration = (Math.random() * 30 + 50) + 's';
                 elements.parallaxBackground.appendChild(cloud);
             }
         } else {
             elements.parallaxBackground.classList.remove('light-theme');
-            // Recreate stars if switching to dark
             const existingStars = elements.parallaxBackground.querySelectorAll('.star');
             existingStars.forEach(star => star.remove());
             const starCount = 50;
@@ -1004,8 +994,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 star.classList.add('star');
                 star.style.left = Math.random() * 100 + '%';
                 star.style.width = star.style.height = (Math.random() * 3 + 1) + 'px';
-                star.style.animationDelay = Math.random() * 8 + 's'; // Slower random delay
-                star.style.animationDuration = (Math.random() * 4 + 6) + 's'; // Longer duration further
+                star.style.animationDelay = Math.random() * 8 + 's';
+                star.style.animationDuration = (Math.random() * 4 + 6) + 's';
                 elements.parallaxBackground.appendChild(star);
             }
         }
@@ -1018,7 +1008,7 @@ document.addEventListener('DOMContentLoaded', () => {
             star.style.left = Math.random() * 100 + '%';
             star.style.width = star.style.height = (Math.random() * 3 + 1) + 'px';
             star.style.animationDelay = Math.random() * 8 + 's';
-            star.style.animationDuration = (Math.random() * 4 + 6) + 's'; // Slower stars
+            star.style.animationDuration = (Math.random() * 4 + 6) + 's';
             elements.parallaxBackground.appendChild(star);
         }
         if (document.documentElement.classList.contains('light-theme')) {
@@ -1029,7 +1019,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 cloud.style.left = Math.random() * 100 + '%';
                 cloud.style.width = cloud.style.height = (Math.random() * 60 + 40) + 'px';
                 cloud.style.animationDelay = Math.random() * 50 + 's';
-                cloud.style.animationDuration = (Math.random() * 30 + 50) + 's'; // Slower clouds
+                cloud.style.animationDuration = (Math.random() * 30 + 50) + 's';
                 elements.parallaxBackground.appendChild(cloud);
             }
         }
@@ -1056,12 +1046,12 @@ document.addEventListener('DOMContentLoaded', () => {
             elements.changingText.textContent = currentText.substring(0, charIndex + 1);
             charIndex++;
         }
-        let typeSpeed = 100; // Slower for smoother typing
+        let typeSpeed = 100;
         if (isDeleting) {
-            typeSpeed /= 1.2; // Slightly slower delete for smoothness
+            typeSpeed /= 1.2;
         }
         if (!isDeleting && charIndex === currentText.length) {
-            typeSpeed = 2200; // Shorter pause for quicker cycle
+            typeSpeed = 2200;
             isDeleting = true;
         } else if (isDeleting && charIndex === 0) {
             typeSpeed = 500;
@@ -1088,7 +1078,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1000);
     }
     elements.welcomeBtn.addEventListener('click', () => {
-        // Play sound if available
         if (elements.welcomeSound) {
             elements.welcomeSound.play().catch(e => console.log('Sound play failed:', e));
         }
@@ -1096,9 +1085,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             elements.mainContent.classList.add('fade-in');
             elements.headerElement.classList.add('fade-in');
-            // Start typing animation
             typeWriter();
-            // Trigger icon pulses and repeat every 5 seconds
             triggerIconPulses();
             setInterval(triggerIconPulses, 5000);
         }, 300);
@@ -1106,10 +1093,9 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         elements.loadingScreen.classList.add('hidden');
         elements.welcomeOverlay.classList.add('visible');
-        // Trigger fade-in for welcome text
         const welcomeText = document.querySelector('.welcome-text');
         setTimeout(() => welcomeText.style.opacity = '1', 500);
-    }, 1000); // Reduced from 2000ms to 1000ms
+    }, 1000);
     elements.mobileMenuButton.addEventListener('click', (e) => {
         e.stopPropagation();
         elements.mobileMenu.classList.toggle('-translate-y-[150%]');
@@ -1125,7 +1111,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (targetSection) {
                 targetSection.scrollIntoView({ behavior: 'smooth' });
             }
-            // Close mobile menu if open
             if (!elements.mobileMenu.classList.contains('-translate-y-[150%]')) {
                 elements.mobileMenu.classList.add('-translate-y-[150%]');
                 elements.mobileMenuButton.setAttribute('aria-expanded', 'false');
@@ -1138,7 +1123,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const contentId = btn.getAttribute('aria-controls');
             const content = document.getElementById(contentId);
             const isExpanded = btn.getAttribute('aria-expanded') === 'true';
-            // Close all other sections first
             elements.toggleButtons.forEach(otherBtn => {
                 if (otherBtn !== btn) {
                     const otherContentId = otherBtn.getAttribute('aria-controls');
@@ -1152,7 +1136,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             });
-            // Toggle the clicked one
             btn.setAttribute('aria-expanded', !isExpanded);
             const icon = btn.querySelector('i');
             if (icon) icon.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
@@ -1163,7 +1146,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const skillItems = document.querySelectorAll('.skill-item');
     skillItems.forEach(item => {
         item.addEventListener('click', () => {
-            // Close other open items
             skillItems.forEach(otherItem => {
                 if (otherItem !== item) {
                     otherItem.classList.remove('expanded');
@@ -1185,7 +1167,6 @@ document.addEventListener('DOMContentLoaded', () => {
             elements.mainHeader.classList.remove('hide');
         }
         lastScrollY = currentScrollY;
-        // Back to top visibility
         if (currentScrollY > 300) {
             elements.backToTopBtn.classList.add('visible');
         } else {
@@ -1210,13 +1191,11 @@ document.addEventListener('DOMContentLoaded', () => {
     elements.sections.forEach(section => observer.observe(section));
     function validateForm() {
         let isValid = true;
-        // Reset errors
         [elements.nameError, elements.emailError, elements.messageError, elements.captchaError].forEach(error => {
             error.classList.remove('active');
             const input = error.previousElementSibling || error.parentNode.querySelector('input, textarea');
             if (input) input.classList.remove('input-error');
         });
-        // Name validation
         const name = elements.nameInput.value.trim();
         const nameRegex = /^[a-zA-Z\s-]{2,50}$/;
         if (!nameRegex.test(name)) {
@@ -1224,7 +1203,6 @@ document.addEventListener('DOMContentLoaded', () => {
             elements.nameInput.classList.add('input-error');
             isValid = false;
         }
-        // Email validation
         const email = elements.emailInput.value.trim();
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
@@ -1232,15 +1210,13 @@ document.addEventListener('DOMContentLoaded', () => {
             elements.emailInput.classList.add('input-error');
             isValid = false;
         }
-        // Message validation
         const message = elements.messageInput.value.trim();
-        const messageRegex = /^[\w\s.,!?'-]{10,500}$/; // Alphanumeric, spaces, common punctuation
+        const messageRegex = /^[\w\s.,!?'-]{10,500}$/;
         if (!messageRegex.test(message)) {
             elements.messageError.classList.add('active');
             elements.messageInput.classList.add('input-error');
             isValid = false;
         }
-        // Captcha
         if (!elements.captchaCheckbox.checked) {
             elements.captchaError.classList.add('active');
             isValid = false;
@@ -1257,7 +1233,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!validateForm()) {
             return;
         }
-        // Disable submit button
         elements.submitBtn.disabled = true;
         const originalText = elements.submitBtn.innerHTML;
         elements.submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Sending...';
@@ -1267,7 +1242,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 email: elements.emailInput.value.trim(),
                 message: elements.messageInput.value.trim()
             };
-            const response = await fetch('https://portfolio-form-handler.timespace.workers.dev/', { // Replace with your Worker URL
+            const response = await fetch('https://portfolio-form-handler.timespace.workers.dev/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -1301,7 +1276,7 @@ document.addEventListener('DOMContentLoaded', () => {
         input.addEventListener('input', () => {
             const error = document.getElementById(input.id + '-error');
             if (error) {
-                validateForm(); // Re-validate on input
+                validateForm();
             }
         });
     });
