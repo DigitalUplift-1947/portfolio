@@ -938,7 +938,7 @@ html.light-theme .expanded-content {
 /* ========================================
    VISIT PROJECT BUTTON - MODERN STYLE
    ======================================== */
-.projects-section .visit-project-btn {
+.projects-section .visit-project-btn, .view-credential-btn {
     display: inline-block;
     padding: 0.85rem 1.75rem;
     background: linear-gradient(135deg, var(--primary-color), #FF6B35);
@@ -951,18 +951,18 @@ html.light-theme .expanded-content {
     box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
     border: none;
 }
-.projects-section .visit-project-btn:hover {
+.projects-section .visit-project-btn:hover, .view-credential-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(255, 140, 0, 0.4);
     background: linear-gradient(135deg, #FF6B35, var(--primary-color));
 }
-html.light-theme .projects-section .visit-project-btn {
+html.light-theme .projects-section .visit-project-btn, html.light-theme .view-credential-btn {
     background: linear-gradient(135deg, white, #FFE4D6);
     color: var(--primary-color);
     border: 2px solid var(--primary-color);
     box-shadow: 0 4px 12px rgba(255, 140, 0, 0.2);
 }
-html.light-theme .projects-section .visit-project-btn:hover {
+html.light-theme .projects-section .visit-project-btn:hover, html.light-theme .view-credential-btn:hover {
     background: linear-gradient(135deg, var(--primary-color), #FF6B35);
     color: white;
     box-shadow: 0 8px 20px rgba(255, 140, 0, 0.3);
@@ -1004,6 +1004,9 @@ html.light-theme .profile-container:hover {
     border-radius: 1rem;
     margin: 0;
     padding: 1.5rem;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
 }
 html.light-theme .projects-section .grid > div {
     background: var(--card-light) !important;
