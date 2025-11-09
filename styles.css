@@ -569,7 +569,6 @@ html.light-theme .projects-section p {
 html.light-theme .skill-item .expanded-content p {
     color: var(--gray-light) !important;
 }
-/* Loading Screen Styles - Enhanced */
 #loading-screen {
     position: fixed;
     top: 0;
@@ -610,7 +609,6 @@ html.light-theme .skill-item .expanded-content p {
     0%, 100% { opacity: 1; transform: scale(1); }
     50% { opacity: 0.7; transform: scale(1.05); }
 }
-/* Welcome Overlay Styles - Enhanced */
 #welcome-overlay {
     position: fixed;
     top: 0;
@@ -666,7 +664,6 @@ html.light-theme .skill-item .expanded-content p {
     transform: scale(1.08);
     box-shadow: 0 8px 16px rgba(255, 140, 0, 0.3);
 }
-/* Main Content Transition - Enhanced */
 main.fade-in {
     opacity: 1;
     transform: translateY(0);
@@ -725,7 +722,6 @@ html.light-theme .lang-dropdown {
 html.light-theme .lang-option {
     color: var(--text-light);
 }
-/* Enhanced certification card hover */
 .certifications-section .grid > div {
     transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     background: var(--card-dark);
@@ -737,7 +733,6 @@ html.light-theme .lang-option {
     transform: translateY(-10px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
-/* Enhanced skill badges with category-specific hover colors */
 .skill-badge {
     transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease, background-color 0.3s ease, color 0.3s ease;
     background: var(--card-dark);
@@ -756,7 +751,6 @@ html.light-theme .lang-option {
 html.light-theme .skill-badge:hover {
     color: #000000 !important;
 }
-/* Social Icons Animation in Home Section */
 .social-icon {
     transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.4s ease;
     padding: 0.5rem;
@@ -767,11 +761,9 @@ html.light-theme .skill-badge:hover {
 .social-icon:hover {
     transform: scale(1.2) rotate(10deg);
 }
-/* Icon Pulse Animation */
 .icon-pulse {
     animation: pulse-brand-color 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
 }
-/* Overall enhancements: Added subtle glow effects and improved shadows for cards */
 .about-section .flex, .certifications-section .grid > div, .timeline-item, .contact-form {
     background: var(--card-dark);
     border: 1px solid var(--card-border-dark);
@@ -781,13 +773,11 @@ html.light-theme .skill-badge:hover {
 .about-section .flex:hover, .certifications-section .grid > div:hover, .timeline-item:hover, .contact-form:hover {
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
 }
-/* Header title image styling */
 .header-title-img {
     height: 1.5rem;
     width: auto;
     margin-right: 0.5rem;
 }
-/* New logo styling */
 .logo-section {
     text-align: center;
     padding: 1rem 0;
@@ -808,17 +798,14 @@ html.light-theme .skill-badge:hover {
         max-height: 150px;
     }
 }
-/* Apply solid backgrounds to form inputs */
 .form-input {
     background: var(--card-dark);
     border: 1px solid var(--card-border-dark);
     transition: border-color 0.3s ease;
 }
-/* Contact form specific */
 .contact-form {
     border-radius: 1rem;
 }
-/* Increase font sizes for better visibility */
 h2 {
     font-size: 3.5rem !important;
 }
@@ -830,7 +817,6 @@ p, li {
     font-weight: 500;
     margin-bottom: 1rem;
 }
-/* Footer styling */
 footer {
     background: var(--header-bg-dark);
     border-top: 1px solid var(--card-border-dark);
@@ -843,7 +829,6 @@ html.light-theme footer {
 footer p {
     margin-bottom: 1rem;
 }
-/* Enhanced Skills Section - Full-width, professional layout with Grid, consistent spacing */
 .skills-grid {
     display: flex;
     flex-wrap: wrap;
@@ -932,7 +917,6 @@ html.light-theme .skill-item:hover .skill-badge {
 html.light-theme .expanded-content p {
     color: var(--text-light);
 }
-/* Profile 3D Effect - Subtle depth without overflow */
 .profile-container {
     overflow: hidden;
     position: relative;
@@ -960,7 +944,6 @@ html.light-theme .profile-container {
 html.light-theme .profile-container:hover {
     box-shadow: 0 8px 20px rgba(255, 140, 0, 0.2);
 }
-/* Projects Background Fix - Solid, consistent with certifications */
 .projects-section .grid > div {
     background: var(--card-dark) !important;
     border: 1px solid var(--card-border-dark);
@@ -973,7 +956,6 @@ html.light-theme .projects-section .grid > div {
     background: var(--card-light) !important;
     border-color: var(--card-border-light);
 }
-/* Ensure high contrast text in projects */
 .projects-section h3 {
     color: #FFFFFF !important;
 }
@@ -986,7 +968,6 @@ html.light-theme .projects-section h3 {
 html.light-theme .projects-section p {
     color: #374151 !important;
 }
-/* Responsiveness for all sections */
 @media (max-width: 360px) {
     h2 {
         font-size: 2.5rem !important;
@@ -1047,7 +1028,6 @@ html.light-theme .projects-section p {
         max-width: 1280px;
     }
 }
-/* About Section Specific Styles - Wider layout and larger fonts */
 #about {
     max-width: 100%;
 }
@@ -1072,14 +1052,12 @@ html.light-theme .projects-section p {
         padding: 1rem;
     }
 }
-/* Center everything */
 .logo-container {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 60px;
 }
-/* Logo animation */
 .logo {
   width: 250px;
   height: auto;
@@ -1101,12 +1079,10 @@ html.light-theme .projects-section p {
     transform: translateY(0) scale(1);
   }
 }
-/* RTL support for languages like Arabic (if enabled in JS). */
 [dir="rtl"] .skill-badge i {
     margin-right: 0;
     margin-left: 0.75rem;
 }
-/* Certification logos sizing */
 .certifications-section img {
     width: 120px;
     height: auto;
@@ -1116,7 +1092,6 @@ html.light-theme .projects-section p {
 .certifications-section img:hover {
     transform: scale(1.1);
 }
-/* Experience logos sizing */
 .timeline-item img {
     width: 120px;
     height: auto;
@@ -1126,7 +1101,6 @@ html.light-theme .projects-section p {
 .timeline-item img:hover {
     transform: scale(1.1);
 }
-/* Lucide Icons Styling */
 i[data-lucide] {
     width: 1.25em;
     height: 1.25em;
@@ -1136,7 +1110,6 @@ i[data-lucide] {
     stroke-linejoin: round;
     transition: stroke 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-/* Toggle Switch Styles */
 .toggle-switch {
     position: relative;
     display: inline-block;
