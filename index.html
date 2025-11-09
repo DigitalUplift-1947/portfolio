@@ -66,8 +66,13 @@
                     <a href="#" class="lang-option" data-lang="hi" data-i18n="lang-hi">हिंदी</a>
                     <a href="#" class="lang-option" data-lang="pt" data-i18n="lang-pt">Português</a>
                 </div>
-                <div id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle Light/Dark Mode">
-                    <div class="toggle-knob"></div>
+                <div id="theme-toggle" class="theme-toggle flex items-center space-x-1">
+                    <i data-lucide="moon" class="text-lg"></i>
+                    <div class="toggle-switch relative inline-block w-10 h-5">
+                        <input type="checkbox" id="toggle-checkbox" class="opacity-0 w-0 h-0">
+                        <label for="toggle-checkbox" class="absolute cursor-pointer top-0 left-0 right-0 bottom-0 bg-gray-600 rounded-full transition duration-300 ease-in-out before:absolute before:content-[''] before:h-4 before:w-4 before:rounded-full before:bg-white before:top-0.5 before:left-0.5 before:transition before:duration-300 before:ease-in-out"></label>
+                    </div>
+                    <i data-lucide="sun" class="text-lg"></i>
                 </div>
                 <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none" aria-expanded="false" aria-controls="mobile-menu">
                     <i class="fas fa-bars text-xl"></i>
@@ -124,73 +129,73 @@
                             <h3 class="text-2xl sm:text-3xl font-semibold mb-6 text-[var(--primary-color)]" data-i18n="skills-title">Skills & Expertise</h3>
                             <div class="skills-grid -mx-8 sm:-mx-10">
                                 <div class="skill-item skill-ai">
-                                    <span class="skill-badge"><i data-lucide="bot" class="mr-2"></i><span data-i18n="skill-ai">AI Tools</span></span>
+                                    <span class="skill-badge"><i class="fas fa-robot mr-2"></i><span data-i18n="skill-ai">AI Tools</span></span>
                                     <div class="expanded-content">
                                         <p>I have extensive experience with various AI tools, leveraging them to automate tasks and generate innovative solutions in creative and technical projects.</p>
                                     </div>
                                 </div>
                                 <div class="skill-item skill-dev">
-                                    <span class="skill-badge"><i data-lucide="code" class="mr-2"></i><span data-i18n="skill-python">Python</span></span>
+                                    <span class="skill-badge"><i class="fas fa-code mr-2"></i><span data-i18n="skill-python">Python</span></span>
                                     <div class="expanded-content">
                                         <p>Proficient in Python for scripting, data analysis, and building automation tools, with a focus on clean, efficient code for real-world applications.</p>
                                     </div>
                                 </div>
                                 <div class="skill-item skill-security">
-                                    <span class="skill-badge"><i data-lucide="shield" class="mr-2"></i><span data-i18n="skill-cyber">Cybersecurity</span></span>
+                                    <span class="skill-badge"><i class="fas fa-shield-alt mr-2"></i><span data-i18n="skill-cyber">Cybersecurity</span></span>
                                     <div class="expanded-content">
                                         <p>Knowledgeable in cybersecurity fundamentals, including threat detection, encryption, and secure coding practices to protect digital assets.</p>
                                     </div>
                                 </div>
                                 <div class="skill-item skill-marketing">
-                                    <span class="skill-badge"><i data-lucide="trending-up" class="mr-2"></i><span data-i18n="skill-marketing">Digital Marketing</span></span>
+                                    <span class="skill-badge"><i class="fas fa-chart-line mr-2"></i><span data-i18n="skill-marketing">Digital Marketing</span></span>
                                     <div class="expanded-content">
                                         <p>Experienced in digital marketing strategies, SEO, social media campaigns, and analytics to drive engagement and growth for brands.</p>
                                     </div>
                                 </div>
                                 <div class="skill-item skill-content">
-                                    <span class="skill-badge"><i data-lucide="youtube" class="mr-2"></i><span data-i18n="skill-youtube">YouTube Creation</span></span>
+                                    <span class="skill-badge"><i class="fab fa-youtube mr-2"></i><span data-i18n="skill-youtube">YouTube Creation</span></span>
                                     <div class="expanded-content">
                                         <p>Skilled in YouTube content creation, from scripting and filming to editing and optimization, helping build audiences through engaging videos.</p>
                                     </div>
                                 </div>
                                 <div class="skill-item skill-comm">
-                                    <span class="skill-badge"><i data-lucide="languages" class="mr-2"></i><span data-i18n="skill-bilingual">Bilingual Communication</span></span>
+                                    <span class="skill-badge"><i class="fas fa-language mr-2"></i><span data-i18n="skill-bilingual">Bilingual Communication</span></span>
                                     <div class="expanded-content">
                                         <p>Fluent in English and Urdu, enabling effective communication in diverse settings, from professional collaborations to content localization.</p>
                                     </div>
                                 </div>
                                 <div class="skill-item skill-dev">
-                                    <span class="skill-badge"><i data-lucide="github" class="mr-2"></i><span data-i18n="skill-github">GitHub</span></span>
+                                    <span class="skill-badge"><i class="fab fa-github mr-2"></i><span data-i18n="skill-github">GitHub</span></span>
                                     <div class="expanded-content">
                                         <p>Active GitHub user for version control, collaboration, and open-source contributions, ensuring robust project management.</p>
                                     </div>
                                 </div>
                                 <div class="skill-item skill-dev">
-                                    <span class="skill-badge"><i data-lucide="cloud" class="mr-2"></i><span data-i18n="skill-netlify">Netlify</span></span>
+                                    <span class="skill-badge"><i class="fas fa-cloud mr-2"></i><span data-i18n="skill-netlify">Netlify</span></span>
                                     <div class="expanded-content">
                                         <p>Utilize Netlify for seamless deployment of static sites and JAMstack applications, with CI/CD integration for efficient workflows.</p>
                                     </div>
                                 </div>
                                 <div class="skill-item skill-content">
-                                    <span class="skill-badge"><i data-lucide="video" class="mr-2"></i><span data-i18n="skill-premiere">Premiere Pro</span></span>
+                                    <span class="skill-badge"><i class="fas fa-video mr-2"></i><span data-i18n="skill-premiere">Premiere Pro</span></span>
                                     <div class="expanded-content">
                                         <p>Expert in Adobe Premiere Pro for professional video editing, color grading, and post-production to create polished content.</p>
                                     </div>
                                 </div>
                                 <div class="skill-item skill-dev">
-                                    <span class="skill-badge"><i data-lucide="cloud" class="mr-2"></i><span data-i18n="skill-cloudflare">Cloudflare</span></span>
+                                    <span class="skill-badge"><i class="fas fa-cloud mr-2"></i><span data-i18n="skill-cloudflare">Cloudflare</span></span>
                                     <div class="expanded-content">
                                         <p>Leverage Cloudflare for CDN, DDoS protection, and performance optimization to enhance web security and speed.</p>
                                     </div>
                                 </div>
                                 <div class="skill-item skill-dev">
-                                    <span class="skill-badge"><i data-lucide="server" class="mr-2"></i><span data-i18n="skill-backend">Backend Development</span></span>
+                                    <span class="skill-badge"><i class="fas fa-server mr-2"></i><span data-i18n="skill-backend">Backend Development</span></span>
                                     <div class="expanded-content">
                                         <p>Focus on backend development with APIs, databases, and server-side logic to build scalable and secure applications.</p>
                                     </div>
                                 </div>
                                 <div class="skill-item skill-dev">
-                                    <span class="skill-badge"><i data-lucide="hammer" class="mr-2"></i><span data-i18n="skill-workers">Workers</span></span>
+                                    <span class="skill-badge"><i class="fas fa-hammer mr-2"></i><span data-i18n="skill-workers">Workers</span></span>
                                     <div class="expanded-content">
                                         <p>Develop serverless functions using Cloudflare Workers for edge computing, enabling fast and global application logic.</p>
                                     </div>
@@ -212,13 +217,13 @@
                 <div class="timeline">
                     <div class="timeline-item p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.01] transition-transform duration-300" aria-labelledby="experience-1" role="listitem">
                         <div class="flex items-center mb-4">
-                            <i data-lucide="briefcase" class="mr-3 text-[var(--primary-color)] text-xl sm:text-2xl"></i>
+                            <i class="fas fa-briefcase mr-3 text-[var(--primary-color)] text-xl sm:text-2xl"></i>
                             <h3 id="experience-1" class="text-2xl sm:text-3xl font-bold text-white" data-i18n="exp-ai-strategist">AI & Content Strategist</h3>
                             <span class="badge" data-i18n="badge-personal">Personal Project</span>
                         </div>
                         <p class="text-sm sm:text-base font-medium text-gray-200 mb-4" data-i18n="exp-digital-dates">Digital Uplift | 2020 – Present</p>
                         <button class="toggle-details" aria-expanded="false" aria-controls="details-1" aria-label="Toggle AI & Content Strategist details">
-                            <i data-lucide="chevron-down"></i>
+                            <i class="fas fa-chevron-down"></i>
                         </button>
                         <div id="details-1" class="timeline-content mt-4">
                             <ul class="list-disc list-inside space-y-3 text-gray-200 text-base sm:text-lg">
@@ -230,13 +235,13 @@
                     </div>
                     <div class="timeline-item p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.01] transition-transform duration-300" aria-labelledby="experience-2" role="listitem">
                         <div class="flex items-center mb-4">
-                            <i data-lucide="user-check" class="mr-3 text-[var(--primary-color)] text-xl sm:text-2xl"></i>
+                            <i class="fas fa-user-tie mr-3 text-[var(--primary-color)] text-xl sm:text-2xl"></i>
                             <h3 id="experience-2" class="text-2xl sm:text-3xl font-bold text-white" data-i18n="exp-internships">Internships</h3>
                             <span class="badge" data-i18n="badge-multiple">Multiple Roles</span>
                         </div>
                         <p class="text-sm sm:text-base font-medium text-gray-200 mb-4" data-i18n="exp-various-dates">Various Organizations | 2022 – 2026</p>
                         <button class="toggle-details" aria-expanded="false" aria-controls="details-2" aria-label="Toggle Internships details">
-                            <i data-lucide="chevron-down"></i>
+                            <i class="fas fa-chevron-down"></i>
                         </button>
                         <div id="details-2" class="timeline-content mt-4">
                             <ul class="list-disc list-inside space-y-3 text-gray-200 text-base sm:text-lg">
@@ -296,7 +301,7 @@
                         <p class="text-gray-200 text-base sm:text-lg mb-2 text-center" data-i18n="issued-by-google">Issued by Google</p>
                         <p class="text-sm sm:text-base text-gray-200 text-center">2024</p>
                         <div class="text-center mt-4">
-                            <a href="https://skillshop.exceedlms.com/student/award/fR9PskUZepTYWBUYdNzMdnPy" class="inline-block text-sm sm:text-base text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer" data-i18n="view-credential">View Credential &rarr;</a>
+                            <a href="https://skillshop.exceedlms.com/student/award/fR9LskUZepTYWBUYdNzMdnPy" class="inline-block text-sm sm:text-base text-[var(--primary-color)] hover:underline" target="_blank" rel="noopener noreferrer" data-i18n="view-credential">View Credential &rarr;</a>
                         </div>
                     </div>
                     <div class="p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
@@ -398,7 +403,7 @@
         </div>
     </div>
     <button id="back-to-top" aria-label="Scroll to top of page" title="Back to Top" class="bubbly-btn">
-        <i data-lucide="chevron-up"></i>
+        <i class="fas fa-chevron-up"></i>
     </button>
     <footer class="text-center text-gray-500 text-base">
         <p data-i18n="footer-copyright">&copy; 2025 <span class="text-[var(--primary-color)]">Muhammad Owais</span>. All Rights Reserved.</p>
