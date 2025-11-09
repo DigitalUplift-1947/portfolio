@@ -483,9 +483,9 @@ html.light-theme .badge {
 .theme-toggle i, .lang-toggle i {
     font-size: 1.25rem;
 }
-html.light-theme .theme-toggle .fa-moon { display: none; }
-html.light-theme .theme-toggle .fa-sun { display: inline; }
-.theme-toggle .fa-sun { display: none; }
+html.light-theme .theme-toggle [data-lucide="moon"] { display: none; }
+html.light-theme .theme-toggle [data-lucide="sun"] { display: inline; }
+.theme-toggle [data-lucide="sun"] { display: none; }
 html.light-theme #main-header h1 {
     color: var(--text-light);
     transition: color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -740,14 +740,14 @@ html.light-theme .lang-option {
     box-shadow: var(--shadow-soft);
     border-radius: 9999px;
     margin: 0.5rem;
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.4rem;
 }
 .skill-badge:hover {
     transform: translateY(-2px) scale(1.05);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     color: #FFFFFF;
 }
-/* Category-specific hover colors - REMOVED as per requirements */
 /* Social Icons Animation in Home Section */
 .social-icon {
     transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.4s ease;
@@ -876,7 +876,7 @@ footer p {
 }
 /* Updated .skill-badge to prevent text overflow/wrapping: use ellipsis for long text, ensure it fits within rectangle. */
 .skill-badge {
-    font-size: 1.25rem;
+    font-size: 1.4rem;
     font-weight: 600;
     display: flex;
     align-items: center;
@@ -1083,4 +1083,14 @@ html.light-theme .projects-section p {
 }
 .timeline-item img:hover {
     transform: scale(1.1);
+}
+/* Lucide Icons Styling */
+i[data-lucide] {
+    width: 1.25em;
+    height: 1.25em;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
