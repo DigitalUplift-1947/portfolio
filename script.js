@@ -588,7 +588,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'explore-certifications': '내 자격증 탐색',
             'join-me': '더 밝은 미래를 위한 디지털 스킬 마스터링에 나와 함께하세요!',
             'about-title': '소개',
-            'about-para1': 'AI 도구, 프롬프트 엔지니어링, 사이버 보안 스킬을 디지털 마케팅과 콘텐츠 제작 경험과 결합합니다. 현재 관리 및 기술 대학에서<span class="text-[var(--primary-color)]">비즈니스 정보 시스템 학사(BBIS)</span>를 추구 중 (2027년 예상).',
+            'about-para1': 'AI 도구, 프롬프트 엔지니어링, 사이버 보안 스킬을 디지털 마케팅과 콘텐츠 제작 경험과 결합합니다. 현재 관리 및 기술 대학에서 <span class="text-[var(--primary-color)]">비즈니스 정보 시스템 학사(BBIS)</span>를 추구 중 (2027년 예상).',
             'about-para2': '내 YouTube 채널 <a href="https://www.youtube.com/@DigitalUplift.1947" target="_blank" rel="noopener noreferrer" class="text-[var(--primary-color)] hover:underline">@DigitalUplift.1947</a>을 통해 디지털 스킬이 부족한 <span class="text-[var(--primary-color)]">1억 7,700만 파키스탄인</span>을 주간 비디오로 실용적인 팁을 제공하여 강화합니다.',
             'about-para3': '호기심과 학습 헌신에 의해 주도되며, 적응력 있고 창의적이며 복잡한 아이디어를 단순화하는 데 열정적입니다.',
             'skills-title': '스킬 & 전문 지식',
@@ -791,7 +791,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'exp-internships': 'इंटर्नशिप',
             'badge-multiple': 'मल्टीपल भूमिकाएं',
             'exp-various-dates': 'विभिन्न संगठन | 2022 – 2026',
-            'exp-intern1': 'शशौकत खानम अस्पताल (मार्केटिंग और HR इंटर्न, 2023–2024): इवेंट भागीदारी 15% बढ़ाई, भर्ती को सुव्यवस्थित किया।',
+            'exp-intern1': 'शौकत खानम अस्पताल (मार्केटिंग और HR इंटर्न, 2023–2024): इवेंट भागीदारी 15% बढ़ाई, भर्ती को सुव्यवस्थित किया।',
             'exp-intern2': 'TX लैब्ज (HR इंटर्न, 2022): ऑनबोर्डिंग को अनुकूलित किया, प्रोसेसिंग टाइम 20% कम किया।',
             'exp-intern3': 'मेड कोच ग्लोबल (सोशल मीडिया इंटर्न, 2025–वर्तमान): सोशल मीडिया संलग्नता 30% बढ़ाई।',
             'exp-intern4': 'एनजीओ अनुभव (अलखिमत फाउंडेशन और ILM): समुदाय परियोजनाओं और आउटरीच का समन्वय किया।',
@@ -967,9 +967,8 @@ document.addEventListener('DOMContentLoaded', () => {
             elements.langDropdown.classList.remove('visible');
         });
     });
-    elements.themeToggleCheckbox.addEventListener('change', () => {
-        document.documentElement.classList.toggle('light-theme', elements.themeToggleCheckbox.checked);
-        const isLight = document.documentElement.classList.contains('light-theme');
+    function updateTheme(isLight) {
+        document.documentElement.classList.toggle('light-theme', isLight);
         if (isLight) {
             elements.parallaxBackground.classList.add('light-theme');
             const existingClouds = elements.parallaxBackground.querySelectorAll('.cloud');
@@ -999,6 +998,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 elements.parallaxBackground.appendChild(star);
             }
         }
+    }
+    const savedTheme = localStorage.getItem('theme');
+    const isLight = savedTheme === 'light';
+    elements.themeToggleCheckbox.checked = isLight;
+    updateTheme(isLight);
+    elements.themeToggleCheckbox.addEventListener('change', () => {
+        const isLight = elements.themeToggleCheckbox.checked;
+        updateTheme(isLight);
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
     });
     function createStarsAndClouds() {
         const starCount = 50;
@@ -1146,6 +1154,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const skillItems = document.querySelectorAll('.skill-item');
     skillItems.forEach(item => {
         item.addEventListener('click', () => {
+            skillItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('expanded');
+                }
+            });
+            item.classList.toggle('expanded');
+        });
+        item.addEventListener('touchstart', () => {
             skillItems.forEach(otherItem => {
                 if (otherItem !== item) {
                     otherItem.classList.remove('expanded');
