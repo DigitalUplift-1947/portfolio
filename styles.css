@@ -855,16 +855,11 @@ footer p {
     overflow: hidden;
 }
 .skill-item:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    border-color: transparent;
-    background: var(--primary-color);
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    background-color: rgba(255, 140, 0, 0.08);
+    border-color: rgba(255, 140, 0, 0.2);
     outline: 2px solid var(--primary-color);
-}
-.skill-item:hover .skill-badge,
-.skill-item:hover .skill-badge i {
-    color: #FFFFFF;
-    transition: color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .skill-badge {
     font-size: 1.5rem;
@@ -909,11 +904,9 @@ html.light-theme .skill-item {
     border-color: var(--card-border-light);
 }
 html.light-theme .skill-item:hover {
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    background: var(--primary-color);
-}
-html.light-theme .skill-item:hover .skill-badge {
-    color: #000000 !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 140, 0, 0.12);
+    border-color: rgba(255, 140, 0, 0.2);
 }
 html.light-theme .expanded-content p {
     color: var(--text-light);
