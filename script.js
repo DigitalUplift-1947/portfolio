@@ -1079,9 +1079,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     // EASY EDIT: Social icons pulse animation. Adjust timings or add more icons.
     function triggerIconPulses() {
-        const whatsappIcon = document.querySelector('#whatsapp-icon').parentElement;
-        const emailIcon = document.querySelector('#email-icon').parentElement;
-        const linkedinIcon = document.querySelector('#linkedin-icon').parentElement;
+        const whatsappIcon = document.querySelector('#whatsapp-icon');
+        const emailIcon = document.querySelector('#email-icon');
+        const linkedinIcon = document.querySelector('#linkedin-icon');
+        const youtubeIcon = document.querySelector('#youtube-icon');
         setTimeout(() => {
             whatsappIcon.classList.add('whatsapp-pulse');
             setTimeout(() => whatsappIcon.classList.remove('whatsapp-pulse'), 2500);
@@ -1094,6 +1095,10 @@ document.addEventListener('DOMContentLoaded', () => {
             linkedinIcon.classList.add('linkedin-pulse');
             setTimeout(() => linkedinIcon.classList.remove('linkedin-pulse'), 2500);
         }, 1000);
+        setTimeout(() => {
+            youtubeIcon.classList.add('youtube-pulse');
+            setTimeout(() => youtubeIcon.classList.remove('youtube-pulse'), 2500);
+        }, 1500);
     }
     // EASY EDIT: Welcome overlay dismiss. Adjust sound or fade timings.
     elements.welcomeBtn.addEventListener('click', () => {
