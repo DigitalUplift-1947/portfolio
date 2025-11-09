@@ -1,8 +1,6 @@
 // script.js
 document.addEventListener('DOMContentLoaded', () => {
-    // EASY EDIT: Console log for debugging load time. Remove if not needed.
     console.log("Portfolio website loaded at 07:08 AM PKT, September 25, 2025");
-    // EASY EDIT: Cached elements. Add/remove DOM queries here if adding features.
     const elements = {
         youtubeBtn: document.getElementById('youtube-btn'),
         mobileMenuButton: document.getElementById('mobile-menu-button'),
@@ -46,13 +44,11 @@ document.addEventListener('DOMContentLoaded', () => {
     lucideScript.onload = () => {
         lucide.createIcons();
     };
-    // EASY EDIT: Variables for scroll and form submission. Adjust cooldown if needed.
     let lastScrollY = window.scrollY;
     let lastSubmissionTime = 0;
     const submissionCooldown = 30000;
     let scrollTimeout;
     let typingInterval; // For typing animation control
-    // EASY EDIT: Translations object. Add/remove languages or keys as needed.
     const translations = {
         en: {
             'nav-home': 'Home',
@@ -935,7 +931,6 @@ document.addEventListener('DOMContentLoaded', () => {
             'lang-pt': 'Português'
         }
     };
-    // EASY EDIT: i18n function. Handles text updates for language changes. Add logic for RTL if needed (e.g., for Arabic).
     function updateText(lang) {
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
@@ -961,7 +956,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     // Initialize language to English
     updateText('en');
-    // EASY EDIT: Language toggle logic. Add more languages to dropdown HTML and translations object.
     elements.langToggle.addEventListener('click', (e) => {
         e.stopPropagation();
         elements.langDropdown.classList.toggle('visible');
@@ -977,9 +971,10 @@ document.addEventListener('DOMContentLoaded', () => {
             elements.langDropdown.classList.remove('visible');
         });
     });
-    // EASY EDIT: Theme toggle. Adjust light/dark variables in CSS :root.
+    // Theme toggle with switch
     elements.themeToggle.addEventListener('click', () => {
         document.documentElement.classList.toggle('light-theme');
+        elements.themeToggle.classList.toggle('light');
         const isLight = document.documentElement.classList.contains('light-theme');
         elements.themeToggle.setAttribute('aria-label', isLight ? 'Switch to dark theme' : 'Switch to light theme');
         // Update parallax for theme
@@ -1015,7 +1010,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
-    // EASY EDIT: Parallax elements creation. Adjust counts, sizes, or animation speeds in CSS.
     function createStarsAndClouds() {
         const starCount = 50;
         for (let i = 0; i < starCount; i++) {
@@ -1041,7 +1035,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     createStarsAndClouds();
-    // EASY EDIT: Typing animation texts. Add/remove strings in this array for the changing text in Home.
     const texts = [
         'AI Enthusiast & Innovator',
         'Mastering Prompt Engineering',
@@ -1077,12 +1070,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         typingInterval = setTimeout(typeWriter, typeSpeed);
     }
-    // EASY EDIT: Social icons pulse animation. Adjust timings or add more icons.
     function triggerIconPulses() {
-        const whatsappIcon = document.querySelector('#whatsapp-icon');
-        const emailIcon = document.querySelector('#email-icon');
-        const linkedinIcon = document.querySelector('#linkedin-icon');
-        const youtubeIcon = document.querySelector('#youtube-icon');
+        const whatsappIcon = document.querySelector('#whatsapp-icon').parentElement;
+        const emailIcon = document.querySelector('#email-icon').parentElement;
+        const linkedinIcon = document.querySelector('#linkedin-icon').parentElement;
         setTimeout(() => {
             whatsappIcon.classList.add('whatsapp-pulse');
             setTimeout(() => whatsappIcon.classList.remove('whatsapp-pulse'), 2500);
@@ -1095,12 +1086,7 @@ document.addEventListener('DOMContentLoaded', () => {
             linkedinIcon.classList.add('linkedin-pulse');
             setTimeout(() => linkedinIcon.classList.remove('linkedin-pulse'), 2500);
         }, 1000);
-        setTimeout(() => {
-            youtubeIcon.classList.add('youtube-pulse');
-            setTimeout(() => youtubeIcon.classList.remove('youtube-pulse'), 2500);
-        }, 1500);
     }
-    // EASY EDIT: Welcome overlay dismiss. Adjust sound or fade timings.
     elements.welcomeBtn.addEventListener('click', () => {
         // Play sound if available
         if (elements.welcomeSound) {
@@ -1117,7 +1103,6 @@ document.addEventListener('DOMContentLoaded', () => {
             setInterval(triggerIconPulses, 5000);
         }, 300);
     });
-    // EASY EDIT: Loading screen hide. Adjust timeout for longer/shorter load simulation.
     setTimeout(() => {
         elements.loadingScreen.classList.add('hidden');
         elements.welcomeOverlay.classList.add('visible');
@@ -1125,7 +1110,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const welcomeText = document.querySelector('.welcome-text');
         setTimeout(() => welcomeText.style.opacity = '1', 500);
     }, 1000); // Reduced from 2000ms to 1000ms
-    // EASY EDIT: Mobile menu toggle. Adjust transitions in CSS.
     elements.mobileMenuButton.addEventListener('click', (e) => {
         e.stopPropagation();
         elements.mobileMenu.classList.toggle('-translate-y-[150%]');
@@ -1133,7 +1117,6 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.mobileMenuButton.setAttribute('aria-expanded', isOpen);
         elements.mobileMenuButton.innerHTML = isOpen ? '<i class="fas fa-times text-xl"></i>' : '<i class="fas fa-bars text-xl"></i>';
     });
-    // EASY EDIT: Nav links smooth scroll. Add more links if expanding nav.
     elements.navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
@@ -1150,7 +1133,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-    // EASY EDIT: Toggle details for timeline. Adjust aria attributes if adding more.
     elements.toggleButtons.forEach(btn => {
         btn.addEventListener('click', () => {
             const contentId = btn.getAttribute('aria-controls');
@@ -1178,7 +1160,6 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.classList.toggle('active');
         });
     });
-    // EASY EDIT: Skill items expand on click. Adjust max-height in CSS for longer content.
     const skillItems = document.querySelectorAll('.skill-item');
     skillItems.forEach(item => {
         item.addEventListener('click', () => {
@@ -1191,7 +1172,6 @@ document.addEventListener('DOMContentLoaded', () => {
             item.classList.toggle('expanded');
         });
     });
-    // EASY EDIT: Scroll handler for header and back-to-top. Adjust thresholds (e.g., 50, 100, 300).
     function handleScroll() {
         const currentScrollY = window.scrollY;
         if (currentScrollY > 50) {
@@ -1213,11 +1193,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     window.addEventListener('scroll', handleScroll);
-    // EASY EDIT: Back to top click. Adjust behavior if needed.
     elements.backToTopBtn.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-    // EASY EDIT: Intersection observer for section animations. Adjust threshold/rootMargin for trigger points.
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -1230,7 +1208,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
     elements.sections.forEach(section => observer.observe(section));
-    // EASY EDIT: Form validation. Adjust regex patterns for name/email/message.
     function validateForm() {
         let isValid = true;
         // Reset errors
@@ -1270,7 +1247,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         return isValid;
     }
-    // EASY EDIT: Form submission to Cloudflare Worker. Update URL or add more fields.
     elements.contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const now = Date.now();
@@ -1313,7 +1289,6 @@ document.addEventListener('DOMContentLoaded', () => {
             elements.submitBtn.innerHTML = originalText;
         }
     });
-    // EASY EDIT: Modal close logic. Adjust if adding more modals.
     elements.closeModalBtn.addEventListener('click', () => {
         elements.messageModal.classList.remove('is-visible');
     });
@@ -1322,7 +1297,6 @@ document.addEventListener('DOMContentLoaded', () => {
             elements.messageModal.classList.remove('is-visible');
         }
     });
-    // EASY EDIT: Real-time input validation. Adjust if changing fields.
     [elements.nameInput, elements.emailInput, elements.messageInput].forEach(input => {
         input.addEventListener('input', () => {
             const error = document.getElementById(input.id + '-error');
@@ -1336,6 +1310,5 @@ document.addEventListener('DOMContentLoaded', () => {
             validateForm();
         }
     });
-    // Initial scroll handle
     handleScroll();
 });
