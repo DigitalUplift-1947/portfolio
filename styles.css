@@ -830,9 +830,9 @@ footer p {
     margin-bottom: 1rem;
 }
 .skills-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
     justify-content: center;
     margin-top: 2rem;
     width: 100%;
@@ -843,7 +843,7 @@ footer p {
     align-items: flex-start;
     width: auto;
     background: var(--card-dark);
-    padding: 0.75rem 1.25rem;
+    padding: 1rem;
     border-radius: 1rem;
     border: 1px solid var(--card-border-dark);
     box-shadow: var(--shadow-soft);
@@ -859,6 +859,7 @@ footer p {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     border-color: transparent;
     background: var(--primary-color);
+    outline: 2px solid var(--primary-color);
 }
 .skill-item:hover .skill-badge,
 .skill-item:hover .skill-badge i {
@@ -1164,10 +1165,10 @@ html.light-theme .toggle-switch input:checked + label:before {
 .view-credential-btn {
     display: inline-block;
     padding: 0.85rem 1.75rem;
-    background: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color), #FF6B35);
     color: white;
     text-decoration: none;
-    border-radius: 0.5rem;
+    border-radius: 9999px;
     font-weight: 600;
     font-size: 1.1rem;
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -1177,15 +1178,16 @@ html.light-theme .toggle-switch input:checked + label:before {
 .view-credential-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(255, 140, 0, 0.4);
-    background: #FF6B35;
+    background: linear-gradient(135deg, #FF6B35, var(--primary-color));
 }
 html.light-theme .view-credential-btn {
-    background: var(--primary-color);
-    color: white;
+    background: linear-gradient(135deg, white, #FFE4D6);
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
     box-shadow: 0 4px 12px rgba(255, 140, 0, 0.2);
 }
 html.light-theme .view-credential-btn:hover {
-    background: #FF6B35;
+    background: linear-gradient(135deg, var(--primary-color), #FF6B35);
     color: white;
     box-shadow: 0 8px 20px rgba(255, 140, 0, 0.3);
 }
