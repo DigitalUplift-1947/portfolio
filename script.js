@@ -1,5 +1,7 @@
 // script.js
-document.addEventListener('DOMContentLoaded', () => 
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("Portfolio website loaded");
+    const elements = {
         youtubeBtn: document.getElementById('youtube-btn'),
         mobileMenuButton: document.getElementById('mobile-menu-button'),
         mobileMenu: document.getElementById('mobile-menu'),
