@@ -1,7 +1,5 @@
 // script.js
-document.addEventListener('DOMContentLoaded', () => {
-    console.log("Portfolio website loaded at 07:08 AM PKT, September 25, 2025");
-    const elements = {
+document.addEventListener('DOMContentLoaded', () => 
         youtubeBtn: document.getElementById('youtube-btn'),
         mobileMenuButton: document.getElementById('mobile-menu-button'),
         mobileMenu: document.getElementById('mobile-menu'),
