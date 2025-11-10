@@ -750,6 +750,27 @@ html.light-theme .lang-option {
     transform: translateY(-10px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
+.skill-badge {
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease, background-color 0.3s ease, color 0.3s ease;
+    background: var(--card-dark);
+    border: 1px solid var(--card-border-dark);
+    box-shadow: var(--shadow-soft);
+    border-radius: 9999px;
+    margin: 0.5rem;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+}
+.skill-badge:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #FFFFFF;
+}
+html.light-theme .skill-badge:hover {
+    color: #000000 !important;
+}
 .social-icon {
     transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.4s ease;
     padding: 0.5rem;
@@ -857,11 +878,10 @@ footer p {
     overflow-wrap: break-word;
     word-break: break-word;
     hyphens: auto;
-    
+   
     /* Add unified animation trigger */
     will-change: transform, box-shadow;
 }
-
 .skill-item::before {
     /* Existing tint preserved, enhanced for readability */
     content: '';
@@ -875,21 +895,18 @@ footer p {
     border-radius: 1.5rem;
     z-index: 1; /* Ensure it sits behind text */
 }
-
 .skill-item:hover::before {
     opacity: 1;
 }
-
 .skill-item:hover {
     /* Cohesive single animation: card lift with subtle scale */
     transform: translateY(-8px) scale(1.02); /* Reduced from -12px/1.03 for smoother cohesion */
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); /* Slightly softer shadow */
     border-color: var(--primary-color);
-    
+   
     /* Ensure consistent timing across card */
     transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-
 .skill-badge {
     /* Existing styles preserved */
     font-size: 1.75rem;
@@ -901,10 +918,9 @@ footer p {
     margin-bottom: 0.75rem;
     position: relative; /* For pop-up layering */
     z-index: 2; /* Above tint */
-    
+   
     /* Remove separate hover; tie to card hover */
 }
-
 .skill-badge i {
     /* Existing styles preserved */
     font-size: 2rem;
@@ -912,7 +928,6 @@ footer p {
     color: var(--primary-color);
     transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Unified timing */
 }
-
 /* Pop-up animation for pill-shaped skill name on card hover */
 .skill-item:hover .skill-badge {
     /* Single pop-up: quick scale and lift for emphasis */
@@ -920,19 +935,16 @@ footer p {
     color: #FFFFFF; /* High contrast for readability over tint */
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
 }
-
 .skill-item:hover .skill-badge i {
     /* Icon pops slightly more for visual pop */
     transform: scale(1.1);
     color: #FFFFFF; /* Match text for cohesion */
 }
-
 /* Ensure expanded content readability on hover */
 .skill-item:hover .expanded-content {
     color: var(--text-dark); /* Maintain high contrast */
     transition: color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-
 .expanded-content {
     padding-top: 1rem;
     border-top: 1px dashed var(--card-border-dark);
@@ -943,21 +955,17 @@ footer p {
 html.light-theme .expanded-content {
     color: var(--gray-light);
 }
-
 /* Light theme adjustments for readability */
 html.light-theme .skill-item::before {
     background: linear-gradient(135deg, rgba(255,140,0,0.06), rgba(255,140,0,0.02)); /* Lighter tint */
 }
-
 html.light-theme .skill-item:hover .skill-badge {
     color: var(--text-light); /* Dark text on light theme for contrast */
     text-shadow: 0 1px 2px rgba(255, 140, 0, 0.3); /* Orange glow instead */
 }
-
 html.light-theme .skill-item:hover .skill-badge i {
     color: var(--primary-color); /* Keep orange icon */
 }
-
 /* Responsive: Soften on smaller screens */
 @media (max-width: 768px) {
     .skills-grid {
@@ -972,23 +980,21 @@ html.light-theme .skill-item:hover .skill-badge i {
     .skill-item:hover {
         transform: translateY(-4px) scale(1.01); /* Less dramatic on mobile */
     }
-    
+   
     .skill-item:hover .skill-badge {
         transform: translateY(-2px) scale(1.05);
     }
 }
 /* ========================================
-   VISIT PROJECT BUTTON - MODERN STYLE (Unified with View Credential)
+   VISIT PROJECT BUTTON - MODERN STYLE
    ======================================== */
-/* Unified styles for both Visit Project and View Credential buttons to ensure exact matching */
-.projects-section .visit-project-btn,
-.view-credential-btn {
-    display: inline-flex !important;
+.projects-section .visit-project-btn, .view-credential-btn {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 0.85rem 1.75rem;
     background: linear-gradient(135deg, var(--primary-color) 0%, #FF4500 100%);
-    color: white !important;
+    color: white;
     text-decoration: none;
     border-radius: 8px;
     font-weight: 600;
@@ -998,11 +1004,18 @@ html.light-theme .skill-item:hover .skill-badge i {
     border: none;
     position: relative;
     overflow: hidden;
-    cursor: pointer;
 }
-
-.projects-section .visit-project-btn::after,
-.view-credential-btn::after {
+.projects-section .visit-project-btn:hover, .view-credential-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(255, 140, 0, 0.4);
+    background: linear-gradient(135deg, #FF4500 0%, var(--primary-color) 100%);
+}
+.projects-section .visit-project-btn:active, .view-credential-btn:active {
+    transform: scale(0.95);
+    box-shadow: none;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.projects-section .visit-project-btn::after, .view-credential-btn::after {
     content: '';
     position: absolute;
     top: 50%;
@@ -1015,46 +1028,23 @@ html.light-theme .skill-item:hover .skill-badge i {
     transform: translate(-50%, -50%) scale(0);
     transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease-in-out;
 }
-
-.projects-section .visit-project-btn:hover,
-.view-credential-btn:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(255, 140, 0, 0.4);
-    background: linear-gradient(135deg, #FF4500 0%, var(--primary-color) 100%);
-}
-
-.projects-section .visit-project-btn:active,
-.view-credential-btn:active {
-    transform: scale(0.95);
-    box-shadow: none;
-    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.projects-section .visit-project-btn:active::after,
-.view-credential-btn:active::after {
+.projects-section .visit-project-btn:active::after, .view-credential-btn:active::after {
     animation: ripple-effect 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
-
-/* Light theme overrides for both buttons */
-html.light-theme .projects-section .visit-project-btn,
-html.light-theme .view-credential-btn {
+html.light-theme .projects-section .visit-project-btn, html.light-theme .view-credential-btn {
     background: linear-gradient(135deg, #FFE4D6 0%, white 100%);
-    color: var(--primary-color) !important;
+    color: var(--primary-color);
     border: 2px solid var(--primary-color);
     box-shadow: 0 4px 12px rgba(255, 140, 0, 0.2);
 }
-
-html.light-theme .projects-section .visit-project-btn::after,
-html.light-theme .view-credential-btn::after {
-    background: rgba(0, 0, 0, 0.4);
-}
-
-html.light-theme .projects-section .visit-project-btn:hover,
-html.light-theme .view-credential-btn:hover {
+html.light-theme .projects-section .visit-project-btn:hover, html.light-theme .view-credential-btn:hover {
     transform: translateY(-4px);
     background: linear-gradient(135deg, var(--primary-color) 0%, #FF4500 100%);
-    color: white !important;
+    color: white;
     box-shadow: 0 8px 20px rgba(255, 140, 0, 0.3);
+}
+html.light-theme .projects-section .visit-project-btn::after, html.light-theme .view-credential-btn::after {
+    background: rgba(0, 0, 0, 0.4);
 }
 /* ========================================
    REST OF ORIGINAL STYLES (unchanged)
@@ -1169,3 +1159,36 @@ html.light-theme .toggle-switch label { background-color: var(--primary-color); 
 html.light-theme .toggle-switch input:not(:checked) + label:before { transform: translateX(20px); }
 html.light-theme .toggle-switch input:checked + label { background-color: #ccc; }
 html.light-theme .toggle-switch input:checked + label:before { transform: translateX(0); }
+.view-credential-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.75rem;
+    background: linear-gradient(135deg, var(--primary-color) 0%, #FF4500 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+.view-credential-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(255, 140, 0, 0.4);
+    background: linear-gradient(135deg, #FF4500 0%, var(--primary-color) 100%);
+}
+html.light-theme .view-credential-btn {
+    background: linear-gradient(135deg, #FFE4D6 0%, white 100%);
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 4px 12px rgba(255, 140, 0, 0.2);
+}
+html.light-theme .view-credential-btn:hover {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #FF4500 100%);
+    color: white;
+    box-shadow: 0 8px 20px rgba(255, 140, 0, 0.3);
+}
