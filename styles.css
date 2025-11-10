@@ -978,16 +978,17 @@ html.light-theme .skill-item:hover .skill-badge i {
     }
 }
 /* ========================================
-   VISIT PROJECT BUTTON - MODERN STYLE
+   VISIT PROJECT BUTTON - MODERN STYLE (Unified with View Credential)
    ======================================== */
-/* Styles for Visit Project buttons to match View Credential buttons exactly */
-.projects-section .visit-project-btn, .view-credential-btn {
-    display: inline-flex;
+/* Unified styles for both Visit Project and View Credential buttons to ensure exact matching */
+.projects-section .visit-project-btn,
+.view-credential-btn {
+    display: inline-flex !important;
     align-items: center;
     justify-content: center;
     padding: 0.85rem 1.75rem;
     background: linear-gradient(135deg, var(--primary-color) 0%, #FF4500 100%);
-    color: white;
+    color: white !important;
     text-decoration: none;
     border-radius: 8px;
     font-weight: 600;
@@ -997,9 +998,11 @@ html.light-theme .skill-item:hover .skill-badge i {
     border: none;
     position: relative;
     overflow: hidden;
+    cursor: pointer;
 }
 
-.projects-section .visit-project-btn::after, .view-credential-btn::after {
+.projects-section .visit-project-btn::after,
+.view-credential-btn::after {
     content: '';
     position: absolute;
     top: 50%;
@@ -1013,37 +1016,44 @@ html.light-theme .skill-item:hover .skill-badge i {
     transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease-in-out;
 }
 
-.projects-section .visit-project-btn:hover, .view-credential-btn:hover {
+.projects-section .visit-project-btn:hover,
+.view-credential-btn:hover {
     transform: translateY(-4px);
     box-shadow: 0 8px 20px rgba(255, 140, 0, 0.4);
     background: linear-gradient(135deg, #FF4500 0%, var(--primary-color) 100%);
 }
 
-.projects-section .visit-project-btn:active, .view-credential-btn:active {
+.projects-section .visit-project-btn:active,
+.view-credential-btn:active {
     transform: scale(0.95);
     box-shadow: none;
     transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.projects-section .visit-project-btn:active::after, .view-credential-btn:active::after {
+.projects-section .visit-project-btn:active::after,
+.view-credential-btn:active::after {
     animation: ripple-effect 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
-/* Light theme styles */
-html.light-theme .projects-section .visit-project-btn, html.light-theme .view-credential-btn {
+/* Light theme overrides for both buttons */
+html.light-theme .projects-section .visit-project-btn,
+html.light-theme .view-credential-btn {
     background: linear-gradient(135deg, #FFE4D6 0%, white 100%);
-    color: var(--primary-color);
+    color: var(--primary-color) !important;
     border: 2px solid var(--primary-color);
     box-shadow: 0 4px 12px rgba(255, 140, 0, 0.2);
 }
 
-html.light-theme .projects-section .visit-project-btn::after, html.light-theme .view-credential-btn::after {
+html.light-theme .projects-section .visit-project-btn::after,
+html.light-theme .view-credential-btn::after {
     background: rgba(0, 0, 0, 0.4);
 }
 
-html.light-theme .projects-section .visit-project-btn:hover, html.light-theme .view-credential-btn:hover {
+html.light-theme .projects-section .visit-project-btn:hover,
+html.light-theme .view-credential-btn:hover {
+    transform: translateY(-4px);
     background: linear-gradient(135deg, var(--primary-color) 0%, #FF4500 100%);
-    color: white;
+    color: white !important;
     box-shadow: 0 8px 20px rgba(255, 140, 0, 0.3);
 }
 /* ========================================
