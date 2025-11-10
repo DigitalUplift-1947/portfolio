@@ -863,7 +863,9 @@ footer p {
     max-width: 800px;
     padding: 0 1rem;
 }
+/* Enhanced cohesive hover effect for skill cards */
 .skill-item {
+    /* Existing styles preserved */
     background: var(--card-dark);
     border: 1px solid var(--card-border-dark);
     border-radius: 1.5rem;
@@ -876,40 +878,82 @@ footer p {
     overflow-wrap: break-word;
     word-break: break-word;
     hyphens: auto;
+    
+    /* Add unified animation trigger */
+    will-change: transform, box-shadow;
 }
+
 .skill-item::before {
+    /* Existing tint preserved, enhanced for readability */
     content: '';
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: linear-gradient(135deg, rgba(255,140,0,0.1), transparent);
+    background: linear-gradient(135deg, rgba(255,140,0,0.08), rgba(255,140,0,0.04)); /* Subtle orange tint for better readability */
     opacity: 0;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     pointer-events: none;
     border-radius: 1.5rem;
+    z-index: 1; /* Ensure it sits behind text */
 }
+
 .skill-item:hover::before {
     opacity: 1;
 }
+
 .skill-item:hover {
-    transform: translateY(-12px) scale(1.03);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    /* Cohesive single animation: card lift with subtle scale */
+    transform: translateY(-8px) scale(1.02); /* Reduced from -12px/1.03 for smoother cohesion */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); /* Slightly softer shadow */
     border-color: var(--primary-color);
+    
+    /* Ensure consistent timing across card */
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
+
 .skill-badge {
+    /* Existing styles preserved */
     font-size: 1.75rem;
     font-weight: 700;
     display: flex;
     align-items: center;
     color: var(--text-dark);
-    transition: color 0.4s ease;
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Unified transition timing */
     margin-bottom: 0.75rem;
+    position: relative; /* For pop-up layering */
+    z-index: 2; /* Above tint */
+    
+    /* Remove separate hover; tie to card hover */
 }
+
 .skill-badge i {
+    /* Existing styles preserved */
     font-size: 2rem;
     margin-right: 1rem;
     color: var(--primary-color);
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Unified timing */
 }
+
+/* Pop-up animation for pill-shaped skill name on card hover */
+.skill-item:hover .skill-badge {
+    /* Single pop-up: quick scale and lift for emphasis */
+    transform: translateY(-4px) scale(1.08);
+    color: #FFFFFF; /* High contrast for readability over tint */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+}
+
+.skill-item:hover .skill-badge i {
+    /* Icon pops slightly more for visual pop */
+    transform: scale(1.1);
+    color: #FFFFFF; /* Match text for cohesion */
+}
+
+/* Ensure expanded content readability on hover */
+.skill-item:hover .expanded-content {
+    color: var(--text-dark); /* Maintain high contrast */
+    transition: color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
 .expanded-content {
     padding-top: 1rem;
     border-top: 1px dashed var(--card-border-dark);
@@ -920,7 +964,22 @@ footer p {
 html.light-theme .expanded-content {
     color: var(--gray-light);
 }
-/* Responsive */
+
+/* Light theme adjustments for readability */
+html.light-theme .skill-item::before {
+    background: linear-gradient(135deg, rgba(255,140,0,0.06), rgba(255,140,0,0.02)); /* Lighter tint */
+}
+
+html.light-theme .skill-item:hover .skill-badge {
+    color: var(--text-light); /* Dark text on light theme for contrast */
+    text-shadow: 0 1px 2px rgba(255, 140, 0, 0.3); /* Orange glow instead */
+}
+
+html.light-theme .skill-item:hover .skill-badge i {
+    color: var(--primary-color); /* Keep orange icon */
+}
+
+/* Responsive: Soften on smaller screens */
 @media (max-width: 768px) {
     .skills-grid {
         gap: 1.5rem;
@@ -930,6 +989,13 @@ html.light-theme .expanded-content {
     }
     .skill-badge i {
         font-size: 1.8rem;
+    }
+    .skill-item:hover {
+        transform: translateY(-4px) scale(1.01); /* Less dramatic on mobile */
+    }
+    
+    .skill-item:hover .skill-badge {
+        transform: translateY(-2px) scale(1.05);
     }
 }
 /* ========================================
