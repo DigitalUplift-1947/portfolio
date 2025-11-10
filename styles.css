@@ -909,10 +909,6 @@ footer p {
     font-size: 2rem;
     margin-right: 1rem;
     color: var(--primary-color);
-    transition: transform 0.4s ease;
-}
-.skill-item:hover .skill-badge i {
-    transform: scale(1.2) rotate(5deg);
 }
 .expanded-content {
     padding-top: 1rem;
@@ -940,60 +936,51 @@ html.light-theme .expanded-content {
    VISIT PROJECT BUTTON - MODERN STYLE
    ======================================== */
 .projects-section .visit-project-btn, .view-credential-btn {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     padding: 0.85rem 1.75rem;
-    background-color: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color) 0%, #FF4500 100%);
     color: white;
     text-decoration: none;
-    border-radius: 9999px;
+    border-radius: 8px;
     font-weight: 600;
     font-size: 1.1rem;
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
     border: none;
     position: relative;
     overflow: hidden;
 }
-.projects-section .visit-project-btn:hover, .view-credential-btn:hover {
-    transform: translateY(-8px) scale(1.05);
-    box-shadow: 0 16px 28px rgba(0, 0, 0, 0.3);
-    background-color: #FF6B35;
-}
-.projects-section .visit-project-btn:active, .view-credential-btn:active {
-    transform: scale(0.95);
-    box-shadow: none;
-    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-.projects-section .visit-project-btn::after, .view-credential-btn::after {
+.projects-section .visit-project-btn::before {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 5px;
-    height: 5px;
-    background: rgba(255, 255, 255, 0.6);
-    border-radius: 50%;
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0);
-    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease-in-out;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+    transform: scale(0);
+    transition: transform 0.5s ease;
 }
-.projects-section .visit-project-btn:active::after, .view-credential-btn:active::after {
-    animation: ripple-effect 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+.projects-section .visit-project-btn:hover::before {
+    transform: scale(1);
+}
+.projects-section .visit-project-btn:hover, .view-credential-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(255, 140, 0, 0.4);
+    background: linear-gradient(135deg, #FF4500 0%, var(--primary-color) 100%);
 }
 html.light-theme .projects-section .visit-project-btn, html.light-theme .view-credential-btn {
-    background-color: transparent;
+    background: linear-gradient(135deg, #FFE4D6 0%, white 100%);
     color: var(--primary-color);
     border: 2px solid var(--primary-color);
     box-shadow: 0 4px 12px rgba(255, 140, 0, 0.2);
 }
 html.light-theme .projects-section .visit-project-btn:hover, html.light-theme .view-credential-btn:hover {
-    background-color: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color) 0%, #FF4500 100%);
     color: white;
-    box-shadow: 0 16px 28px rgba(0, 0, 0, 0.3);
-    transform: translateY(-8px) scale(1.05);
-}
-html.light-theme .projects-section .visit-project-btn::after, html.light-theme .view-credential-btn::after {
-    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 8px 20px rgba(255, 140, 0, 0.3);
 }
 /* ========================================
    REST OF ORIGINAL STYLES (unchanged)
@@ -1109,34 +1096,49 @@ html.light-theme .toggle-switch input:not(:checked) + label:before { transform: 
 html.light-theme .toggle-switch input:checked + label { background-color: #ccc; }
 html.light-theme .toggle-switch input:checked + label:before { transform: translateX(0); }
 .view-credential-btn {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     padding: 0.85rem 1.75rem;
-    background-color: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color) 0%, #FF4500 100%);
     color: white;
     text-decoration: none;
-    border-radius: 9999px;
+    border-radius: 8px;
     font-weight: 600;
     font-size: 1.1rem;
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
     border: none;
     position: relative;
     overflow: hidden;
 }
+.view-credential-btn::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+    transform: scale(0);
+    transition: transform 0.5s ease;
+}
+.view-credential-btn:hover::before {
+    transform: scale(1);
+}
 .view-credential-btn:hover {
-    transform: translateY(-8px) scale(1.05);
-    box-shadow: 0 16px 28px rgba(0, 0, 0, 0.3);
-    background-color: #FF6B35;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(255, 140, 0, 0.4);
+    background: linear-gradient(135deg, #FF4500 0%, var(--primary-color) 100%);
 }
 html.light-theme .view-credential-btn {
-    background-color: transparent;
+    background: linear-gradient(135deg, #FFE4D6 0%, white 100%);
     color: var(--primary-color);
     border: 2px solid var(--primary-color);
     box-shadow: 0 4px 12px rgba(255, 140, 0, 0.2);
 }
 html.light-theme .view-credential-btn:hover {
-    background-color: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color) 0%, #FF4500 100%);
     color: white;
-    box-shadow: 0 16px 28px rgba(0, 0, 0, 0.3);
-    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(255, 140, 0, 0.3);
 }
