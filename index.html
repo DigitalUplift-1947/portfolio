@@ -1,46 +1,62 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
+    <!-- Head section: Meta tags for SEO, description, keywords, Open Graph, Twitter Cards, and title. Edit these for better search visibility. -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Portfolio of Muhammad Owais, an AI enthusiast, content creator, and digital marketer specializing in prompt engineering, cybersecurity, and YouTube content. Explore certifications, experience, and skills.">
     <meta name="keywords" content="Muhammad Owais, AI tools, prompt engineering, cybersecurity, digital marketing, YouTube creator, portfolio, certifications, Python, Google AI Essentials">
     <meta property="og:title" content="Muhammad Owais | Portfolio">
     <meta property="og:description" content="Discover the professional journey of Muhammad Owais in AI, cybersecurity, and digital content creation.">
+    <!-- Change this og:image URL to your preferred portfolio preview image (recommended: 1200x630px for social sharing) -->
     <meta property="og:image" content="https://via.placeholder.com/150">
     <meta property="og:url" content="https://your-portfolio-url.com">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Muhammad Owais | Portfolio">
     <meta name="twitter:description" content="Explore Muhammad Owais's skills in AI, prompt engineering, and more.">
+    <!-- Change this twitter:image URL to your preferred portfolio preview image (recommended: 1200x675px for Twitter) -->
     <meta name="twitter:image" content="https://via.placeholder.com/150">
     <title>Muhammad Owais | Portfolio</title>
+    <!-- Favicon: Change href to your custom favicon file (e.g., .ico, .png, .svg) for browser tab icon -->
     <link rel="icon" href="fevcon.svg" type="image/svg" alt="Muhammad Owais Portfolio Favicon">
+    <!-- Font Awesome for icons: No changes needed unless you want different icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous">
+    <!-- Google Fonts: Inter font family. Edit link if you want different fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS: CDN for utility classes. Replace with local file if preferred -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- SheetJS for Excel/CSV handling: Used in script for file processing -->
     <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+    <!-- Custom CSS: Link to your styles.css file. Edit styles.css for design changes -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Loading Screen: Full-screen loader with spinner and text. Customize animation or text in CSS -->
     <div id="loading-screen">
         <div class="loader"></div>
         <p class="loading-text" data-i18n="loading-text">Loading Portfolio...</p>
     </div>
+    <!-- Welcome Overlay: Initial popup with emoji, text, and enter button. Customize sound or styling -->
     <div id="welcome-overlay">
         <div class="welcome-emoji">👋</div>
         <p class="welcome-text" data-i18n="welcome-text">Let's have a look at my portfolio!</p>
         <button id="welcome-btn" class="bubbly-btn" data-i18n="enter-btn">Enter</button>
     </div>
+    <!-- Welcome Audio: Background sound on enter. Change src to your MP3 file (keep small for fast load) -->
     <audio id="welcome-sound" preload="auto">
         <source src="welcome.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
+    <!-- Parallax Background: Animated starry/cloud background. Edit CSS for different effects -->
     <div class="parallax-background"></div>
+    <!-- Logo Container: Site logo at top. Change src to your custom logo image/SVG (keep aspect ratio) -->
     <div class="logo-container">
         <img src="logo.svg" alt="logo" class="logo">
     </div>
+    <!-- Header/Navigation: Fixed top nav with menu, language/theme toggles. Edit links or add items -->
     <header id="main-header" class="fixed top-0 left-0 right-0 z-50 py-4 px-4 sm:px-6">
         <nav class="flex justify-between items-center w-full">
+            <!-- Desktop Nav Links: Hidden on mobile. Edit hrefs or add new <li> for sections -->
             <ul class="hidden md:flex space-x-6 lg:space-x-8 text-lg font-bold">
                 <li><a href="#home" class="nav-link" data-i18n="nav-home">Home</a></li>
                 <li><a href="#about" class="nav-link" data-i18n="nav-about">About</a></li>
@@ -49,10 +65,13 @@
                 <li><a href="#projects" class="nav-link" data-i18n="nav-projects">Projects</a></li>
                 <li><a href="#contact" class="nav-link" data-i18n="nav-contact">Contact</a></li>
             </ul>
+            <!-- Right-side Controls: Language dropdown, theme toggle, mobile menu button -->
             <div class="flex items-center space-x-2 sm:space-x-4 relative">
+                <!-- Language Toggle Button: Opens dropdown. Edit options in dropdown below -->
                 <button id="lang-toggle" class="lang-toggle" aria-label="Language Selector" title="Select Language">
                     <i class="fas fa-globe"></i>
                 </button>
+                <!-- Language Dropdown: Hidden by default. Edit <a> items for languages -->
                 <div id="lang-dropdown" class="lang-dropdown">
                     <a href="#" class="lang-option" data-lang="en" data-i18n="lang-en">English</a>
                     <a href="#" class="lang-option" data-lang="fr" data-i18n="lang-fr">Français</a>
@@ -60,6 +79,7 @@
                     <a href="#" class="lang-option" data-lang="hi" data-i18n="lang-hi">हिंदी</a>
                     <a href="#" class="lang-option" data-lang="zh" data-i18n="lang-zh">中文</a>
                 </div>
+                <!-- Theme Toggle: Dark/light mode switch with icons -->
                 <div id="theme-toggle" class="theme-toggle flex items-center space-x-1">
                     <i data-lucide="moon" class="text-lg"></i>
                     <div class="toggle-switch relative inline-block w-10 h-5">
@@ -68,11 +88,13 @@
                     </div>
                     <i data-lucide="sun" class="text-lg"></i>
                 </div>
+                <!-- Mobile Menu Button: Hamburger icon for mobile nav -->
                 <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none" aria-expanded="false" aria-controls="mobile-menu">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
             </div>
         </nav>
+        <!-- Mobile Menu: Dropdown nav for small screens. Edit <li> items to match desktop -->
         <div id="mobile-menu" class="md:hidden absolute top-full left-0 w-full transform -translate-y-[150%]">
             <ul class="flex flex-col items-center space-y-4 py-6 text-lg font-bold">
                 <li><a href="#home" class="nav-link" data-i18n="nav-home">Home</a></li>
@@ -84,13 +106,17 @@
             </ul>
         </div>
     </header>
+    <!-- Main Content: All sections below. Each section has id for smooth scrolling -->
     <main class="relative z-10">
+        <!-- Home Section: Hero with greeting, changing text, social icons, and CTA button -->
         <section id="home" class="min-h-screen flex items-center pt-28 sm:pt-32 px-6 sm:px-8">
             <div class="text-center w-full space-y-8 animated-section">
                 <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight">
                     <span data-i18n="home-hello">Hello</span>, I'm <span class="text-[var(--primary-color)]">Muhammad Owais</span>
                 </h2>
+                <!-- Changing Text: Animated subtitle. Edit text array in script.js -->
                 <p id="changing-text" class="text-lg sm:text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto"></p>
+                <!-- Social Icons: WhatsApp, Email, LinkedIn. Change hrefs or add new icons -->
                 <div class="flex justify-center space-x-8">
                     <a href="https://wa.me/message/NHLJOW7GEFJ7L1" target="_blank" rel="noopener noreferrer" class="text-2xl sm:text-3xl text-white hover:text-[#25D366] social-icon" aria-label="WhatsApp">
                         <i id="whatsapp-icon" class="fab fa-whatsapp"></i>
@@ -103,22 +129,29 @@
                     </a>
                 </div>
                 <div class="mt-6 space-y-6">
+                    <!-- CTA Button: Links to certifications. Change href or text -->
                     <a href="#certifications" class="inline-block px-8 py-3 sm:px-10 sm:py-4 text-lg sm:text-xl font-semibold text-gray-900 bg-white rounded-full shadow-lg bubbly-btn hover:bg-[var(--primary-color)] hover:text-white" data-i18n="explore-certifications">Explore My Certifications</a>
                     <p class="text-lg sm:text-xl text-gray-200" data-i18n="join-me">Join me in mastering digital skills for a brighter future!</p>
                 </div>
             </div>
         </section>
+        <!-- About Section: Profile image, bio paragraphs, skills grid, YouTube button -->
         <section id="about" class="py-16 sm:py-20 md:py-24 px-6 sm:px-8 animated-section about-section">
             <div class="container mx-auto">
+                <!-- Section Title: About Me heading -->
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 md:mb-14 text-[var(--primary-color)]" data-i18n="about-title">About Me</h2>
+                <!-- Profile Card: Flex layout with image and text -->
                 <div class="flex flex-col md:flex-row items-center md:items-start space-y-8 md:space-y-0 md:space-x-10 p-8 sm:p-10 rounded-2xl shadow-xl border border-gray-700">
+                    <!-- Profile Image: Change src to your personal photo (recommended: square, 256x256px or larger) -->
                     <div class="flex-shrink-0 profile-container">
                         <img src="Profile.jpg" alt="Profile Photo for Muhammad Owais">
                     </div>
+                    <!-- Bio Text: Paragraphs with links. Edit content or add more <p> -->
                     <div class="md:flex-grow text-center md:text-left">
                         <p class="text-base sm:text-lg leading-relaxed mb-6 text-gray-200" data-i18n="about-para1">I combine skills in AI tools, prompt engineering, and cybersecurity with experience in digital marketing and content creation. Currently pursuing <span class="text-[var(--primary-color)]">Bachelor of Business Information Systems (BBIS)</span>, University of Management and Technology – Ongoing (Expected 2027).</p>
                         <p class="text-base sm:text-lg leading-relaxed mb-6 text-gray-200" data-i18n="about-para2">Through my YouTube channel <a href="https://www.youtube.com/@DigitalUplift.1947" target="_blank" rel="noopener noreferrer" class="text-[var(--primary-color)] hover:underline">@DigitalUplift.1947</a>, I empower over <span class="text-[var(--primary-color)]">177 million Pakistanis</span> lacking digital skills with weekly videos offering practical tips.</p>
                         <p class="text-base sm:text-lg leading-relaxed mb-8 text-gray-200" data-i18n="about-para3">Driven by curiosity and a commitment to learning, I’m adaptable, creative, and passionate about simplifying complex ideas.</p>
+                        <!-- Skills Grid: List of skill cards. Edit each <div class="skill-item"> for new skills, icons, or descriptions -->
                         <div class="mt-8">
                             <h3 class="text-2xl sm:text-3xl font-semibold mb-6 text-[var(--primary-color)]" data-i18n="skills-title">Skills & Expertise</h3>
                             <div class="skills-grid -mx-8 sm:-mx-10">
@@ -196,6 +229,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- YouTube Button: Links to channel. Change href or text -->
                         <div class="mt-6 sm:mt-8 text-center md:text-left">
                             <button id="youtube-btn" onclick="window.open('https://www.youtube.com/@DigitalUplift.1947', '_blank');" class="inline-block px-6 py-3 sm:px-8 sm:py-4 bg-white/10 text-white font-bold rounded-lg bubbly-btn flex items-center justify-center hover:bg-[#FF0000]" data-i18n="visit-youtube">
                                 <i class="fab fa-youtube mr-2"></i>Visit My YouTube Channel
@@ -205,10 +239,14 @@
                 </div>
             </div>
         </section>
+        <!-- Experience Section: Timeline of professional roles with expandable details -->
         <section id="experience" class="py-16 sm:py-20 md:py-24 px-6 sm:px-8 animated-section">
             <div class="container mx-auto max-w-5xl">
+                <!-- Section Title: Experience heading -->
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 md:mb-14 text-[var(--primary-color)]" data-i18n="experience-title">Professional Experience</h2>
+                <!-- Timeline Container: Vertical timeline layout -->
                 <div class="timeline">
+                    <!-- Timeline Item 1: AI & Content Strategist -->
                     <div class="timeline-item p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.01] transition-transform duration-300" aria-labelledby="experience-1" role="listitem">
                         <div class="flex items-center mb-4">
                             <i class="fas fa-briefcase mr-3 text-[var(--primary-color)] text-xl sm:text-2xl"></i>
@@ -216,9 +254,11 @@
                             <span class="badge" data-i18n="badge-personal">Personal Project</span>
                         </div>
                         <p class="text-sm sm:text-base font-medium text-gray-200 mb-4" data-i18n="exp-digital-dates">Digital Uplift | 2020 – Present</p>
+                        <!-- Toggle Button: Expand/collapse details -->
                         <button class="toggle-details" aria-expanded="false" aria-controls="details-1" aria-label="Toggle AI & Content Strategist details">
                             <i class="fas fa-chevron-down"></i>
                         </button>
+                        <!-- Expandable Content: Bullet list. Edit <li> for details -->
                         <div id="details-1" class="timeline-content mt-4">
                             <ul class="list-disc list-inside space-y-3 text-gray-200 text-base sm:text-lg">
                                 <li data-i18n="exp-ai-bullet1">Produced tech-focused YouTube content, growing audience by 25% annually.</li>
@@ -227,6 +267,7 @@
                             </ul>
                         </div>
                     </div>
+                    <!-- Timeline Item 2: Internships -->
                     <div class="timeline-item p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.01] transition-transform duration-300" aria-labelledby="experience-2" role="listitem">
                         <div class="flex items-center mb-4">
                             <i class="fas fa-user-tie mr-3 text-[var(--primary-color)] text-xl sm:text-2xl"></i>
@@ -234,9 +275,11 @@
                             <span class="badge" data-i18n="badge-multiple">Multiple Roles</span>
                         </div>
                         <p class="text-sm sm:text-base font-medium text-gray-200 mb-4" data-i18n="exp-various-dates">Various Organizations | 2022 – 2026</p>
+                        <!-- Toggle Button: Expand/collapse details -->
                         <button class="toggle-details" aria-expanded="false" aria-controls="details-2" aria-label="Toggle Internships details">
                             <i class="fas fa-chevron-down"></i>
                         </button>
+                        <!-- Expandable Content: Bullet list. Edit <li> for details -->
                         <div id="details-2" class="timeline-content mt-4">
                             <ul class="list-disc list-inside space-y-3 text-gray-200 text-base sm:text-lg">
                                 <li data-i18n="exp-intern1">Shaukat Khanum Hospital (Marketing & HR Intern, 2023–2024): Boosted event participation by 15% and streamlined recruitment.</li>
@@ -249,11 +292,16 @@
                 </div>
             </div>
         </section>
+        <!-- Certifications Section: Grid of certification cards with logos and links -->
         <section id="certifications" class="py-16 sm:py-20 md:py-24 px-6 sm:px-8 animated-section certifications-section">
             <div class="container mx-auto max-w-6xl">
+                <!-- Section Title: Certifications heading -->
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 md:mb-14 text-[var(--primary-color)]" data-i18n="cert-title">Certifications</h2>
+                <!-- Grid Layout: Responsive grid for cards. Edit cols for more/less items -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
+                    <!-- Cert Card 1: Prompt Engineering -->
                     <div class="p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] hover:translateY(-10px) transition-all duration-300 border border-gray-700">
+                        <!-- Logo Image: Change src to your certification badge (e.g., SVG/PNG, keep square) -->
                         <img src="google.svg" alt="Google Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
                         <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2 text-center" data-i18n="cert-prompt-eng">Prompt Engineering and Prompting Essentials</h3>
                         <p class="text-gray-200 text-base sm:text-lg mb-2 text-center" data-i18n="issued-by-google">Issued by Google</p>
@@ -262,7 +310,9 @@
                             <a href="https://www.coursera.org/account/accomplishments/verify/EO0L72HVNHTL" class="view-credential-btn" target="_blank" rel="noopener noreferrer" data-i18n="view-credential">View Credential &rarr;</a>
                         </div>
                     </div>
+                    <!-- Cert Card 2: Google AI Essentials -->
                     <div class="p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] hover:translateY(-10px) transition-all duration-300 border border-gray-700">
+                        <!-- Logo Image: Change src to your certification badge (e.g., SVG/PNG, keep square) -->
                         <img src="google.svg" alt="Google AI Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
                         <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2 text-center" data-i18n="cert-google-ai">Google AI Essentials</h3>
                         <p class="text-gray-200 text-base sm:text-lg mb-2 text-center" data-i18n="issued-by-google">Issued by Google</p>
@@ -271,7 +321,9 @@
                             <a href="https://coursera.org/share/ec941470fa4f3bfdd16eae5b4789f247" class="view-credential-btn" target="_blank" rel="noopener noreferrer" data-i18n="view-credential">View Credential &rarr;</a>
                         </div>
                     </div>
+                    <!-- Cert Card 3: LinkedIn AI Essentials -->
                     <div class="p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] hover:translateY(-10px) transition-all duration-300 border border-gray-700">
+                        <!-- Logo Image: Change src to your certification badge (e.g., SVG/PNG, keep square) -->
                         <img src="likedin.svg" alt="LinkedIn Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
                         <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2 text-center" data-i18n="cert-linkedin-ai">LinkedIn AI Essentials</h3>
                         <p class="text-gray-200 text-base sm:text-lg mb-2 text-center" data-i18n="issued-by-linkedin">Issued by LinkedIn</p>
@@ -280,7 +332,9 @@
                             <a href="https://www.linkedin.com/in/muhammad-owais-b45106328/details/certifications/1727674508303/single-media-viewer/" class="view-credential-btn" target="_blank" rel="noopener noreferrer" data-i18n="view-credential">View Credential &rarr;</a>
                         </div>
                     </div>
+                    <!-- Cert Card 4: Python Programming -->
                     <div class="p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] hover:translateY(-10px) transition-all duration-300 border border-gray-700">
+                        <!-- Logo Image: Change src to your certification badge (e.g., SVG/PNG, keep square) -->
                         <img src="itu.svg" alt="ITU Python Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
                         <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2 text-center" data-i18n="cert-python">Python Programming Course</h3>
                         <p class="text-gray-200 text-base sm:text-lg mb-2 text-center" data-i18n="issued-by-itu">Issued by ITU</p>
@@ -289,7 +343,9 @@
                             <a href="https://www.linkedin.com/in/muhammad-owais-b45106328/details/certifications/1727659107845/single-media-viewer/" class="view-credential-btn" target="_blank" rel="noopener noreferrer" data-i18n="view-credential">View Credential &rarr;</a>
                         </div>
                     </div>
+                    <!-- Cert Card 5: Digital Marketing -->
                     <div class="p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] hover:translateY(-10px) transition-all duration-300 border border-gray-700">
+                        <!-- Logo Image: Change src to your certification badge (e.g., SVG/PNG, keep square) -->
                         <img src="google.svg" alt="Google Marketing Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
                         <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2 text-center" data-i18n="cert-marketing">Digital Marketing Course</h3>
                         <p class="text-gray-200 text-base sm:text-lg mb-2 text-center" data-i18n="issued-by-google">Issued by Google</p>
@@ -298,7 +354,9 @@
                             <a href="https://skillshop.exceedlms.com/student/award/fR9PskUZepTYWBUYdNzMdnPy" class="view-credential-btn" target="_blank" rel="noopener noreferrer" data-i18n="view-credential">View Credential &rarr;</a>
                         </div>
                     </div>
+                    <!-- Cert Card 6: Cybersecurity -->
                     <div class="p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] hover:translateY(-10px) transition-all duration-300 border border-gray-700">
+                        <!-- Logo Image: Change src to your certification badge (e.g., SVG/PNG, keep square) -->
                         <img src="ibm.svg" alt="IBM Cybersecurity Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
                         <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2 text-center" data-i18n="cert-cyber">Cybersecurity Course</h3>
                         <p class="text-gray-200 text-base sm:text-lg mb-2 text-center" data-i18n="issued-by-ibm">Issued by IBM</p>
@@ -307,7 +365,9 @@
                             <a href="https://www.credly.com/badges/fa7cbba6-4f2e-4192-9f6f-77983482e85d/public_url" class="view-credential-btn" target="_blank" rel="noopener noreferrer" data-i18n="view-credential">View Credential &rarr;</a>
                         </div>
                     </div>
+                    <!-- Cert Card 7: Oracle Cloud -->
                     <div class="p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] hover:translateY(-10px) transition-all duration-300 border border-gray-700">
+                        <!-- Logo Image: Change src to your certification badge (e.g., SVG/PNG, keep square) -->
                         <img src="oracle.svg" alt="Oracle Certificate Badge" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
                         <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white mb-2 text-center">Oracle Cloud Infrastructure Foundations</h3>
                         <p class="text-gray-200 text-base sm:text-lg mb-2 text-center">Issued by Oracle</p>
@@ -319,12 +379,17 @@
                 </div>
             </div>
         </section>
+        <!-- Projects Section: Timeline-style project cards with images and links -->
         <section id="projects" class="py-16 sm:py-20 md:py-24 px-6 sm:px-8 animated-section projects-section">
             <div class="container mx-auto max-w-5xl">
+                <!-- Section Title: Projects heading -->
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 md:mb-14 text-[var(--primary-color)]" data-i18n="projects-title">Projects</h2>
+                <!-- Timeline Container: For project items -->
                 <div class="timeline">
+                    <!-- Project Item 1: AI Chatbot -->
                     <div class="timeline-item p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.01] transition-transform duration-300" aria-labelledby="project-1" role="listitem">
                         <div class="project-container">
+                            <!-- Project Image: Change src to your project screenshot/demo image (recommended: 16:9 aspect) -->
                             <img src="time space (40 x 40 px).svg" alt="Project 1 Image" class="rounded-lg mb-4 md:mb-0 h-auto max-w-full object-cover border border-gray-600 project-image" loading="lazy">
                             <div class="project-details">
                                 <h3 id="project-1" class="text-2xl sm:text-3xl font-bold text-white mb-2">AI Chatbot</h3>
@@ -335,8 +400,10 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Project Item 2: Portfolio Website -->
                     <div class="timeline-item p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.01] transition-transform duration-300" aria-labelledby="project-2" role="listitem">
                         <div class="project-container">
+                            <!-- Project Image: Change src to your project screenshot/demo image (recommended: 16:9 aspect) -->
                             <img src="project2.jpg" alt="Project 2 Image" class="rounded-lg mb-4 md:mb-0 h-auto max-w-full object-cover border border-gray-600 project-image" loading="lazy">
                             <div class="project-details">
                                 <h3 id="project-2" class="text-2xl sm:text-3xl font-bold text-white mb-2">Portfolio Website</h3>
@@ -350,9 +417,12 @@
                 </div>
             </div>
         </section>
+        <!-- Contact Section: Form, social icons, direct links -->
         <section id="contact" class="py-16 sm:py-20 md:py-24 px-6 sm:px-8 animated-section">
             <div class="container mx-auto max-w-3xl">
+                <!-- Section Title: Contact heading -->
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 md:mb-14 text-[var(--primary-color)]" data-i18n="contact-title">Get in Touch</h2>
+                <!-- Contact Form: Validation and submission handled in script.js. Edit fields or add more -->
                 <form id="contact-form" class="space-y-8 p-8 sm:p-10 rounded-2xl shadow-xl border border-gray-700 contact-form">
                     <div>
                         <label for="name" class="block text-base font-medium text-gray-200" data-i18n="form-name">Name</label>
@@ -374,8 +444,10 @@
                         <label for="not-a-bot" class="ml-2 text-base font-medium text-gray-200" data-i18n="form-not-bot">I'm not a bot</label>
                         <p id="captcha-error" class="error-message ml-2" data-i18n="error-captcha">Please check this box to verify.</p>
                     </div>
+                    <!-- Submit Button: Triggers form send -->
                     <button type="submit" id="submit-btn" class="w-full px-6 py-3 sm:px-8 sm:py-4 bg-white/10 text-white font-bold rounded-lg bubbly-btn hover:bg-[var(--primary-color)]" data-i18n="send-message">Send Message</button>
                 </form>
+                <!-- Social Media Links: Below form. Change hrefs or add icons -->
                 <div class="mt-10 sm:mt-12 text-center">
                     <p class="text-base sm:text-lg text-gray-200" data-i18n="social-text">Find me on social media:</p>
                     <div class="flex justify-center space-x-8 mt-4 text-2xl sm:text-3xl">
@@ -383,12 +455,14 @@
                         <a href="https://www.youtube.com/@DigitalUplift.1947" class="text-gray-200 youtube-contact" aria-label="YouTube" target="_blank" rel="noopener noreferrer"><i id="youtube-contact-icon" class="fab fa-youtube"></i></a>
                     </div>
                 </div>
+                <!-- Direct Contact Buttons: WhatsApp and Resume download -->
                 <div class="mt-10 sm:mt-12 text-center space-y-6">
                     <p class="text-base sm:text-lg text-gray-200" data-i18n="direct-text">Or contact me directly:</p>
                     <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
                         <a href="https://wa.me/message/NHLJOW7GEFJ7L1" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 bg-white/10 text-white font-bold rounded-lg bubbly-btn flex items-center justify-center hover:bg-[#25D366]" data-i18n="chat-whatsapp">
                             <i class="fab fa-whatsapp mr-2"></i>Chat on WhatsApp
                         </a>
+                        <!-- Resume Download: Change href to your PDF resume file -->
                         <a href="Cv 2025.pdf" download class="w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 bg-white/10 text-white font-bold rounded-lg bubbly-btn flex items-center justify-center hover:bg-[var(--primary-color)]" data-i18n="download-resume">
                             <i class="fas fa-download mr-2"></i>Download Resume
                         </a>
@@ -397,6 +471,7 @@
             </div>
         </section>
     </main>
+    <!-- Message Success Modal: Popup after form submit. Customize text or styling -->
     <div id="message-modal" class="modal fixed inset-0 bg-gray-900/50 backdrop-blur-sm flex items-center justify-center opacity-0 z-50 transform scale-95" aria-modal="true">
         <div class="bg-gray-800 p-8 sm:p-10 rounded-lg shadow-xl text-center border border-gray-700 max-w-md w-full">
             <h3 class="text-xl sm:text-2xl font-bold text-white mb-4" data-i18n="modal-sent">Message Sent!</h3>
@@ -404,18 +479,23 @@
             <button id="close-modal-btn" class="mt-6 sm:mt-8 px-6 py-3 bg-[var(--primary-color)] text-gray-900 rounded-lg font-semibold bubbly-btn" data-i18n="close-btn">Close</button>
         </div>
     </div>
+    <!-- Image Modal: Full-screen image viewer for projects. Triggered by JS -->
     <div id="image-modal" class="modal fixed inset-0 bg-gray-900/90 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 z-50" aria-modal="true">
         <div class="relative max-w-4xl max-h-[90vh]">
-            <img id="large-image" src="https://pikwy.com/web/6914fe606803a1483150e5a6" alt="Large Project Image" class="max-w-full max-h-[90vh] rounded-lg shadow-2xl">
+            <!-- Large Image: Dynamically set src via JS. No direct edit needed -->
+            <img id="large-image" src="Large time space.svg" alt="Large Project Image" class="max-w-full max-h-[90vh] rounded-lg shadow-2xl">
             <button id="close-image-modal" class="absolute top-4 right-4 text-white text-3xl font-bold bubbly-btn">&times;</button>
         </div>
     </div>
+    <!-- Back to Top Button: Floating button for scrolling up -->
     <button id="back-to-top" aria-label="Scroll to top of page" title="Back to Top" class="bubbly-btn">
         <i class="fas fa-chevron-up"></i>
     </button>
+    <!-- Footer: Copyright and reserved rights. Edit year or add links -->
     <footer class="text-center text-gray-500 text-base">
         <p data-i18n="footer-copyright">&copy; 2025 <span class="text-[var(--primary-color)]">Muhammad Owais</span>. All Rights Reserved.</p>
     </footer>
+    <!-- SheetJS Script: For handling XLSX files (if used in future). No direct changes -->
     <script type="text/javascript">
         var gk_isXlsx = false;
         var gk_xlsxFileLookup = {};
@@ -452,6 +532,7 @@
             return gk_fileData[filename] || '';
         }
     </script>
+    <!-- Email Link Script: Handles email click for mobile/desktop -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('email-link').addEventListener('click', function(event) {
@@ -466,6 +547,7 @@
             });
         });
     </script>
+    <!-- Main Script: Defer loads script.js for interactions, animations, i18n, etc. Edit script.js for functionality changes -->
     <script src="script.js" defer></script>
 </body>
 </html>
