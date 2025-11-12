@@ -1506,17 +1506,22 @@ html.light-theme .toggle-switch input:checked + label:before { transform: transl
     }
 
     .skill-item {
-        padding: 1rem; /* Reduce padding on mobile for better fit */
+        padding: 0.75rem; /* Reduced padding to fix overflow */
+        margin: 0; /* Ensure no extra margins */
+        border-radius: 1rem; /* Slightly smaller radius for fit */
     }
 
     .skill-badge {
-        font-size: 1.25rem; /* Smaller font on mobile */
-        padding: 0.75rem 1.25rem; /* Adjust padding */
+        font-size: 1rem; /* Smaller font to prevent overflow */
+        padding: 0.5rem 1rem; /* Reduced padding */
+        margin: 0.25rem; /* Smaller margin */
+        flex-wrap: wrap; /* Allow wrapping if text is long */
+        justify-content: center;
     }
 
     .skill-badge i {
-        font-size: 1.5rem; /* Smaller icon */
-        margin-right: 0.75rem;
+        font-size: 1.25rem; /* Smaller icon */
+        margin-right: 0.5rem;
     }
 
     .skill-item:hover {
@@ -1528,7 +1533,9 @@ html.light-theme .toggle-switch input:checked + label:before { transform: transl
     }
 
     .expanded-content {
-        font-size: 0.95rem; /* Slightly smaller text on mobile */
+        font-size: 0.85rem; /* Smaller text to fit */
+        padding-top: 0.5rem;
+        line-height: 1.5;
     }
 
     .projects-grid {
@@ -1537,6 +1544,38 @@ html.light-theme .toggle-switch input:checked + label:before { transform: transl
 
     .certifications-section .grid {
         grid-template-columns: 1fr;
+    }
+
+    /* Reformat Certifications for Mobile: Collapse by default, show only logo, title, and button */
+    .certifications-section .grid > div {
+        padding: 1rem;
+        gap: 0.5rem; /* Tighter spacing */
+        min-height: auto; /* Allow natural height */
+    }
+
+    .certifications-section .grid > div p,
+    .certifications-section .grid > div .description,
+    .certifications-section .grid > div .details {
+        display: none; /* Hide full description and details */
+    }
+
+    .certifications-section img {
+        width: 80px; /* Smaller logo for mobile */
+        height: auto;
+    }
+
+    .certifications-section h3 {
+        font-size: 1.2rem !important; /* Smaller title */
+        margin: 0.25rem 0;
+    }
+
+    .view-credential-btn {
+        display: block !important; /* Ensure button is visible */
+        font-size: 0.8rem; /* Small button */
+        padding: 0.4rem 0.8rem; /* Compact padding */
+        margin-top: 0.5rem;
+        width: auto;
+        align-self: center;
     }
 
     #about .flex {
@@ -1583,20 +1622,22 @@ html.light-theme .toggle-switch input:checked + label:before { transform: transl
     }
 
     .certifications-section .grid > div {
-        padding: 1rem;
-        gap: 0.75rem; /* Tighter gap for better wrapping */
+        padding: 0.75rem;
+        gap: 0.25rem; /* Even tighter for small screens */
     }
 
-    /* Fix awkward text wrapping in Certifications */
+    /* Additional Certifications tweaks for very small screens */
+    .certifications-section img {
+        width: 60px;
+    }
+
     .certifications-section h3 {
-        font-size: 1.5rem !important; /* Smaller heading to prevent wrapping issues */
-        margin-bottom: 0.5rem;
+        font-size: 1rem !important;
     }
 
-    .certifications-section p {
-        font-size: 0.9rem !important; /* Smaller text for better flow */
-        line-height: 1.5;
-        margin: 0;
+    .view-credential-btn {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.6rem;
     }
 
     .projects-section .project-card {
@@ -1652,37 +1693,33 @@ html.light-theme .toggle-switch input:checked + label:before { transform: transl
         font-size: 0.95rem !important;
     }
 
-    /* Resolve overflowing text in Skills cards */
+    /* Further reduce Skills cards to prevent overflow */
     .skill-item {
-        padding: 0.75rem; /* Further reduce padding */
+        padding: 0.5rem; /* Even smaller padding */
     }
 
     .skill-badge {
-        font-size: 1.1rem; /* Even smaller on tiny screens */
-        padding: 0.5rem 1rem;
-        flex-wrap: wrap; /* Allow wrapping if needed */
-        justify-content: center;
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
     }
 
     .skill-badge i {
-        font-size: 1.25rem;
-        margin-right: 0.5rem;
+        font-size: 1rem;
+        margin-right: 0.4rem;
     }
 
     .expanded-content {
-        font-size: 0.85rem;
-        padding-top: 0.75rem;
-        line-height: 1.5; /* Tighter line height to fit more text */
+        font-size: 0.8rem;
+        padding-top: 0.4rem;
     }
 
     .certifications-section .grid > div {
-        padding: 0.75rem;
-        gap: 0.5rem;
+        padding: 0.5rem;
+        gap: 0.2rem;
     }
 
     .certifications-section img {
-        width: 100px; /* Smaller images to make room for text */
-        max-width: 100%;
+        width: 50px;
     }
 }
 
@@ -1721,20 +1758,25 @@ html.light-theme .toggle-switch input:checked + label:before { transform: transl
     }
 
     .skill-badge {
-        font-size: 1rem;
-        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+        padding: 0.3rem 0.6rem;
     }
 
     .expanded-content {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
     }
 
     .certifications-section .grid > div {
-        padding: 0.5rem;
+        padding: 0.4rem;
     }
 
     .certifications-section h3 {
-        font-size: 1.3rem !important;
+        font-size: 0.9rem !important;
+    }
+
+    .view-credential-btn {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.5rem;
     }
 }
 
