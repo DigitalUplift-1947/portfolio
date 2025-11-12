@@ -1,4 +1,3 @@
-/* style.css */
 :root {
     --primary-color: #FF8C00;
     --background-dark: #0A192F;
@@ -521,7 +520,7 @@ html.light-theme .certifications-section .grid > div {
     background-color: var(--card-light);
     border-color: var(--card-border-light);
 }
-html.light-theme .projects-section .grid > div {
+html.light-theme .projects-section .timeline-item {
     background-color: var(--card-light) !important;
     border-color: var(--card-border-light);
 }
@@ -878,7 +877,7 @@ footer p {
     overflow-wrap: break-word;
     word-break: break-word;
     hyphens: auto;
-   
+  
     /* Add unified animation trigger */
     will-change: transform, box-shadow;
 }
@@ -903,7 +902,7 @@ footer p {
     transform: translateY(-8px) scale(1.02); /* Reduced from -12px/1.03 for smoother cohesion */
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); /* Slightly softer shadow */
     border-color: var(--primary-color);
-   
+  
     /* Ensure consistent timing across card */
     transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
@@ -918,7 +917,7 @@ footer p {
     margin-bottom: 0.75rem;
     position: relative; /* For pop-up layering */
     z-index: 2; /* Above tint */
-   
+  
     /* Remove separate hover; tie to card hover */
 }
 .skill-badge i {
@@ -980,7 +979,7 @@ html.light-theme .skill-item:hover .skill-badge i {
     .skill-item:hover {
         transform: translateY(-4px) scale(1.01); /* Less dramatic on mobile */
     }
-   
+  
     .skill-item:hover .skill-badge {
         transform: translateY(-2px) scale(1.05);
     }
@@ -1076,7 +1075,7 @@ html.light-theme .profile-container {
 html.light-theme .profile-container:hover {
     box-shadow: 0 8px 20px rgba(255, 140, 0, 0.2);
 }
-.projects-section .grid > div {
+.projects-section .timeline-item {
     background: var(--card-dark) !important;
     border: 1px solid var(--card-border-dark);
     box-shadow: var(--shadow-soft);
@@ -1087,7 +1086,7 @@ html.light-theme .profile-container:hover {
     word-break: break-word;
     hyphens: auto;
 }
-html.light-theme .projects-section .grid > div {
+html.light-theme .projects-section .timeline-item {
     background: var(--card-light) !important;
     border-color: var(--card-border-light);
 }
@@ -1118,12 +1117,12 @@ html.light-theme .projects-section p {
 }
 @media (max-width: 768px) {
     .skills-grid { gap: 1rem; }
-    .projects-section .grid { grid-template-columns: 1fr; }
+    .projects-section .timeline-item .project-container { flex-direction: column; }
+    .projects-section .timeline-item img { max-width: 100%; margin-right: 0; margin-bottom: 1rem; }
     .certifications-section .grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 1024px) {
     .skills-grid { gap: 1rem; }
-    .projects-section .grid { grid-template-columns: repeat(2, 1fr); }
     .certifications-section .grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 1440px) {
@@ -1191,4 +1190,75 @@ html.light-theme .view-credential-btn:hover {
     background: linear-gradient(135deg, var(--primary-color) 0%, #FF4500 100%);
     color: white;
     box-shadow: 0 8px 20px rgba(255, 140, 0, 0.3);
+}
+.project-container {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    gap: 1rem;
+}
+.project-container img {
+    max-width: 50%;
+    height: auto;
+    border-radius: 0.5rem;
+}
+.project-details {
+    flex: 1;
+}
+@media (max-width: 768px) {
+    .project-container {
+        flex-direction: column;
+    }
+    .project-container img {
+        max-width: 100%;
+    }
+}
+/* Additional media queries for better responsiveness and smaller fonts on mobile */
+@media (max-width: 640px) {
+    body {
+        font-size: 1rem;
+    }
+    h2 {
+        font-size: 2.5rem !important;
+    }
+    h3 {
+        font-size: 1.8rem !important;
+    }
+    p, li {
+        font-size: 0.95rem !important;
+    }
+    .timeline-item {
+        padding: 1rem;
+    }
+    .skills-grid {
+        padding: 0 0.5rem;
+    }
+    .certifications-section .grid > div {
+        padding: 1rem;
+    }
+    .projects-section .timeline-item {
+        padding: 1rem;
+    }
+    .contact-form {
+        padding: 1rem;
+    }
+}
+@media (max-width: 480px) {
+    h2 {
+        font-size: 2rem !important;
+    }
+    h3 {
+        font-size: 1.5rem !important;
+    }
+    p, li {
+        font-size: 0.9rem !important;
+    }
+    .bubbly-btn {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+    }
+    .view-credential-btn, .visit-project-btn {
+        font-size: 1rem;
+        padding: 0.75rem 1.25rem;
+    }
 }
