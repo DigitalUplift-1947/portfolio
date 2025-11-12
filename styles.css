@@ -253,7 +253,7 @@ html.light-theme #mobile-menu {
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(5px);
 }
-.modal.is-visible {
+.modal.is-visible, .modal.show {
     opacity: 1;
     pointer-events: auto;
     transform: scale(1);
@@ -353,7 +353,7 @@ input[type="checkbox"]:focus {
 }
 .timeline-item {
     position: relative;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     padding-left: 2rem;
     transition: background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.4s ease;
     z-index: 5;
@@ -749,6 +749,12 @@ html.light-theme .lang-option {
     transform: translateY(-10px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
+.certifications-section img {
+    width: 120px;
+    height: auto;
+    object-fit: contain;
+    transition: none; /* Removed hover transform */
+}
 .skill-badge {
     transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease, background-color 0.3s ease, color 0.3s ease;
     background: var(--card-dark);
@@ -1143,10 +1149,12 @@ html.light-theme .projects-section p {
   100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 [dir="rtl"] .skill-badge i { margin-right: 0; margin-left: 0.75rem; }
-.certifications-section img { width: 120px; height: auto; object-fit: contain; transition: transform 0.3s ease; }
-.certifications-section img:hover { transform: scale(1.1); }
-.timeline-item img { width: 120px; height: auto; object-fit: contain; transition: transform 0.3s ease; }
-.timeline-item img:hover { transform: scale(1.1); }
+.timeline-item img {
+    width: 120px;
+    height: auto;
+    object-fit: contain;
+    transition: none; /* Removed hover transform */
+}
 i[data-lucide] { width: 1.25em; height: 1.25em; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
 .toggle-switch { position: relative; display: inline-block; width: 40px; height: 20px; }
 .toggle-switch input { opacity: 0; width: 0; height: 0; }
@@ -1201,6 +1209,7 @@ html.light-theme .view-credential-btn:hover {
     max-width: 50%;
     height: auto;
     border-radius: 0.5rem;
+    cursor: pointer;
 }
 .project-details {
     flex: 1;
@@ -1244,15 +1253,9 @@ html.light-theme .view-credential-btn:hover {
     }
 }
 @media (max-width: 480px) {
-    h2 {
-        font-size: 2rem !important;
-    }
-    h3 {
-        font-size: 1.5rem !important;
-    }
-    p, li {
-        font-size: 0.9rem !important;
-    }
+    h2 { font-size: 2rem !important; }
+    h3 { font-size: 1.5rem !important; }
+    p, li { font-size: 0.9rem !important; }
     .bubbly-btn {
         font-size: 1rem;
         padding: 0.5rem 1rem;
@@ -1261,4 +1264,20 @@ html.light-theme .view-credential-btn:hover {
         font-size: 1rem;
         padding: 0.75rem 1.25rem;
     }
+}
+#image-modal {
+    transition: opacity 0.3s ease;
+}
+#image-modal.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+#close-image-modal {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+#close-image-modal:hover {
+    transform: scale(1.2);
 }
