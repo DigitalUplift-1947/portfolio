@@ -1,4 +1,3 @@
-// script.js
 document.addEventListener('DOMContentLoaded', () => {
     console.log("Portfolio website loaded");
     const elements = {
@@ -261,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'exp-ai-bullet2': 'Développé des scripts créatifs utilisant l\'ingénierie de prompts, améliorant l\'engagement.',
             'exp-ai-bullet3': 'Géré la production vidéo de bout en bout avec Adobe Premiere Pro.',
             'exp-internships': 'Stages',
-            'badge-multiple': 'Multiples Rôles',
+            'badge-multiple': 'Múltiples Rôles',
             'exp-various-dates': 'Diverses Organisations | 2022 – 2026',
             'exp-intern1': 'Hôpital Shaukat Khanum (Stage Marketing et RH, 2023–2024) : Augmenté la participation aux événements de 15% et rationalisé le recrutement.',
             'exp-intern2': 'TX Labz (Stage RH, 2022) : Optimisé l\'onboarding, réduisant le temps de traitement de 20%.',
@@ -439,7 +438,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'exp-internships': '实习',
             'badge-multiple': '多个角色',
             'exp-various-dates': '各种组织 | 2022 – 2026',
-            'exp-intern1': 'Shaukat Khanum医院（营销与HR实习，2023–2024）：提升活动参与15%，简化招聘。',
+            'exp-intern1': 'Shaukat Khanum医院（营销 & HR实习，2023–2024）：提升活动参与15%，简化招聘。',
             'exp-intern2': 'TX Labz（HR实习，2022）：优化入职，减少处理时间20%。',
             'exp-intern3': 'Med Coach Global（社交媒体实习, 2025–至今）：增加社交媒体参与30%。',
             'exp-intern4': 'NGO经验（Alkhimat Foundation & ILM）：协调社区项目和外展。',
@@ -775,7 +774,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'skill-youtube': 'यूट्यूब क्रिएशन',
             'skill-bilingual': 'द्विभाषी संचार',
             'skill-github': 'गिटहब',
-            'skill-netlify': 'नेटलीफाई',
+            'skill-netlify': 'नेटفلाई',
             'skill-premiere': 'प्रिमियर प्रो',
             'skill-cloudflare': 'Cloudflare',
             'skill-backend': 'Backend Development',
