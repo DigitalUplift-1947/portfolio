@@ -389,8 +389,8 @@
                     <!-- Project Item 1: AI Chatbot -->
                     <div class="timeline-item p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.01] transition-transform duration-300" aria-labelledby="project-1" role="listitem">
                         <div class="project-container">
-                            <!-- Project Image: Change src to your project screenshot/demo image (recommended: 16:9 aspect) -->
-                            <img src="time space (40 x 40 px).svg" alt="Project 1 Image" class="rounded-lg mb-4 md:mb-0 h-auto max-w-full object-cover border border-gray-600 project-image" loading="lazy">
+                            <!-- Project Image: Change src to your project screenshot/demo image (recommended: 16:9 aspect). Click opens modal with larger version. Edit data-large-src to path/URL of high-res version (e.g., "images/ai-chatbot-large.jpg") -->
+                            <img src="time space (40 x 40 px).svg" alt="Project 1 Image" class="rounded-lg mb-4 md:mb-0 h-auto max-w-full object-cover border border-gray-600 project-image cursor-pointer" data-large-src="Large time space.svg" onclick="openProjectModal(this.getAttribute('data-large-src'))" loading="lazy">
                             <div class="project-details">
                                 <h3 id="project-1" class="text-2xl sm:text-3xl font-bold text-white mb-2">AI Chatbot</h3>
                                 <p class="text-gray-200 mb-4">An intelligent chatbot built with AI technologies.</p>
@@ -403,8 +403,8 @@
                     <!-- Project Item 2: Portfolio Website -->
                     <div class="timeline-item p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.01] transition-transform duration-300" aria-labelledby="project-2" role="listitem">
                         <div class="project-container">
-                            <!-- Project Image: Change src to your project screenshot/demo image (recommended: 16:9 aspect) -->
-                            <img src="project2.jpg" alt="Project 2 Image" class="rounded-lg mb-4 md:mb-0 h-auto max-w-full object-cover border border-gray-600 project-image" loading="lazy">
+                            <!-- Project Image: Change src to your project screenshot/demo image (recommended: 16:9 aspect). Click opens modal with larger version. Edit data-large-src to path/URL of high-res version (e.g., "images/portfolio-large.jpg") -->
+                            <img src="project2.jpg" alt="Project 2 Image" class="rounded-lg mb-4 md:mb-0 h-auto max-w-full object-cover border border-gray-600 project-image cursor-pointer" data-large-src="your-portfolio-large.jpg" onclick="openProjectModal(this.getAttribute('data-large-src'))" loading="lazy">
                             <div class="project-details">
                                 <h3 id="project-2" class="text-2xl sm:text-3xl font-bold text-white mb-2">Portfolio Website</h3>
                                 <p class="text-gray-200 mb-4">A responsive personal portfolio website.</p>
@@ -482,9 +482,9 @@
     <!-- Image Modal: Full-screen image viewer for projects. Triggered by JS -->
     <div id="image-modal" class="modal fixed inset-0 bg-gray-900/90 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 z-50" aria-modal="true">
         <div class="relative max-w-4xl max-h-[90vh]">
-            <!-- Large Image: Dynamically set src via JS. No direct edit needed -->
-            <img id="large-image" src="Large time space.svg" alt="Large Project Image" class="max-w-full max-h-[90vh] rounded-lg shadow-2xl">
-            <button id="close-image-modal" class="absolute top-4 right-4 text-white text-3xl font-bold bubbly-btn">&times;</button>
+            <!-- Large Image: Dynamically set src via JS when clicking project images. This is the fallback; edit the default src if needed, but JS will override it based on data-large-src from the clicked image. Recommended: High-res versions of your project images. -->
+            <img id="large-image" src="" alt="Large Project Image" class="max-w-full max-h-[90vh] rounded-lg shadow-2xl">
+            <button id="close-image-modal" class="absolute top-4 right-4 text-white text-3xl font-bold bubbly-btn" onclick="closeProjectModal()">&times;</button>
         </div>
     </div>
     <!-- Back to Top Button: Floating button for scrolling up -->
@@ -545,6 +545,29 @@
                     window.open('https://mail.google.com/mail/?view=cm&fs=1&to=' + email, '_blank');
                 }
             });
+        });
+    </script>
+    <!-- Project Image Modal JS: Handles opening/closing the modal for project images. Add this inline or to script.js. Edit image paths in data-large-src attributes on project <img> tags. -->
+    <script>
+        function openProjectModal(largeImageSrc) {
+            const modal = document.getElementById('image-modal');
+            const largeImage = document.getElementById('large-image');
+            largeImage.src = largeImageSrc; // Set the large image source
+            modal.classList.add('show'); // Show the modal (assumes CSS .show class for visibility)
+            modal.style.display = 'flex'; // Ensure it's visible
+        }
+
+        function closeProjectModal() {
+            const modal = document.getElementById('image-modal');
+            modal.classList.remove('show');
+            modal.style.display = 'none'; // Hide the modal
+        }
+
+        // Optional: Close modal on outside click (add to script.js or here)
+        document.getElementById('image-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeProjectModal();
+            }
         });
     </script>
     <!-- Main Script: Defer loads script.js for interactions, animations, i18n, etc. Edit script.js for functionality changes -->
