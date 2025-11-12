@@ -26,9 +26,7 @@ html.light-theme {
     --gray-dark: var(--gray-light);
     --card-border-dark: var(--card-border-light);
 }
-html.light-theme .text-gray-200,
-html.light-theme .text-gray-300,
-html.light-theme .text-gray-500 {
+html.light-theme .text-gray-200, html.light-theme .text-gray-300, html.light-theme .text-gray-500 {
     color: var(--gray-light) !important;
     transition: color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
@@ -520,7 +518,7 @@ html.light-theme .certifications-section .grid > div {
     background-color: var(--card-light);
     border-color: var(--card-border-light);
 }
-html.light-theme .projects-section .timeline-item {
+html.light-theme .projects-section .project-card {
     background-color: var(--card-light) !important;
     border-color: var(--card-border-light);
 }
@@ -866,7 +864,7 @@ footer p {
 .skills-grid {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem; /* Reduced gap for mobile, increased for desktop */
     margin: 2.5rem auto 0;
     max-width: 800px;
     padding: 0 1rem;
@@ -886,7 +884,6 @@ footer p {
     overflow-wrap: break-word;
     word-break: break-word;
     hyphens: auto;
-  
     /* Add unified animation trigger */
     will-change: transform, box-shadow;
 }
@@ -911,7 +908,6 @@ footer p {
     transform: translateY(-8px) scale(1.02); /* Reduced from -12px/1.03 for smoother cohesion */
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); /* Slightly softer shadow */
     border-color: var(--primary-color);
-  
     /* Ensure consistent timing across card */
     transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
@@ -926,7 +922,6 @@ footer p {
     margin-bottom: 0.75rem;
     position: relative; /* For pop-up layering */
     z-index: 2; /* Above tint */
-  
     /* Remove separate hover; tie to card hover */
 }
 .skill-badge i {
@@ -977,20 +972,28 @@ html.light-theme .skill-item:hover .skill-badge i {
 /* Responsive: Soften on smaller screens */
 @media (max-width: 768px) {
     .skills-grid {
-        gap: 1.5rem;
+        gap: 1rem; /* Proper gap on mobile */
+        padding: 0 0.5rem; /* Add padding to prevent edge clipping */
+    }
+    .skill-item {
+        padding: 1rem; /* Reduce padding on mobile for better fit */
     }
     .skill-badge {
-        font-size: 1.5rem;
+        font-size: 1.25rem; /* Smaller font on mobile */
+        padding: 0.75rem 1.25rem; /* Adjust padding */
     }
     .skill-badge i {
-        font-size: 1.8rem;
+        font-size: 1.5rem; /* Smaller icon */
+        margin-right: 0.75rem;
     }
     .skill-item:hover {
         transform: translateY(-4px) scale(1.01); /* Less dramatic on mobile */
     }
-  
     .skill-item:hover .skill-badge {
         transform: translateY(-2px) scale(1.05);
+    }
+    .expanded-content {
+        font-size: 0.95rem; /* Slightly smaller text on mobile */
     }
 }
 /* ========================================
@@ -1055,6 +1058,78 @@ html.light-theme .projects-section .visit-project-btn::after, html.light-theme .
     background: rgba(0, 0, 0, 0.4);
 }
 /* ========================================
+   PROJECTS SECTION - FIXED LAYOUT WITH GRID AND PROPER SPACING
+   ======================================== */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid: side-by-side on large, stack on small */
+    gap: 2rem; /* Proper, consistent gap between cards */
+    margin-top: 2rem; /* Space from title */
+}
+.project-card {
+    background: var(--card-dark);
+    border: 1px solid var(--card-border-dark);
+    border-radius: 1rem;
+    overflow: hidden; /* Ensure rounded corners on images */
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+}
+.project-container {
+    display: flex;
+    flex-direction: column; /* Stack image and details vertically for better mobile flow */
+    gap: 1rem; /* Space between image and details */
+    align-items: flex-start;
+}
+.project-image {
+    width: 100%; /* Full width on all screens */
+    height: auto;
+    aspect-ratio: 16/9; /* Consistent aspect ratio to prevent layout shift */
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease; /* Subtle hover for images */
+}
+.project-image:hover {
+    transform: scale(1.02); /* Light zoom on hover */
+}
+.project-details {
+    flex: 1;
+    padding: 0 0.5rem; /* Light padding for text breathing room */
+}
+@media (min-width: 768px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr); /* Force 2 columns on tablet+ */
+        gap: 2.5rem; /* Slightly larger gap on larger screens */
+    }
+    .project-container {
+        flex-direction: row; /* Side-by-side image and details on larger screens */
+        align-items: center;
+    }
+    .project-image {
+        flex: 0 0 40%; /* Image takes 40% width */
+        max-width: 200px; /* Cap image size */
+    }
+    .project-details {
+        flex: 1;
+        padding-left: 1rem;
+    }
+}
+@media (max-width: 640px) {
+    .projects-grid {
+        gap: 1.5rem; /* Smaller gap on mobile to save space */
+        padding: 0 0.5rem; /* Prevent edge clipping */
+    }
+    .project-card {
+        padding: 1rem; /* Reduce padding on mobile */
+    }
+    .project-details h3 {
+        font-size: 1.5rem !important; /* Smaller heading on mobile */
+    }
+    .project-details p {
+        font-size: 0.95rem !important; /* Adjust text size */
+    }
+}
+/* ========================================
    REST OF ORIGINAL STYLES (unchanged)
    ======================================== */
 .profile-container {
@@ -1084,21 +1159,6 @@ html.light-theme .profile-container {
 html.light-theme .profile-container:hover {
     box-shadow: 0 8px 20px rgba(255, 140, 0, 0.2);
 }
-.projects-section .timeline-item {
-    background: var(--card-dark) !important;
-    border: 1px solid var(--card-border-dark);
-    box-shadow: var(--shadow-soft);
-    border-radius: 1rem;
-    margin: 0;
-    padding: 1.5rem;
-    overflow-wrap: break-word;
-    word-break: break-word;
-    hyphens: auto;
-}
-html.light-theme .projects-section .timeline-item {
-    background: var(--card-light) !important;
-    border-color: var(--card-border-light);
-}
 .projects-section h3 {
     color: #FFFFFF !important;
 }
@@ -1126,8 +1186,7 @@ html.light-theme .projects-section p {
 }
 @media (max-width: 768px) {
     .skills-grid { gap: 1rem; }
-    .projects-section .project-container { flex-direction: column; }
-    .projects-section .project-container img { max-width: 100%; margin-right: 0; margin-bottom: 1rem; }
+    .projects-grid { grid-template-columns: 1fr; } /* Ensure single column on small tablets */
     .certifications-section .grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 1024px) {
@@ -1143,26 +1202,90 @@ html.light-theme .projects-section p {
 #about h3 { font-size: 3rem !important; }
 #about p { font-size: 1.25rem !important; line-height: 1.8; }
 #about .flex { padding: 1rem; }
-@media (max-width: 768px) { #about .flex { padding: 1rem; } }
-.logo-container { display: flex; justify-content: center; align-items: center; margin-top: 60px; }
-.logo { width: 250px; height: auto; opacity: 0; transform: translateY(40px) scale(0.9); animation: coolIntro 1.6s ease-out forwards; }
+@media (max-width: 768px) {
+    #about .flex { padding: 1rem; }
+}
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+}
+.logo {
+    width: 250px;
+    height: auto;
+    opacity: 0;
+    transform: translateY(40px) scale(0.9);
+    animation: coolIntro 1.6s ease-out forwards;
+}
 @keyframes coolIntro {
-  0% { opacity: 0; transform: translateY(40px) scale(0.9); }
-  60% { opacity: 1; transform: translateY(-8px) scale(1.02); }
-  100% { opacity: 1; transform: translateY(0) scale(1); }
+    0% { opacity: 0; transform: translateY(40px) scale(0.9); }
+    60% { opacity: 1; transform: translateY(-8px) scale(1.02); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 [dir="rtl"] .skill-badge i { margin-right: 0; margin-left: 0.75rem; }
-.certifications-section img { width: 120px; height: auto; object-fit: contain; transition: none; /* Removed hover transform */ }
+.certifications-section img {
+    width: 120px;
+    height: auto;
+    object-fit: contain;
+    transition: none; /* Removed hover transform */
+}
 .certifications-section img:hover { transform: none; }
-.timeline-item img { width: 120px; height: auto; object-fit: contain; transition: none; }
+.timeline-item img {
+    width: 120px;
+    height: auto;
+    object-fit: contain;
+    transition: none;
+}
 .timeline-item img:hover { transform: none; }
-i[data-lucide] { width: 1.25em; height: 1.25em; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-.toggle-switch { position: relative; display: inline-block; width: 40px; height: 20px; }
-.toggle-switch input { opacity: 0; width: 0; height: 0; }
-.toggle-switch label { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); border-radius: 20px; }
-.toggle-switch label:before { position: absolute; content: ""; height: 16px; width: 16px; left: 2px; bottom: 2px; background-color: white; transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); border-radius: 50%; }
-.toggle-switch input:checked + label { background-color: var(--primary-color); }
-.toggle-switch input:checked + label:before { transform: translateX(20px); }
+i[data-lucide] {
+    width: 1.25em;
+    height: 1.25em;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.toggle-switch label {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border-radius: 20px;
+}
+.toggle-switch label:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border-radius: 50%;
+}
+.toggle-switch input:checked + label {
+    background-color: var(--primary-color);
+}
+.toggle-switch input:checked + label:before {
+    transform: translateX(20px);
+}
 html.light-theme .toggle-switch label { background-color: var(--primary-color); }
 html.light-theme .toggle-switch input:not(:checked) + label:before { transform: translateX(20px); }
 html.light-theme .toggle-switch input:checked + label { background-color: #ccc; }
@@ -1252,7 +1375,7 @@ html.light-theme .view-credential-btn:hover {
     .certifications-section .grid > div {
         padding: 1rem;
     }
-    .projects-section .timeline-item {
+    .projects-section .project-card {
         padding: 1rem;
     }
     .contact-form {
