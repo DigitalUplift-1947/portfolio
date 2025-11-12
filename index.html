@@ -14,7 +14,7 @@
     <meta name="twitter:description" content="Explore Muhammad Owais's skills in AI, prompt engineering, and more.">
     <meta name="twitter:image" content="https://via.placeholder.com/150">
     <title>Muhammad Owais | Portfolio</title>
-    <link rel="icon" href="fevcon.svg" type="image/x-icon" alt="Muhammad Owais Portfolio Favicon">
+    <link rel="icon" href="favicon.svg" type="image/x-icon" alt="Muhammad Owais Portfolio Favicon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -36,9 +36,9 @@
         Your browser does not support the audio element.
     </audio>
     <div class="parallax-background"></div>
-<div class="logo-container">
-  <img src="logo.svg" alt="logo" class="logo">
-</div>
+    <div class="logo-container">
+        <img src="logo.svg" alt="logo" class="logo">
+    </div>
     <header id="main-header" class="fixed top-0 left-0 right-0 z-50 py-4 px-4 sm:px-6">
         <nav class="flex justify-between items-center w-full">
             <ul class="hidden md:flex space-x-6 lg:space-x-8 text-lg font-bold">
@@ -100,8 +100,7 @@
                     <a href="https://wa.me/message/NHLJOW7GEFJ7L1" target="_blank" rel="noopener noreferrer" class="text-2xl sm:text-3xl text-white hover:text-[#25D366] social-icon" aria-label="WhatsApp">
                         <i id="whatsapp-icon" class="fab fa-whatsapp"></i>
                     </a>
-                    <a <a href="mailto:professional.ots@gmail.com" onclick="event.preventDefault(); window.open('https://mail.google.com/mail/?view=cm&fs=1&to=professional.ots@gmail.com', '_blank');"
-                        class="text-2xl sm:text-3xl text-white hover:text-[#3498db] social-icon">
+                    <a id="email-link" class="text-2xl sm:text-3xl text-white hover:text-[#3498db] social-icon" aria-label="Email">
                         <i id="email-icon" class="fas fa-envelope"></i>
                     </a>
                     <a href="https://www.linkedin.com/in/muhammad-owais-b45106328/" target="_blank" rel="noopener noreferrer" class="text-2xl sm:text-3xl text-white hover:text-[#0A66C2] social-icon" aria-label="LinkedIn">
@@ -248,7 +247,7 @@
                                 <li data-i18n="exp-intern1">Shaukat Khanum Hospital (Marketing & HR Intern, 2023–2024): Boosted event participation by 15% and streamlined recruitment.</li>
                                 <li data-i18n="exp-intern2">TX Labz (HR Intern, 2022): Optimized onboarding, reducing processing time by 20%.</li>
                                 <li data-i18n="exp-intern3">Med Coach Global (Social Media Intern, 2025–Present): Increased social media engagement by 30%.</li>
-                                <li data-i18n="exp-intern4">NGO Experience (Alkhimat Foundation & ILM): Coordinated community projects and outreach.</li>
+                                <li data-i18n="exp-intern4">NGO Experience (Alkhidmat Foundation & ILM): Coordinated community projects and outreach.</li>
                             </ul>
                         </div>
                     </div>
@@ -443,6 +442,20 @@
             }
             return gk_fileData[filename] || '';
         }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('email-link').addEventListener('click', function(event) {
+                event.preventDefault();
+                var email = 'professional.ots@gmail.com';
+                var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+                if (isMobile) {
+                    window.location.href = 'mailto:' + email;
+                } else {
+                    window.open('https://mail.google.com/mail/?view=cm&fs=1&to=' + email, '_blank');
+                }
+            });
+        });
     </script>
     <script src="script.js" defer></script>
 </body>
