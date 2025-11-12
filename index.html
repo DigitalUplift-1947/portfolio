@@ -14,9 +14,9 @@
     <meta name="twitter:description" content="Explore Muhammad Owais's skills in AI, prompt engineering, and more.">
     <meta name="twitter:image" content="https://via.placeholder.com/150">
     <title>Muhammad Owais | Portfolio</title>
-    <link rel="icon" href="favicon.svg" type="image/x-icon" alt="Muhammad Owais Portfolio Favicon">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" alt="Muhammad Owais Portfolio Favicon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
     <link rel="stylesheet" href="styles.css">
@@ -325,23 +325,31 @@
             </div>
         </section>
         <section id="projects" class="py-16 sm:py-20 md:py-24 px-6 sm:px-8 animated-section projects-section">
-            <div class="container mx-auto max-w-6xl">
+            <div class="container mx-auto max-w-5xl">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 md:mb-14 text-[var(--primary-color)]" data-i18n="projects-title">Projects</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
-                    <div class="p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
-                        <img src="time space (40 x 40 px).svg" alt="Project 1 Image" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
-                        <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold mb-2 text-center">AI Chatbot</h3>
-                        <p class="text-base sm:text-lg mb-4 text-center">An intelligent chatbot built with AI technologies.</p>
-                        <div class="text-center">
-                            <a href="https://time-space.pages.dev/" class="visit-project-btn" target="_blank" rel="noopener noreferrer" data-i18n="visit-project">Visit Project &rarr;</a>
+                <div class="timeline">
+                    <div class="timeline-item p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.01] transition-transform duration-300" aria-labelledby="project-1" role="listitem">
+                        <div class="project-container">
+                            <img src="time space (40 x 40 px).svg" alt="Project 1 Image" class="rounded-lg mb-4 md:mb-0 h-auto max-w-full object-cover border border-gray-600" loading="lazy">
+                            <div class="project-details">
+                                <h3 id="project-1" class="text-2xl sm:text-3xl font-bold text-white mb-2">AI Chatbot</h3>
+                                <p class="text-gray-200 mb-4">An intelligent chatbot built with AI technologies.</p>
+                                <div class="mt-4">
+                                    <a href="https://time-space.pages.dev/" class="visit-project-btn" target="_blank" rel="noopener noreferrer" data-i18n="visit-project">Visit Project &rarr;</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.03] transition-all duration-300 border border-gray-700">
-                        <img src="project2.jpg" alt="Project 2 Image" class="rounded-lg mb-4 h-auto max-w-full mx-auto object-cover border border-gray-600" loading="lazy">
-                        <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold mb-2 text-center">Portfolio Website</h3>
-                        <p class="text-base sm:text-lg mb-4 text-center">A responsive personal portfolio website.</p>
-                        <div class="text-center">
-                            <a href="https://your-portfolio-url.com" class="visit-project-btn" target="_blank" rel="noopener noreferrer" data-i18n="visit-project">Visit Project &rarr;</a>
+                    <div class="timeline-item p-6 sm:p-8 rounded-2xl shadow-xl hover:scale-[1.01] transition-transform duration-300" aria-labelledby="project-2" role="listitem">
+                        <div class="project-container">
+                            <img src="project2.jpg" alt="Project 2 Image" class="rounded-lg mb-4 md:mb-0 h-auto max-w-full object-cover border border-gray-600" loading="lazy">
+                            <div class="project-details">
+                                <h3 id="project-2" class="text-2xl sm:text-3xl font-bold text-white mb-2">Portfolio Website</h3>
+                                <p class="text-gray-200 mb-4">A responsive personal portfolio website.</p>
+                                <div class="mt-4">
+                                    <a href="https://your-portfolio-url.com" class="visit-project-btn" target="_blank" rel="noopener noreferrer" data-i18n="visit-project">Visit Project &rarr;</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
